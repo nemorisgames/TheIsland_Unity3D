@@ -1,0 +1,113 @@
+fileFormatVersion: 2
+guid: 6d4458c610293f34185e2c485dd585fe
+timeCreated: 1469220763
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: FencePost
+    100002: OldFarmeGa
+    100004: OldFarmGa0
+    100006: OldFarmGa1
+    100008: OldFarmGa2
+    100010: OldFarmGat
+    100012: //RootNode
+    100014: PadLock
+    100016: PadlockArc
+    400000: FencePost
+    400002: OldFarmeGa
+    400004: OldFarmGa0
+    400006: OldFarmGa1
+    400008: OldFarmGa2
+    400010: OldFarmGat
+    400012: //RootNode
+    400014: PadLock
+    400016: PadlockArc
+    2300000: FencePost
+    2300002: OldFarmeGa
+    2300004: OldFarmGa0
+    2300006: OldFarmGa1
+    2300008: OldFarmGa2
+    2300010: OldFarmGat
+    2300012: PadLock
+    2300014: PadlockArc
+    3300000: FencePost
+    3300002: OldFarmeGa
+    3300004: OldFarmGa0
+    3300006: OldFarmGa1
+    3300008: OldFarmGa2
+    3300010: OldFarmGat
+    3300012: PadLock
+    3300014: PadlockArc
+    4300000: FencePost
+    4300002: OldFarmGat
+    4300004: OldFarmGa0
+    4300006: OldFarmeGa
+    4300008: OldFarmGa1
+    4300010: OldFarmGa2
+    4300012: PadLock
+    4300014: PadlockArc
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.01
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

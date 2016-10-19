@@ -1,0 +1,515 @@
+fileFormatVersion: 2
+guid: 6193f9b734b26c544b600991483d32e3
+timeCreated: 1469563529
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: AnteBrazoDe
+    100002: AnteBrazoIz
+    100004: Anular1_De
+    100006: Anular1_Iz
+    100008: Anular2_De
+    100010: Anular2_Iz
+    100012: Barriga
+    100014: Barriga 1
+    100016: BaseCuello
+    100018: Brazo_De
+    100020: Brazo_Der
+    100022: Brazo_Iz
+    100024: Brazo_Izq
+    100026: C_Cabeza
+    100028: C_Pie_De
+    100030: C_Pie_Iz
+    100032: //RootNode
+    100034: casual09_m_highpoly:_notused_Bip01_L_Toe0Nub
+    100036: casual09_m_highpoly:_notused_Bip01_R_Toe0Nub
+    100038: Cejas
+    100040: Centro
+    100042: Clavicle_Der
+    100044: Clavicle_Iz
+    100046: cluster1Handle
+    100048: Codo_Der
+    100050: Codo_Izq
+    100052: ControlBase
+    100054: ControlMedio
+    100056: Cuello
+    100058: curve1
+    100060: Empeine_D
+    100062: Empeine_L
+    100064: Foot_D
+    100066: Foot_L
+    100068: group1
+    100070: group2
+    100072: group3
+    100074: group4
+    100076: group5
+    100078: Hombros
+    100080: iK_Handle
+    100082: ikHandle1
+    100084: ikHandle2
+    100086: ikHandle3
+    100088: ikHandle4
+    100090: ikHandle5
+    100092: ikHandle6
+    100094: Ind1_De
+    100096: Ind1_Iz
+    100098: Ind2_De
+    100100: Ind2_Iz
+    100102: Leg_Der
+    100104: Leg_Izq
+    100106: Mandibula
+    100108: ManoDe
+    100110: ManoIz
+    100112: Mayor1_De
+    100114: Mayor1_Iz
+    100116: Mayor2_De
+    100118: Mayor2_Iz
+    100120: Menique1_De
+    100122: Menique1_Iz
+    100124: Menique2_De
+    100126: Menique2_Iz
+    100128: Muneca_Der
+    100130: Muneca_Izq
+    100132: OjoDe
+    100134: OjoIz
+    100136: Pecho
+    100138: Pecho 1
+    100140: Pecho_Espalda
+    100142: Pelvis
+    100144: Pulgar1_De
+    100146: Pulgar1_Iz
+    100148: Pulgar2_De
+    100150: Pulgar2_Iz
+    100152: PuntaAnularDe
+    100154: PuntaAnularIz
+    100156: PuntaCabeza
+    100158: PuntaIndiceDe
+    100160: PuntaIndiceIz
+    100162: PuntaMayorDe
+    100164: PuntaMayorIz
+    100166: PuntaMeniqueDe
+    100168: PuntaMeniqueIz
+    100170: PuntaPulgarDe
+    100172: PuntaPulgarIz
+    100174: Rodilla_D
+    100176: Rodilla_L
+    100178: Superior
+    100180: Supervisor1
+    100182: transform1
+    100184: transform2
+    100186: Caballo_
+    100188: Carabinero
+    100190: Carabinero_
+    100192: Cola
+    100194: PeloBajo
+    100196: PeloSup
+    100198: polySurface11
+    400000: AnteBrazoDe
+    400002: AnteBrazoIz
+    400004: Anular1_De
+    400006: Anular1_Iz
+    400008: Anular2_De
+    400010: Anular2_Iz
+    400012: Barriga
+    400014: Barriga 1
+    400016: BaseCuello
+    400018: Brazo_De
+    400020: Brazo_Der
+    400022: Brazo_Iz
+    400024: Brazo_Izq
+    400026: C_Cabeza
+    400028: C_Pie_De
+    400030: C_Pie_Iz
+    400032: //RootNode
+    400034: casual09_m_highpoly:_notused_Bip01_L_Toe0Nub
+    400036: casual09_m_highpoly:_notused_Bip01_R_Toe0Nub
+    400038: Cejas
+    400040: Centro
+    400042: Clavicle_Der
+    400044: Clavicle_Iz
+    400046: cluster1Handle
+    400048: Codo_Der
+    400050: Codo_Izq
+    400052: ControlBase
+    400054: ControlMedio
+    400056: Cuello
+    400058: curve1
+    400060: Empeine_D
+    400062: Empeine_L
+    400064: Foot_D
+    400066: Foot_L
+    400068: group1
+    400070: group2
+    400072: group3
+    400074: group4
+    400076: group5
+    400078: Hombros
+    400080: iK_Handle
+    400082: ikHandle1
+    400084: ikHandle2
+    400086: ikHandle3
+    400088: ikHandle4
+    400090: ikHandle5
+    400092: ikHandle6
+    400094: Ind1_De
+    400096: Ind1_Iz
+    400098: Ind2_De
+    400100: Ind2_Iz
+    400102: Leg_Der
+    400104: Leg_Izq
+    400106: Mandibula
+    400108: ManoDe
+    400110: ManoIz
+    400112: Mayor1_De
+    400114: Mayor1_Iz
+    400116: Mayor2_De
+    400118: Mayor2_Iz
+    400120: Menique1_De
+    400122: Menique1_Iz
+    400124: Menique2_De
+    400126: Menique2_Iz
+    400128: Muneca_Der
+    400130: Muneca_Izq
+    400132: OjoDe
+    400134: OjoIz
+    400136: Pecho
+    400138: Pecho 1
+    400140: Pecho_Espalda
+    400142: Pelvis
+    400144: Pulgar1_De
+    400146: Pulgar1_Iz
+    400148: Pulgar2_De
+    400150: Pulgar2_Iz
+    400152: PuntaAnularDe
+    400154: PuntaAnularIz
+    400156: PuntaCabeza
+    400158: PuntaIndiceDe
+    400160: PuntaIndiceIz
+    400162: PuntaMayorDe
+    400164: PuntaMayorIz
+    400166: PuntaMeniqueDe
+    400168: PuntaMeniqueIz
+    400170: PuntaPulgarDe
+    400172: PuntaPulgarIz
+    400174: Rodilla_D
+    400176: Rodilla_L
+    400178: Superior
+    400180: Supervisor1
+    400182: transform1
+    400184: transform2
+    400186: Caballo_
+    400188: Carabinero
+    400190: Carabinero_
+    400192: Cola
+    400194: PeloBajo
+    400196: PeloSup
+    400198: polySurface11
+    2300000: Cola
+    2300002: PeloBajo
+    2300004: PeloSup
+    2300006: polySurface11
+    3300000: Cola
+    3300002: PeloBajo
+    3300004: PeloSup
+    3300006: polySurface11
+    4300000: Carabinero
+    4300002: PeloBajo
+    4300004: PeloSup
+    4300006: polySurface11
+    4300008: Cola
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Carabinero
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 210
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Caballo_
+        weight: 1
+      - path: Caballo_/Cola
+        weight: 1
+      - path: Caballo_/PeloBajo
+        weight: 1
+      - path: Caballo_/PeloSup
+        weight: 1
+      - path: Caballo_/polySurface11
+        weight: 1
+      - path: Carabinero
+        weight: 1
+      - path: Carabinero_
+        weight: 1
+      - path: Carabinero_/group5
+        weight: 1
+      - path: Carabinero_/group5/group3
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der/Codo_Der
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der/Codo_Der/AnteBrazoDe
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der/Codo_Der/AnteBrazoDe/transform1
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der/Codo_Der/AnteBrazoDe/transform1/Muneca_Der
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der/Codo_Der/AnteBrazoDe/transform1/Muneca_Der/Anular1_De
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der/Codo_Der/AnteBrazoDe/transform1/Muneca_Der/Anular1_De/Anular2_De
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der/Codo_Der/AnteBrazoDe/transform1/Muneca_Der/Anular1_De/Anular2_De/PuntaAnularDe
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der/Codo_Der/AnteBrazoDe/transform1/Muneca_Der/Ind1_De
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der/Codo_Der/AnteBrazoDe/transform1/Muneca_Der/Ind1_De/Ind2_De
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der/Codo_Der/AnteBrazoDe/transform1/Muneca_Der/Ind1_De/Ind2_De/PuntaIndiceDe
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der/Codo_Der/AnteBrazoDe/transform1/Muneca_Der/Mayor1_De
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der/Codo_Der/AnteBrazoDe/transform1/Muneca_Der/Mayor1_De/Mayor2_De
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der/Codo_Der/AnteBrazoDe/transform1/Muneca_Der/Mayor1_De/Mayor2_De/PuntaMayorDe
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der/Codo_Der/AnteBrazoDe/transform1/Muneca_Der/Menique1_De
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der/Codo_Der/AnteBrazoDe/transform1/Muneca_Der/Menique1_De/Menique2_De
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der/Codo_Der/AnteBrazoDe/transform1/Muneca_Der/Menique1_De/Menique2_De/PuntaMeniqueDe
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der/Codo_Der/AnteBrazoDe/transform1/Muneca_Der/Pulgar1_De
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der/Codo_Der/AnteBrazoDe/transform1/Muneca_Der/Pulgar1_De/Pulgar2_De
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Der/Brazo_Der/Codo_Der/AnteBrazoDe/transform1/Muneca_Der/Pulgar1_De/Pulgar2_De/PuntaPulgarDe
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq/Codo_Izq
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq/Codo_Izq/AnteBrazoIz
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq/Codo_Izq/AnteBrazoIz/transform2
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq/Codo_Izq/AnteBrazoIz/transform2/Muneca_Izq
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq/Codo_Izq/AnteBrazoIz/transform2/Muneca_Izq/Anular1_Iz
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq/Codo_Izq/AnteBrazoIz/transform2/Muneca_Izq/Anular1_Iz/Anular2_Iz
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq/Codo_Izq/AnteBrazoIz/transform2/Muneca_Izq/Anular1_Iz/Anular2_Iz/PuntaAnularIz
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq/Codo_Izq/AnteBrazoIz/transform2/Muneca_Izq/Ind1_Iz
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq/Codo_Izq/AnteBrazoIz/transform2/Muneca_Izq/Ind1_Iz/Ind2_Iz
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq/Codo_Izq/AnteBrazoIz/transform2/Muneca_Izq/Ind1_Iz/Ind2_Iz/PuntaIndiceIz
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq/Codo_Izq/AnteBrazoIz/transform2/Muneca_Izq/Mayor1_Iz
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq/Codo_Izq/AnteBrazoIz/transform2/Muneca_Izq/Mayor1_Iz/Mayor2_Iz
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq/Codo_Izq/AnteBrazoIz/transform2/Muneca_Izq/Mayor1_Iz/Mayor2_Iz/PuntaMayorIz
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq/Codo_Izq/AnteBrazoIz/transform2/Muneca_Izq/Menique1_Iz
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq/Codo_Izq/AnteBrazoIz/transform2/Muneca_Izq/Menique1_Iz/Menique2_Iz
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq/Codo_Izq/AnteBrazoIz/transform2/Muneca_Izq/Menique1_Iz/Menique2_Iz/PuntaMeniqueIz
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq/Codo_Izq/AnteBrazoIz/transform2/Muneca_Izq/Pulgar1_Iz
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq/Codo_Izq/AnteBrazoIz/transform2/Muneca_Izq/Pulgar1_Iz/Pulgar2_Iz
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Clavicle_Iz/Brazo_Izq/Codo_Izq/AnteBrazoIz/transform2/Muneca_Izq/Pulgar1_Iz/Pulgar2_Iz/PuntaPulgarIz
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Cuello
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Cuello/Mandibula
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Cuello/OjoDe
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Cuello/OjoIz
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Barriga 1/Pecho 1/BaseCuello/Cuello/PuntaCabeza
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Leg_Der
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Leg_Der/Rodilla_D
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Leg_Der/Rodilla_D/Foot_D
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Leg_Der/Rodilla_D/Foot_D/Empeine_D
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Leg_Der/Rodilla_D/Foot_D/Empeine_D/casual09_m_highpoly:_notused_Bip01_R_Toe0Nub
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Leg_Izq
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Leg_Izq/Rodilla_L
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Leg_Izq/Rodilla_L/Foot_L
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Leg_Izq/Rodilla_L/Foot_L/Empeine_L
+        weight: 1
+      - path: Carabinero_/group5/group3/Pelvis/Centro/Leg_Izq/Rodilla_L/Foot_L/Empeine_L/casual09_m_highpoly:_notused_Bip01_L_Toe0Nub
+        weight: 1
+      - path: Carabinero_/group5/group4
+        weight: 1
+      - path: Carabinero_/group5/group4/ikHandle5
+        weight: 1
+      - path: Carabinero_/group5/group4/ikHandle6
+        weight: 1
+      - path: Carabinero_/group5/iK_Handle
+        weight: 1
+      - path: Carabinero_/group5/iK_Handle/ikHandle1
+        weight: 1
+      - path: Carabinero_/group5/iK_Handle/ikHandle2
+        weight: 1
+      - path: Carabinero_/group5/iK_Handle/ikHandle3
+        weight: 1
+      - path: Carabinero_/group5/iK_Handle/ikHandle4
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1/ControlBase
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1/ControlBase/C_Pie_De
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1/ControlBase/C_Pie_Iz
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1/ControlBase/ControlMedio
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1/ControlBase/ControlMedio/Barriga
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1/ControlBase/ControlMedio/Barriga/Pecho
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1/ControlBase/ControlMedio/Barriga/Pecho/Pecho_Espalda
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1/ControlBase/ControlMedio/Barriga/Pecho/Pecho_Espalda/Superior
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1/ControlBase/ControlMedio/Barriga/Pecho/Pecho_Espalda/Superior/C_Cabeza
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1/ControlBase/ControlMedio/Barriga/Pecho/Pecho_Espalda/Superior/C_Cabeza/Cejas
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1/ControlBase/ControlMedio/Barriga/Pecho/Pecho_Espalda/Superior/C_Cabeza/group1
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1/ControlBase/ControlMedio/Barriga/Pecho/Pecho_Espalda/Superior/C_Cabeza/group1/cluster1Handle
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1/ControlBase/ControlMedio/Barriga/Pecho/Pecho_Espalda/Superior/C_Cabeza/group2
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1/ControlBase/ControlMedio/Barriga/Pecho/Pecho_Espalda/Superior/C_Cabeza/group2/curve1
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1/ControlBase/ControlMedio/Barriga/Pecho/Pecho_Espalda/Superior/Hombros
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1/ControlBase/ControlMedio/Barriga/Pecho/Pecho_Espalda/Superior/Hombros/Brazo_De
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1/ControlBase/ControlMedio/Barriga/Pecho/Pecho_Espalda/Superior/Hombros/Brazo_De/ManoDe
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1/ControlBase/ControlMedio/Barriga/Pecho/Pecho_Espalda/Superior/Hombros/Brazo_Iz
+        weight: 1
+      - path: Carabinero_/group5/Supervisor1/ControlBase/ControlMedio/Barriga/Pecho/Pecho_Espalda/Superior/Hombros/Brazo_Iz/ManoIz
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

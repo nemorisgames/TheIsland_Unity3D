@@ -1,0 +1,277 @@
+fileFormatVersion: 2
+guid: 137e95188b972a5459ab4f493f2c58e9
+timeCreated: 1471059125
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: _notused_Bip01_L_Finger0Nub
+    100002: Amr
+    100004: Anular1
+    100006: Anular1 1
+    100008: Anular2
+    100010: Anular2 1
+    100012: Anular3
+    100014: Anular3 1
+    100016: Arm_Right
+    100018: Back1
+    100020: Back2
+    100022: BaseCuello
+    100024: Bip01_L_Finger0
+    100026: Bip01_L_Finger01
+    100028: C_Elbow
+    100030: C_Mandibula
+    100032: Cintura
+    100034: Clavicle_Left
+    100036: Clavicle_Right
+    100038: Control
+    100040: ControlMenton
+    100042: ControlMiddle
+    100044: Cuello
+    100046: Cuello 1
+    100048: Elbow_Left
+    100050: Elbow_Right
+    100052: ElbowControlLeft
+    100054: ElbowControlRight
+    100056: EmpeineLeft
+    100058: EmpeineRight
+    100060: Espalda1
+    100062: Espalda2
+    100064: EyeLeft
+    100066: EyeRight
+    100068: Foot_Left
+    100070: Foot_Right
+    100072: FootLeft
+    100074: FootRight
+    100076: Glob_Head
+    100078: group1
+    100080: group2
+    100082: Hand_Left
+    100084: Hand_Right
+    100086: Handle
+    100088: HandLeft
+    100090: HandLeft 1
+    100092: HandleLeg
+    100094: HandRight
+    100096: HandRight 1
+    100098: ikHandle1
+    100100: ikHandle3
+    100102: ikHandle4
+    100104: ikHandle5
+    100106: ikHandle6
+    100108: ikHandle7
+    100110: Indice
+    100112: Indice1
+    100114: Indice1 1
+    100116: Indice2
+    100118: Indice2 1
+    100120: Indice3
+    100122: Invunche
+    100124: //RootNode
+    100126: Invunche_
+    100128: joint1
+    100130: joint2
+    100132: joint3
+    100134: Knee_Left
+    100136: Knee_Rigth
+    100138: KneeControlLeft
+    100140: KneeControlRight
+    100142: Left_Eyebrown
+    100144: Leg_Left
+    100146: Leg_Right
+    100148: MandiDown
+    100150: MandiUp
+    100152: Mayor1
+    100154: Mayor1 1
+    100156: Mayor2
+    100158: mayor2
+    100160: Mayor3
+    100162: Mayor3 1
+    100164: Menique1
+    100166: Menique1 1
+    100168: Menique2
+    100170: Menique2 1
+    100172: Menique3
+    100174: Menique3 1
+    100176: nurbsCircle3
+    100178: nurbsCircle3 1
+    100180: PointFootLeft
+    100182: PointFootRight
+    100184: PointHead
+    100186: Pulgar1
+    100188: Pulgar2
+    100190: Pulgar3
+    100192: Quijada
+    100194: Raiz
+    100196: Right_Eyebrown
+    100198: Rm
+    400000: _notused_Bip01_L_Finger0Nub
+    400002: Amr
+    400004: Anular1
+    400006: Anular1 1
+    400008: Anular2
+    400010: Anular2 1
+    400012: Anular3
+    400014: Anular3 1
+    400016: Arm_Right
+    400018: Back1
+    400020: Back2
+    400022: BaseCuello
+    400024: Bip01_L_Finger0
+    400026: Bip01_L_Finger01
+    400028: C_Elbow
+    400030: C_Mandibula
+    400032: Cintura
+    400034: Clavicle_Left
+    400036: Clavicle_Right
+    400038: Control
+    400040: ControlMenton
+    400042: ControlMiddle
+    400044: Cuello
+    400046: Cuello 1
+    400048: Elbow_Left
+    400050: Elbow_Right
+    400052: ElbowControlLeft
+    400054: ElbowControlRight
+    400056: EmpeineLeft
+    400058: EmpeineRight
+    400060: Espalda1
+    400062: Espalda2
+    400064: EyeLeft
+    400066: EyeRight
+    400068: Foot_Left
+    400070: Foot_Right
+    400072: FootLeft
+    400074: FootRight
+    400076: Glob_Head
+    400078: group1
+    400080: group2
+    400082: Hand_Left
+    400084: Hand_Right
+    400086: Handle
+    400088: HandLeft
+    400090: HandLeft 1
+    400092: HandleLeg
+    400094: HandRight
+    400096: HandRight 1
+    400098: ikHandle1
+    400100: ikHandle3
+    400102: ikHandle4
+    400104: ikHandle5
+    400106: ikHandle6
+    400108: ikHandle7
+    400110: Indice
+    400112: Indice1
+    400114: Indice1 1
+    400116: Indice2
+    400118: Indice2 1
+    400120: Indice3
+    400122: Invunche
+    400124: //RootNode
+    400126: Invunche_
+    400128: joint1
+    400130: joint2
+    400132: joint3
+    400134: Knee_Left
+    400136: Knee_Rigth
+    400138: KneeControlLeft
+    400140: KneeControlRight
+    400142: Left_Eyebrown
+    400144: Leg_Left
+    400146: Leg_Right
+    400148: MandiDown
+    400150: MandiUp
+    400152: Mayor1
+    400154: Mayor1 1
+    400156: Mayor2
+    400158: mayor2
+    400160: Mayor3
+    400162: Mayor3 1
+    400164: Menique1
+    400166: Menique1 1
+    400168: Menique2
+    400170: Menique2 1
+    400172: Menique3
+    400174: Menique3 1
+    400176: nurbsCircle3
+    400178: nurbsCircle3 1
+    400180: PointFootLeft
+    400182: PointFootRight
+    400184: PointHead
+    400186: Pulgar1
+    400188: Pulgar2
+    400190: Pulgar3
+    400192: Quijada
+    400194: Raiz
+    400196: Right_Eyebrown
+    400198: Rm
+    2300000: C_Mandibula
+    3300000: C_Mandibula
+    4300000: Invunche
+    4300002: C_Mandibula
+    9500000: //RootNode
+    13700000: Invunche
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
