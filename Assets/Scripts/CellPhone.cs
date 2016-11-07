@@ -13,6 +13,8 @@ public class CellPhone : MonoBehaviour {
     public Light lightStandBy;
     bool inTransition = false;
     public bool active = false;
+	public Camera cellphoneView;
+	public RenderTexture screenTexture;
 
     public enum CellphoneFunctions {Light, CameraPhoto, CameraVideo, ReviewPhotos, Call};
     public CellphoneFunctions currentFunction = CellphoneFunctions.Light;
@@ -42,7 +44,6 @@ public class CellPhone : MonoBehaviour {
         this.active = active;
         cellphoneBody.SetActive(active);
     }
-
     void LateUpdate()
     {
         
@@ -100,15 +101,57 @@ public class CellPhone : MonoBehaviour {
                     light.enabled = !light.enabled;
                     AC.GlobalVariables.SetBooleanValue(0, light.enabled);
                     break;
-                case CellphoneFunctions.CameraPhoto:
-                    StartCoroutine(takePhoto());
+			case CellphoneFunctions.CameraPhoto:
+					StartCoroutine (takePhoto ());
+					SaveCameraScreenShot ();
                     break;
             }
         }
 
         cellphoneMaterialFunctions.mainTextureOffset = new Vector2(0f, Mathf.Lerp(cellphoneMaterialFunctions.mainTextureOffset.y, (indiceActual * 0.2f + 0.032f), Time.deltaTime * 3f));
     }
+	void SaveCameraScreenShot(){
+		// capture the virtuCam and save it as a square PNG.
 
+		int sqr = 512;
+
+		cellphoneView.aspect = 1.0f;
+		// recall that the height is now the "actual" size from now on
+
+		RenderTexture tempRT = new RenderTexture(sqr,sqr, 24 );
+		// the 24 can be 0,16,24, formats like
+		// RenderTextureFormat.Default, ARGB32 etc.
+
+		cellphoneView.targetTexture = tempRT;
+		cellphoneView.Render();
+
+		RenderTexture.active = tempRT;
+		Texture2D virtualPhoto =
+			new Texture2D(sqr,sqr, TextureFormat.RGB24, false);
+		// false, meaning no need for mipmaps
+		virtualPhoto.ReadPixels( new Rect(0, 0, sqr,sqr), 0, 0);
+
+		RenderTexture.active = screenTexture; //can help avoid errors 
+		cellphoneView.targetTexture = screenTexture;
+		// consider ... Destroy(tempRT);
+
+		byte[] bytes;
+		bytes = virtualPhoto.EncodeToPNG();
+
+		System.IO.File.WriteAllBytes(
+			OurTempSquareImageLocation(), bytes );
+		// virtualCam.SetActive(false); ... no great need for this.
+
+		// now use the image, 
+		//UseFileImageAt( OurTempSquareImageLocation() );
+	
+	}
+	private string OurTempSquareImageLocation()
+	{
+		string r = "/Users/felipeclaude/Desktop/"+ "/p.png";
+		Debug.Log (r);
+		return r;
+	}
     IEnumerator takePhoto()
     {
         float intensityOriginal = light.intensity;
