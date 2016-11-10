@@ -81,6 +81,7 @@ public class CellPhone : MonoBehaviour {
                 else
                     transform.parent = null;
             }
+            ScreenManager.Instance.CloseScreen();
         }
 
         if(Input.GetAxis("Mouse ScrollWheel") != 0f)
@@ -103,9 +104,11 @@ public class CellPhone : MonoBehaviour {
                     light.enabled = !light.enabled;
                     AC.GlobalVariables.SetBooleanValue(0, light.enabled);
                     break;
-			case CellphoneFunctions.CameraPhoto:
-					StartCoroutine (takePhoto ());
-					
+			    case CellphoneFunctions.CameraPhoto:
+					StartCoroutine (takePhoto ());					
+                    break;
+                case CellphoneFunctions.ReviewPhotos:
+                    ScreenManager.Instance.ShowScreen(ScreenType.PhotoView);
                     break;
             }
         }
