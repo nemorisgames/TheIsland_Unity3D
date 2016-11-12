@@ -23,7 +23,9 @@ public class CellPhone : MonoBehaviour {
 
     [Header("ForScreenShots")]
     public TakePhoto photoFunctionality;
-    private bool save = false;
+    private bool isSavingPhoto = false;
+    private bool canUseMouseScroll = true;
+
     void Start()
     {
         cellphoneMaterialFunctions.mainTextureOffset = new Vector2(0f, 0.032f);
@@ -82,9 +84,10 @@ public class CellPhone : MonoBehaviour {
                     transform.parent = null;
             }
             ScreenManager.Instance.CloseScreen();
+            canUseMouseScroll = true;
         }
 
-        if(Input.GetAxis("Mouse ScrollWheel") != 0f)
+        if(Input.GetAxis("Mouse ScrollWheel") != 0f && canUseMouseScroll)
         {
             if (Input.GetAxis("Mouse ScrollWheel") < 0f)
             {
@@ -109,6 +112,7 @@ public class CellPhone : MonoBehaviour {
                     break;
                 case CellphoneFunctions.ReviewPhotos:
                     ScreenManager.Instance.ShowScreen(ScreenType.PhotoView);
+                    canUseMouseScroll = false;
                     break;
             }
         }
@@ -138,12 +142,17 @@ public class CellPhone : MonoBehaviour {
         {
             light.intensity += intensityOriginal * 4f / 5f;
             yield return new WaitForSeconds(0.01f);
-            photoFunctionality.SaveCameraScreenShot();
+            if (!isSavingPhoto)
+            {
+                isSavingPhoto = true;
+                photoFunctionality.SaveCameraScreenShot();
+            }            
         }
         yield return new WaitForSeconds(0.2f);       
         light.spotAngle = angleOriginal;
         light.intensity = intensityOriginal;
         light.enabled = lightEnabledOriginal;
+        isSavingPhoto = false;
     }
 
     void nextFunction(bool next)

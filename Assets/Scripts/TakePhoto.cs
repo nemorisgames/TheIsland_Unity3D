@@ -5,12 +5,17 @@ public class TakePhoto : MonoBehaviour {
     [Header("ForScreenShots")]
     public Camera cellphoneView;
     public RenderTexture screenTexture;
-
+    int nextPhotoNumber;
+    public static string photoName = "ScreenShot_";
     bool save = false;
     // Use this for initialization
     void Start () {
 	
 	}
+    void Awake()
+    {
+        nextPhotoNumber = PlayerPrefs.GetInt("PhotoNumber", 0);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -50,7 +55,9 @@ public class TakePhoto : MonoBehaviour {
     }
     private string ScreenShotLocation()
     {
-        string r = Application.persistentDataPath + "/p.png";
+        string r = Application.persistentDataPath + "/"+photoName+nextPhotoNumber+".png";
+        nextPhotoNumber++;
+        PlayerPrefs.SetInt("PhotoNumber", nextPhotoNumber);
         Debug.Log(r);
         return r;
     }
