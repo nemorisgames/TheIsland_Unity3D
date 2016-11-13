@@ -6,19 +6,21 @@ using System.IO;
 
 public class PhotoReview : MonoBehaviour {
     int photoNumber;
-    [SerializeField]
+   [SerializeField]
     RawImage photo;
+    /*NGUI[SerializeField]
+    UITexture photo;*/
     [SerializeField]
     GameObject noPhoto;
     private List<Texture2D> photosTaken;
     private List<string> photosTakenPath;
     bool isDirty=false;
-    int currentPhoto;
+    int currentPhoto=0;
 
     void OnEnable()
     {
         //this screen has been activated, show/load taken images
-        LoadPhotos();
+        //LoadPhotos();
     }
     void OnDisable()
     {
@@ -37,8 +39,10 @@ public class PhotoReview : MonoBehaviour {
         currentPhoto = 0;
         photoNumber = PlayerPrefs.GetInt("PhotoNumber", 0);
     }
-	void LoadPhotos()
+	public void LoadPhotos()
     {
+        Debug.Log("loading fotos");
+        photoNumber = PlayerPrefs.GetInt("PhotoNumber", 0);
         photosTaken = new List<Texture2D>();
         photosTakenPath = new List<string>();
         Texture2D texture = null;
@@ -74,7 +78,8 @@ public class PhotoReview : MonoBehaviour {
     }
     void ShowPhoto(int i)
     {
-        photo.texture = photosTaken[i];
+        photo.texture=photosTaken[i];
+        //photo.mainTexture = photosTaken[i];
         currentPhoto = i;
     }
     public void DeletePhoto()
