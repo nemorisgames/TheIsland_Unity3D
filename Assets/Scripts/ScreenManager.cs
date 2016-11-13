@@ -44,8 +44,20 @@ public class ScreenManager : MonoBehaviour {
                
             }
         }
+        //any aditional setups
+        switch (type)
+        {
+            case ScreenType.PhotoView:
+                screens[(int)type].GetComponent<PhotoReview>().LoadPhotos();
+                break;
+            case ScreenType.ItemView:
+                break;
+            default:
+                break;
+        }
         showedScreens.Push(type);
         screens[(int)type].SetActive(true);
+
     }
     public void CloseScreen()
     {
