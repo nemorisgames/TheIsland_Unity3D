@@ -6,10 +6,10 @@ using System.IO;
 
 public class PhotoReview : MonoBehaviour {
     int photoNumber;
-   [SerializeField]
-    RawImage photo;
-    /*NGUI[SerializeField]
-    UITexture photo;*/
+   //[SerializeField]
+    //RawImage photo;
+    [SerializeField]
+    UITexture photo;
     [SerializeField]
     GameObject noPhoto;
     private List<Texture2D> photosTaken;
@@ -78,8 +78,8 @@ public class PhotoReview : MonoBehaviour {
     }
     void ShowPhoto(int i)
     {
-        photo.texture=photosTaken[i];
-        //photo.mainTexture = photosTaken[i];
+        //photo.texture=photosTaken[i];
+        photo.mainTexture = photosTaken[i];
         currentPhoto = i;
     }
     public void DeletePhoto()

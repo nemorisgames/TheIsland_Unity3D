@@ -9,6 +9,10 @@ public class ScreenManager : MonoBehaviour {
     public static ScreenManager Instance = null;
     [SerializeField]
     GameObject[] screens;
+    [SerializeField]
+    AC.Cutscene pauseGame;
+    [SerializeField]
+    AC.Cutscene unPauseGame;
     // Use this for initialization
     private Stack<ScreenType> showedScreens= new Stack<ScreenType>();
 	void Start () {
@@ -56,6 +60,7 @@ public class ScreenManager : MonoBehaviour {
                 break;
         }
         showedScreens.Push(type);
+        pauseGame.Interact();
         screens[(int)type].SetActive(true);
 
     }
@@ -64,6 +69,7 @@ public class ScreenManager : MonoBehaviour {
         HideScreens();
         if (showedScreens.Count <= 1)
         {
+            unPauseGame.Interact();
             return;
         }
         ScreenType type = showedScreens.Pop();
