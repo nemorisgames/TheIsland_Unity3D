@@ -79,9 +79,15 @@ public class CellPhone : MonoBehaviour {
                 if (selected)
                 {
                     StartCoroutine(waitPosition());
+                    CaraFunctions.Instance.bothHands.SendMessage("Hide");
+                    CaraFunctions.Instance.rightHand.SendMessage("Show");
                 }
                 else
+                {
                     transform.parent = null;
+                    CaraFunctions.Instance.bothHands.SendMessage("Show");
+                    CaraFunctions.Instance.rightHand.SendMessage("Hide");
+                }                    
             }
             ScreenManager.Instance.CloseScreen();
             canUseMouseScroll = true;
