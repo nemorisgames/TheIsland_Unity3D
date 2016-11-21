@@ -39,9 +39,9 @@ public class FrameCounter : MonoBehaviour
 		//GUI.Label(new Rect(10,10,200,50),"Score: ");
 
 		GUI.Label(new Rect(10,10,300,50), guic);
-		GUI.Label(new Rect(10,30,300,50), "WASD to move, left shift for speed");
-		GUI.Label(new Rect(10,50,300,50), "Right click rotate");
-		GUI.Label(new Rect(10,70,300,50), "'C' to toggle Scion");
+		GUI.Label(new Rect(10,30,300,50), "Time: " + Mathf.FloorToInt(Time.timeSinceLevelLoad));
+		//GUI.Label(new Rect(10,50,300,50), "Right click rotate");
+		//GUI.Label(new Rect(10,70,300,50), "'C' to toggle Scion");
 		// Interval ended - update GUI text and start new interval
 		if( timeleft <= 0.0 )
 		{
