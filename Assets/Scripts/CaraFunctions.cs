@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CaraFunctions : MonoBehaviour {
     public static CaraFunctions Instance = null;
-    public GameObject bothHands;
+    public GameObject leftHand;
     public GameObject rightHand;
 	// Use this for initialization
 	void Start () {
@@ -15,6 +15,6 @@ public class CaraFunctions : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
-	
+	    
 	}
 }
