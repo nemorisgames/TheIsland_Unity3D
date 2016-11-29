@@ -32,6 +32,8 @@ public class CellPhone : MonoBehaviour
 	public AudioSource source;
 	private float timeOut = 0;
 	private bool showingNotification = false;
+	private int maxNotification = 5;
+	private int currentNotifications = 0;
 
 	void Start()
 	{
@@ -206,10 +208,10 @@ public class CellPhone : MonoBehaviour
 		}
 	}
 	void ShowNotification()
-	{
-		notification.SetActive(true);
+	{		
 		if (!showingNotification)
 		{
+			currentNotifications = 0;
 			showingNotification = true; //can be used to close notification when she shows the cell phone
 			InvokeRepeating("NotificationSound", 0f, 1.5f);
 		}		
@@ -217,11 +219,19 @@ public class CellPhone : MonoBehaviour
 	void NotificationSound()
 	{
 		//make sound
+		currentNotifications++;
 		source.clip = notificationSound;
-		source.Play();		
+		source.Play();
+		if (currentNotifications >= maxNotification)
+		{
+			showingNotification = false;
+			CancelInvoke("NotificationSound");
+			return;
+		}			
 	}
 	void NotificationDuration()
 	{
+		notification.SetActive(true);
 		//define max time
 		if (Time.time - timeOut >= 5f)
 		{
