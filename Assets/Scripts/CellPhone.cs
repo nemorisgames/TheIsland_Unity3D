@@ -26,14 +26,19 @@ public class CellPhone : MonoBehaviour
 	public TakePhoto photoFunctionality;
 	private bool isSavingPhoto = false;
 	private bool canUseMouseScroll = true;
+	private bool isTakingPhoto = false;
 	[Header("ForNotifications")]
 	public GameObject notification;
 	public AudioClip notificationSound;
+	public AudioClip photoSound;
 	public AudioSource source;
 	private float timeOut = 0;
 	private bool showingNotification = false;
 	private int maxNotification = 5;
 	private int currentNotifications = 0;
+	float defaultSpotAngle = 0;
+	float defaultIntensity = 0;
+	bool defaultLightEnabled=false;
 
 	void Start()
 	{
@@ -41,6 +46,12 @@ public class CellPhone : MonoBehaviour
 		notification.SetActive(false);
 		cellphoneBody = transform.FindChild("Cuerpo").gameObject;
 		cellphoneBody.SetActive(active);
+	}
+	void Awake()
+	{
+		defaultIntensity = light.intensity;
+		defaultSpotAngle = light.spotAngle;
+		defaultLightEnabled = light.enabled;
 	}
 
 	public void activate()
@@ -96,6 +107,7 @@ public class CellPhone : MonoBehaviour
 				}
 				else
 				{
+					ResetToDefaults();
 					transform.parent = null;
 					CaraFunctions.Instance.leftHand.SendMessage("Hide");
 					CaraFunctions.Instance.rightHand.SendMessage("Hide");
@@ -128,7 +140,8 @@ public class CellPhone : MonoBehaviour
 					AC.GlobalVariables.SetBooleanValue(0, light.enabled);
 					break;
 				case CellphoneFunctions.CameraPhoto:
-					StartCoroutine(takePhoto());
+					if(!isTakingPhoto)
+						StartCoroutine(takePhoto());
 					break;
 				case CellphoneFunctions.ReviewPhotos:
 					ScreenManager.Instance.ShowScreen(ScreenType.PhotoView);
@@ -139,8 +152,18 @@ public class CellPhone : MonoBehaviour
 
 		cellphoneMaterialFunctions.mainTextureOffset = new Vector2(0f, Mathf.Lerp(cellphoneMaterialFunctions.mainTextureOffset.y, (indiceActual * 0.2f + 0.032f), Time.deltaTime * 3f));
 	}
+	void ResetToDefaults()
+	{
+		Debug.Log("Reseting defaults");
+		light.spotAngle = defaultSpotAngle;
+		light.intensity = defaultIntensity;
+		light.enabled = defaultLightEnabled;
+		isSavingPhoto = false;
+		isTakingPhoto = false;
+	}
 	IEnumerator takePhoto()
 	{
+		isTakingPhoto = true;
 		float intensityOriginal = light.intensity;
 		float angleOriginal = light.spotAngle;
 		bool lightEnabledOriginal = light.enabled;
@@ -165,6 +188,8 @@ public class CellPhone : MonoBehaviour
 			if (!isSavingPhoto)
 			{
 				isSavingPhoto = true;
+				source.clip = photoSound;
+				source.Play();
 				photoFunctionality.SaveCameraScreenShot();
 			}
 		}
@@ -173,6 +198,7 @@ public class CellPhone : MonoBehaviour
 		light.intensity = intensityOriginal;
 		light.enabled = lightEnabledOriginal;
 		isSavingPhoto = false;
+		isTakingPhoto = false;
 	}
 
 	void nextFunction(bool next)

@@ -28,7 +28,7 @@ public class TakePhoto : MonoBehaviour
 	public void SaveCameraScreenShot()
 	{
 		defaultCulling = cellphoneView.cullingMask;
-		cellphoneView.cullingMask = (defaultCulling | 1 << LayerMask.NameToLayer("OnclyCellPhone"));
+		cellphoneView.cullingMask = (defaultCulling | 1 << LayerMask.NameToLayer("OnlyCamera"));
 		Debug.Log("Saving Screen Shot");
 		save = true;
 	}

@@ -56,10 +56,13 @@ public class PhotoReview : MonoBehaviour {
         Debug.Log("loading fotos");
         photoNumber = PlayerPrefs.GetInt("PhotoNumber", 0);
         photosTaken = new List<Texture2D>();
-		for(int i=0; i< scrollPhotos.Count; i++)
+		if (scrollPhotos!=null && scrollPhotos.Count>0)
 		{
-			Destroy(scrollPhotos[i].gameObject);
-		}
+			for (int i = 0; i < scrollPhotos.Count; i++)
+			{
+				Destroy(scrollPhotos[i].gameObject);
+			}
+		}		
 		scrollPhotos = new List<Photo>();
         photosTakenPath = new List<string>();
         Texture2D texture = null;
