@@ -9,6 +9,8 @@ public class ScreenManager : MonoBehaviour {
     public static ScreenManager Instance = null;
     [SerializeField]
     GameObject[] screens;
+	[SerializeField]
+	bool debug=false;
     [SerializeField]
     AC.Cutscene pauseGame;
     [SerializeField]
@@ -22,6 +24,10 @@ public class ScreenManager : MonoBehaviour {
     {
         Instance = this;
         HideScreens();
+		if (debug)
+		{
+			ShowScreen(ScreenType.PhotoView);
+		}
     }
     void HideScreens()
     {

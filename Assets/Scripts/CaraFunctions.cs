@@ -5,6 +5,7 @@ public class CaraFunctions : MonoBehaviour {
     public static CaraFunctions Instance = null;
     public GameObject leftHand;
     public GameObject rightHand;
+	public GameObject defaultRightHand;
 	// Use this for initialization
 	void Start () {
 	

@@ -1,64 +1,68 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TakePhoto : MonoBehaviour {
-    [Header("ForScreenShots")]
-    public Camera cellphoneView;
-    public RenderTexture screenTexture;
-    int nextPhotoNumber;
-    public static string photoName = "ScreenShot_";
-    bool save = false;
-    // Use this for initialization
-    void Start () {
-	
+public class TakePhoto : MonoBehaviour
+{
+	[Header("ForScreenShots")]
+	public Camera cellphoneView;
+	public RenderTexture screenTexture;
+	int nextPhotoNumber;
+	public static string photoName = "ScreenShot_";
+	bool save = false;
+	int defaultCulling;
+	// Use this for initialization
+	void Start()
+	{
+
 	}
-    void Awake()
-    {
-        nextPhotoNumber = PlayerPrefs.GetInt("PhotoNumber", 0);
-    }
-	
+	void Awake()
+	{
+		nextPhotoNumber = PlayerPrefs.GetInt("PhotoNumber", 0);
+	}
+
 	// Update is called once per frame
-	void Update () {
-	
+	void Update()
+	{
+
 	}
-    public void SaveCameraScreenShot()
-    {
-        Debug.Log("Saving Screen Shot");        
-        save = true;
-    }
-    void OnPostRender()
-    {
-        if (save)
-        {
-            int width = cellphoneView.pixelWidth;
-            int height = cellphoneView.pixelHeight;
-            Debug.Log(width + " " + height);
-            //RenderTexture.active = tempRT;
-            Texture2D virtualPhoto = new Texture2D(width, height, TextureFormat.RGB24, false);
-            // false, meaning no need for mipmaps
-            virtualPhoto.ReadPixels(new Rect(0, 0, width, height), 0, 0);
-            virtualPhoto.Apply();
+	public void SaveCameraScreenShot()
+	{
+		defaultCulling = cellphoneView.cullingMask;
+		cellphoneView.cullingMask = (defaultCulling | 1 << LayerMask.NameToLayer("OnclyCellPhone"));
+		Debug.Log("Saving Screen Shot");
+		save = true;
+	}
+	void OnPostRender()
+	{
+		if (save)
+		{
+			int width = cellphoneView.pixelWidth;
+			int height = cellphoneView.pixelHeight;
+			Debug.Log(width + " " + height);
+			//RenderTexture.active = tempRT;
+			Texture2D virtualPhoto = new Texture2D(width, height, TextureFormat.RGB24, false);
+			// false, meaning no need for mipmaps
+			virtualPhoto.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+			virtualPhoto.Apply();
 
-            // consider ... Destroy(tempRT);
+			// consider ... Destroy(tempRT);
 
-            byte[] bytes;
-            bytes = virtualPhoto.EncodeToPNG();
+			byte[] bytes;
+			bytes = virtualPhoto.EncodeToPNG();
 
-            System.IO.File.WriteAllBytes(ScreenShotLocation(), bytes);
-            save = false;
-            RenderTexture.active = screenTexture; //can help avoid errors 
-            cellphoneView.targetTexture = screenTexture;
-
-        }
-       
-
-    }
-    private string ScreenShotLocation()
-    {
-        string r = Application.persistentDataPath + "/"+photoName+nextPhotoNumber+".png";
-        nextPhotoNumber++;
-        PlayerPrefs.SetInt("PhotoNumber", nextPhotoNumber);
-        Debug.Log(r);
-        return r;
-    }
+			System.IO.File.WriteAllBytes(ScreenShotLocation(), bytes);
+			save = false;
+			RenderTexture.active = screenTexture; //can help avoid errors 
+			cellphoneView.targetTexture = screenTexture;
+			cellphoneView.cullingMask = defaultCulling;
+		}
+	}
+	private string ScreenShotLocation()
+	{
+		string r = Application.persistentDataPath + "/" + photoName + nextPhotoNumber + ".png";
+		nextPhotoNumber++;
+		PlayerPrefs.SetInt("PhotoNumber", nextPhotoNumber);
+		Debug.Log(r);
+		return r;
+	}
 }

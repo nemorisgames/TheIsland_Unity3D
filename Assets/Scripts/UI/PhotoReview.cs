@@ -5,15 +5,26 @@ using System.Collections.Generic;
 using System.IO;
 
 public class PhotoReview : MonoBehaviour {
+	public static PhotoReview Instance = null;
     int photoNumber;
-   //[SerializeField]
-    //RawImage photo;
-    [SerializeField]
-    UITexture photo;
+	//[SerializeField]
+	//RawImage photo;
+	[SerializeField]
+	GameObject photoGameObject;
+	[SerializeField]
+    RawImage photo;
     [SerializeField]
     GameObject noPhoto;
-    private List<Texture2D> photosTaken;
+	[SerializeField]
+	GameObject ConfirmationPopup;
+	[SerializeField]
+	GameObject allPhotosGrid;
+	[SerializeField]
+	GameObject photoPrefab;
+
+	private List<Texture2D> photosTaken;
     private List<string> photosTakenPath;
+	private List<Photo>scrollPhotos;
     bool isDirty=false;
     int currentPhoto=0;
 
@@ -35,8 +46,9 @@ public class PhotoReview : MonoBehaviour {
 	}
     void Awake()
     {
+		Instance = this;
         isDirty = false;
-        currentPhoto = 0;
+        currentPhoto = 0;		
         photoNumber = PlayerPrefs.GetInt("PhotoNumber", 0);
     }
 	public void LoadPhotos()
@@ -44,6 +56,11 @@ public class PhotoReview : MonoBehaviour {
         Debug.Log("loading fotos");
         photoNumber = PlayerPrefs.GetInt("PhotoNumber", 0);
         photosTaken = new List<Texture2D>();
+		for(int i=0; i< scrollPhotos.Count; i++)
+		{
+			Destroy(scrollPhotos[i].gameObject);
+		}
+		scrollPhotos = new List<Photo>();
         photosTakenPath = new List<string>();
         Texture2D texture = null;
         byte[] fileData;
@@ -58,6 +75,13 @@ public class PhotoReview : MonoBehaviour {
                 texture.LoadImage(fileData);
                 photosTaken.Add(texture);
                 photosTakenPath.Add(path);
+				GameObject p = GameObject.Instantiate(photoPrefab, allPhotosGrid.transform) as GameObject;
+				p.transform.SetAsLastSibling();
+				p.transform.localScale = new Vector3(1, 1, 1);
+				Photo pc = p.GetComponent<Photo>();
+				pc.pos = i;
+				pc.texture.texture = texture;				
+				scrollPhotos.Add(pc);				
             }
             else
             {
@@ -67,26 +91,48 @@ public class PhotoReview : MonoBehaviour {
         if (photosTaken.Count > 0)
         {
             noPhoto.SetActive(false);
-            photo.gameObject.SetActive(true);
+            photoGameObject.SetActive(true);
             ShowPhoto(0);
         }
         else
         {
             noPhoto.SetActive(true);
-            photo.gameObject.SetActive(false);
+			photoGameObject.SetActive(false);
         }
     }
-    void ShowPhoto(int i)
+    public void ShowPhoto(int pos)
     {
         //photo.texture=photosTaken[i];
-        photo.mainTexture = photosTaken[i];
-        currentPhoto = i;
+        photo.texture = photosTaken[pos];
+		for(int i=0; i< scrollPhotos.Count; i++)
+		{
+			scrollPhotos[i].highlight.SetActive(false);
+		}
+		scrollPhotos[pos].highlight.SetActive(true);
+        currentPhoto = pos;
     }
+	public void ShowConfirmationPopup()
+	{
+		ConfirmationPopup.SetActive(true);
+	}
+	public void OnClickYes()
+	{
+		DeletePhoto();
+		ConfirmationPopup.SetActive(false);
+	}
+	public void OnClickNo()
+	{
+		ConfirmationPopup.SetActive(false);
+	}
     public void DeletePhoto()
     {
         photosTaken.RemoveAt(currentPhoto);
         FileUtil.DeleteFileOrDirectory(photosTakenPath[currentPhoto]);
+		Debug.Log("Deleted photo");
         photosTakenPath.RemoveAt(currentPhoto);
+		Destroy(scrollPhotos[currentPhoto].gameObject);
+		scrollPhotos.RemoveAt(currentPhoto);
+		ShowPhoto(currentPhoto - 1);
         isDirty = true;
     }
     void RenamePhotos()

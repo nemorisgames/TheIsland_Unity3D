@@ -90,14 +90,16 @@ public class CellPhone : MonoBehaviour
 				{
 					StartCoroutine(waitPosition());
 					CaraFunctions.Instance.leftHand.SendMessage("Hide");
-					CaraFunctions.Instance.rightHand.SendMessage("Show");
+					CaraFunctions.Instance.rightHand.SendMessage("Hide");
+					CaraFunctions.Instance.defaultRightHand.SendMessage("Hide");
 					WhenUsingCellPhone();
 				}
 				else
 				{
 					transform.parent = null;
-					CaraFunctions.Instance.leftHand.SendMessage("Show");
+					CaraFunctions.Instance.leftHand.SendMessage("Hide");
 					CaraFunctions.Instance.rightHand.SendMessage("Hide");
+					CaraFunctions.Instance.defaultRightHand.SendMessage("Hide");
 				}
 			}
 			ScreenManager.Instance.CloseScreen();
