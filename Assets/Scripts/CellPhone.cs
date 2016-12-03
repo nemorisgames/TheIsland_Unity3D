@@ -154,12 +154,15 @@ public class CellPhone : MonoBehaviour
 	}
 	void ResetToDefaults()
 	{
-		Debug.Log("Reseting defaults");
-		light.spotAngle = defaultSpotAngle;
-		light.intensity = defaultIntensity;
-		light.enabled = defaultLightEnabled;
-		isSavingPhoto = false;
-		isTakingPhoto = false;
+		if (currentFunction != CellphoneFunctions.Light)
+		{
+			Debug.Log("Reseting defaults");
+			light.spotAngle = defaultSpotAngle;
+			light.intensity = defaultIntensity;
+			light.enabled = defaultLightEnabled;
+			isSavingPhoto = false;
+			isTakingPhoto = false;
+		}		
 	}
 	IEnumerator takePhoto()
 	{
