@@ -13,6 +13,7 @@ TagManager:
   - stick
   - AnimTag
   - BackgroundCamera
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
