@@ -16,7 +16,7 @@ public class CellPhone : MonoBehaviour
 	public bool active = false;
 
 
-	public enum CellphoneFunctions { Light, CameraPhoto, CameraVideo, ReviewPhotos, Call };
+	public enum CellphoneFunctions { Light, CameraPhoto, ReviewPhotos, Call };
 	public CellphoneFunctions currentFunction = CellphoneFunctions.Light;
 
 	public Material cellphoneMaterialFunctions;
@@ -144,7 +144,7 @@ public class CellPhone : MonoBehaviour
 			}
 		}
 
-		cellphoneMaterialFunctions.mainTextureOffset = new Vector2(0f, Mathf.Lerp(cellphoneMaterialFunctions.mainTextureOffset.y, (indiceActual * 0.2f + 0.032f), Time.deltaTime * 3f));
+		cellphoneMaterialFunctions.mainTextureOffset = new Vector2(0f, Mathf.Lerp(cellphoneMaterialFunctions.mainTextureOffset.y, (indiceActual * 0.25f + 0.032f), Time.deltaTime * 3f));
 	}
 	void ResetToDefaults()
 	{
@@ -200,14 +200,13 @@ public class CellPhone : MonoBehaviour
 
 	void nextFunction(bool next)
 	{
-		indiceActual = Mathf.Clamp(indiceActual + (next ? 1 : -1), 0, 4);
+		indiceActual = Mathf.Clamp(indiceActual + (next ? 1 : -1), 0, 3);
 		switch (indiceActual)
 		{
 			case 0: currentFunction = CellphoneFunctions.Light; break;
 			case 1: currentFunction = CellphoneFunctions.CameraPhoto; break;
-			case 2: currentFunction = CellphoneFunctions.CameraVideo; break;
-			case 3: currentFunction = CellphoneFunctions.ReviewPhotos; break;
-			case 4: currentFunction = CellphoneFunctions.Call; break;
+			case 2: currentFunction = CellphoneFunctions.ReviewPhotos; break;
+			case 3: currentFunction = CellphoneFunctions.Call; break;
 		}
 	}
 
