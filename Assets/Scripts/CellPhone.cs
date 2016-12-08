@@ -38,7 +38,7 @@ public class CellPhone : MonoBehaviour
 	private int currentNotifications = 0;
 	float defaultSpotAngle = 0;
 	float defaultIntensity = 0;
-	bool defaultLightEnabled=false;
+	bool defaultLightEnabled = false;
 
 	void Start()
 	{
@@ -100,18 +100,12 @@ public class CellPhone : MonoBehaviour
 				if (selected)
 				{
 					StartCoroutine(waitPosition());
-					CaraFunctions.Instance.leftHand.SendMessage("Hide");
-					CaraFunctions.Instance.rightHand.SendMessage("Hide");
-					CaraFunctions.Instance.defaultRightHand.SendMessage("Hide");
 					WhenUsingCellPhone();
 				}
 				else
 				{
 					ResetToDefaults();
-					transform.parent = null;
-					CaraFunctions.Instance.leftHand.SendMessage("Hide");
-					CaraFunctions.Instance.rightHand.SendMessage("Hide");
-					CaraFunctions.Instance.defaultRightHand.SendMessage("Hide");
+					transform.parent = null;					
 				}
 			}
 			ScreenManager.Instance.CloseScreen();
@@ -140,7 +134,7 @@ public class CellPhone : MonoBehaviour
 					AC.GlobalVariables.SetBooleanValue(0, light.enabled);
 					break;
 				case CellphoneFunctions.CameraPhoto:
-					if(!isTakingPhoto)
+					if (!isTakingPhoto)
 						StartCoroutine(takePhoto());
 					break;
 				case CellphoneFunctions.ReviewPhotos:
@@ -162,7 +156,7 @@ public class CellPhone : MonoBehaviour
 			light.enabled = defaultLightEnabled;
 			isSavingPhoto = false;
 			isTakingPhoto = false;
-		}		
+		}
 	}
 	IEnumerator takePhoto()
 	{
@@ -239,13 +233,13 @@ public class CellPhone : MonoBehaviour
 		}
 	}
 	void ShowNotification()
-	{		
+	{
 		if (!showingNotification)
 		{
 			currentNotifications = 0;
 			showingNotification = true; //can be used to close notification when she shows the cell phone
 			InvokeRepeating("NotificationSound", 0f, 1.5f);
-		}		
+		}
 	}
 	void NotificationSound()
 	{
@@ -258,7 +252,7 @@ public class CellPhone : MonoBehaviour
 			showingNotification = false;
 			CancelInvoke("NotificationSound");
 			return;
-		}			
+		}
 	}
 	void NotificationDuration()
 	{
@@ -268,7 +262,7 @@ public class CellPhone : MonoBehaviour
 		{
 			timeOut = 0;
 			CancelInvoke("NotificaionDuration");
-			notification.SetActive(false);			
+			notification.SetActive(false);
 		}
 	}
 }

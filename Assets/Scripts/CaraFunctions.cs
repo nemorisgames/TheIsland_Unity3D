@@ -8,7 +8,9 @@ public class CaraFunctions : MonoBehaviour {
 	public GameObject defaultRightHand;
 	// Use this for initialization
 	void Start () {
-	
+		leftHand.SendMessage("Hide");
+		rightHand.SendMessage("Hide");
+		defaultRightHand.SendMessage("Hide");
 	}
 	void Awake()
     {
