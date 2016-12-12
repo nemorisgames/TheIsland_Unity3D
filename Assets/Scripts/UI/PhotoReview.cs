@@ -105,6 +105,8 @@ public class PhotoReview : MonoBehaviour {
     }
     public void ShowPhoto(int pos)
     {
+		if (pos < 0)
+			pos = 0;
         //photo.texture=photosTaken[i];
         photo.texture = photosTaken[pos];
 		for(int i=0; i< scrollPhotos.Count; i++)
@@ -130,7 +132,12 @@ public class PhotoReview : MonoBehaviour {
     public void DeletePhoto()
     {
         photosTaken.RemoveAt(currentPhoto);
-        FileUtil.DeleteFileOrDirectory(photosTakenPath[currentPhoto]);
+		//new
+		if (File.Exists(photosTakenPath[currentPhoto]))
+		{
+			File.Delete(photosTakenPath[currentPhoto]);
+		}
+        //FileUtil.DeleteFileOrDirectory(photosTakenPath[currentPhoto]);
 		Debug.Log("Deleted photo");
         photosTakenPath.RemoveAt(currentPhoto);
 		Destroy(scrollPhotos[currentPhoto].gameObject);
@@ -141,10 +148,19 @@ public class PhotoReview : MonoBehaviour {
     void RenamePhotos()
     {
         string path = Application.persistentDataPath + "/" + TakePhoto.photoName;
+		string temp = "";
         for (int i = 0; i < photosTaken.Count; i++)
         {
-            FileUtil.MoveFileOrDirectory(photosTakenPath[i], path + i + ".png");
-        }
+			temp = path + i + ".png";
+			if (File.Exists(temp))
+			{
+				File.Delete(temp);
+			}
+			byte[] bytes;
+			bytes = photosTaken[i].EncodeToPNG();
+			File.WriteAllBytes(temp, bytes);
+			//FileUtil.MoveFileOrDirectory(photosTakenPath[i], path + i + ".png");
+		}
     }
     public void NextPhoto()
     {
