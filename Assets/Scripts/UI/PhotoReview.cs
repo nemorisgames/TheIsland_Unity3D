@@ -130,7 +130,7 @@ public class PhotoReview : MonoBehaviour {
     public void DeletePhoto()
     {
         photosTaken.RemoveAt(currentPhoto);
-        FileUtil.DeleteFileOrDirectory(photosTakenPath[currentPhoto]);
+		UnityEditor.FileUtil.DeleteFileOrDirectory(photosTakenPath[currentPhoto]);
 		Debug.Log("Deleted photo");
         photosTakenPath.RemoveAt(currentPhoto);
 		Destroy(scrollPhotos[currentPhoto].gameObject);
@@ -143,7 +143,7 @@ public class PhotoReview : MonoBehaviour {
         string path = Application.persistentDataPath + "/" + TakePhoto.photoName;
         for (int i = 0; i < photosTaken.Count; i++)
         {
-            FileUtil.MoveFileOrDirectory(photosTakenPath[i], path + i + ".png");
+			UnityEditor.FileUtil.MoveFileOrDirectory(photosTakenPath[i], path + i + ".png");
         }
     }
     public void NextPhoto()
