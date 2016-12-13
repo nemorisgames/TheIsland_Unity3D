@@ -21,7 +21,7 @@ public class Title : MonoBehaviour {
             t.PlayReverse();
         }
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("Scene1");
+        SceneManager.LoadScene("ExteriorPrototype");
     }
 	
 	// Update is called once per frame

@@ -138,6 +138,7 @@ public class PhotoReview : MonoBehaviour {
 			File.Delete(photosTakenPath[currentPhoto]);
 		}
         //FileUtil.DeleteFileOrDirectory(photosTakenPath[currentPhoto]);
+
 		Debug.Log("Deleted photo");
         photosTakenPath.RemoveAt(currentPhoto);
 		Destroy(scrollPhotos[currentPhoto].gameObject);
