@@ -4,6 +4,7 @@ public enum ScreenType
 {
     PhotoView,
     ItemView,
+	BookView,
 }
 public class ScreenManager : MonoBehaviour {
     public static ScreenManager Instance = null;

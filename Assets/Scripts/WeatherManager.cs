@@ -9,6 +9,7 @@ public enum Weather
 public class WeatherManager : MonoBehaviour
 {
 	public static WeatherManager Instance = null;
+	public ParticleSystem particles;
 	void Awake()
 	{
 		Instance = this;
