@@ -35,10 +35,12 @@ public class CaraFunctions : MonoBehaviour
 	}
 	void Kill()
 	{
-		killCamera.transform.position = fpsCamera.transform.position;
-		killCamera.transform.rotation = fpsCamera.transform.rotation;
+		killCamera.transform.parent.position = fpsCamera.transform.position;
+		killCamera.transform.parent.rotation = fpsCamera.transform.rotation;
+		killCamera.GetComponent<Camera>().enabled = true;
+		fpsCamera.GetComponent<Camera>().enabled = false;
 		killAnimation.Interact();
-		killCamera.GetComponent<Animation>().Play();
+		killCamera.GetComponent<Animator>().SetBool("Kill",true);
 	}
 	void Reset()
 	{
