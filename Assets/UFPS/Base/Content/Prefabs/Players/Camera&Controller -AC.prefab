@@ -455,13 +455,13 @@ MonoBehaviour:
     m_Curve:
     - time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
+      inSlope: 1.0023867
+      outSlope: 1.0023867
       tangentMode: 10
     - time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
+      value: 1.0023867
+      inSlope: 1.0023867
+      outSlope: 1.0023867
       tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -470,14 +470,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
+      value: 0.05011933
+      inSlope: 0.94988066
+      outSlope: 0.94988066
       tangentMode: 10
     - time: 1
       value: 1
-      inSlope: 1
-      outSlope: 1
+      inSlope: 0.94988066
+      outSlope: 0.94988066
       tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -486,14 +486,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
+      value: 0.06805042
+      inSlope: 0.93194956
+      outSlope: 0.93194956
       tangentMode: 10
     - time: 1
       value: 1
-      inSlope: 1
-      outSlope: 1
+      inSlope: 0.93194956
+      outSlope: 0.93194956
       tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -563,7 +563,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  saturation: 0.23
+  saturation: 1.08
   selectiveCc: 0
   selectiveFromColor: {r: 1, g: 1, b: 1, a: 1}
   selectiveToColor: {r: 1, g: 1, b: 1, a: 1}
@@ -607,7 +607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_grain: 1
   m_grainIntensity: 0.04
-  m_vignette: 1
+  m_vignette: 0
   m_vignetteIntensity: 0.7
   m_vignetteScale: 0.7
   m_vignetteColor: {r: 0, g: 0, b: 0, a: 1}
@@ -617,8 +617,8 @@ MonoBehaviour:
   m_bloom: 1
   m_bloomThreshold: 0
   m_bloomIntensity: 0.35
-  m_bloomBrightness: 1.2
-  m_bloomDistanceMultiplier: 1
+  m_bloomBrightness: 1.31
+  m_bloomDistanceMultiplier: 0.859
   m_bloomDownsamples: 7
   m_lensFlare: 1
   m_lensFlareGhostSamples: 5
@@ -646,7 +646,7 @@ MonoBehaviour:
   m_lensDirtLensFlareEffect: 1
   m_lensDirtLensFlareBrightness: 2
   m_tonemappingMode: 2
-  m_whitePoint: 7
+  m_whitePoint: 15
   m_cameraMode: 2
   m_fNumber: 4
   m_ISO: 100
@@ -674,10 +674,10 @@ MonoBehaviour:
   m_depthAdaptionSpeed: 15
   m_focalDistance: 10
   m_focalRange: 10
-  m_colorGradingMode: 0
-  m_colorGradingTex1: {fileID: 2800000, guid: ef5f36f26e5568b4e9b3686ebf2b7675, type: 3}
-  m_colorGradingTex2: {fileID: 0}
-  m_colorGradingBlendFactor: 0
+  m_colorGradingMode: 1
+  m_colorGradingTex1: {fileID: 2800000, guid: 942eca2293f701e42a3a1a7522ec4723, type: 3}
+  m_colorGradingTex2: {fileID: 2800000, guid: 3ad036aa92b53f84f9fe718d6224ca3c, type: 3}
+  m_colorGradingBlendFactor: 0.094
   forceFillParams: 0
 --- !u!114 &11485504
 MonoBehaviour:

@@ -1,0 +1,13 @@
+Update 1.4 adds Colorblindness test LUTs.
+
+Use them to easily check for issues with your interface or important parts of your project, or just to view how Colorblind people would see it. 
+Simply input the LUTs as usual and behold the result, adjust accordingly. 
+
+Example: A traffic light that looks "Red, Yellow, Green" for us, can look all Yellow for people with Deuteranopia, removing its warning / signalizing effect.
+This can also occur in your interface, and the LUTs can help spotting such issues. 
+
+Default and Amplify Color / Scion versions are included in this folder for the 3 most common occurances. 
+
+HF!
+
+ - FF

@@ -90,62 +90,6 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &15359963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74813bf97090c47b39d9f3d0ec84a80b, type: 3}
-  m_Name: (Clone)
-  m_EditorClassIdentifier: 
-  id: 0
-  category: 9
-  title: Change state
-  description: Provides various options to show and hide both menus and menu elements.
-  isDisplayed: 1
-  showComment: 0
-  comment: 
-  showOutputSockets: 1
-  numSockets: 1
-  willWait: 0
-  defaultPauseTime: 0.1
-  isRunning: 0
-  lastResult:
-    resultAction: 0
-    skipAction: -10
-    skipActionActual: {fileID: 0}
-    linkedCutscene: {fileID: 0}
-    linkedAsset: {fileID: 0}
-  endAction: 1
-  skipAction: -1
-  skipActionActual: {fileID: 0}
-  linkedCutscene: {fileID: 0}
-  linkedAsset: {fileID: 0}
-  isEnabled: 1
-  isAssetFile: 0
-  isMarked: 0
-  isBreakPoint: 0
-  nodeRect:
-    serializedVersion: 2
-    x: 14
-    y: 14
-    width: 300
-    height: 122
-  nodeHeight: 0
-  changeType: 0
-  menuToChange: PhotoReview
-  menuToChangeParameterID: -1
-  elementToChange: 
-  elementToChangeParameterID: -1
-  journalText: 
-  onlyAddNewJournal: 0
-  doFade: 0
-  lineID: -1
-  journalPageIndex: -1
-  journalPageIndexParameterID: -1
 --- !u!1 &17756526
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +168,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 60.995003, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 18
+  m_RootOrder: 17
 --- !u!1 &18578564
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,85 +197,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1983672079}
   m_RootOrder: 2
---- !u!1 &19988251
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 19988252}
-  - 33: {fileID: 19988255}
-  - 65: {fileID: 19988254}
-  - 23: {fileID: 19988253}
-  m_Layer: 0
-  m_Name: Cube (6)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &19988252
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 19988251}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.816, z: -0.215}
-  m_LocalScale: {x: 1, y: 1, z: 0.580826}
-  m_LocalEulerAnglesHint: {x: 0, y: 15.314001, z: 0}
-  m_Children: []
-  m_Father: {fileID: 1789329937}
-  m_RootOrder: 0
---- !u!23 &19988253
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 19988251}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedWireframeHidden: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!65 &19988254
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 19988251}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!33 &19988255
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 19988251}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &24893675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,72 +309,64 @@ MonoBehaviour:
   lineID: -1
   journalPageIndex: -1
   journalPageIndexParameterID: -1
---- !u!1 &57605049
-GameObject:
+--- !u!1001 &62192162
+Prefab:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 57605050}
-  - 33: {fileID: 57605052}
-  - 23: {fileID: 57605051}
-  m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &57605050
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 57605049}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.16, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 1435499770}
-  m_RootOrder: 0
---- !u!23 &57605051
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 57605049}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedWireframeHidden: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!33 &57605052
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 57605049}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400004, guid: cc873ba40a2e7fc428cf3269686e07fa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -128.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: cc873ba40a2e7fc428cf3269686e07fa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -17.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: cc873ba40a2e7fc428cf3269686e07fa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 86.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: cc873ba40a2e7fc428cf3269686e07fa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: cc873ba40a2e7fc428cf3269686e07fa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9956689
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: cc873ba40a2e7fc428cf3269686e07fa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: cc873ba40a2e7fc428cf3269686e07fa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.09297026
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: cc873ba40a2e7fc428cf3269686e07fa, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: cc873ba40a2e7fc428cf3269686e07fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -169.59601
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: cc873ba40a2e7fc428cf3269686e07fa, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: cc873ba40a2e7fc428cf3269686e07fa, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: cc873ba40a2e7fc428cf3269686e07fa, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: cc873ba40a2e7fc428cf3269686e07fa, type: 3}
+  m_IsPrefabParent: 0
 --- !u!1001 &67185878
 Prefab:
   m_ObjectHideFlags: 0
@@ -547,7 +404,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013706580292, guid: 5e3d11c723dc2e94fa9730db837a2763, type: 2}
       propertyPath: m_RootOrder
-      value: 16
+      value: 17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e3d11c723dc2e94fa9730db837a2763, type: 2}
@@ -613,6 +470,62 @@ MonoBehaviour:
   relativeMarkerID: 0
   relativeMarkerParameterID: -1
   forceReload: 0
+--- !u!114 &87260045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74813bf97090c47b39d9f3d0ec84a80b, type: 3}
+  m_Name: (Clone)
+  m_EditorClassIdentifier: 
+  id: 0
+  category: 9
+  title: Change state
+  description: Provides various options to show and hide both menus and menu elements.
+  isDisplayed: 1
+  showComment: 0
+  comment: 
+  showOutputSockets: 1
+  numSockets: 1
+  willWait: 0
+  defaultPauseTime: 0.1
+  isRunning: 0
+  lastResult:
+    resultAction: 0
+    skipAction: -10
+    skipActionActual: {fileID: 0}
+    linkedCutscene: {fileID: 0}
+    linkedAsset: {fileID: 0}
+  endAction: 0
+  skipAction: -1
+  skipActionActual: {fileID: 0}
+  linkedCutscene: {fileID: 0}
+  linkedAsset: {fileID: 0}
+  isEnabled: 1
+  isAssetFile: 0
+  isMarked: 0
+  isBreakPoint: 0
+  nodeRect:
+    serializedVersion: 2
+    x: 14
+    y: 14
+    width: 300
+    height: 122
+  nodeHeight: 0
+  changeType: 1
+  menuToChange: PhotoReview
+  menuToChangeParameterID: -1
+  elementToChange: 
+  elementToChangeParameterID: -1
+  journalText: 
+  onlyAddNewJournal: 0
+  doFade: 0
+  lineID: -1
+  journalPageIndex: -1
+  journalPageIndexParameterID: -1
 --- !u!1 &94926658
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +604,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 15
+  m_RootOrder: 14
 --- !u!1 &95146882
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,7 +683,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 21.355001, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 23
+  m_RootOrder: 22
 --- !u!1 &106712101
 GameObject:
   m_ObjectHideFlags: 0
@@ -849,7 +762,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: -10.931001, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 22
+  m_RootOrder: 21
 --- !u!1001 &131271453
 Prefab:
   m_ObjectHideFlags: 0
@@ -887,7 +800,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 446656, guid: 07370c655b905b347a932c5d75b78921, type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1000014051855168, guid: 07370c655b905b347a932c5d75b78921, type: 2}
       propertyPath: m_IsActive
@@ -924,7 +837,7 @@ Transform:
   m_Children:
   - {fileID: 1413046216}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!1 &194518013
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,7 +865,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1 &197387700
 GameObject:
   m_ObjectHideFlags: 0
@@ -2667,7 +2580,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!1 &209760036
 GameObject:
   m_ObjectHideFlags: 0
@@ -2774,7 +2687,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: -21.923, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 16
+  m_RootOrder: 15
 --- !u!1001 &233097712
 Prefab:
   m_ObjectHideFlags: 0
@@ -3167,7 +3080,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: -59.152004, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 21
+  m_RootOrder: 20
 --- !u!1 &338549977
 GameObject:
   m_ObjectHideFlags: 0
@@ -3246,7 +3159,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: -23.496, y: 114.092, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 30
+  m_RootOrder: 29
 --- !u!1 &344965952
 GameObject:
   m_ObjectHideFlags: 0
@@ -3274,7 +3187,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!1 &345616337
 GameObject:
   m_ObjectHideFlags: 0
@@ -11837,7 +11750,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 27
+  m_RootOrder: 26
 --- !u!1 &348792758
 GameObject:
   m_ObjectHideFlags: 0
@@ -11893,7 +11806,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
 --- !u!1001 &357160116
 Prefab:
   m_ObjectHideFlags: 0
@@ -11907,15 +11820,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fe86ccd22fa03454eacf90df8d7944f9, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -120.32
+      value: -120.85
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fe86ccd22fa03454eacf90df8d7944f9, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -15.48
+      value: -16.2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fe86ccd22fa03454eacf90df8d7944f9, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 88.35
+      value: 89.26
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fe86ccd22fa03454eacf90df8d7944f9, type: 2}
       propertyPath: m_LocalRotation.x
@@ -11959,11 +11872,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fe86ccd22fa03454eacf90df8d7944f9, type: 2}
       propertyPath: m_LocalScale.z
-      value: 1.6916382
+      value: 1.0973836
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fe86ccd22fa03454eacf90df8d7944f9, type: 2}
       propertyPath: m_LocalScale.y
-      value: 3.853181
+      value: 2.499599
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: fe86ccd22fa03454eacf90df8d7944f9, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.6487105
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fe86ccd22fa03454eacf90df8d7944f9, type: 2}
@@ -12253,7 +12170,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 24.214, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 11
+  m_RootOrder: 10
 --- !u!1 &489385274
 GameObject:
   m_ObjectHideFlags: 0
@@ -12332,7 +12249,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 85.118004, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 9
+  m_RootOrder: 8
 --- !u!1 &490357636
 GameObject:
   m_ObjectHideFlags: 0
@@ -12626,7 +12543,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 60.995003, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 10
+  m_RootOrder: 9
 --- !u!1 &595061610
 GameObject:
   m_ObjectHideFlags: 0
@@ -12662,7 +12579,7 @@ Transform:
   - {fileID: 1740169003}
   - {fileID: 1415345336}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
 --- !u!1 &605202906
 GameObject:
   m_ObjectHideFlags: 0
@@ -12787,7 +12704,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 9c6d82e28b280448ea70b3f4f7011508, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.17
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9c6d82e28b280448ea70b3f4f7011508, type: 2}
       propertyPath: m_LocalPosition.y
@@ -12795,7 +12712,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9c6d82e28b280448ea70b3f4f7011508, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -18.25
+      value: -18.41
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9c6d82e28b280448ea70b3f4f7011508, type: 2}
       propertyPath: m_LocalRotation.x
@@ -12908,7 +12825,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 13
+  m_RootOrder: 12
 --- !u!1 &772669812
 GameObject:
   m_ObjectHideFlags: 0
@@ -12938,7 +12855,7 @@ Transform:
   - {fileID: 912336024}
   - {fileID: 2024093438}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!1 &818516011
 GameObject:
   m_ObjectHideFlags: 0
@@ -13017,7 +12934,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 62.689003, z: 71.493004}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 24
+  m_RootOrder: 23
 --- !u!1 &858363030
 GameObject:
   m_ObjectHideFlags: 0
@@ -13124,7 +13041,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 104.649, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 26
+  m_RootOrder: 25
 --- !u!1 &912336023
 GameObject:
   m_ObjectHideFlags: 0
@@ -13310,7 +13227,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 60.995003, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 19
+  m_RootOrder: 18
 --- !u!1 &1053550065
 GameObject:
   m_ObjectHideFlags: 0
@@ -13556,7 +13473,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!1001 &1110566437
 Prefab:
   m_ObjectHideFlags: 0
@@ -13697,7 +13614,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 28
+  m_RootOrder: 27
 --- !u!1 &1156669289
 GameObject:
   m_ObjectHideFlags: 0
@@ -13727,7 +13644,7 @@ Transform:
   - {fileID: 303099087}
   - {fileID: 1110566439}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1001 &1167945243
 Prefab:
   m_ObjectHideFlags: 0
@@ -13765,7 +13682,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 467102, guid: e09972c21fa93c14382b70be97d6811c, type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 11433964, guid: e09972c21fa93c14382b70be97d6811c, type: 2}
       propertyPath: active
@@ -13877,7 +13794,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: -21.095001, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 20
+  m_RootOrder: 19
 --- !u!1 &1223161700
 GameObject:
   m_ObjectHideFlags: 0
@@ -13909,7 +13826,6 @@ Transform:
   - {fileID: 986628707}
   - {fileID: 1799230947}
   - {fileID: 2059999026}
-  - {fileID: 1789329937}
   - {fileID: 197387706}
   - {fileID: 1997432540}
   - {fileID: 1954547458}
@@ -13965,62 +13881,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 595061611}
   m_RootOrder: 3
---- !u!114 &1259324748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74813bf97090c47b39d9f3d0ec84a80b, type: 3}
-  m_Name: (Clone)
-  m_EditorClassIdentifier: 
-  id: 0
-  category: 9
-  title: Change state
-  description: Provides various options to show and hide both menus and menu elements.
-  isDisplayed: 1
-  showComment: 0
-  comment: 
-  showOutputSockets: 1
-  numSockets: 1
-  willWait: 0
-  defaultPauseTime: 0.1
-  isRunning: 0
-  lastResult:
-    resultAction: 0
-    skipAction: -10
-    skipActionActual: {fileID: 0}
-    linkedCutscene: {fileID: 0}
-    linkedAsset: {fileID: 0}
-  endAction: 0
-  skipAction: -1
-  skipActionActual: {fileID: 0}
-  linkedCutscene: {fileID: 0}
-  linkedAsset: {fileID: 0}
-  isEnabled: 1
-  isAssetFile: 0
-  isMarked: 0
-  isBreakPoint: 0
-  nodeRect:
-    serializedVersion: 2
-    x: 14
-    y: 14
-    width: 300
-    height: 122
-  nodeHeight: 0
-  changeType: 1
-  menuToChange: PhotoReview
-  menuToChangeParameterID: -1
-  elementToChange: 
-  elementToChangeParameterID: -1
-  journalText: 
-  onlyAddNewJournal: 0
-  doFade: 0
-  lineID: -1
-  journalPageIndex: -1
-  journalPageIndexParameterID: -1
 --- !u!1001 &1290462539
 Prefab:
   m_ObjectHideFlags: 0
@@ -14058,7 +13918,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 472040, guid: 2c6993be4db7d5b4da08daf47707f245, type: 2}
       propertyPath: m_RootOrder
-      value: 17
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2c6993be4db7d5b4da08daf47707f245, type: 2}
@@ -14119,7 +13979,7 @@ Transform:
   m_Children:
   - {fileID: 1786672991}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!1 &1345771572
 GameObject:
   m_ObjectHideFlags: 0
@@ -14198,7 +14058,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 62.689003, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 25
+  m_RootOrder: 24
 --- !u!1 &1413046215
 GameObject:
   m_ObjectHideFlags: 0
@@ -14259,6 +14119,67 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: fe86ccd22fa03454eacf90df8d7944f9, type: 2}
   m_PrefabInternal: {fileID: 357160116}
+--- !u!114 &1510539514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d11677f69f745f88dbe9922511d53f, type: 3}
+  m_Name: (Clone)
+  m_EditorClassIdentifier: 
+  id: 0
+  category: 5
+  title: Change scene
+  description: 'Moves the Player to a new scene. The scene must be listed in Unity''s
+    Build Settings. By default, the screen will cut to black during the transition,
+    but the last frame of the current scene can instead be overlayed. This allows
+    for cinematic effects: if the next scene fades in, it will cause a crossfade effect;
+    if the next scene doesn''t fade, it will cause a straight cut.'
+  isDisplayed: 1
+  showComment: 0
+  comment: 
+  showOutputSockets: 1
+  numSockets: 0
+  willWait: 0
+  defaultPauseTime: 0.1
+  isRunning: 0
+  lastResult:
+    resultAction: 0
+    skipAction: -10
+    skipActionActual: {fileID: 0}
+    linkedCutscene: {fileID: 0}
+    linkedAsset: {fileID: 0}
+  endAction: 1
+  skipAction: -1
+  skipActionActual: {fileID: 0}
+  linkedCutscene: {fileID: 0}
+  linkedAsset: {fileID: 0}
+  isEnabled: 1
+  isAssetFile: 0
+  isMarked: 0
+  isBreakPoint: 0
+  nodeRect:
+    serializedVersion: 2
+    x: 14
+    y: 14
+    width: 300
+    height: 150
+  nodeHeight: 0
+  chooseSceneBy: 1
+  sceneNumber: 0
+  sceneNumberParameterID: -1
+  sceneName: InteriorPrototype
+  sceneNameParameterID: -1
+  assignScreenOverlay: 0
+  onlyPreload: 0
+  relativePosition: 0
+  relativeMarker: {fileID: 0}
+  relativeMarkerID: 0
+  relativeMarkerParameterID: -1
+  forceReload: 0
 --- !u!1 &1544450667
 GameObject:
   m_ObjectHideFlags: 0
@@ -14337,7 +14258,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 24.214, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 12
+  m_RootOrder: 11
 --- !u!1001 &1577195504
 Prefab:
   m_ObjectHideFlags: 0
@@ -14455,7 +14376,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
 --- !u!1 &1701057845
 GameObject:
   m_ObjectHideFlags: 0
@@ -14534,7 +14455,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 27.005001, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 17
+  m_RootOrder: 16
 --- !u!1 &1740169002
 GameObject:
   m_ObjectHideFlags: 0
@@ -14642,7 +14563,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 29
+  m_RootOrder: 28
 --- !u!114 &1786672990 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11400000, guid: a9d4e17cb5a8745ccad47e11f075de33,
@@ -14653,86 +14574,6 @@ MonoBehaviour:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: a9d4e17cb5a8745ccad47e11f075de33, type: 2}
   m_PrefabInternal: {fileID: 1096908172}
---- !u!1 &1789329933
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1789329937}
-  - 33: {fileID: 1789329936}
-  - 65: {fileID: 1789329935}
-  - 23: {fileID: 1789329934}
-  m_Layer: 0
-  m_Name: Casa
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!23 &1789329934
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1789329933}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedWireframeHidden: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!65 &1789329935
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1789329933}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!33 &1789329936
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1789329933}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1789329937
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1789329933}
-  m_LocalRotation: {x: -0, y: 0.097412, z: -0, w: 0.99524415}
-  m_LocalPosition: {x: -129.3, y: -15.7, z: 81.4}
-  m_LocalScale: {x: 15.004784, y: 6.406687, z: 22.531788}
-  m_LocalEulerAnglesHint: {x: 0, y: 10.907001, z: 0}
-  m_Children:
-  - {fileID: 19988252}
-  m_Father: {fileID: 1223161701}
-  m_RootOrder: 5
 --- !u!1 &1798762509
 GameObject:
   m_ObjectHideFlags: 0
@@ -14919,6 +14760,62 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1223161701}
   m_RootOrder: 1
+--- !u!114 &1899578715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74813bf97090c47b39d9f3d0ec84a80b, type: 3}
+  m_Name: (Clone)
+  m_EditorClassIdentifier: 
+  id: 0
+  category: 9
+  title: Change state
+  description: Provides various options to show and hide both menus and menu elements.
+  isDisplayed: 1
+  showComment: 0
+  comment: 
+  showOutputSockets: 1
+  numSockets: 1
+  willWait: 0
+  defaultPauseTime: 0.1
+  isRunning: 0
+  lastResult:
+    resultAction: 0
+    skipAction: -10
+    skipActionActual: {fileID: 0}
+    linkedCutscene: {fileID: 0}
+    linkedAsset: {fileID: 0}
+  endAction: 1
+  skipAction: -1
+  skipActionActual: {fileID: 0}
+  linkedCutscene: {fileID: 0}
+  linkedAsset: {fileID: 0}
+  isEnabled: 1
+  isAssetFile: 0
+  isMarked: 0
+  isBreakPoint: 0
+  nodeRect:
+    serializedVersion: 2
+    x: 14
+    y: 14
+    width: 300
+    height: 122
+  nodeHeight: 0
+  changeType: 0
+  menuToChange: PhotoReview
+  menuToChangeParameterID: -1
+  elementToChange: 
+  elementToChangeParameterID: -1
+  journalText: 
+  onlyAddNewJournal: 0
+  doFade: 0
+  lineID: -1
+  journalPageIndex: -1
+  journalPageIndexParameterID: -1
 --- !u!1 &1927175035
 GameObject:
   m_ObjectHideFlags: 0
@@ -14946,7 +14843,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
 --- !u!1 &1942036709
 GameObject:
   m_ObjectHideFlags: 0
@@ -15053,7 +14950,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 60.995003, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 8
+  m_RootOrder: 7
 --- !u!43 &1973466883
 Mesh:
   m_ObjectHideFlags: 0
@@ -15342,7 +15239,7 @@ Transform:
   - {fileID: 524472269}
   - {fileID: 209760037}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!1 &1997432534
 GameObject:
   m_ObjectHideFlags: 0
@@ -23905,7 +23802,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 7
+  m_RootOrder: 6
 --- !u!1 &2024093437
 GameObject:
   m_ObjectHideFlags: 0
@@ -50601,67 +50498,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 595061611}
   m_RootOrder: 4
---- !u!114 &2126697889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d11677f69f745f88dbe9922511d53f, type: 3}
-  m_Name: (Clone)
-  m_EditorClassIdentifier: 
-  id: 0
-  category: 5
-  title: Change scene
-  description: 'Moves the Player to a new scene. The scene must be listed in Unity''s
-    Build Settings. By default, the screen will cut to black during the transition,
-    but the last frame of the current scene can instead be overlayed. This allows
-    for cinematic effects: if the next scene fades in, it will cause a crossfade effect;
-    if the next scene doesn''t fade, it will cause a straight cut.'
-  isDisplayed: 1
-  showComment: 0
-  comment: 
-  showOutputSockets: 1
-  numSockets: 0
-  willWait: 0
-  defaultPauseTime: 0.1
-  isRunning: 0
-  lastResult:
-    resultAction: 0
-    skipAction: -10
-    skipActionActual: {fileID: 0}
-    linkedCutscene: {fileID: 0}
-    linkedAsset: {fileID: 0}
-  endAction: 1
-  skipAction: -1
-  skipActionActual: {fileID: 0}
-  linkedCutscene: {fileID: 0}
-  linkedAsset: {fileID: 0}
-  isEnabled: 1
-  isAssetFile: 0
-  isMarked: 0
-  isBreakPoint: 0
-  nodeRect:
-    serializedVersion: 2
-    x: 14
-    y: 14
-    width: 300
-    height: 150
-  nodeHeight: 0
-  chooseSceneBy: 1
-  sceneNumber: 0
-  sceneNumberParameterID: -1
-  sceneName: InteriorPrototype
-  sceneNameParameterID: -1
-  assignScreenOverlay: 0
-  onlyPreload: 0
-  relativePosition: 0
-  relativeMarker: {fileID: 0}
-  relativeMarkerID: 0
-  relativeMarkerParameterID: -1
-  forceReload: 0
 --- !u!1 &2131611105
 GameObject:
   m_ObjectHideFlags: 0
@@ -50740,7 +50576,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: -23.496, y: 114.092, z: 0}
   m_Children: []
   m_Father: {fileID: 1223161701}
-  m_RootOrder: 14
+  m_RootOrder: 13
 --- !u!1 &2142551658
 GameObject:
   m_ObjectHideFlags: 0
@@ -50773,4 +50609,4 @@ Transform:
   - {fileID: 233097713}
   - {fileID: 1577195505}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
