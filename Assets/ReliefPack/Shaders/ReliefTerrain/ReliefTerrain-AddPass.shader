@@ -440,7 +440,7 @@ Fog { Mode Off }
 ZTest LEqual
 ZWrite Off
 CGPROGRAM
-	#pragma surface surf Standard vertex:vert finalcolor:customFog decal:blend exclude_path:prepass exclude_path:deferred fullforwardshadows nolightmap
+	#pragma surface surf Standard vertex:vert finalcolor:customFog decal:blend exclude_path:prepass exclude_path:deferred
 	// U5 fog handling
 	#pragma multi_compile_fog
 	#include "UnityCG.cginc"

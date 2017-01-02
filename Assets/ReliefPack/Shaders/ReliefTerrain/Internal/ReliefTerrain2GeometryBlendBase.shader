@@ -442,7 +442,7 @@ SubShader {
 	Fog { Mode Off }
 	ZTest LEqual
 	CGPROGRAM
-	#pragma surface surf Standard vertex:vert finalcolor:customFog exclude_path:prepass fullforwardshadows nolightmap
+	#pragma surface surf Standard vertex:vert finalcolor:customFog exclude_path:prepass exclude_path:deferred
 	// U5 fog handling
 	#pragma multi_compile_fog		
 	#pragma target 3.0
@@ -467,7 +467,7 @@ Fog { Mode Off }
 ZWrite Off
 ZTest LEqual	
 CGPROGRAM
-	#pragma surface surf Standard vertex:vert finalcolor:customFog decal:blend exclude_path:prepass fullforwardshadows nolightmap
+	#pragma surface surf Standard vertex:vert finalcolor:customFog decal:blend exclude_path:prepass exclude_path:deferred
 	// U5 fog handling
 	#pragma multi_compile_fog	
 	#pragma target 3.0

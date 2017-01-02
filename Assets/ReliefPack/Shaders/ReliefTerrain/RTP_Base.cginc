@@ -183,7 +183,7 @@
 //#define USE_EXTRUDE_REDUCTION
 
 // cutting holes functionality (make global colormap alpha channel completely black to cut)
-#define RTP_CUT_HOLES
+//#define RTP_CUT_HOLES
 
 //
 // in 8 layers mode we can use simplier shading for not overplapped (RTP_HARD_CROSSPASS must be defined) 4-7 layers
