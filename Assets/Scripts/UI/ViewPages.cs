@@ -7,11 +7,10 @@ public class ViewPages : MonoBehaviour
 {
 	public RawImage image;
 	public GameObject pagePrefab;
-	public GameObject grid;
 	public GameObject noPages;
 	private int currentPage = 0;
 	private int pagesCount = 1;
-	private List<GameObject> pages;
+	private List<Texture2D> pages;
 	void Awake()
 	{
 
@@ -45,14 +44,10 @@ public class ViewPages : MonoBehaviour
 				Destroy(pages[i]);
 			}
 		}
-		pages = new List<GameObject>();
+		pages = new List<Texture2D>();
 		for (int i = 0; i < 15; i++)
 		{
-			GameObject ob = GameObject.Instantiate(pagePrefab, grid.transform) as GameObject;
-			ob.transform.localScale = Vector3.one;
-			ob.transform.SetAsLastSibling();
-			ob.GetComponent<RawImage>().color = new Color(255f, Random.Range(0f, 255f), Random.Range(0f, 255f));
-			pages.Add(ob);
+			pages.Add(new Texture2D(500, 500));
 		}
 		pagesCount = 15;
 		currentPage = 0;
@@ -65,8 +60,8 @@ public class ViewPages : MonoBehaviour
 			currentPage = pos;
 
 		}
-		image.texture = pages[currentPage].GetComponent<RawImage>().texture;
-		image.color = pages[currentPage].GetComponent<RawImage>().color;
+		image.texture = pages[currentPage];
+		//image.color = pages[currentPage].;
 		//show currentPage		
 	}
 	void Update()

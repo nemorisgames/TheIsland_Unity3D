@@ -2,14 +2,22 @@
 using System.Collections;
 public enum Weather
 {
-	rain,
-	heavyRain,
-	Fog
+	rain_low,
+	rain_normal,
+	rain_heavy,
+	rain_storm
+}
+public enum WeatherEffects
+{
+	flash,
+	thunder,
 }
 public class WeatherManager : MonoBehaviour
 {
 	public static WeatherManager Instance = null;
 	public ParticleSystem particles;
+	public AudioClip[] weather_Sounds;
+	public AudioClip[] weather_effects;
 	void Awake()
 	{
 		Instance = this;
@@ -20,33 +28,22 @@ public class WeatherManager : MonoBehaviour
 	}
 	void StartNewWeather(int newWeather)
 	{
-		RemoveOldWeather();
+		//RemoveOldWeather();
 		switch (newWeather)
 		{
-			case (int)Weather.rain:
-				SetRain();
+			case 0:
+				//particles.emission.rate = 10f;
 				break;
-			case (int)Weather.heavyRain:
-				SetHeavyRain();
+			case 1:
 				break;
-			case (int)Weather.Fog:
-				SetFog();
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
 				break;
 			default:
-				Debug.LogWarning("NO WEATHER GIVEN");
 				break;
 		}
-	}
-	void SetFog()
-	{
-		Debug.Log("setting fog");
-	}
-	void SetRain()
-	{
-		Debug.Log("setting rain");
-	}
-	void SetHeavyRain()
-	{
-		Debug.Log("setting heavy rain");
 	}
 }

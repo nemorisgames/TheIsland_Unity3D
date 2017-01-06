@@ -32,10 +32,10 @@ public class CaraFunctions : MonoBehaviour
 			Kill();
 			kill = false;
 		}
-		if (Input.GetKeyDown(KeyCode.P))
-		{
-			ScreenManager.Instance.ShowScreen(ScreenType.BookView);
-		}
+		//if (Input.GetKeyDown(KeyCode.P))
+		//{
+		//	ScreenManager.Instance.ShowScreen(ScreenType.BookView);
+		//}
 	}
 	void Kill()
 	{
@@ -44,7 +44,7 @@ public class CaraFunctions : MonoBehaviour
 		killCamera.GetComponent<Camera>().enabled = true;
 		fpsCamera.GetComponent<Camera>().enabled = false;
 		killAnimation.Interact();
-		killCamera.GetComponent<Animator>().SetBool("Kill",true);
+		killCamera.GetComponent<Animator>().SetBool("Kill", true);
 	}
 	void Reset()
 	{
