@@ -168,7 +168,7 @@
 //#define USE_EXTRUDE_REDUCTION
 
 // cutting holes functionality (make global colormap alpha channel completely black to cut)
-#define RTP_CUT_HOLES
+//#define RTP_CUT_HOLES
 
 // in presence of 2 passes we can do heightblend between passes
 #define RTP_CROSSPASS_HEIGHTBLEND

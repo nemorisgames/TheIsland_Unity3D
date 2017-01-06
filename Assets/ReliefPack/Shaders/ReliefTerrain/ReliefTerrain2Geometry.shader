@@ -439,7 +439,7 @@ SubShader {
 	Fog { Mode Off }
 	//Offset -1,-1
 	CGPROGRAM
-	#pragma surface surf Standard vertex:vert finalcolor:customFog exclude_path:prepass fullforwardshadows nolightmap
+	#pragma surface surf Standard vertex:vert finalcolor:customFog exclude_path:prepass
 	// U5 fog handling
 	#pragma multi_compile_fog	
 	#include "UnityCG.cginc"
@@ -464,7 +464,7 @@ Fog { Mode Off }
 ZWrite Off
 ZTest LEqual	
 CGPROGRAM
-	#pragma surface surf Standard vertex:vert finalcolor:customFog decal:blend exclude_path:prepass fullforwardshadows nolightmap
+	#pragma surface surf Standard vertex:vert finalcolor:customFog decal:blend exclude_path:prepass
 	// U5 fog handling
 	#pragma multi_compile_fog	
 	#include "UnityCG.cginc"

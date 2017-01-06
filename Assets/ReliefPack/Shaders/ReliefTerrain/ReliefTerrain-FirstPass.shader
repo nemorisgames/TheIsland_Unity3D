@@ -450,7 +450,7 @@ SubShader {
 	LOD 700
 	Fog { Mode Off }
 	CGPROGRAM
-	#pragma surface surf Standard vertex:vert finalcolor:customFog exclude_path:prepass fullforwardshadows nolightmap
+	#pragma surface surf Standard vertex:vert finalcolor:customFog exclude_path:prepass
 	// U5 fog handling
 	#pragma multi_compile_fog	
 	#include "UnityCG.cginc"
@@ -529,7 +529,7 @@ CGPROGRAM
 #include "UnityCG.cginc"
 #define UNITY_PASS_SHADOWCASTER
 
-#define RTP_CUT_HOLES
+//#define RTP_CUT_HOLES
 
 struct v2f { 
 	V2F_SHADOW_CASTER;

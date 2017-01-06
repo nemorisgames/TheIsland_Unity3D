@@ -143,6 +143,12 @@ Material:
     - first:
         name: _TranslucencyViewDependency
       second: 0.7
+    - first:
+        name: _TumbleFrequency
+      second: 1
+    - first:
+        name: _TumbleStrength
+      second: 0.1
     m_Colors:
     - first:
         name: _Color

@@ -127,7 +127,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   curvX:
     serializedVersion: 2
     m_Curve:
@@ -143,7 +143,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   curvZ:
     serializedVersion: 2
     m_Curve:
@@ -159,7 +159,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   adjustBlueValue: 0
   adjustGreenValue: 0
   adjustRedValue: 0
