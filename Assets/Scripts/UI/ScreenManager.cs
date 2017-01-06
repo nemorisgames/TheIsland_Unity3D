@@ -3,8 +3,8 @@ using System.Collections.Generic;
 public enum ScreenType
 {
     PhotoView,
-    ItemView,
-	BookView,
+    BookView,
+	ItemView,
 }
 public class ScreenManager : MonoBehaviour {
     public static ScreenManager Instance = null;
@@ -61,8 +61,9 @@ public class ScreenManager : MonoBehaviour {
             case ScreenType.PhotoView:
                 screens[(int)type].GetComponent<PhotoReview>().LoadPhotos();
                 break;
-            case ScreenType.ItemView:
-                break;
+            case ScreenType.BookView:
+				screens[(int)type].GetComponent<ViewPages>().Load();
+				break;
             default:
                 break;
         }

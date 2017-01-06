@@ -32,6 +32,10 @@ public class CaraFunctions : MonoBehaviour
 			Kill();
 			kill = false;
 		}
+		if (Input.GetKeyDown(KeyCode.P))
+		{
+			ScreenManager.Instance.ShowScreen(ScreenType.BookView);
+		}
 	}
 	void Kill()
 	{
