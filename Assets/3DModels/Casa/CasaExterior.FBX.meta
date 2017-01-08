@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: cc873ba40a2e7fc428cf3269686e07fa
-timeCreated: 1483144371
+timeCreated: 1483801039
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
@@ -111,6 +111,9 @@ ModelImporter:
     100206: Object029
     100208: Object030
     100210: Object031
+    100212: TPhotometricLight001.Target
+    100214: TPhotometricLight002.Target
+    100216: TPhotometricLight003.Target
     400000: Box001
     400002: Box002
     400004: //RootNode
@@ -217,6 +220,9 @@ ModelImporter:
     400206: Object029
     400208: Object030
     400210: Object031
+    400212: TPhotometricLight001.Target
+    400214: TPhotometricLight002.Target
+    400216: TPhotometricLight003.Target
     2300000: Box001
     2300002: Box002
     2300004: Cone001

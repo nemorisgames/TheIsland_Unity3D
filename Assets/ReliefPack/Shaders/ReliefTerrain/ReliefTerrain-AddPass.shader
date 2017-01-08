@@ -440,7 +440,7 @@ Fog { Mode Off }
 ZTest LEqual
 ZWrite Off
 CGPROGRAM
-	#pragma surface surf Standard vertex:vert finalcolor:customFog decal:blend exclude_path:prepass exclude_path:deferred
+	#pragma surface surf Standard vertex:vert finalcolor:customFog decal:blend exclude_path:prepass exclude_path:deferred noforwardadd nolightmap
 	// U5 fog handling
 	#pragma multi_compile_fog
 	#include "UnityCG.cginc"
@@ -448,7 +448,7 @@ CGPROGRAM
 	#pragma target 3.0
 	#pragma glsl
 	#pragma exclude_renderers d3d11_9x gles
-	#pragma multi_compile RTP_PM_SHADING RTP_SIMPLE_SHADING
+	#pragma multi_compile RTP_SIMPLE_SHADING
 	//#define RTP_PM_SHADING
 	//#define RTP_SIMPLE_SHADING
 	

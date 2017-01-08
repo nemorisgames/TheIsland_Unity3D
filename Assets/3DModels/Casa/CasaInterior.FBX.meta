@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 4ca09cb373550bd439df0cc792a53874
-timeCreated: 1483144371
+timeCreated: 1483801039
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
@@ -61,6 +61,67 @@ ModelImporter:
     100106: Viga016
     100108: Viga017
     100110: Viga2
+    100112: Box001
+    100114: Box003
+    100116: Box007
+    100118: Box009
+    100120: Box010
+    100122: Box011
+    100124: Box012
+    100126: Box013
+    100128: Box014
+    100130: Box015
+    100132: Chimenea001
+    100134: Chimenea002
+    100136: Circle001
+    100138: Cylinder001
+    100140: Cylinder002
+    100142: Cylinder003
+    100144: Cylinder004
+    100146: Line001
+    100148: Loft001
+    100150: MarcoPuerta007
+    100152: PhysCamera001
+    100154: PhysCamera001.Target
+    100156: Puerta007
+    100158: Puerta008
+    100160: Tapeo009
+    100162: Tapeo010
+    100164: Tapeo011
+    100166: Tapeo012
+    100168: Tapeo013
+    100170: Tapeo014
+    100172: Tapeo015
+    100174: Tapeo016
+    100176: Tapeo018
+    100178: Tapeo019
+    100180: TPhotometricLight001
+    100182: TPhotometricLight001.Target
+    100184: TPhotometricLight002
+    100186: TPhotometricLight002.Target
+    100188: Viga018
+    100190: Viga019
+    100192: Viga020
+    100194: Viga021
+    100196: Viga022
+    100198: Viga023
+    100200: Viga024
+    100202: Viga025
+    100204: Viga026
+    100206: Viga027
+    100208: Viga028
+    100210: Viga029
+    100212: Viga030
+    100214: Viga031
+    100216: Viga032
+    100218: Viga033
+    100220: Viga034
+    100222: Viga035
+    100224: Viga036
+    100226: Viga037
+    100228: Viga038
+    100230: Viga039
+    100232: Viga040
     400000: //RootNode
     400002: CasaMain
     400004: Chimenea
@@ -117,6 +178,67 @@ ModelImporter:
     400106: Viga016
     400108: Viga017
     400110: Viga2
+    400112: Box001
+    400114: Box003
+    400116: Box007
+    400118: Box009
+    400120: Box010
+    400122: Box011
+    400124: Box012
+    400126: Box013
+    400128: Box014
+    400130: Box015
+    400132: Chimenea001
+    400134: Chimenea002
+    400136: Circle001
+    400138: Cylinder001
+    400140: Cylinder002
+    400142: Cylinder003
+    400144: Cylinder004
+    400146: Line001
+    400148: Loft001
+    400150: MarcoPuerta007
+    400152: PhysCamera001
+    400154: PhysCamera001.Target
+    400156: Puerta007
+    400158: Puerta008
+    400160: Tapeo009
+    400162: Tapeo010
+    400164: Tapeo011
+    400166: Tapeo012
+    400168: Tapeo013
+    400170: Tapeo014
+    400172: Tapeo015
+    400174: Tapeo016
+    400176: Tapeo018
+    400178: Tapeo019
+    400180: TPhotometricLight001
+    400182: TPhotometricLight001.Target
+    400184: TPhotometricLight002
+    400186: TPhotometricLight002.Target
+    400188: Viga018
+    400190: Viga019
+    400192: Viga020
+    400194: Viga021
+    400196: Viga022
+    400198: Viga023
+    400200: Viga024
+    400202: Viga025
+    400204: Viga026
+    400206: Viga027
+    400208: Viga028
+    400210: Viga029
+    400212: Viga030
+    400214: Viga031
+    400216: Viga032
+    400218: Viga033
+    400220: Viga034
+    400222: Viga035
+    400224: Viga036
+    400226: Viga037
+    400228: Viga038
+    400230: Viga039
+    400232: Viga040
     2300000: CasaMain
     2300002: Chimenea
     2300004: MarcoPuerta002
@@ -172,6 +294,59 @@ ModelImporter:
     2300104: Viga016
     2300106: Viga017
     2300108: Viga2
+    2300110: Box001
+    2300112: Box003
+    2300114: Box007
+    2300116: Box009
+    2300118: Box010
+    2300120: Box011
+    2300122: Box012
+    2300124: Box013
+    2300126: Box014
+    2300128: Box015
+    2300130: Chimenea001
+    2300132: Chimenea002
+    2300134: Cylinder001
+    2300136: Cylinder002
+    2300138: Cylinder003
+    2300140: Cylinder004
+    2300142: Loft001
+    2300144: MarcoPuerta007
+    2300146: Puerta007
+    2300148: Puerta008
+    2300150: Tapeo009
+    2300152: Tapeo010
+    2300154: Tapeo011
+    2300156: Tapeo012
+    2300158: Tapeo013
+    2300160: Tapeo014
+    2300162: Tapeo015
+    2300164: Tapeo016
+    2300166: Tapeo018
+    2300168: Tapeo019
+    2300170: Viga018
+    2300172: Viga019
+    2300174: Viga020
+    2300176: Viga021
+    2300178: Viga022
+    2300180: Viga023
+    2300182: Viga024
+    2300184: Viga025
+    2300186: Viga026
+    2300188: Viga027
+    2300190: Viga028
+    2300192: Viga029
+    2300194: Viga030
+    2300196: Viga031
+    2300198: Viga032
+    2300200: Viga033
+    2300202: Viga034
+    2300204: Viga035
+    2300206: Viga036
+    2300208: Viga037
+    2300210: Viga038
+    2300212: Viga039
+    2300214: Viga040
     3300000: CasaMain
     3300002: Chimenea
     3300004: MarcoPuerta002
@@ -227,6 +402,59 @@ ModelImporter:
     3300104: Viga016
     3300106: Viga017
     3300108: Viga2
+    3300110: Box001
+    3300112: Box003
+    3300114: Box007
+    3300116: Box009
+    3300118: Box010
+    3300120: Box011
+    3300122: Box012
+    3300124: Box013
+    3300126: Box014
+    3300128: Box015
+    3300130: Chimenea001
+    3300132: Chimenea002
+    3300134: Cylinder001
+    3300136: Cylinder002
+    3300138: Cylinder003
+    3300140: Cylinder004
+    3300142: Loft001
+    3300144: MarcoPuerta007
+    3300146: Puerta007
+    3300148: Puerta008
+    3300150: Tapeo009
+    3300152: Tapeo010
+    3300154: Tapeo011
+    3300156: Tapeo012
+    3300158: Tapeo013
+    3300160: Tapeo014
+    3300162: Tapeo015
+    3300164: Tapeo016
+    3300166: Tapeo018
+    3300168: Tapeo019
+    3300170: Viga018
+    3300172: Viga019
+    3300174: Viga020
+    3300176: Viga021
+    3300178: Viga022
+    3300180: Viga023
+    3300182: Viga024
+    3300184: Viga025
+    3300186: Viga026
+    3300188: Viga027
+    3300190: Viga028
+    3300192: Viga029
+    3300194: Viga030
+    3300196: Viga031
+    3300198: Viga032
+    3300200: Viga033
+    3300202: Viga034
+    3300204: Viga035
+    3300206: Viga036
+    3300208: Viga037
+    3300210: Viga038
+    3300212: Viga039
+    3300214: Viga040
     4300000: CasaMain
     4300002: Piso1
     4300004: Chimenea
@@ -282,6 +510,59 @@ ModelImporter:
     4300104: Puerta004
     4300106: Puerta005
     4300108: Puerta006
+    4300110: MarcoPuerta007
+    4300112: Puerta007
+    4300114: Viga018
+    4300116: Viga019
+    4300118: Viga020
+    4300120: Viga021
+    4300122: Viga022
+    4300124: Viga023
+    4300126: Viga024
+    4300128: Viga025
+    4300130: Viga026
+    4300132: Viga027
+    4300134: Viga028
+    4300136: Viga029
+    4300138: Viga030
+    4300140: Viga031
+    4300142: Viga032
+    4300144: Tapeo009
+    4300146: Tapeo010
+    4300148: Tapeo011
+    4300150: Viga033
+    4300152: Viga034
+    4300154: Viga035
+    4300156: Viga036
+    4300158: Viga037
+    4300160: Puerta008
+    4300162: Viga038
+    4300164: Viga039
+    4300166: Viga040
+    4300168: Chimenea001
+    4300170: Tapeo012
+    4300172: Tapeo013
+    4300174: Tapeo014
+    4300176: Tapeo015
+    4300178: Tapeo016
+    4300180: Tapeo018
+    4300182: Tapeo019
+    4300184: Chimenea002
+    4300186: Box001
+    4300188: Box003
+    4300190: Box007
+    4300192: Loft001
+    4300194: Cylinder001
+    4300196: Box009
+    4300198: Cylinder002
+    4300200: Cylinder003
+    4300202: Cylinder004
+    4300204: Box010
+    4300206: Box011
+    4300208: Box012
+    4300210: Box013
+    4300212: Box014
+    4300214: Box015
   materials:
     importMaterials: 1
     materialName: 0
