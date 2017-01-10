@@ -80,6 +80,9 @@ Material:
         name: _FresnelScale
       second: 0.3897143
     - first:
+        name: _GerstnerIntensity
+      second: 1
+    - first:
         name: _HeightDisplacement
       second: 2.3370318
     - first:
