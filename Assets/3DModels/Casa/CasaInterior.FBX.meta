@@ -122,6 +122,19 @@ ModelImporter:
     100228: Viga038
     100230: Viga039
     100232: Viga040
+    100234: Bodega
+    100236: MarcoPuerta008
+    100238: Object029
+    100240: Object030
+    100242: Object031
+    100244: Object032
+    100246: Object033
+    100248: Object034
+    100250: Object035
+    100252: Object036
+    100254: Puerta009
+    100256: Puerta010
+    100258: Viga041
     400000: //RootNode
     400002: CasaMain
     400004: Chimenea
@@ -239,6 +252,19 @@ ModelImporter:
     400228: Viga038
     400230: Viga039
     400232: Viga040
+    400234: Bodega
+    400236: MarcoPuerta008
+    400238: Object029
+    400240: Object030
+    400242: Object031
+    400244: Object032
+    400246: Object033
+    400248: Object034
+    400250: Object035
+    400252: Object036
+    400254: Puerta009
+    400256: Puerta010
+    400258: Viga041
     2300000: CasaMain
     2300002: Chimenea
     2300004: MarcoPuerta002
@@ -347,6 +373,19 @@ ModelImporter:
     2300210: Viga038
     2300212: Viga039
     2300214: Viga040
+    2300216: Bodega
+    2300218: MarcoPuerta008
+    2300220: Object029
+    2300222: Object030
+    2300224: Object031
+    2300226: Object032
+    2300228: Object033
+    2300230: Object034
+    2300232: Object035
+    2300234: Object036
+    2300236: Puerta009
+    2300238: Puerta010
+    2300240: Viga041
     3300000: CasaMain
     3300002: Chimenea
     3300004: MarcoPuerta002
@@ -455,6 +494,19 @@ ModelImporter:
     3300210: Viga038
     3300212: Viga039
     3300214: Viga040
+    3300216: Bodega
+    3300218: MarcoPuerta008
+    3300220: Object029
+    3300222: Object030
+    3300224: Object031
+    3300226: Object032
+    3300228: Object033
+    3300230: Object034
+    3300232: Object035
+    3300234: Object036
+    3300236: Puerta009
+    3300238: Puerta010
+    3300240: Viga041
     4300000: CasaMain
     4300002: Piso1
     4300004: Chimenea
@@ -563,6 +615,19 @@ ModelImporter:
     4300210: Box013
     4300212: Box014
     4300214: Box015
+    4300216: Viga041
+    4300218: Bodega
+    4300220: Object029
+    4300222: Object030
+    4300224: Object031
+    4300226: Object032
+    4300228: Object033
+    4300230: Puerta009
+    4300232: MarcoPuerta008
+    4300234: Puerta010
+    4300236: Object034
+    4300238: Object035
+    4300240: Object036
   materials:
     importMaterials: 1
     materialName: 0
