@@ -25,6 +25,11 @@ public class WeatherManager : MonoBehaviour
 	void Awake()
 	{
 		Instance = this;
+		if (GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>() == null)
+		{
+			GameObject.FindGameObjectWithTag("Player").AddComponent<AudioSource>();
+		}
+		source = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
 	}
 	void RemoveOldWeather()
 	{
@@ -116,16 +121,16 @@ public class WeatherManager : MonoBehaviour
 	void Update()
 	{
 		//for debuging
-		if (Input.GetAxis("Mouse ScrollWheel") != 0f)
-		{
-			if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-			{
-				NextWeather();
-			}
-			if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-			{
-				LastWeather();
-			}
-		}
+		//if (Input.GetAxis("Mouse ScrollWheel") != 0f)
+		//{
+		//	if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+		//	{
+		//		NextWeather();
+		//	}
+		//	if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+		//	{
+		//		LastWeather();
+		//	}
+		//}
 	}
 }

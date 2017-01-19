@@ -10,7 +10,7 @@ public enum ItemType
 	matches,
 }
 public class Inventory : MonoBehaviour
-{	
+{
 	public static Inventory Instance = null;
 	[SerializeField]
 	InventoryItem[] inventoryItems;//same order as ItemType enum
@@ -21,13 +21,13 @@ public class Inventory : MonoBehaviour
 	void Awake()
 	{
 		Instance = this;
-		for(int i = 0; i < inventoryItems.Length; i++)
-		{
-			AddInventoryItem(inventoryItems[i].type);
-			inventoryItems[i].SetActive(false);
-		}
+		//for(int i = 0; i < inventoryItems.Length; i++)
+		//{
+		//	AddInventoryItem(inventoryItems[i].type);
+		//	inventoryItems[i].SetActive(false);
+		//}
 		//AddInventoryItem(ItemType.stick);
-		inventoryItems[(int)ItemType.stick].SetActive(true);
+		//inventoryItems[(int)ItemType.stick].SetActive(true);
 	}
 	void Start()
 	{
@@ -50,14 +50,15 @@ public class Inventory : MonoBehaviour
 	public void RemoveInventoryItem(ItemType type)
 	{
 		inventoryItems[(int)type].hasItem = false;
+		inventoryItems[(int)type].SetActive(false);
 		//inventoryItems[(int)type].hand.SetActive(false);
 	}
 	public void AddInventoryItem(ItemType type)
 	{
-		print (type);
 		//checking
 		inventoryItems[(int)type].hasItem = true;
-		inventoryItems[(int)type].hand.SetActive(true);
+		inventoryItems[(int)type].SetActive(true);
+		//inventoryItems[(int)type].objectInHand.SetActive(true);
 	}
 	public void CycleInventoryItem(bool forward)
 	{

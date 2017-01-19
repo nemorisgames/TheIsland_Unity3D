@@ -33,7 +33,7 @@ public class InventoryItem : MonoBehaviour
 		if (hasItem)
 		{
 			activeItem = b;
-			objectInHand.SetActive(b);
+			objectInHand.SetActive(activeItem);
 			hand.SetActive(activeItem);
 		}
 		else
