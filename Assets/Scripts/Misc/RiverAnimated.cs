@@ -22,7 +22,6 @@ public class RiverAnimated : MonoBehaviour {
 			break;
 		case WaterType.Sea:
 			offset = Mathf.Sin (speed * Time.timeSinceLevelLoad * Mathf.PI / 180f) * 0.1f;
-			print (offset);
 			mat.mainTextureOffset = new Vector2 (offset, 0f);
 			offset = Mathf.Sin (speed * 0.5f * Time.timeSinceLevelLoad * Mathf.PI / 180f) * 0.1f;
 			mat.SetTextureOffset ("_DetailAlbedoMap", new Vector2 (offset, 0f));

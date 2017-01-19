@@ -48,7 +48,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: e780b79e78def43d3af038675f486a4a, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -113,7 +113,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: 5094d06db1a764e629ba3f8c0c6b50f8, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -387,7 +387,7 @@ MonoBehaviour:
   m_Name: Tree Data
   m_EditorClassIdentifier: 
   _uniqueID: 4120
-  materialHash: 0d0136d5972ddd0c2f7faea110941e97-550813696
+  materialHash: ccef917b237ebdc34dd08266a293e586-550813696
   root:
     _uniqueID: 1
     seed: 1234
@@ -465,17 +465,17 @@ MonoBehaviour:
     rootSpread: 1.5470645
     groundOffset: 0.3
     rootMatrix:
-      e00: 1
-      e01: 0
-      e02: 0
+      e00: 0.887968
+      e01: -0.0021504993
+      e02: -0.4599003
       e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
+      e10: -0.45976144
+      e11: -0.029162388
+      e12: -0.8875635
       e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
+      e20: -0.0115030855
+      e21: 0.99957246
+      e22: -0.026883982
       e23: 0
       e30: 0
       e31: 0
@@ -1149,17 +1149,17 @@ MonoBehaviour:
     pitch: -0
     rotation: {x: 0, y: 0, z: 0, w: 1}
     matrix:
-      e00: 1
-      e01: 0
-      e02: 0
+      e00: 0.887968
+      e01: -0.0021504993
+      e02: -0.4599003
       e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
+      e10: -0.45976144
+      e11: -0.029162388
+      e12: -0.8875635
       e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
+      e20: -0.0115030855
+      e21: 0.99957246
+      e22: -0.026883982
       e23: 0
       e30: 0
       e31: 0

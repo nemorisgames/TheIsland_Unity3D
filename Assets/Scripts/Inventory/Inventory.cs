@@ -54,6 +54,7 @@ public class Inventory : MonoBehaviour
 	}
 	public void AddInventoryItem(ItemType type)
 	{
+		print (type);
 		//checking
 		inventoryItems[(int)type].hasItem = true;
 		inventoryItems[(int)type].hand.SetActive(true);

@@ -165,8 +165,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168906}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.29799986, y: 1.9660001, z: -4.94}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.29799986, y: 17.2, z: -4.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -447,7 +447,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 535d51aea96c8724eb2cb344e3ac3e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   speed: 5
   speedRotation: 3
   position: {x: 0.6, y: -0.55, z: 0.2}
@@ -461,7 +460,7 @@ MonoBehaviour:
   photoFunctionality: {fileID: 114000013011061014}
   notification: {fileID: 120718}
   notificationSound: {fileID: 8300000, guid: 893b5f058d7e7f4418ec658b5c9d1375, type: 3}
-  photoSound: {fileID: 8300000, guid: a42c2e7cf9e79e244a23b09b398cc2e0, type: 3}
+  photoSound: {fileID: 8300000, guid: 91a82f0ede3163a4987c64d691d61e10, type: 3}
   source: {fileID: 82000012284779368}
 --- !u!114 &11462914
 MonoBehaviour:
@@ -1341,7 +1340,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:

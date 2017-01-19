@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CellPhone : MonoBehaviour
 {
-	public Transform target;
+	Transform target;
 	GameObject cellphoneBody;
 	public float speed = 1f;
 	public float speedRotation = 1f;
@@ -49,6 +49,7 @@ public class CellPhone : MonoBehaviour
 	}
 	void Awake()
 	{
+		target = GameObject.FindWithTag ("Player").transform.FindChild ("FPSCamera");
 		defaultIntensity = light.intensity;
 		defaultSpotAngle = light.spotAngle;
 		defaultLightEnabled = light.enabled;
