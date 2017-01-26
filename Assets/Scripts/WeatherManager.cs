@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 public enum Weather
 {
 	rain_low,
@@ -21,6 +22,8 @@ public class WeatherManager : MonoBehaviour
 	public AudioClip[] weather_Sounds;
 	public AudioClip[] weather_effects;
 	public GameObject[] positions;
+	public GameObject thunderSpawns;
+	private AudioSource[] thunderSounds;
 	int currentWeather = (int)Weather.rain_heavy;
 	void Awake()
 	{
@@ -30,6 +33,7 @@ public class WeatherManager : MonoBehaviour
 			GameObject.FindGameObjectWithTag("Player").AddComponent<AudioSource>();
 		}
 		source = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
+		thunderSounds = thunderSpawns.GetComponentsInChildren<AudioSource>();
 	}
 	void RemoveOldWeather()
 	{
@@ -70,7 +74,8 @@ public class WeatherManager : MonoBehaviour
 			case 3:
 				rate.mode = ParticleSystemCurveMode.Constant;
 				rate.constant = 200f;
-				Invoke("ThunderAndFlash", Random.Range(0f, 5f));
+				ThunderAndFlash();
+				Debug.Log("Thunder");
 				break;
 			case 4:
 				break;
@@ -82,30 +87,31 @@ public class WeatherManager : MonoBehaviour
 	}
 	IEnumerator FlashEffect(int pos)
 	{
-		yield return null;
-
+		thunderSounds[pos].transform.GetChild(0).gameObject.SetActive(true);
+		yield return new WaitForSeconds(1f);
+		thunderSounds[pos].transform.GetChild(0).gameObject.SetActive(false);
 	}
-	IEnumerator ThunderSound(float time, int pos, float volume)
+	IEnumerator ThunderSound(ulong time, int pos, float volume)
 	{
 		yield return new WaitForSeconds(time);
-		source.volume = volume;
-		source.PlayOneShot(weather_effects[pos]);
-		Invoke("ThunderAndFlash", Random.Range(3f, 10f));
+		thunderSounds[pos].PlayDelayed(time);
+		Debug.Log("ThunderSound");
 	}
-	void ThunderAndFlash()
+	void ThunderAndFlash(int pos = -1)
 	{
-		int pos = Random.Range(0, positions.Length);
+		if (pos == -1)
+			pos = Random.Range(0, thunderSounds.Length);
 		//play lightning visual effect
 		StartCoroutine(FlashEffect(pos));
 		//calculate time based on distance of lightning to Cara
-		float time = Random.Range(0f, 3f);
-		float volume = 1f;
-		StartCoroutine(ThunderSound(time, pos, volume));
+		float dist = Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, thunderSounds[pos].transform.position);
+		float time = 1f;
+		StartCoroutine(ThunderSound((ulong)time, pos, 1f));
 	}
 	void NextWeather()
 	{
 		currentWeather++;
-		if (currentWeather >= 3)
+		if (currentWeather > 3)
 		{
 			currentWeather = 0;
 		}
@@ -121,16 +127,17 @@ public class WeatherManager : MonoBehaviour
 	void Update()
 	{
 		//for debuging
-		//if (Input.GetAxis("Mouse ScrollWheel") != 0f)
-		//{
-		//	if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-		//	{
-		//		NextWeather();
-		//	}
-		//	if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-		//	{
-		//		LastWeather();
-		//	}
-		//}
+		/*
+		if (Input.GetAxis("Mouse ScrollWheel") != 0f)
+		{
+			if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+			{
+				NextWeather();
+			}
+			if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+			{
+				LastWeather();
+			}
+		}*/
 	}
 }
