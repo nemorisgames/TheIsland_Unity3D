@@ -130,18 +130,20 @@ public class CellPhone : MonoBehaviour
 		{
 			switch (currentFunction)
 			{
-				case CellphoneFunctions.Light:
-					light.enabled = !light.enabled;
-					AC.GlobalVariables.SetBooleanValue(0, light.enabled);
-					break;
-				case CellphoneFunctions.CameraPhoto:
-					if (!isTakingPhoto)
-						StartCoroutine(takePhoto());
-					break;
-				case CellphoneFunctions.ReviewPhotos:
-					ScreenManager.Instance.ShowScreen(ScreenType.PhotoView);
-					canUseMouseScroll = false;
-					break;
+			case CellphoneFunctions.Light:
+				light.enabled = !light.enabled;
+				Light s = light.transform.FindChild ("SupportLight").GetComponent<Light> ();
+				s.enabled = !s.enabled;
+				AC.GlobalVariables.SetBooleanValue(0, light.enabled);
+				break;
+			case CellphoneFunctions.CameraPhoto:
+				if (!isTakingPhoto)
+					StartCoroutine(takePhoto());
+				break;
+			case CellphoneFunctions.ReviewPhotos:
+				ScreenManager.Instance.ShowScreen(ScreenType.PhotoView);
+				canUseMouseScroll = false;
+				break;
 			}
 		}
 
