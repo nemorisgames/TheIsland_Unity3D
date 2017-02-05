@@ -35,7 +35,7 @@ SubShader {
 	}
 	LOD 700
 
-Offset -1,-1
+//Offset -1,-1
 ZTest LEqual
 CGPROGRAM
 #pragma surface surf Standard vertex:vert fullforwardshadows decal:blend

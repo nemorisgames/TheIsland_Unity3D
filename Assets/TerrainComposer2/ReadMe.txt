@@ -4,10 +4,8 @@ TerrainComposer 2 ReadMe
 The TerrainComposer 2 window can be opened in:
 'Unity Menu -> Window -> Power Of Nature Software -> TerrainComposer2'.
 
-*** TerrainComposer2 beta does not work on the Mac yet. Because Mac OS does not 
-support GPU Compute shaders yet. It requires OpenGL 4.3 and Mac OS is still on
-OpenGL 4.1. Don't worry as I'm still working on CPU Multithreading generating, and 
-this will be added during the beta so it will also work on Mac. For more info and
+*** TerrainComposer2 does not work on the Mac yet as Metal is required for this. 
+Unity is working on adding Metal in the Mac Editor on Unity5.6. For more info and
 supported platforms for Compute shaders visit the documentation page.
 
 Visit the documentation page to find downloadable stamps, examples, documentation, video tutorials and release notes:
@@ -17,11 +15,12 @@ You can go to this page from within the TerrainComposer window by right clicking
 on the empty area (the area around the height/splat/color... buttons). And a popup
 menu will appear and select 'Help -> Documentation'.
 
-The example Scenes are animated terrains to show the seeding possibilities and the GPU speed. If you get a low framerate 
+There's an example Scene included in the Examples/Scene folder. The animated folder contains animated 
+terrain examples to show the seeding possibilities and the GPU speed. If you get a low framerate 
 heightmap resolution should be set to 256. The animating can be stopped by disabling the animating scripts on the layers
-(green nodes) in the 'Height' output. There also 'Steady' examples that can be loaded with TC Menu -> File -> Open. 
+(green nodes) in the 'Height' output. There are also project examples that can be loaded with TC Menu -> File -> Open. 
 
-There's a high resolution stamp link on the documentation page. I don't include this in the main package because I
+There's a high resolution stamp link on the documentation page. I didn't include this in the main package because I
 want to keep the package size small, so it's easy to update on the Asset Store and fast to import.
 
 Please read at least how the TC2 GUI works so you will be able to drag&drop, duplicate
@@ -36,6 +35,6 @@ I hope you will enjoy TerrainComposer2!
 If you have any questions or run into something, please contact me at 
 support@terraincomposer.com
 
-You can expect reply within 24 hours.
+You can expect a reply within 24 hours.
 
 Nathaniel

@@ -23,7 +23,7 @@ public class WeatherManager : MonoBehaviour
 	public AudioClip[] weather_effects;
 	public GameObject[] positions;
 	public GameObject thunderSpawns;
-	private AudioSource[] thunderSounds;
+	public AudioSource[] thunderSounds;
 	int currentWeather = (int)Weather.rain_heavy;
 	void Awake()
 	{
@@ -33,7 +33,7 @@ public class WeatherManager : MonoBehaviour
 			GameObject.FindGameObjectWithTag("Player").AddComponent<AudioSource>();
 		}
 		source = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
-		thunderSounds = thunderSpawns.GetComponentsInChildren<AudioSource>();
+		//thunderSounds = thunderSpawns.GetComponentsInChildren<AudioSource>();
 	}
 	void RemoveOldWeather()
 	{
@@ -88,7 +88,11 @@ public class WeatherManager : MonoBehaviour
 	IEnumerator FlashEffect(int pos)
 	{
 		thunderSounds[pos].transform.GetChild(0).gameObject.SetActive(true);
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(0.2f);
+		thunderSounds[pos].transform.GetChild(0).gameObject.SetActive(false);
+		yield return new WaitForSeconds(0.1f);
+		thunderSounds[pos].transform.GetChild(0).gameObject.SetActive(true);
+		yield return new WaitForSeconds(0.5f);
 		thunderSounds[pos].transform.GetChild(0).gameObject.SetActive(false);
 	}
 	IEnumerator ThunderSound(ulong time, int pos, float volume)
@@ -105,7 +109,7 @@ public class WeatherManager : MonoBehaviour
 		StartCoroutine(FlashEffect(pos));
 		//calculate time based on distance of lightning to Cara
 		float dist = Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, thunderSounds[pos].transform.position);
-		float time = 1f;
+		float time = Vector3.Distance (thunderSounds [pos].transform.position, GameObject.FindWithTag ("Player").transform.position) * 0.05f;
 		StartCoroutine(ThunderSound((ulong)time, pos, 1f));
 	}
 	void NextWeather()

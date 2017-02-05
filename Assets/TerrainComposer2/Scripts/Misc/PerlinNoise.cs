@@ -17,12 +17,11 @@ public class PerlinNoise
 
 	public PerlinNoise(int seed)
 	{
-		#if UNITY_5_4_OR_NEWER
-		UnityEngine.Random.InitState(seed);
+		#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3
+			UnityEngine.Random.seed = seed;
 		#else
-		UnityEngine.Random.seed = seed;
+			UnityEngine.Random.InitState(seed);
 		#endif
-
 
 		int i, j, k;
 		for (i = 0 ; i < SIZE ; i++) 

@@ -53,9 +53,9 @@ Shader "Relief Pack - GeometryBlend/ Standard (Specular setup)"
 
 	SubShader
 	{
-		Tags { "RenderType"="Opaque" "PerformanceChecks"="False" }
+		Tags { "RenderType"="Opaque" "Queue" = "Geometry+12" }
 		LOD 300
-	
+		Offset -1,-1
 
 		// ------------------------------------------------------------------
 		//  Base forward pass (directional light, emission, lightmaps, ...)
@@ -64,8 +64,8 @@ Shader "Relief Pack - GeometryBlend/ Standard (Specular setup)"
 			Name "FORWARD" 
 			Tags { "LightMode" = "ForwardBase" }
 
-			Blend [_SrcBlend] [_DstBlend]
-			ZWrite [_ZWrite]
+			Blend SrcAlpha OneMinusSrcAlpha//[_SrcBlend] [_DstBlend]
+			ZWrite Off//[_ZWrite]
 
 			CGPROGRAM
 			#pragma target 3.0
@@ -75,7 +75,8 @@ Shader "Relief Pack - GeometryBlend/ Standard (Specular setup)"
 			// -------------------------------------
 					
 			#pragma shader_feature _NORMALMAP
-			#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
+			//#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
+			#define _ALPHABLEND_ON 1
 			#pragma shader_feature _EMISSION
 			#pragma shader_feature _SPECGLOSSMAP
 			#pragma shader_feature ___ _DETAIL_MULX2
@@ -96,7 +97,7 @@ Shader "Relief Pack - GeometryBlend/ Standard (Specular setup)"
 		{
 			Name "FORWARD_DELTA"
 			Tags { "LightMode" = "ForwardAdd" }
-			Blend [_SrcBlend] One
+			Blend SrcAlpha One//[_SrcBlend] One
 			Fog { Color (0,0,0,0) } // in additive pass fog should be black
 			ZWrite Off
 			ZTest LEqual
@@ -110,7 +111,8 @@ Shader "Relief Pack - GeometryBlend/ Standard (Specular setup)"
 
 			
 			#pragma shader_feature _NORMALMAP
-			#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
+			//#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
+			#define _ALPHABLEND_ON 1
 			#pragma shader_feature _SPECGLOSSMAP
 			#pragma shader_feature ___ _DETAIL_MULX2
 			#pragma shader_feature _PARALLAXMAP
@@ -124,66 +126,66 @@ Shader "Relief Pack - GeometryBlend/ Standard (Specular setup)"
 
 			ENDCG
 		}
-		// ------------------------------------------------------------------
-		//  Shadow rendering pass
-		Pass {
-			Name "ShadowCaster"
-			Tags { "LightMode" = "ShadowCaster" }
-			
-			ZWrite On ZTest LEqual
+		//// ------------------------------------------------------------------
+		////  Shadow rendering pass
+		//Pass {
+		//	Name "ShadowCaster"
+		//	Tags { "LightMode" = "ShadowCaster" }
+		//	
+		//	ZWrite On ZTest LEqual
 
-			CGPROGRAM
-			#pragma target 3.0
-			// TEMPORARY: GLES2.0 temporarily disabled to prevent errors spam on devices without textureCubeLodEXT
-			#pragma exclude_renderers gles
-			
-			// -------------------------------------
+		//	CGPROGRAM
+		//	#pragma target 3.0
+		//	// TEMPORARY: GLES2.0 temporarily disabled to prevent errors spam on devices without textureCubeLodEXT
+		//	#pragma exclude_renderers gles
+		//	
+		//	// -------------------------------------
 
 
-			#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
-			#pragma multi_compile_shadowcaster
+		//	//#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
+		//	#pragma multi_compile_shadowcaster
 
-			#pragma vertex vertShadowCaster
-			#pragma fragment fragShadowCaster
+		//	#pragma vertex vertShadowCaster
+		//	#pragma fragment fragShadowCaster
 
-			#include "UnityStandardShadow.cginc"
+		//	#include "UnityStandardShadow.cginc"
 
-			ENDCG
-		}
-		// ------------------------------------------------------------------
-		//  Deferred pass
-		Pass
-		{
-			Name "DEFERRED"
-			Tags { "LightMode" = "Deferred" }
+		//	ENDCG
+		//}
+		//// ------------------------------------------------------------------
+		////  Deferred pass
+		//Pass
+		//{
+		//	Name "DEFERRED"
+		//	Tags { "LightMode" = "Deferred" }
 
-			CGPROGRAM
-			#pragma target 3.0
-			// TEMPORARY: GLES2.0 temporarily disabled to prevent errors spam on devices without textureCubeLodEXT
-			#pragma exclude_renderers nomrt gles
-			
+		//	CGPROGRAM
+		//	#pragma target 3.0
+		//	// TEMPORARY: GLES2.0 temporarily disabled to prevent errors spam on devices without textureCubeLodEXT
+		//	#pragma exclude_renderers nomrt gles
+		//	
 
-			// -------------------------------------
+		//	// -------------------------------------
 
-			#pragma shader_feature _NORMALMAP
-			#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
-			#pragma shader_feature _EMISSION
-			#pragma shader_feature _SPECGLOSSMAP
-			#pragma shader_feature ___ _DETAIL_MULX2
-			#pragma shader_feature _PARALLAXMAP
+		//	#pragma shader_feature _NORMALMAP
+		//	#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
+		//	#pragma shader_feature _EMISSION
+		//	#pragma shader_feature _SPECGLOSSMAP
+		//	#pragma shader_feature ___ _DETAIL_MULX2
+		//	#pragma shader_feature _PARALLAXMAP
 
-			#pragma multi_compile ___ UNITY_HDR_ON
-			#pragma multi_compile LIGHTMAP_OFF LIGHTMAP_ON
-			#pragma multi_compile DIRLIGHTMAP_OFF DIRLIGHTMAP_COMBINED DIRLIGHTMAP_SEPARATE
-			#pragma multi_compile DYNAMICLIGHTMAP_OFF DYNAMICLIGHTMAP_ON
-			
-			#pragma vertex vertDeferred
-			#pragma fragment fragDeferred
+		//	#pragma multi_compile ___ UNITY_HDR_ON
+		//	#pragma multi_compile LIGHTMAP_OFF LIGHTMAP_ON
+		//	#pragma multi_compile DIRLIGHTMAP_OFF DIRLIGHTMAP_COMBINED DIRLIGHTMAP_SEPARATE
+		//	#pragma multi_compile DYNAMICLIGHTMAP_OFF DYNAMICLIGHTMAP_ON
+		//	
+		//	#pragma vertex vertDeferred
+		//	#pragma fragment fragDeferred
 
-			#include "UnityStandardCore.cginc"
+		//	#include "UnityStandardCore.cginc"
 
-			ENDCG
-		}
+		//	ENDCG
+		//}
 
 		// ------------------------------------------------------------------
 		// Extracts information for lightmapping, GI (emission, albedo, ...)
@@ -208,116 +210,116 @@ Shader "Relief Pack - GeometryBlend/ Standard (Specular setup)"
 		}
 	}
 
-	SubShader
-	{
-		Tags { "RenderType"="Opaque" "PerformanceChecks"="False" }
-		LOD 150
+	//SubShader
+	//{
+	//	Tags { "RenderType"="Opaque" "PerformanceChecks"="False" }
+	//	LOD 150
 
-		// ------------------------------------------------------------------
-		//  Base forward pass (directional light, emission, lightmaps, ...)
-		Pass
-		{
-			Name "FORWARD" 
-			Tags { "LightMode" = "ForwardBase" }
+	//	// ------------------------------------------------------------------
+	//	//  Base forward pass (directional light, emission, lightmaps, ...)
+	//	Pass
+	//	{
+	//		Name "FORWARD" 
+	//		Tags { "LightMode" = "ForwardBase" }
 
-			Blend [_SrcBlend] [_DstBlend]
-			ZWrite [_ZWrite]
+	//		Blend [_SrcBlend] [_DstBlend]
+	//		ZWrite [_ZWrite]
 
-			CGPROGRAM
-			#pragma target 2.0
-			
-			#pragma shader_feature _NORMALMAP
-			#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
-			#pragma shader_feature _EMISSION 
-			#pragma shader_feature _SPECGLOSSMAP
-			#pragma shader_feature ___ _DETAIL_MULX2
-			// SM2.0: NOT SUPPORTED shader_feature _PARALLAXMAP
+	//		CGPROGRAM
+	//		#pragma target 2.0
+	//		
+	//		#pragma shader_feature _NORMALMAP
+	//		#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
+	//		#pragma shader_feature _EMISSION 
+	//		#pragma shader_feature _SPECGLOSSMAP
+	//		#pragma shader_feature ___ _DETAIL_MULX2
+	//		// SM2.0: NOT SUPPORTED shader_feature _PARALLAXMAP
 
-			#pragma skip_variants SHADOWS_SOFT DYNAMICLIGHTMAP_ON DIRLIGHTMAP_COMBINED DIRLIGHTMAP_SEPARATE
-			
-			#pragma multi_compile_fwdbase
-			#pragma multi_compile_fog
+	//		#pragma skip_variants SHADOWS_SOFT DYNAMICLIGHTMAP_ON DIRLIGHTMAP_COMBINED DIRLIGHTMAP_SEPARATE
+	//		
+	//		#pragma multi_compile_fwdbase
+	//		#pragma multi_compile_fog
 
-			#pragma vertex vertBase
-			#pragma fragment fragBase
-			#include "UnityStandardCoreForward.cginc"
+	//		#pragma vertex vertBase
+	//		#pragma fragment fragBase
+	//		#include "UnityStandardCoreForward.cginc"
 
-			ENDCG
-		}
-		// ------------------------------------------------------------------
-		//  Additive forward pass (one light per pass)
-		Pass
-		{
-			Name "FORWARD_DELTA"
-			Tags { "LightMode" = "ForwardAdd" }
-			Blend [_SrcBlend] One
-			Fog { Color (0,0,0,0) } // in additive pass fog should be black
-			ZWrite Off
-			ZTest LEqual
-			
-			CGPROGRAM
-			#pragma target 2.0
+	//		ENDCG
+	//	}
+	//	// ------------------------------------------------------------------
+	//	//  Additive forward pass (one light per pass)
+	//	Pass
+	//	{
+	//		Name "FORWARD_DELTA"
+	//		Tags { "LightMode" = "ForwardAdd" }
+	//		Blend [_SrcBlend] One
+	//		Fog { Color (0,0,0,0) } // in additive pass fog should be black
+	//		ZWrite Off
+	//		ZTest LEqual
+	//		
+	//		CGPROGRAM
+	//		#pragma target 2.0
 
-			#pragma shader_feature _NORMALMAP
-			#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
-			#pragma shader_feature _SPECGLOSSMAP
-			#pragma shader_feature ___ _DETAIL_MULX2
-			// SM2.0: NOT SUPPORTED shader_feature _PARALLAXMAP
-			#pragma skip_variants SHADOWS_SOFT
-			
-			#pragma multi_compile_fwdadd_fullshadows
-			#pragma multi_compile_fog
-			
-			#pragma vertex vertAdd
-			#pragma fragment fragAdd
-			#include "UnityStandardCoreForward.cginc"
+	//		#pragma shader_feature _NORMALMAP
+	//		#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
+	//		#pragma shader_feature _SPECGLOSSMAP
+	//		#pragma shader_feature ___ _DETAIL_MULX2
+	//		// SM2.0: NOT SUPPORTED shader_feature _PARALLAXMAP
+	//		#pragma skip_variants SHADOWS_SOFT
+	//		
+	//		#pragma multi_compile_fwdadd_fullshadows
+	//		#pragma multi_compile_fog
+	//		
+	//		#pragma vertex vertAdd
+	//		#pragma fragment fragAdd
+	//		#include "UnityStandardCoreForward.cginc"
 
-			ENDCG
-		}
-		// ------------------------------------------------------------------
-		//  Shadow rendering pass
-		Pass {
-			Name "ShadowCaster"
-			Tags { "LightMode" = "ShadowCaster" }
-			
-			ZWrite On ZTest LEqual
+	//		ENDCG
+	//	}
+	//	// ------------------------------------------------------------------
+	//	//  Shadow rendering pass
+	//	Pass {
+	//		Name "ShadowCaster"
+	//		Tags { "LightMode" = "ShadowCaster" }
+	//		
+	//		ZWrite On ZTest LEqual
 
-			CGPROGRAM
-			#pragma target 2.0
+	//		CGPROGRAM
+	//		#pragma target 2.0
 
-			#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
-			#pragma skip_variants SHADOWS_SOFT
-			#pragma multi_compile_shadowcaster
+	//		#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
+	//		#pragma skip_variants SHADOWS_SOFT
+	//		#pragma multi_compile_shadowcaster
 
-			#pragma vertex vertShadowCaster
-			#pragma fragment fragShadowCaster
+	//		#pragma vertex vertShadowCaster
+	//		#pragma fragment fragShadowCaster
 
-			#include "UnityStandardShadow.cginc"
+	//		#include "UnityStandardShadow.cginc"
 
-			ENDCG
-		}
-		// ------------------------------------------------------------------
-		// Extracts information for lightmapping, GI (emission, albedo, ...)
-		// This pass it not used during regular rendering.
-		Pass
-		{
-			Name "META" 
-			Tags { "LightMode"="Meta" }
+	//		ENDCG
+	//	}
+	//	// ------------------------------------------------------------------
+	//	// Extracts information for lightmapping, GI (emission, albedo, ...)
+	//	// This pass it not used during regular rendering.
+	//	Pass
+	//	{
+	//		Name "META" 
+	//		Tags { "LightMode"="Meta" }
 
-			Cull Off
+	//		Cull Off
 
-			CGPROGRAM
-			#pragma vertex vert_meta
-			#pragma fragment frag_meta
+	//		CGPROGRAM
+	//		#pragma vertex vert_meta
+	//		#pragma fragment frag_meta
 
-			#pragma shader_feature _EMISSION
-			#pragma shader_feature _SPECGLOSSMAP
-			#pragma shader_feature ___ _DETAIL_MULX2
+	//		#pragma shader_feature _EMISSION
+	//		#pragma shader_feature _SPECGLOSSMAP
+	//		#pragma shader_feature ___ _DETAIL_MULX2
 
-			#include "UnityStandardMeta.cginc"
-			ENDCG
-		}
-	}
+	//		#include "UnityStandardMeta.cginc"
+	//		ENDCG
+	//	}
+	//}
 
 	//FallBack "VertexLit"
 	CustomEditor "StandardShaderGUI_RTPGeomBlend"

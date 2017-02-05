@@ -46,6 +46,7 @@ namespace TerrainComposer2
 
         // SpawnObject
         SerializedProperty spawnObject, linkToPrefab, go, rotRangeX, rotRangeY, rotRangeZ, isSnapRot, isSnapRotX, isSnapRotY, isSnapRotZ, snapRotX, snapRotY, snapRotZ, lookAtTarget, lookAtX, heightRange, includeTerrainHeight;
+        SerializedProperty customScaleRange, scaleRangeX, scaleRangeY, scaleRangeZ;
 
         SPCurve localCurve = new SPCurve();
         SPCurve worldCurve = new SPCurve();
@@ -59,6 +60,9 @@ namespace TerrainComposer2
         TC_Node node;
         TC_SelectItemGroup selectItemGroup;
         TC_SelectItem selectItem;
+
+        TC_Settings settings;
+        TC_Generate generate;
 
         Event eventCurrent;
 
@@ -259,6 +263,11 @@ namespace TerrainComposer2
                     snapRotY = spawnObject.FindPropertyRelative("snapRotY");
                     snapRotZ = spawnObject.FindPropertyRelative("snapRotZ");
 
+                    customScaleRange = spawnObject.FindPropertyRelative("customScaleRange");
+                    scaleRangeX = spawnObject.FindPropertyRelative("scaleRangeX");
+                    scaleRangeY = spawnObject.FindPropertyRelative("scaleRangeY");
+                    scaleRangeZ = spawnObject.FindPropertyRelative("scaleRangeZ");
+
                     scaleRange = spawnObject.FindPropertyRelative("scaleRange");
                     scaleMulti = spawnObject.FindPropertyRelative("scaleMulti");
                     nonUniformScale = spawnObject.FindPropertyRelative("nonUniformScale");
@@ -305,8 +314,8 @@ namespace TerrainComposer2
             if (eventCurrent.type == EventType.KeyUp) keyUp = true;
             else if (eventCurrent.type == EventType.KeyDown) keyUp = false;
 
-            if (eventCurrent.commandName == "Delete" || eventCurrent.commandName == "SoftDelete") { eventCurrent.Use(); cmdDelete = true; }
-            else if (eventCurrent.commandName == "Duplicate") { eventCurrent.Use(); cmdDuplicate = true; }
+            if ((eventCurrent.commandName == "Delete" || eventCurrent.commandName == "SoftDelete") && eventCurrent.type == EventType.Repaint) { eventCurrent.Use(); cmdDelete = true; }
+            else if (eventCurrent.commandName == "Duplicate" && eventCurrent.type == EventType.Repaint) { eventCurrent.Use(); cmdDuplicate = true; }
             
             if (cmdDelete && keyUp) { cmdDelete = keyUp = false; TC_NodeWindow.DeleteKey(); return; }
             else if (cmdDuplicate && keyUp) { cmdDuplicate = keyUp = false; TC_NodeWindow.DuplicateKey(); return; }
@@ -464,7 +473,10 @@ namespace TerrainComposer2
 
         public override void OnInspectorGUI()
         {
-            if (TC_Settings.instance == null) return;
+            settings = TC_Settings.instance;
+            generate = TC_Generate.instance;
+
+            if (settings == null) return;
             serializedObject.Update();
             
             EditorGUILayout.BeginHorizontal();
@@ -638,24 +650,24 @@ namespace TerrainComposer2
                     }
                     else if (node.inputTerrain == InputTerrain.Splatmap)
                     {
-                        if (TC_Settings.instance.hasMasterTerrain)
+                        if (settings.hasMasterTerrain)
                         {
                             EditorGUILayout.BeginHorizontal();
-                            DrawIntSlider(splatSelectIndex, 0, TC_Settings.instance.masterTerrain.terrainData.splatPrototypes.Length - 1, new GUIContent("Splat Index"));
+                            DrawIntSlider(splatSelectIndex, 0, settings.masterTerrain.terrainData.splatPrototypes.Length - 1, new GUIContent("Splat Index"));
                             EditorGUILayout.EndHorizontal();
                             EditorGUILayout.BeginHorizontal();
                             GUILayout.Space(5);
                             EditorGUILayout.PrefixLabel(" ");
-                            if (splatSelectIndex.intValue < TC_Settings.instance.masterTerrain.terrainData.splatPrototypes.Length)
+                            if (splatSelectIndex.intValue < settings.masterTerrain.terrainData.splatPrototypes.Length)
                             {
-                                DrawPreviewTexture(TC_Settings.instance.masterTerrain.terrainData.splatPrototypes[splatSelectIndex.intValue].texture, Color.white, Color.white, 150, 150);
+                                DrawPreviewTexture(settings.masterTerrain.terrainData.splatPrototypes[splatSelectIndex.intValue].texture, Color.white, Color.white, 150, 150);
                             }
                             EditorGUILayout.EndHorizontal();
                         }
                     }
                     else if (node.inputTerrain == InputTerrain.Normal)
                     {
-                        DrawCommingSoon("The normal node will be added in another beta release.");
+                        DrawCommingSoon("The normal node will be added in the next release.");
                     }
                     else if (node.inputTerrain == InputTerrain.Collision)
                     {
@@ -699,7 +711,6 @@ namespace TerrainComposer2
 
                     if (node.inputFile == InputFile.RawImage) DrawRawImage();
                     else if (node.inputFile == InputFile.Image) DrawImage();
-                    else if (node.inputFile == InputFile.Image) DrawCommingSoon("The image node will be added in another beta release.");
                 }
                 else if (node.inputKind == InputKind.Current)
                 {
@@ -725,7 +736,7 @@ namespace TerrainComposer2
                 }
                 else if (node.inputKind == InputKind.Portal)
                 {
-                    DrawCommingSoon("Portals will be added in another beta release.");
+                    DrawCommingSoon("Portals will be added in another release.");
                 }
             }
             else if (selectItemGroup != null)
@@ -750,23 +761,34 @@ namespace TerrainComposer2
                 DrawCurve(worldCurve, "Global Height Curve");
             }
 
-            if (TC_Generate.instance.generateDone != TC_Generate.instance.generateDoneOld)
+            if (generate.generateDone != generate.generateDoneOld)
             {
                 // Debug.Log("Generate Done");
                 Repaint();
-                TC_Generate.instance.generateDoneOld = TC_Generate.instance.generateDone;
+                generate.generateDoneOld = generate.generateDone;
             }
 
             // DrawMethod();
             // Draw Inspector
             // if (node == null)
+            
+            if (layerGroup != null)
+            {
+                if (layerGroup.level == 0)
+                {
+                    if (layerGroup.outputId == TC.heightOutput) DrawExport(settings.heightmapFilename, 0);
+                    if (layerGroup.outputId == TC.splatOutput) DrawExport(settings.splatmapFilename, 1);
+                    else if (layerGroup.outputId == TC.colorOutput) DrawExport(settings.colormapFilename, 2);
+                }
+            }
+
             TD.DrawSpacer();
 
             TD.DrawLabelWidthUnderline("Notes", 14);
 
             notes.stringValue = EditorGUILayout.TextArea(notes.stringValue);
 
-            if (TC_Settings.instance.drawDefaultInspector) base.OnInspectorGUI();  
+            if (settings.drawDefaultInspector) base.OnInspectorGUI();  
             TD.DrawSpacer();
             
             serializedObject.ApplyModifiedProperties();
@@ -786,6 +808,98 @@ namespace TerrainComposer2
                     AutoGenerate();
                 }
             }
+        }
+
+        void DrawExport(string filename, int mode)
+        {
+            TD.DrawSpacer();
+
+            GUI.changed = false;
+
+            TD.DrawLabelWidthUnderline("Export", 14);
+
+            GUI.color = Color.blue * TD.editorSkinMulti;
+            EditorGUILayout.BeginVertical("Box");
+            GUI.color = Color.white;
+
+            EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.PrefixLabel("Path");
+                EditorGUILayout.LabelField(settings.exportPath);
+                if (GUILayout.Button("Select", GUILayout.Width(50))) SelectExportPath();
+            EditorGUILayout.EndHorizontal();
+
+            string filenameText, buttonText;
+            int buttonWidth;
+
+            if (mode == 0) { filenameText = "Heightmap Filename"; buttonText = "Export Heightmap"; buttonWidth = 125; } else { filenameText = "Filename"; buttonText = "Export"; buttonWidth = 50; }
+
+            filename = EditorGUILayout.TextField(filenameText, filename);
+
+            if (mode == 0)
+            {
+                settings.combineHeightmapImage = EditorGUILayout.Toggle("Combine Image", settings.combineHeightmapImage);
+            }
+            else if (mode == 1 || mode == 2)
+            {
+                settings.imageExportFormat = (TC_Settings.ImageExportFormat)EditorGUILayout.EnumPopup("Image Format", settings.imageExportFormat);
+            }
+
+            if (GUI.changed)
+            {
+                EditorUtility.SetDirty(settings);
+            }
+
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.PrefixLabel(" ");
+            if (GUILayout.Button(buttonText, GUILayout.Width(buttonWidth)))
+            {
+                if (mode == 0)
+                {
+                    if (settings.combineHeightmapImage) generate.ExportHeightmapCombined(settings.exportPath); else generate.ExportHeightmap(settings.exportPath);
+                }
+                else if (mode == 1) generate.ExportSplatmap(settings.exportPath);
+                else if (mode == 2) generate.ExportColormap(settings.exportPath, true);
+
+            }
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.EndVertical();
+
+            if (mode == 0)
+            {
+                GUILayout.Space(10);
+                GUI.color = Color.green * TD.editorSkinMulti;
+                EditorGUILayout.BeginVertical("Box");
+                GUI.color = Color.white;
+
+                filename = EditorGUILayout.TextField("Normal map Filename", settings.normalmapFilename);
+                settings.imageExportFormat = (TC_Settings.ImageExportFormat)EditorGUILayout.EnumPopup("Image Format", settings.imageExportFormat);
+                settings.normalmapStrength = EditorGUILayout.FloatField("Normal map Strength", settings.normalmapStrength);
+
+                EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.PrefixLabel(" ");
+
+                    if (GUILayout.Button("Export Normal map", GUILayout.Width(buttonWidth)))
+                    {
+                        generate.ExportNormalmap(settings.exportPath);
+                    }
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.EndVertical();
+            }
+            
+        }
+
+        public void SelectExportPath()
+        {
+            string path = settings.exportPath;
+
+            if (path == "") path = Application.dataPath;
+
+            string newPath = EditorUtility.SaveFolderPanel("Export path", path, "");
+
+            if (newPath == "") return;
+
+            settings.exportPath = newPath;
         }
 
         void AutoGenerate()
@@ -1272,7 +1386,7 @@ namespace TerrainComposer2
 
         public void DrawRawImage()
         {
-            if (TC_Settings.instance.presetMode == PresetMode.StampMode)
+            if (settings.presetMode == PresetMode.StampMode)
             {
                 GUI.changed = false;
                 EditorGUILayout.BeginHorizontal();
@@ -1517,7 +1631,7 @@ namespace TerrainComposer2
 
         void DrawTerrainHeightSlider(Rect rect)
         {
-            if (!TC_Settings.instance.hasMasterTerrain) return;
+            if (!settings.hasMasterTerrain) return;
 
             TC_Area2D area2D = TC_Area2D.current;
 
@@ -1553,12 +1667,12 @@ namespace TerrainComposer2
 
             area2D.currentTerrainArea.ApplySize();
             DoRepaint();
-            TC_Generate.instance.Generate(true);
+            generate.Generate(true);
         }
 
         void DrawSelectItem()
         {
-            if (!TC_Settings.instance.hasMasterTerrain) return;
+            if (!settings.hasMasterTerrain) return;
 
             int length = selectItem.GetItemTotalFromTerrain();
 
@@ -1578,7 +1692,7 @@ namespace TerrainComposer2
                 //    {
                 //        EditorGUILayout.BeginHorizontal();
                 //        GUILayout.Space(15);
-                //        DrawPreviewTexture(TC_Settings.instance.masterTerrain.terrainData.splatPrototypes[i].texture, Color.white, Color.white);
+                //        DrawPreviewTexture(settings.masterTerrain.terrainData.splatPrototypes[i].texture, Color.white, Color.white);
                 //        GUILayout.Space(5);
                 //        DrawSlider(splatCustomValues.GetArrayElementAtIndex(i), 0, 1, new GUIContent(""));
                 //        EditorGUILayout.EndHorizontal();
@@ -1606,12 +1720,12 @@ namespace TerrainComposer2
                 EditorGUILayout.BeginHorizontal();
                 if (layerGroup.outputId == TC.treeOutput)
                 {
-                    terrainLayer.treeResolutionPM = EditorGUILayout.IntField(new GUIContent("Tree Resolution Per Meter"), terrainLayer.treeResolutionPM);
+                    terrainLayer.treeResolutionPM = EditorGUILayout.FloatField(new GUIContent("Tree Resolution Per Meter"), terrainLayer.treeResolutionPM);
                     if (terrainLayer.treeResolutionPM > 89) terrainLayer.treeResolutionPM = 89;
                 }
                 else if (layerGroup.outputId == TC.objectOutput)
                 {
-                    terrainLayer.objectResolutionPM = EditorGUILayout.IntField(new GUIContent("Object Resolution Per Meter"), terrainLayer.objectResolutionPM);
+                    terrainLayer.objectResolutionPM = EditorGUILayout.FloatField(new GUIContent("Object Resolution Per Meter"), terrainLayer.objectResolutionPM);
                     if (terrainLayer.objectResolutionPM > 89) terrainLayer.objectResolutionPM = 89;
                 }
                 else if (layerGroup.outputId == TC.colorOutput) terrainLayer.colormapResolution = EditorGUILayout.IntField(new GUIContent("Colormap Resolution"), terrainLayer.colormapResolution);
@@ -1630,9 +1744,9 @@ namespace TerrainComposer2
         
         void DrawTreeSelectItem()
         {
-            if (!TC_Settings.instance.hasMasterTerrain) return;
+            if (!settings.hasMasterTerrain) return;
 
-            int treeLength = TC_Settings.instance.masterTerrain.terrainData.treePrototypes.Length;
+            int treeLength = settings.masterTerrain.terrainData.treePrototypes.Length;
 
             DrawIntSlider(selectIndex, 0, treeLength - 1, new GUIContent("Tree Index"));
             if (GUI.changed) selectItem.Refresh();
@@ -1649,10 +1763,10 @@ namespace TerrainComposer2
 
             TD.DrawSpacer();
 
-            DrawScale();
+            DrawScale(false);
         }
 
-        void DrawScale()
+        void DrawScale(bool isObjectItem)
         {
             GUI.color = Color.blue * TD.editorSkinMulti;
             EditorGUILayout.BeginVertical("Box");
@@ -1660,12 +1774,22 @@ namespace TerrainComposer2
 
             TD.DrawLabelWidthUnderline("Scale", 14);
 
-            EditorGUILayout.BeginHorizontal();
-            // GUILayout.Space(15);
-            
-            DrawVector2(scaleRange, true, "Min", "Max", new GUIContent("Scale Range"));
-           
-            EditorGUILayout.EndHorizontal();
+            if (isObjectItem)
+            {
+                TD.DrawProperty(customScaleRange, new GUIContent("Custom Scale"));
+            }
+
+            if (customScaleRange.boolValue && isObjectItem)
+            {
+                DrawVector2(scaleRangeX, true, "Min", "Max", new GUIContent("Scale Range X"));
+                DrawVector2(scaleRangeY, true, "Min", "Max", new GUIContent("Scale Range Y"));
+                DrawVector2(scaleRangeZ, true, "Min", "Max", new GUIContent("Scale Range Z"));
+            }
+            else
+            {
+                DrawVector2(scaleRange, true, "Min", "Max", new GUIContent("Scale Range"));
+                DrawSlider(nonUniformScale, 0, 1);
+            }
 
             GUI.changed = false;
             TD.DrawProperty(scaleMulti);
@@ -1673,8 +1797,7 @@ namespace TerrainComposer2
             {
                 if (scaleMulti.floatValue < 0.01f) scaleMulti.floatValue = 0.01f;
             }
-
-            DrawSlider(nonUniformScale, 0, 1);
+            
             TD.DrawProperty(scaleCurve);
 
             TC_SelectItemGroup selectableItemGroup = selectItem.parentItem;
@@ -1747,9 +1870,9 @@ namespace TerrainComposer2
 
             TD.DrawLabelWidthUnderline("Rotation", 14);
 
-            DrawVector2(rotRangeX, false, "Min", "Max", new GUIContent("Rotation X Range"));
-            DrawVector2(rotRangeY, false, "Min", "Max", new GUIContent("Rotation Y Range"));
-            DrawVector2(rotRangeZ, false, "Min", "Max", new GUIContent("Rotation Z Range"));
+            DrawVector2(rotRangeX, false, "Min", "Max", new GUIContent("Rotation Range X"));
+            DrawVector2(rotRangeY, false, "Min", "Max", new GUIContent("Rotation Range Y"));
+            DrawVector2(rotRangeZ, false, "Min", "Max", new GUIContent("Rotation Range Z"));
 
             TD.DrawProperty(isSnapRot, new GUIContent("Snap Rotation"));
             if (isSnapRot.boolValue)
@@ -1765,7 +1888,7 @@ namespace TerrainComposer2
 
             TD.DrawSpacer();
 
-            DrawScale();
+            DrawScale(true);
         }
 
         void DrawSnapRotation(SerializedProperty isSnapRot, SerializedProperty snapRotAxis, string label)

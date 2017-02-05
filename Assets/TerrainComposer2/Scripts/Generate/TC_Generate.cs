@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using System.IO;
 
 
 namespace TerrainComposer2
@@ -48,16 +49,24 @@ namespace TerrainComposer2
 
         [System.NonSerialized] TC_Terrain firstTreeTerrain;
         [System.NonSerialized] TC_Terrain firstObjectTerrain;
-        
-        // static public EditorCoroutine co;
 
+        // static public EditorCoroutine co;
+        
         void OnEnable()
         {
             instance = this;
             isGeneratingHeight = false;
 
             #if UNITY_EDITOR
-            UnityEditor.EditorApplication.update += MyUpdate;
+                if (UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
+                {
+                    // transform.parent.gameObject.SetActive(false);
+                }
+                UnityEditor.EditorApplication.update += MyUpdate;
+            #else
+            {
+                // transform.parent.gameObject.SetActive(false);
+            }
             #endif
         }
 
@@ -96,7 +105,7 @@ namespace TerrainComposer2
                 if (settings.version == 0)
                 {
                     settings.version = TC.GetVersionNumber();
-                    TC.refreshOutputReferences = 7;
+                    TC.RefreshOutputReferences(7);
                     TC.AddMessage("TerrainComposer2 is updated to " + TC.GetVersionLabel());
                 }
             }
@@ -105,9 +114,9 @@ namespace TerrainComposer2
 
             if (area2D == null) return;
             if (area2D.terrainLayer == null) return;
-            if (area2D.terrainLayer.layerGroups[0] == null) TC.refreshOutputReferences = TC.allOutput;
+            if (area2D.terrainLayer.layerGroups[0] == null) TC.RefreshOutputReferences(TC.allOutput);
 
-            RefreshOutputReferences(TC.refreshOutputReferences, TC.refreshPreviewImages);
+            RefreshOutputReferences(TC.GetRefreshOutputReferences(), TC.refreshPreviewImages);
 
             if (cmdGenerate)
             {
@@ -136,10 +145,10 @@ namespace TerrainComposer2
             if (outputId >= 0)
             {
                 TC.refreshPreviewImages = refreshPreviewImages;
-                // Debug.Log("GetItems " + TC.refreshOutputReferences);
+                // Debug.Log("GetItems " + outputId);
                 
                 if (outputId >= 6) area2D.terrainLayer.GetItems(false, true, outputId == 7); else area2D.terrainLayer.GetItem(outputId, true, false);
-                TC.refreshOutputReferences = -1;
+                TC.RefreshOutputReferences(-1);
                 TC.refreshPreviewImages = false;
                 TC.repaintNodeWindow = true;
             }
@@ -248,7 +257,11 @@ namespace TerrainComposer2
         {
             // Debug.Log("Generate");
             if (!CheckForTerrain()) return;
+            
             area2D = TC_Area2D.current;
+
+            if (area2D == null) return;
+            if (area2D.terrainLayer == null) return;
             
             TC_Settings settings = TC_Settings.instance;
             if (settings == null)
@@ -535,6 +548,272 @@ namespace TerrainComposer2
             return true;
         }
 
+        public void ExportHeightmap(string path)
+        {
+            byte[] bytes = null;
+            Color32[] colors;
+            
+            int i = 0;
+            int offset = TC_Area2D.current.resExpandBorder;
+            
+            for (int y = 0; y < area2D.terrainAreas[0].tiles.y; ++y)
+            {
+                for (int x = 0; x < area2D.terrainAreas[0].tiles.x; ++x)
+                {
+                    TCUnityTerrain terrain = area2D.terrainAreas[0].terrains[i];
+                    Texture2D texHeight = terrain.texHeight;
+
+                    if (texHeight == null) continue;
+
+                    string filePath = path + "/" + TC_Settings.instance.heightmapFilename + "_x" + x + "_y" + y + ".raw";
+
+                    FileStream fs = new FileStream(filePath, FileMode.Create);
+                    
+                    colors = terrain.texHeight.GetPixels32();
+                    
+                    Int2 resolution = new Int2(texHeight.width - (offset * 2), texHeight.height - (offset * 2));
+
+                    int size = resolution.x * resolution.y;
+
+                    if (bytes == null) bytes = new byte[size * 2];
+                    else if (bytes.Length != size * 2) bytes = new byte[size * 2];
+                    
+                    for (int yy = 0; yy < resolution.y; yy++)
+                    {
+                        for (int xx = 0; xx < resolution.x; xx++)
+                        {
+                            int index = ((yy * resolution.x) + xx) * 2;
+                            int index2 = ((texHeight.height - yy - 1 - offset) * texHeight.width) + xx + offset;
+                            bytes[index] = colors[index2].g;
+                            bytes[index + 1] = colors[index2].r;
+                        }
+                    }
+
+                    fs.Write(bytes, 0, bytes.Length);
+                    fs.Close();
+
+                    i++;
+                }
+            }
+
+            #if UNITY_EDITOR
+            UnityEditor.AssetDatabase.Refresh();
+            #endif
+        }
+
+        public void ExportHeightmapCombined(string path)
+        {
+            byte[] bytes = null;
+            Color32[] colors;
+
+            int i = 0;
+            int offset = TC_Area2D.current.resExpandBorder;
+
+            string filePath = path + "/" + TC_Settings.instance.heightmapFilename + ".raw";
+
+            FileStream fs = new FileStream(filePath, FileMode.Create);
+
+            int tilesY = area2D.terrainAreas[0].tiles.y;
+            int tilesX = area2D.terrainAreas[0].tiles.x;
+
+            for (int y = 0; y < tilesY; ++y)
+            {
+                for (int x = 0; x < tilesX; ++x)
+                {
+                    TCUnityTerrain terrain = area2D.terrainAreas[0].terrains[i];
+                    Texture2D texHeight = terrain.texHeight;
+
+                    if (texHeight == null) continue;
+
+                    colors = terrain.texHeight.GetPixels32();
+
+                    Int2 resolution = new Int2(texHeight.width - (offset * 2), texHeight.height - (offset * 2));
+
+                    int size = resolution.x * resolution.y;
+
+                    if (bytes == null) bytes = new byte[resolution.x * 2];
+                    else if (bytes.Length != resolution.x * 2) bytes = new byte[resolution.x * 2];
+
+                    fs.Seek((x * resolution.x * 2) + ((tilesY - y - 1) * resolution.y * (resolution.x * 2 * tilesX)), SeekOrigin.Begin);
+
+                    for (int yy = 0; yy < resolution.y; yy++)
+                    {
+                        for (int xx = 0; xx < resolution.x; xx++)
+                        {
+                            int index = xx * 2;
+                            int index2 = ((texHeight.height - yy - 1 - offset) * texHeight.width) + xx + offset;
+                            bytes[index] = colors[index2].g;
+                            bytes[index + 1] = colors[index2].r;
+                        }
+                        
+                        fs.Write(bytes, 0, bytes.Length); 
+                        fs.Seek(resolution.x * 2 * (tilesX - 1), SeekOrigin.Current);
+                    }
+                    
+                    i++;
+                }
+            }
+
+            fs.Close();
+
+            #if UNITY_EDITOR
+            UnityEditor.AssetDatabase.Refresh();
+            #endif
+        }
+
+        public void ExportNormalmap(string path)
+        {
+            Color32[] colors, normalColors = null;
+
+            int i = 0;
+            int offset = TC_Area2D.current.resExpandBorder;
+            float nx, ny, nz;
+            float normalmapStrength = TC_Settings.instance.normalmapStrength;
+            
+            for (int y = 0; y < area2D.terrainAreas[0].tiles.y; ++y)
+            {
+                for (int x = 0; x < area2D.terrainAreas[0].tiles.x; ++x)
+                {
+                    TCUnityTerrain terrain = area2D.terrainAreas[0].terrains[i];
+                    Texture2D texHeight = terrain.texHeight;
+
+                    if (texHeight == null) continue;
+
+                    colors = terrain.texHeight.GetPixels32();
+
+                    Int2 resolution = new Int2(texHeight.width - (offset * 2), texHeight.height - (offset * 2));
+                    int size = resolution.x * resolution.y;
+
+                    TC_Compute.InitTexture(ref terrain.texNormalmap, TC_Settings.instance.normalmapFilename, resolution.x, true, TextureFormat.RGB24);
+
+                    if (normalColors == null) normalColors = new Color32[size];
+                    else if (normalColors.Length != size) normalColors = new Color32[size];
+                    
+                    for (int yy = 0; yy < resolution.y; yy++)
+                    {
+                        for (int xx = 0; xx < resolution.x; xx++)
+                        {
+                            int index = ((yy * resolution.x) + xx);
+                            int index2 = ((yy + offset) * texHeight.width) + xx + offset;
+                            nx = ((((float)colors[index2].b / 255.0f) * 2) - 1) * normalmapStrength;
+                            nz = ((((float)colors[index2].a / 255.0f) * 2) - 1) * normalmapStrength;
+                            ny = Mathf.Sqrt(1 - nx * nx - nz * nz);
+                            
+
+                            normalColors[index].r = colors[index2].b;
+                            normalColors[index].g = colors[index2].a;
+                            normalColors[index].b = (byte)(ny * 255f);
+                        }
+                    }
+
+                    terrain.texNormalmap.SetPixels32(normalColors);
+                    terrain.texNormalmap.Apply();
+
+                    ExportImage(path + "/" + TC_Settings.instance.normalmapFilename + "_x" + x + "_y" + y, terrain.texNormalmap);
+
+                    i++;
+                }
+            }
+
+            #if UNITY_EDITOR
+            UnityEditor.AssetDatabase.Refresh();
+            #endif
+        }
+
+        public void ExportColormap(string path, bool assignRTP)
+        {
+            int i = 0;
+            for (int y = 0; y < area2D.terrainAreas[0].tiles.y; ++y)
+            {
+                for (int x = 0; x < area2D.terrainAreas[0].tiles.x; ++x)
+                {
+                    TCUnityTerrain tcTerrain = area2D.terrainAreas[0].terrains[i];
+
+                    if (tcTerrain.texColormap == null) continue;
+                    
+                    string filePath = ExportImage(path + "/" + TC_Settings.instance.colormapFilename + "_x" + x + "_y" + y, tcTerrain.texColormap);
+
+                    #if UNITY_EDITOR
+                    if (TC_Settings.instance.isRTPDetected && TC_Settings.instance.autoColormapRTP && assignRTP)
+                    {
+                        filePath = filePath.Replace(Application.dataPath, "Assets");
+                        // Debug.Log(filePath);
+
+                        Texture2D tex = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(filePath, typeof(Texture2D));
+                        if (tex != null)
+                        {
+                            tcTerrain.AssignTextureRTP("ColorGlobal", tex);
+                        }
+                    }
+                    #endif
+
+                    ++i;
+                }
+
+            }
+
+            #if UNITY_EDITOR
+            UnityEditor.AssetDatabase.Refresh();
+            #endif
+        }
+
+        public string ExportImage(string filePath, Texture2D tex)
+        {
+            byte[] bytes;
+            string extension;
+            
+            if (TC_Settings.instance.imageExportFormat == TC_Settings.ImageExportFormat.PNG)
+            {
+                bytes = tex.EncodeToPNG(); extension = "png";
+            }
+            else
+            {
+                bytes = tex.EncodeToJPG(); extension = "jpg";
+            }
+
+            filePath = filePath + "." + extension;
+
+            #if !UNITY_WEBPLAYER
+            File.WriteAllBytes(filePath, bytes);
+            #endif
+
+            return filePath;
+        }
+
+        public void ExportSplatmap(string path)
+        {
+            int i = 0;
+            for (int y = 0; y < area2D.terrainAreas[0].tiles.y; ++y)
+            {
+                for (int x = 0; x < area2D.terrainAreas[0].tiles.x; ++x)
+                {
+                    TCUnityTerrain tcTerrain = area2D.terrainAreas[0].terrains[i];
+
+                    Terrain terrain = tcTerrain.terrain;
+
+                    if (terrain == null) continue;
+                    if (terrain.terrainData == null) continue;
+
+                    Texture2D[] texSplatmaps = terrain.terrainData.alphamapTextures;
+
+                    for (int j = 0; j < texSplatmaps.Length; j++)
+                    {
+
+                        if (texSplatmaps[j] == null) continue;
+
+                        ExportImage(path + "/" + TC_Settings.instance.splatmapFilename + j + "_x" + x + "_y" + y, texSplatmaps[j]);
+
+                    }
+                    ++i;
+                }
+
+            }
+
+            #if UNITY_EDITOR
+            UnityEditor.AssetDatabase.Refresh();
+            #endif
+        }
+
         public void ComputeHeight()
         {
             TC_LayerGroup heightLayerGroup = area2D.terrainLayer.layerGroups[TC.heightOutput];
@@ -581,6 +860,12 @@ namespace TerrainComposer2
                 area2D.currentTCTerrain.texHeight.ReadPixels(new Rect(0, 0, rtHeight.width, rtHeight.height), 0, 0);
                 area2D.currentTCTerrain.texHeight.Apply(); 
                 RenderTexture.active = rtActiveOld;
+                
+                //if (TC_Settings.instance.isRTPDetected && TC_Settings.instance.autoNormalmapRTP)
+                //{
+                //    ExportNormalmap(TC_Settings.instance.exportPath);
+                //    area2D.currentTCUnityTerrain.AssignTextureRTP("NormalGlobal");
+                //}
 
                 if (!assignTerrainHeightmap)
                 {
@@ -595,6 +880,7 @@ namespace TerrainComposer2
 
                 TC.InitArray(ref heights, heightResolution, heightResolution);
                 TC.InitArray(ref heightsReadback, resolution * resolution);
+
                 // TODO: Can read directly into heights with rearranging the array
                 buffer.GetData(heightsReadback);
                 compute.DisposeBuffer(ref buffer);
@@ -623,7 +909,7 @@ namespace TerrainComposer2
                     for (int x = 0; x < heightResolution; x++) heights[y, x] = heightsReadback[x + offset + ((y + offset) * resolution)];
                 }
 
-                if (area2D.currentTCUnityTerrain.tileX == 0 && area2D.currentTCUnityTerrain.tileZ == 0)
+                if (area2D.currentTCUnityTerrain.tileX == 0 && area2D.currentTCUnityTerrain.tileZ == 0)//  && !exportHeightmap)
                 {
                     area2D.currentTerrainArea.ResetNeighbors();
                 }
@@ -673,26 +959,31 @@ namespace TerrainComposer2
                 // compute.RunColormap(ref colorRTexture, ref area2D.currentTCUnityTerrain.colormap);
 
                 RenderTexture rtActiveOld = RenderTexture.active;
-                TC_Compute.InitTexture(ref area2D.currentTCUnityTerrain.texColormap, "texColormap", -1, true);
+                TC_Compute.InitTexture(ref area2D.currentTCUnityTerrain.texColormap, "texColormap", -1, true, TextureFormat.RGB24);
                 Texture2D texColormap = area2D.currentTCUnityTerrain.texColormap;
 
                 RenderTexture.active = area2D.currentTerrainArea.rtColormap;
                 texColormap.ReadPixels(new Rect(0, 0, texColormap.width, texColormap.height), 0, 0);
                 texColormap.Apply();
 
+                if (TC_Settings.instance.isRTPDetected && TC_Settings.instance.autoColormapRTP)
+                {
+                    area2D.currentTCUnityTerrain.AssignTextureRTP("ColorGlobal", area2D.currentTCUnityTerrain.texColormap);
+                }
+
                 RenderTexture.active = rtActiveOld;
 
-                if (area2D.currentTCUnityTerrain.terrain.materialTemplate != null) area2D.currentTCUnityTerrain.terrain.materialTemplate.SetTexture("_Colormap", area2D.currentTCUnityTerrain.texColormap);
-                else
-                {
-                    TC.AddMessage("The TC2 Colormap material is not assigned to the terrain. So it won't show.");
-                    TC.AddMessage("This will be added in the next beta.");
-                    // TC.AddMessage("Please go to the Setting tab in the inspector on Terrain Area GameObject and assign the custom material 'TC2_TerrainMaterial'.");
-                    // TC.AddMessage("The 'TC2_TerrainMaterial' is in the folder TerrainComposer2 -> Shaders -> Terrain.");
-#if UNITY_EDITOR
-                    // UnityEditor.Selection.activeTransform = area2D.terrainAreas[0].transform;
-#endif
-                }
+//                if (area2D.currentTCUnityTerrain.terrain.materialTemplate != null) area2D.currentTCUnityTerrain.terrain.materialTemplate.SetTexture("_Colormap", area2D.currentTCUnityTerrain.texColormap);
+//                else
+//                {
+//                    TC.AddMessage("The TC2 Colormap material is not assigned to the terrain. So it won't show.");
+//                    TC.AddMessage("This will be added in the next beta.");
+//                    // TC.AddMessage("Please go to the Setting tab in the inspector on Terrain Area GameObject and assign the custom material 'TC2_TerrainMaterial'.");
+//                    // TC.AddMessage("The 'TC2_TerrainMaterial' is in the folder TerrainComposer2 -> Shaders -> Terrain.");
+//#if UNITY_EDITOR
+//                    // UnityEditor.Selection.activeTransform = area2D.terrainAreas[0].transform;
+//#endif
+//                }
 
                 // Material rtpMat = area2D.currentTerrain.materialTemplate;
                 // rtpMat.SetTexture("_ColorMapGlobal", area2D.currentTCUnityTerrain.colormapTex);
@@ -708,7 +999,7 @@ namespace TerrainComposer2
         public void ComputeSplat()
         {
             if (area2D.terrainLayer.layerGroups[TC.splatOutput] == null) return;
-            int splatLength = area2D.splatmapLength;
+            int splatLength = area2D.splatLength;
             int splatmapLength = area2D.splatmapLength;
 
             // Debug.Log("Splat Compute " + TC_Area2D.current.currentTCUnityTerrain.terrain.name);
@@ -721,7 +1012,7 @@ namespace TerrainComposer2
             }
             else if (splatLength > 8)
             {
-                TC.AddMessage("At the moment TC2 only supports generating 8 splat textures. There are " + splatLength + " on " + area2D.currentTerrain.name + " assigned. In a later beta TC2 will be able to generate 16.", 0, 4);
+                TC.AddMessage("TC2 supports generating maximum 8 splat textures. There are " + splatLength + " on " + area2D.currentTerrain.name + " assigned.", 0, 4);
                 return;
             }
 
@@ -785,7 +1076,7 @@ namespace TerrainComposer2
             }
             else if (grassLength > 8)
             {
-                TC.AddMessage("At the moment TC2 only supports generating 8 grass textures. There are " + grassLength + " on " + area2D.currentTerrain.name + " assigned. In a later beta TC2 will be able to generate 16.", 0, 4);
+                TC.AddMessage("TC2 supports generating maximum 8 grass textures. There are " + grassLength + " on " + area2D.currentTerrain.name + " assigned.", 0, 4);
                 return;
             }
 
@@ -878,6 +1169,7 @@ namespace TerrainComposer2
 
             Vector3 terrainSize = area2D.currentTerrain.terrainData.size;
             Vector3 terrainPos = area2D.currentTerrain.transform.position;
+            Vector3 outputOffset = area2D.outputOffsetV3;
 
             List<TC_SelectItem> treeItems = TC_Area2D.current.terrainLayer.treeSelectItems;
             
@@ -891,8 +1183,8 @@ namespace TerrainComposer2
 
                     if (density == 0) continue;
 
-                    Vector3 pos = itemMap[index].pos;
-                    
+                    Vector3 pos = new Vector3((float)x / resolution, 0, (float)y / resolution);
+
                     if (pos.x < 0 || pos.x > 1 || pos.z < 0 || pos.z > 1)
                     {
                         // Debug.Log(position.x + ", "+position.y+", "+position.z);
@@ -912,8 +1204,8 @@ namespace TerrainComposer2
                     int treeIndex = item.selectIndex;
                     TC_SelectItem.Tree tree = item.tree;
 
-                    Vector3 posSeed = new Vector3(pos.x * terrainSize.x, pos.y * terrainSize.y, pos.z * terrainSize.z) + terrainPos;// - item.t.parent.parent.position;
-                    posSeed = Mathw.SnapVector3(posSeed + new Vector3(area2D.resolutionPM.x / 4, 0, area2D.resolutionPM.x / 4), area2D.resolutionPM.x / 2);
+                    Vector2 posSeed = new Vector2(pos.x * terrainSize.x, pos.z * terrainSize.z) + new Vector2(terrainPos.x - outputOffset.x, terrainPos.z - outputOffset.z);
+                    posSeed = Mathw.SnapVector2(posSeed + new Vector2(area2D.resolutionPM.x / 4, area2D.resolutionPM.x / 4), area2D.resolutionPM.x / 2);
 
                     // pos.y += tree.heightOffset / terrainSize.y;
 
@@ -923,27 +1215,28 @@ namespace TerrainComposer2
                     treeInstance.color = Color.white;
                     treeInstance.lightmapColor = Color.white;
 
-                    treeInstance.position = pos;
+                    treeInstance.position = pos + itemMap[index].pos;
                     treeInstance.prototypeIndex = treeIndex;
-                    #if UNITY_5_4_OR_NEWER
-                    Random.InitState((int)posSeed.x + ((int)posSeed.z * resolution));
-                    #else
-                    Random.seed = (int)posSeed.x + ((int)posSeed.z * resolution);
-                    #endif
 
-                    treeInstance.rotation = RandomPos(new Vector2(pos.x, pos.z)) * 360;
+                    //#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3
+                    //    Random.seed = (int)posSeed.x + ((int)posSeed.y * resolution);
+                    //#else
+                    //    Random.InitState((int)posSeed.x + ((int)posSeed.z * resolution));
+                    //#endif
+
+                    treeInstance.rotation = RandomPos(posSeed + new Vector2(225.5f, 350.5f)) * 360;
 
                     Vector2 scaleRange = new Vector2(tree.scaleRange.x * item.parentItem.scaleMinMaxMulti.x, tree.scaleRange.y * item.parentItem.scaleMinMaxMulti.y);
                     float scaleRangeDelta = scaleRange.y - scaleRange.x;
                     if (scaleRangeDelta == 0) scaleRangeDelta = 0.001f;
-                    treeInstance.heightScale = (tree.scaleCurve.Evaluate(Random.value) * scaleRangeDelta) + scaleRange.x;
+                    treeInstance.heightScale = (tree.scaleCurve.Evaluate(RandomPos(posSeed)) * scaleRangeDelta) + scaleRange.x;
 
                     float scaleMulti = tree.scaleMulti * item.parentItem.scaleMulti;
 
                     treeInstance.heightScale *= scaleMulti;
                     if (item.parentItem.linkScaleToMask) treeInstance.heightScale *= itemMap[index].maskValue;
                     if (treeInstance.heightScale < scaleRange.x * scaleMulti) treeInstance.heightScale = scaleRange.x * scaleMulti;
-                    treeInstance.widthScale = treeInstance.heightScale * Random.Range(1 - tree.nonUniformScale, 1 + tree.nonUniformScale);
+                    treeInstance.widthScale = treeInstance.heightScale * ((RandomPos(posSeed + new Vector2(997.5f, 500.5f)) * tree.nonUniformScale * 2) + (1 - tree.nonUniformScale));
                     trees.Add(treeInstance);
                     ++treesCount;
                 }
@@ -992,6 +1285,7 @@ namespace TerrainComposer2
             // Vector2 terrainPos = area2D.area.position;
             Vector3 terrainSize = area2D.currentTerrain.terrainData.size;
             Vector3 terrainPos = area2D.currentTerrain.transform.position;
+            Vector3 outputOffset = area2D.outputOffsetV3;
 
             // tcGenerate.ClearSpawnedObjects();
             // for (int i = 0; i < tcGenerate.objectItems.Length; i++) tcGenerate.objectItems[i].objectCount = 0;
@@ -1009,7 +1303,7 @@ namespace TerrainComposer2
 
                     if (density == 0) continue;
 
-                    Vector3 pos = itemMap[index].pos;
+                    Vector3 pos = new Vector3(((float)x / resolution), 0, ((float)y / resolution)); 
 
                     if (pos.x < 0 || pos.x > 1 || pos.z < 0 || pos.z > 1)
                     {
@@ -1030,18 +1324,20 @@ namespace TerrainComposer2
                     TC_SelectItem item = objectItems[id];
                     TC_SelectItem.SpawnObject spawnObject = item.spawnObject;
 
-                    pos = new Vector3(pos.x * terrainSize.x, pos.y * terrainSize.y, pos.z * terrainSize.z) + terrainPos;// - item.t.parent.parent.position;
-
-                    if (!spawnObject.includeTerrainHeight) pos.y = 0;
-                    Vector3 posSeed = Mathw.SnapVector3(pos + new Vector3(area2D.resolutionPM.x / 4, 0, area2D.resolutionPM.x / 4), area2D.resolutionPM.x / 2);
+                    // Debug.Log("x " + itemMap[index].pos.x + " z " + itemMap[index].pos.z);
+                    pos += itemMap[index].pos;
+                    pos = new Vector3(pos.x * terrainSize.x, pos.y, pos.z * terrainSize.z) + terrainPos; // - item.t.parent.parent.position;
+                    if (spawnObject.includeTerrainHeight) pos.y = area2D.currentTerrain.SampleHeight(pos); else pos.y = 0;
+                    
+                    Vector3 posSeed = Mathw.SnapVector3(pos + new Vector3(area2D.resolutionPM.x / 4, 0, area2D.resolutionPM.x / 4), area2D.resolutionPM.x / 2) - outputOffset;
 
                     // Debug.Log((posSeed.x - pos.x) + ", " + (posSeed.z - pos.z));
 
-                    #if UNITY_5_4_OR_NEWER
-                    Random.InitState((int)posSeed.x + ((int)posSeed.z * resolution));
-                    #else
-                    Random.seed = (int)posSeed.x + ((int)posSeed.z * resolution);
-                    #endif
+#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3
+                        Random.seed = (int)posSeed.x + ((int)posSeed.z * resolution);
+#else
+                        Random.InitState((int)posSeed.x + ((int)posSeed.z * resolution));
+#endif
 
                     Vector3 rotation = Vector3.zero;
                     if (spawnObject.lookAtTarget != null)
@@ -1058,25 +1354,47 @@ namespace TerrainComposer2
                         if (spawnObject.isSnapRotZ) rotation.z = ((int)(rotation.z / spawnObject.snapRotZ)) * spawnObject.snapRotZ;
                     }
 
-                    #if UNITY_5_4_OR_NEWER
-                    Random.InitState((int)posSeed.x + ((int)posSeed.z * resolution));
+                    #if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3
+                        Random.seed = (int)posSeed.x + ((int)posSeed.z * resolution);
                     #else
-                    Random.seed = (int)posSeed.x + ((int)posSeed.z * resolution);
+                        Random.InitState((int)posSeed.x + ((int)posSeed.z * resolution));
                     #endif
-
-                    float scaleRangeDelta = spawnObject.scaleRange.y - spawnObject.scaleRange.x;
-                    if (scaleRangeDelta == 0) scaleRangeDelta = 0.001f;
-
+                    
                     Vector3 scale;
-                    scale.x = (spawnObject.scaleCurve.Evaluate(Random.value) * scaleRangeDelta) + spawnObject.scaleRange.x;
 
                     float scaleMulti = spawnObject.scaleMulti * item.parentItem.scaleMulti;
 
-                    scale.x *= scaleMulti;
-                    if (item.parentItem.linkScaleToMask) scale.x *= itemMap[index].maskValue;
-                    if (scale.x < spawnObject.scaleRange.x * scaleMulti) scale.x = spawnObject.scaleRange.x * scaleMulti;
-                    scale.y = scale.x * Random.Range(1 - spawnObject.nonUniformScale, 1 + spawnObject.nonUniformScale);
-                    scale.z = scale.x * Random.Range(1 - spawnObject.nonUniformScale, 1 + spawnObject.nonUniformScale);
+                    if (!spawnObject.customScaleRange)
+                    {
+                        float scaleRangeDelta = spawnObject.scaleRange.y - spawnObject.scaleRange.x;
+                        if (scaleRangeDelta == 0) scaleRangeDelta = 0.001f;
+                        scale.x = (spawnObject.scaleCurve.Evaluate(Random.value) * scaleRangeDelta) + spawnObject.scaleRange.x;
+
+                        scale.x *= scaleMulti;
+                        if (item.parentItem.linkScaleToMask) scale.x *= itemMap[index].maskValue;
+                        if (scale.x < spawnObject.scaleRange.x * scaleMulti) scale.x = spawnObject.scaleRange.x * scaleMulti;
+                        scale.y = scale.x * Random.Range(1 - spawnObject.nonUniformScale, 1 + spawnObject.nonUniformScale);
+                        scale.z = scale.x * Random.Range(1 - spawnObject.nonUniformScale, 1 + spawnObject.nonUniformScale);
+                    }
+                    else
+                    {
+                        float scaleRangeDeltaX = spawnObject.scaleRangeX.y - spawnObject.scaleRangeX.x;
+                        if (scaleRangeDeltaX == 0) scaleRangeDeltaX = 0.001f;
+                        float scaleRangeDeltaY = spawnObject.scaleRangeY.y - spawnObject.scaleRangeY.x;
+                        if (scaleRangeDeltaY == 0) scaleRangeDeltaY = 0.001f;
+                        float scaleRangeDeltaZ = spawnObject.scaleRangeZ.y - spawnObject.scaleRangeZ.x;
+                        if (scaleRangeDeltaZ == 0) scaleRangeDeltaZ = 0.001f;
+
+                        scale.x = (spawnObject.scaleCurve.Evaluate(Random.value) * scaleRangeDeltaX) + spawnObject.scaleRangeX.x;
+                        scale.y = (spawnObject.scaleCurve.Evaluate(Random.value) * scaleRangeDeltaY) + spawnObject.scaleRangeY.x;
+                        scale.z = (spawnObject.scaleCurve.Evaluate(Random.value) * scaleRangeDeltaZ) + spawnObject.scaleRangeZ.x;
+
+                        scale *= scaleMulti;
+                        if (item.parentItem.linkScaleToMask) scale *= itemMap[index].maskValue;
+                        if (scale.x < spawnObject.scaleRangeX.x * scaleMulti) scale.x = spawnObject.scaleRangeX.x * scaleMulti;
+                        if (scale.y < spawnObject.scaleRangeY.x * scaleMulti) scale.y = spawnObject.scaleRangeY.x * scaleMulti;
+                        if (scale.z < spawnObject.scaleRangeZ.x * scaleMulti) scale.z = spawnObject.scaleRangeZ.x * scaleMulti;
+                    }
 
                     pos.y += spawnObject.heightOffset;
                     if (spawnObject.includeScale) pos.y += Random.Range(spawnObject.heightRange.x, spawnObject.heightRange.y) * scale.y;

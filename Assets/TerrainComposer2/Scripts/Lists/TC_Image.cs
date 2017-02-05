@@ -17,13 +17,13 @@ namespace TerrainComposer2
                 // LoadRawImage(fullPath);
                 TC_Settings.instance.imageList.Add(this);
             }
-            if (!callDestroy) { TC.refreshOutputReferences = TC.allOutput; referenceCount = 0; }
+            if (!callDestroy) { TC.RefreshOutputReferences(TC.allOutput); referenceCount = 0; }
             else callDestroy = false;
         }
 
         void OnDestroy()
         {
-            if (!callDestroy) TC.refreshOutputReferences = TC.allOutput;
+            if (!callDestroy) TC.RefreshOutputReferences(TC.allOutput);
         }
 
         void DestroyMe()

@@ -1,5 +1,3 @@
-// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
-
 //
 // Relief Terrain  -  Parallax mapped material with caustics
 // Tomasz Stobierski 2013-2016

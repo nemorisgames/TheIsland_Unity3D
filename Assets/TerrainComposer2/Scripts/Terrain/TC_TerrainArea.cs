@@ -74,6 +74,40 @@ namespace TerrainComposer2
             // if (terrains.Count == 0) terrains.Add(new TCTerrain());
         }
 
+        public bool IsRTPAddedToTerrains()
+        {
+            Type t = TC.FindRTP();
+
+            if (t == null) return false;
+
+            for (int i = 0; i < terrains.Count; i++)
+            {
+                Terrain terrain = terrains[i].terrain;
+                if (terrain == null) continue;
+
+                Component c = terrain.GetComponent(t);
+                if (c == null) return false;
+            }
+
+            return true;
+        }
+
+        public void AddRTPTOTerrains()
+        {
+            Type t = TC.FindRTP();
+
+            if (t == null) return;
+
+            for (int i = 0; i < terrains.Count; i++)
+            {
+                Terrain terrain = terrains[i].terrain;
+                if (terrain == null) continue;
+
+                Component c = terrain.GetComponent(t);
+                if (c == null) terrain.gameObject.AddComponent(t);
+            }
+        }
+        
         //void Start()
         //{
         //    // This is needed for custom terrain material to not turn black
@@ -388,7 +422,9 @@ namespace TerrainComposer2
         {
             if (terrains == null) terrains = new List<TCUnityTerrain>();
             if (terrains.Count == 0) terrains.Add(new TCUnityTerrain());
-            
+
+            if (terrainSelect >= terrains.Count) terrainSelect = 0;
+
             GetSize();
             GetSettings();
             GetSplatTextures();

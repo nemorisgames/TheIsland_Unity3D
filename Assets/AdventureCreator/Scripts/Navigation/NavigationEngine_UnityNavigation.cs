@@ -43,18 +43,18 @@ namespace AC
 
 		public override Vector3[] GetPointsArray (Vector3 startPosition, Vector3 targetPosition, AC.Char _char = null)
 		{
-			NavMeshPath _path = new NavMeshPath();
+			UnityEngine.AI.NavMeshPath _path = new UnityEngine.AI.NavMeshPath();
 
-			if (!NavMesh.CalculatePath (startPosition, targetPosition, -1, _path))
+			if (!UnityEngine.AI.NavMesh.CalculatePath (startPosition, targetPosition, -1, _path))
 			{
 				// Could not find path with current vectors
 				float maxDistance = 0.001f;
 				float originalDist = Vector3.Distance (startPosition, targetPosition);
 
-				NavMeshHit hit = new NavMeshHit ();
+				UnityEngine.AI.NavMeshHit hit = new UnityEngine.AI.NavMeshHit ();
 				for (maxDistance = 0.001f; maxDistance < originalDist; maxDistance += 0.05f)
 				{
-					if (NavMesh.SamplePosition (startPosition, out hit, maxDistance, -1))
+					if (UnityEngine.AI.NavMesh.SamplePosition (startPosition, out hit, maxDistance, -1))
 					{
 						startPosition = hit.position;
 						break;
@@ -64,7 +64,7 @@ namespace AC
 				bool foundNewEnd = false;
 				for (maxDistance = 0.001f; maxDistance < originalDist; maxDistance += 0.05f)
 				{
-					if (NavMesh.SamplePosition (targetPosition, out hit, maxDistance, -1))
+					if (UnityEngine.AI.NavMesh.SamplePosition (targetPosition, out hit, maxDistance, -1))
 					{
 						targetPosition = hit.position;
 						foundNewEnd = true;
@@ -77,7 +77,7 @@ namespace AC
 					return new Vector3[0];
 				}
 
-				NavMesh.CalculatePath (startPosition, targetPosition, -1, _path);
+				UnityEngine.AI.NavMesh.CalculatePath (startPosition, targetPosition, -1, _path);
 			}
 
 			List<Vector3> pointArray = new List<Vector3>();

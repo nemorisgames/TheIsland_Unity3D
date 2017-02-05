@@ -34,7 +34,8 @@ public class RTP_LODmanager : MonoBehaviour {
 	
 	// feaures (can be switched on/off, shader files are automatically changed, then recompiled)
 	public bool RTP_NOFORWARDADD=false;
-	public bool RTP_FULLFORWARDSHADOWS=false;
+    public bool RTP_NO_DEFERRED = false;
+    public bool RTP_FULLFORWARDSHADOWS=false;
 	public bool RTP_NOLIGHTMAP=false;
 	public bool RTP_NODIRLIGHTMAP=false;
 	public bool RTP_NODYNLIGHTMAP=false;

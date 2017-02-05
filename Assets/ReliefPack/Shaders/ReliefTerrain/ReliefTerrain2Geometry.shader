@@ -439,7 +439,7 @@ SubShader {
 	Fog { Mode Off }
 	//Offset -1,-1
 	CGPROGRAM
-	#pragma surface surf Standard vertex:vert finalcolor:customFog exclude_path:prepass noforwardadd nolightmap
+	#pragma surface surf Standard vertex:vert finalcolor:customFog exclude_path:prepass
 	// U5 fog handling
 	#pragma multi_compile_fog	
 	#include "UnityCG.cginc"
@@ -447,7 +447,7 @@ SubShader {
 	#pragma target 3.0
 	#pragma glsl
 	#pragma exclude_renderers d3d11_9x gles
-	#pragma multi_compile RTP_POM_SHADING_LO RTP_PM_SHADING RTP_SIMPLE_SHADING
+	#pragma multi_compile RTP_PM_SHADING RTP_SIMPLE_SHADING
 	//#define RTP_POM_SHADING_HI
 	
 	// for geom blend (early exit from sur function)
@@ -464,14 +464,14 @@ Fog { Mode Off }
 ZWrite Off
 ZTest LEqual	
 CGPROGRAM
-	#pragma surface surf Standard vertex:vert finalcolor:customFog decal:blend exclude_path:prepass noforwardadd nolightmap
+	#pragma surface surf Standard vertex:vert finalcolor:customFog decal:blend exclude_path:prepass
 	// U5 fog handling
 	#pragma multi_compile_fog	
 	#include "UnityCG.cginc"
 	#pragma target 3.0
 	#pragma glsl
 	#pragma exclude_renderers d3d11_9x gles
-	#pragma multi_compile RTP_SIMPLE_SHADING
+	#pragma multi_compile RTP_PM_SHADING RTP_SIMPLE_SHADING
 	//#define RTP_PM_SHADING
 
 	// for geom blend (early exit from sur function)

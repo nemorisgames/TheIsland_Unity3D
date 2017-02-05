@@ -258,7 +258,7 @@ namespace TerrainComposer2
                 else if (type == typeof(TC_Layer)) label = "Layer";
                 else if (type == typeof(TC_Node)) label = "Node";
                 else if (type == typeof(TC_SelectItem)) label = "Item";
-                else if (type == typeof(TC_SelectItemGroup)) label = "ItemGroup";
+                else if (type == typeof(TC_SelectItemGroup)) label = "Item Group";
             }
 
             // Debug.Log("Add " + label);

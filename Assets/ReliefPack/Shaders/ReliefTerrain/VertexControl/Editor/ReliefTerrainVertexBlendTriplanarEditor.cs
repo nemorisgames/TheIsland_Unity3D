@@ -72,8 +72,9 @@ public class ReliefTerrainVertexBlendTriplanarEditor : Editor {
 					if (_target.tmp_globalColorMap.format==TextureFormat.Alpha8) {
 						TextureImporter textureImporter = AssetImporter.GetAtPath(path) as TextureImporter;
 						if (textureImporter) {
-							textureImporter.textureFormat = TextureImporterFormat.Alpha8; 
-							AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
+							textureImporter.textureCompression = TextureImporterCompression.Uncompressed;
+                            textureImporter.textureType = TextureImporterType.SingleChannel;
+                            AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
 						}
 					}
 					if (mat.HasProperty("_ColorMapGlobal")) {

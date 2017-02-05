@@ -196,6 +196,11 @@ namespace TerrainComposer2
             public bool isSnapRot, isSnapRotX = true, isSnapRotY = true, isSnapRotZ = true;
             public float snapRotX = 45 , snapRotY = 45, snapRotZ = 45;
 
+            public bool customScaleRange;
+            public Vector2 scaleRangeX = Vector2.one;
+            public Vector2 scaleRangeY = Vector2.one;
+            public Vector2 scaleRangeZ = Vector2.one;
+
             public Vector2 scaleRange = Vector2.one;
             public float scaleMulti = 1;
             public float nonUniformScale = 0f;

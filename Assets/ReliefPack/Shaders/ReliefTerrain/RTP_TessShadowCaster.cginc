@@ -1,6 +1,3 @@
-// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
-
-
 #ifdef UNITY_CAN_COMPILE_TESSELLATION
 
 // tessellation vertex shader

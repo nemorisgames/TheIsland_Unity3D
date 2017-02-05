@@ -1,0 +1,7 @@
+RTP3.3e
+
+- U5.5 compatibility (U5.5.0b6 minimum)
+- reusing texture samplers for most DX10+ platforms solves problem of "16 samplers limit exceeded" for good
+- option in LOD manager to exclude deferred path (terrain rendered always in forward)
+- fixed geom blend standard shader
+- fixed web gl build causing erros due to substance code present

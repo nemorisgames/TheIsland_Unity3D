@@ -43,15 +43,25 @@ public class SampleTerrainHeightmap2Texture : EditorWindow
 			if (render_flag || render_flag_npot) {
 				rendered_tex=new Texture2D(sourceTerrain.heightmapResolution-(render_flag_npot ? 0:1), sourceTerrain.heightmapResolution-(render_flag_npot ? 0:1), TextureFormat.RGBA32, false, true);
 				Color32[] cols=new Color32[rendered_tex.width * rendered_tex.height];
-				for( int x = 0; x < rendered_tex.width; x++ ) {
-					for( int y = 0; y < rendered_tex.height; y++ ) {
-
+                for (int y = 0; y < rendered_tex.height; y++)
+                {
+                    //string t = "";
+                    for ( int x = 0; x < rendered_tex.width; x++ )
+                    {
 						float _x = 1.0f*x/(rendered_tex.width-1);
 						float _y = 1.0f*y/(rendered_tex.height-1);
 
 						int _hiP,_loP;
-						float hgt = sourceTerrain.GetInterpolatedHeight( _x,_y )/sourceTerrain.size.y;
-						_hiP = Mathf.FloorToInt( hgt*255.0f );
+                        float hgt = sourceTerrain.GetInterpolatedHeight( _x,_y );
+                        //float hgt = sourceTerrain.GetHeight(x,y);
+                        //if (y==0 || (y==rendered_tex.height-1))
+                        //{
+                        //    string _hgt = "" + hgt;
+                        //    _hgt = _hgt.Replace(".", ",");
+                        //    t +=  _hgt + "\n";
+                        //}
+                        hgt /= sourceTerrain.size.y;
+                        _hiP = Mathf.FloorToInt( hgt*255.0f );
 						_loP = Mathf.FloorToInt( (hgt*255.0f - _hiP)*255.0f );
 
 						int _Nx, _Nz;
@@ -60,8 +70,13 @@ public class SampleTerrainHeightmap2Texture : EditorWindow
 						_Nz = Mathf.RoundToInt( Mathf.Clamp01(norm.z*0.5f+0.5f)*255.0f );
 						cols[y * rendered_tex.width + x] = new Color32( (byte)_hiP, (byte)_loP, (byte)_Nx, (byte)_Nz );
 					}
-				}
-				rendered_tex.SetPixels32(cols);
+                    //if (y == 0 || (y == rendered_tex.height - 1))
+                    //{
+                    //    Debug.Log(t);
+                    //}
+
+                }
+                rendered_tex.SetPixels32(cols);
 				rendered_tex.Apply(false,false);
 				if (Selection.activeObject is Texture2D && AssetDatabase.GetAssetPath(Selection.activeObject as Texture2D)!="") {
 					save_path=AssetDatabase.GetAssetPath(Selection.activeObject as Texture2D);
@@ -102,12 +117,12 @@ public class SampleTerrainHeightmap2Texture : EditorWindow
 			if (_importer) {
 				TextureImporter tex_importer=(TextureImporter)_importer;
 				tex_importer.wrapMode=TextureWrapMode.Clamp;
-				tex_importer.linearTexture=true;
+				tex_importer.sRGBTexture = true;
 				tex_importer.mipmapEnabled=false;
 				tex_importer.npotScale=TextureImporterNPOTScale.None;
 				tex_importer.maxTextureSize=4096;
-				tex_importer.textureFormat=TextureImporterFormat.RGBA32;
-			}
+                tex_importer.textureCompression = TextureImporterCompression.Uncompressed;
+            }
 			AssetDatabase.ImportAsset(path,  ImportAssetOptions.ForceUpdate);
 			finalize=true;
 			rendered_tex=null;

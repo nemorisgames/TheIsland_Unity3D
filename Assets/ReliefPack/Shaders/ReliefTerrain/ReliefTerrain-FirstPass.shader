@@ -450,7 +450,7 @@ SubShader {
 	LOD 700
 	Fog { Mode Off }
 	CGPROGRAM
-	#pragma surface surf Standard vertex:vert finalcolor:customFog exclude_path:prepass noforwardadd nolightmap
+	#pragma surface surf Standard vertex:vert finalcolor:customFog exclude_path:prepass
 	// U5 fog handling
 	#pragma multi_compile_fog	
 	#include "UnityCG.cginc"
@@ -458,7 +458,7 @@ SubShader {
 	#pragma target 3.0
 	#pragma glsl
 	#pragma exclude_renderers d3d11_9x gles
-	#pragma multi_compile RTP_POM_SHADING_LO RTP_PM_SHADING RTP_SIMPLE_SHADING
+	#pragma multi_compile RTP_PM_SHADING RTP_SIMPLE_SHADING
 	//#define RTP_SIMPLE_SHADING
 
 	// for geom blend (early exit from sur function)
@@ -529,7 +529,7 @@ CGPROGRAM
 #include "UnityCG.cginc"
 #define UNITY_PASS_SHADOWCASTER
 
-//#define RTP_CUT_HOLES
+#define RTP_CUT_HOLES
 
 struct v2f { 
 	V2F_SHADOW_CASTER;

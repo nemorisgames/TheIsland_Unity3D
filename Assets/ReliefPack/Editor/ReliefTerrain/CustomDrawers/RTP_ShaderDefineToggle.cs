@@ -17,14 +17,17 @@ public class RTP_ShaderDefineToggle : MaterialPropertyDrawer {
     }
     public RTP_ShaderDefineToggle(string prop1, string prop2) : base()
     {
+        this.toolTip = prop1;
         dependentFeatures = new string[] { prop2 };
     }
     public RTP_ShaderDefineToggle(string prop1, string prop2, string prop3) : base()
     {
+        this.toolTip = prop1;
         dependentFeatures = new string[] { prop2, prop3 };
     }
     public RTP_ShaderDefineToggle(string prop1, string prop2, string prop3, string prop4) : base()
     {
+        this.toolTip = prop1;
         dependentFeatures = new string[] { prop2, prop3, prop4 };
     }
 

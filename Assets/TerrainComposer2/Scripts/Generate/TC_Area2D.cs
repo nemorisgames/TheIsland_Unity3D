@@ -26,8 +26,8 @@ namespace TerrainComposer2
         public Rect area, totalArea;
         public TC_TerrainLayer layerLevelC;
         public TC_TerrainLayer terrainLayer;
-        public Vector2 resolution, resolutionPM, resToPreview, worldPos, localPos, pos, localNPos, previewPos, snapOffsetUV;
-        public Vector3 startPos, terrainSize;
+        public Vector2 resolution, resolutionPM, resToPreview, worldPos, localPos, pos, localNPos, previewPos, snapOffsetUV, outputOffsetV2;
+        public Vector3 startPos, terrainSize, outputOffsetV3;
         public Bounds bounds;
         public Int2 intResolution;
         public float heightN, height, angle;
@@ -39,7 +39,7 @@ namespace TerrainComposer2
         public float progress;
         public bool showProgressBar;
         public int previewResolution;
-        public float resExpandBorderPercentage = 0.0625f;
+        [NonSerialized] public float resExpandBorderPercentage = 0.0625f;
         [NonSerialized] public int resExpandBorder;
         [NonSerialized] public float resExpandBorderSize;
 
@@ -90,8 +90,16 @@ namespace TerrainComposer2
             intResolution = new Int2();
             Int2 resolution2 = new Int2();
 
-            resExpandBorder = Mathf.RoundToInt((terrain.terrainData.heightmapResolution - 1) * resExpandBorderPercentage);
-            resExpandBorderSize = terrain.terrainData.size.x * resExpandBorderPercentage;
+            if (terrain.terrainData.heightmapResolution > 2049)
+            {
+                resExpandBorder = 0;
+                resExpandBorderSize = 0;
+            }
+            else
+            {
+                resExpandBorder = Mathf.RoundToInt((terrain.terrainData.heightmapResolution - 1) * resExpandBorderPercentage);
+                resExpandBorderSize = terrain.terrainData.size.x * resExpandBorderPercentage;
+            }
 
             // Debug.Log(resExpandBorder);
             // Debug.Log(resExpandBorderSize);
@@ -124,6 +132,9 @@ namespace TerrainComposer2
             }
             else if (outputId == TC.colorOutput) { intResolution.x = intResolution.y = terrainLayer.colormapResolution; resolution2 = intResolution; }
 
+            outputOffsetV2 = new Vector2(terrainLayer.layerGroups[outputId].t.position.x, terrainLayer.layerGroups[outputId].t.position.z);
+            outputOffsetV3 = new Vector3(outputOffsetV2.x, 0, outputOffsetV2.y);
+
             resolution = intResolution.ToVector2();
 
             if (intResolution.x < TC_Settings.instance.previewResolution) { previewResolution = intResolution.x; TC_Reporter.Log("From " + TC_Settings.instance.previewResolution + " To " + previewResolution); }
@@ -131,7 +142,10 @@ namespace TerrainComposer2
 
             resToPreview = new Vector2((previewResolution - 0) / (totalArea.width + 0), (previewResolution - 0) / (totalArea.height + 0));
 
-            resolutionPM = new Vector2(terrain.terrainData.size.x / (resolution2.x - 1), terrain.terrainData.size.z / (resolution2.y - 1));
+            if (outputId == TC.heightOutput || outputId == TC.splatOutput) resolutionPM = new Vector2(terrain.terrainData.size.x / (resolution2.x - 1), terrain.terrainData.size.z / (resolution2.y - 1));
+            else resolutionPM = new Vector2(terrain.terrainData.size.x / (resolution2.x - 0), terrain.terrainData.size.z / (resolution2.y - 0));
+
+            // resolutionPM = new Vector2(terrain.terrainData.size.x / (resolution2.x - 1), terrain.terrainData.size.z / (resolution2.y - 1));
 
             if (outputId == TC.heightOutput)
             {
@@ -147,7 +161,7 @@ namespace TerrainComposer2
 
                 if (outputId == TC.treeOutput || outputId == TC.objectOutput)
                 {
-                    posSnap += resolutionPM / 2;
+                    // posSnap += resolutionPM / 2;
                 }
                 area = new Rect(posSnap.x, posSnap.y, intResolution.x, intResolution.y);
 

@@ -175,6 +175,8 @@ namespace TerrainComposer2
         
         public void Init()
         {
+            // Debug.Log("Init");
+
             if (inputKind == InputKind.Terrain)
             {
                 if (inputTerrain == InputTerrain.Normal) { active = false; }

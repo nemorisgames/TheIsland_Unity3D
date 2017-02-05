@@ -838,7 +838,7 @@ namespace TerrainComposer2
             if (selectItemGroupReceive != null) selectItemGroupReceive.refreshRanges = true;
             if (selectItemReceive != null) selectItemReceive.parentItem.refreshRanges = true;
 
-            TC.refreshOutputReferences = (itemReceive.outputId == itemToDrop.outputId) ? itemReceive.outputId : TC.allOutput;
+            TC.RefreshOutputReferences((itemReceive.outputId == itemToDrop.outputId) ? itemReceive.outputId : TC.allOutput);
             CheckDropInDifferentLevel(itemReceive, itemToDrop);
             TC.AutoGenerate();
 
@@ -853,7 +853,7 @@ namespace TerrainComposer2
             Undo.SetTransformParent(itemToDrop.transform, itemReceive.transform, "Move " + itemToDrop.name);
             itemToDrop.transform.SetSiblingIndex(startIndex);
 
-            TC.refreshOutputReferences = (itemReceive.outputId == itemToDrop.outputId) ? itemReceive.outputId : TC.allOutput;
+            TC.RefreshOutputReferences((itemReceive.outputId == itemToDrop.outputId) ? itemReceive.outputId : TC.allOutput);
             CheckDropInDifferentLevel(itemReceive, itemToDrop);
             TC.AutoGenerate();
         }

@@ -14,6 +14,7 @@
 #include "UnityShaderVariables.cginc"
 #include "UnityStandardConfig.cginc"
 #include "UnityLightingCommon.cginc"
+#include "UnityGBuffer.cginc"
 #include "UnityGlobalIllumination.cginc"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -35,8 +36,7 @@ inline half3 DiffuseAndSpecularFromMetallicMod(half3 albedo, half metallic, out 
 // Default BRDF to use:
 #if !defined (UNITY_BRDF_PBS) // allow to explicitly override BRDF in custom shader
 // still add safe net for low shader models, otherwise we might end up with shaders failing to compile
-// the only exception is WebGL in 5.3 - it will be built with shader target 2.0 but we want it to get rid of constraints, as it is effectively desktop
-#if SHADER_TARGET < 30 && !UNITY_53_SPECIFIC_TARGET_WEBGL
+#if SHADER_TARGET < 30
 #define UNITY_BRDF_PBS BRDF3_Unity_PBS
 #elif UNITY_PBS_USE_BRDF3
 #define UNITY_BRDF_PBS BRDF3_Unity_PBS
@@ -69,7 +69,7 @@ inline half3 DiffuseAndSpecularFromMetallicMod(half3 albedo, half metallic, out 
 //-------------------------------------------------------------------------------------
 
 
-inline half3 BRDF_Unity_Indirect(half3 baseColor, half3 specColor, half oneMinusReflectivity, half oneMinusRoughness, half3 normal, half3 viewDir, half occlusion, UnityGI gi)
+inline half3 BRDF_Unity_Indirect(half3 baseColor, half3 specColor, half oneMinusReflectivity, half smoothness, half3 normal, half3 viewDir, half occlusion, UnityGI gi)
 {
 	half3 c = 0;
 #if defined(DIRLIGHTMAP_SEPARATE)
@@ -77,10 +77,10 @@ inline half3 BRDF_Unity_Indirect(half3 baseColor, half3 specColor, half oneMinus
 	gi.indirect.specular = 0;
 
 #ifdef LIGHTMAP_ON
-	c += UNITY_BRDF_PBS_LIGHTMAP_INDIRECT(baseColor, specColor, oneMinusReflectivity, oneMinusRoughness, normal, viewDir, gi.light2, gi.indirect).rgb * occlusion;
+	c += UNITY_BRDF_PBS_LIGHTMAP_INDIRECT(baseColor, specColor, oneMinusReflectivity, smoothness, normal, viewDir, gi.light2, gi.indirect).rgb * occlusion;
 #endif
 #ifdef DYNAMICLIGHTMAP_ON
-	c += UNITY_BRDF_PBS_LIGHTMAP_INDIRECT(baseColor, specColor, oneMinusReflectivity, oneMinusRoughness, normal, viewDir, gi.light3, gi.indirect).rgb * occlusion;
+	c += UNITY_BRDF_PBS_LIGHTMAP_INDIRECT(baseColor, specColor, oneMinusReflectivity, smoothness, normal, viewDir, gi.light3, gi.indirect).rgb * occlusion;
 #endif
 #endif
 	return c;
@@ -89,10 +89,11 @@ inline half3 BRDF_Unity_Indirect(half3 baseColor, half3 specColor, half oneMinus
 //-------------------------------------------------------------------------------------
 
 // little helpers for GI calculation
+// CAUTION: This is deprecated and not use in Untiy shader code, but some asset store plugin still use it, so let here for compatibility
 
 #define UNITY_GLOSSY_ENV_FROM_SURFACE(x, s, data)				\
 	Unity_GlossyEnvironmentData g;								\
-	g.roughness		= 1 - s.Smoothness;							\
+	g.roughness /* perceptualRoughness */ 	= SmoothnessToPerceptualRoughness(s.Smoothness); \
 	g.reflUVW		= reflect(-data.worldViewDir, s.Normal);	\
 
 
@@ -103,9 +104,6 @@ inline half3 BRDF_Unity_Indirect(half3 baseColor, half3 specColor, half oneMinus
 		UNITY_GLOSSY_ENV_FROM_SURFACE(g, s, data);				\
 		x = UnityGlobalIllumination (data, s.Occlusion, s.Normal, g);
 #endif
-
-
-//-------------------------------------------------------------------------------------
 
 
 // Surface shader output structure to be used with physically
@@ -122,6 +120,8 @@ struct SurfaceOutputStandard {
 	fixed3 Normal;		// tangent space normal, if written
 	half3 Emission;
 	half Metallic;		// 0=non-metal, 1=metal
+	// Smoothness is the user facing name, it should be perceptual smoothness but user should not have to deal with it.
+	// Everywhere in the code you meet smoothness it is perceptual smoothness
 	half Smoothness;	// 0=rough, 1=smooth
 	half Occlusion;		// occlusion (default 1)
 	fixed Alpha;		// alpha for transparencies
@@ -136,7 +136,6 @@ struct SurfaceOutputStandard {
 	///////
 };
 
-
 inline half4 LightingStandard(SurfaceOutputStandard s, half3 viewDir, UnityGI gi)
 {
 	s.Normal = normalize(s.Normal);
@@ -150,7 +149,7 @@ inline half4 LightingStandard(SurfaceOutputStandard s, half3 viewDir, UnityGI gi
 	half outputAlpha;
 	s.Albedo = PreMultiplyAlpha(s.Albedo, s.Alpha, oneMinusReflectivity, /*out*/ outputAlpha);
 
-	// RTP 
+	// RTP
 		#if !defined(LIGHTMAP_ON)// && (defined(UNITY_PASS_FORWARDBASE) || defined(RTP_SOFTSHADOWS_FORWARDADD))
 			half3 directLightCol = gi.light.color.rgb;
 			gi.light.color.rgb *= s.atten; // attenuate
@@ -171,7 +170,7 @@ inline half4 LightingStandard(SurfaceOutputStandard s, half3 viewDir, UnityGI gi
 	return c;
 }
 
-inline half4 LightingStandard_Deferred(SurfaceOutputStandard s, half3 viewDir, UnityGI gi, out half4 outDiffuseOcclusion, out half4 outSpecSmoothness, out half4 outNormal)
+inline half4 LightingStandard_Deferred(SurfaceOutputStandard s, half3 viewDir, UnityGI gi, out half4 outGBuffer0, out half4 outGBuffer1, out half4 outGBuffer2)
 {
 	half oneMinusReflectivity;
 	half3 specColor;
@@ -202,9 +201,15 @@ inline half4 LightingStandard_Deferred(SurfaceOutputStandard s, half3 viewDir, U
 	half4 c = UNITY_BRDF_PBS(s.Albedo, specColor, oneMinusReflectivity, s.Smoothness, s.Normal, viewDir, gi.light, gi.indirect);
 	c.rgb += UNITY_BRDF_GI(s.Albedo, specColor, oneMinusReflectivity, s.Smoothness, s.Normal, viewDir, s.Occlusion, gi);
 
-	outDiffuseOcclusion = half4(s.Albedo, s.Occlusion);
-	outSpecSmoothness = half4(specColor, s.Smoothness);
-	outNormal = half4(s.Normal * 0.5 + 0.5, 1);
+	UnityStandardData data;
+	data.diffuseColor = s.Albedo;
+	data.occlusion = s.Occlusion;
+	data.specularColor = specColor;
+	data.smoothness = s.Smoothness;
+	data.normalWorld = s.Normal;
+
+	UnityStandardDataToGbuffer(data, outGBuffer0, outGBuffer1, outGBuffer2);
+
 	half4 emission = half4(s.Emission + c.rgb, encoded); // RTP encoded value on emission A channel
 	return emission;
 }
@@ -214,7 +219,12 @@ inline void LightingStandard_GI(
 	UnityGIInput data,
 	inout UnityGI gi)
 {
-	UNITY_GI(gi, s, data);
+#if defined(UNITY_PASS_DEFERRED) && UNITY_ENABLE_REFLECTION_BUFFERS
+	gi = UnityGlobalIllumination(data, s.Occlusion, s.Normal);
+#else
+	Unity_GlossyEnvironmentData g = UnityGlossyEnvironmentSetup(s.Smoothness, data.worldViewDir, s.Normal, lerp(unity_ColorSpaceDielectricSpec.rgb, s.Albedo, s.Metallic));
+	gi = UnityGlobalIllumination(data, s.Occlusion, s.Normal, g);
+#endif
 }
 
 #endif // UNITY_PBS_LIGHTING_INCLUDED

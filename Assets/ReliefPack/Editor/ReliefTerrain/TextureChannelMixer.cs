@@ -97,7 +97,7 @@ public class TextureChannelMixer : EditorWindow
 			AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
 			AssetImporter _importer=AssetImporter.GetAtPath(path);
 			TextureImporter tex_importer=(TextureImporter)_importer;
-			tex_importer.linearTexture=linearTexture;
+			tex_importer.sRGBTexture = linearTexture;
 			AssetDatabase.ImportAsset(path,  ImportAssetOptions.ForceUpdate);
 			finalize=true;
 			rendered_tex=null;

@@ -37,7 +37,7 @@ namespace AC
 	 *	You can then add your new script to the character instead.</summary>
 	 */
 	[AddComponentMenu("Adventure Creator/Navigation/NavMeshAgent Integration")]
-	[RequireComponent (typeof (NavMeshAgent))]
+	[RequireComponent (typeof (UnityEngine.AI.NavMeshAgent))]
 	#if !(UNITY_4_6 || UNITY_4_7 || UNITY_5_0)
 	[HelpURL("http://www.adventurecreator.org/scripting-guide/class_a_c_1_1_nav_mesh_agent_integration.html")]
 	#endif
@@ -48,7 +48,7 @@ namespace AC
 		public bool useACForTurning = true;
 
 		private float originalSpeed;
-		private NavMeshAgent navMeshAgent;
+		private UnityEngine.AI.NavMeshAgent navMeshAgent;
 		private Char _char;
 		private bool disableDuringGameplay;
 		private Vector3 targetPosition;
@@ -60,7 +60,7 @@ namespace AC
 			 * First, we'll assign our private variables.
 			 */
 
-			navMeshAgent = GetComponent <NavMeshAgent>();
+			navMeshAgent = GetComponent <UnityEngine.AI.NavMeshAgent>();
 			originalSpeed = navMeshAgent.speed;
 			_char = GetComponent <AC.Char>();
 		}

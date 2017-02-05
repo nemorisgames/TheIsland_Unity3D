@@ -677,8 +677,8 @@ public class AfsFoliageToolEditor : Editor {
 			else {
 				ti0.isReadable = true;
 			}
-			if (ti0.textureFormat != TextureImporterFormat.AutomaticTruecolor || ti0.textureType != TextureImporterType.Image ) {
-				ti0.textureType = TextureImporterType.Image; 
+			if (ti0.textureFormat != TextureImporterFormat.AutomaticTruecolor || ti0.textureType != TextureImporterType.Default ) {
+				ti0.textureType = TextureImporterType.Default; 
 				ti0.textureFormat = TextureImporterFormat.AutomaticTruecolor;
 				// Refresh texture
 				AssetDatabase.ImportAsset( path0, ImportAssetOptions.ForceUpdate );
@@ -694,8 +694,8 @@ public class AfsFoliageToolEditor : Editor {
 			else {
 				ti1.isReadable = true;
 			}
-			if (ti1.textureFormat != TextureImporterFormat.AutomaticTruecolor || ti1.textureType != TextureImporterType.Image ) {
-				ti1.textureType = TextureImporterType.Image; 
+			if (ti1.textureFormat != TextureImporterFormat.AutomaticTruecolor || ti1.textureType != TextureImporterType.Default ) {
+				ti1.textureType = TextureImporterType.Default; 
 				ti1.textureFormat = TextureImporterFormat.AutomaticTruecolor;
 				// Refresh texture
 				AssetDatabase.ImportAsset( path1, ImportAssetOptions.ForceUpdate ); 
@@ -762,7 +762,7 @@ public class AfsFoliageToolEditor : Editor {
 			AssetDatabase.Refresh();
 			TextureImporter ti2 = AssetImporter.GetAtPath(filePath) as TextureImporter;
 			ti2.anisoLevel = 7;
-			ti2.textureType = TextureImporterType.Image;
+			ti2.textureType = TextureImporterType.Default;
 			ti2.textureFormat = TextureImporterFormat.AutomaticCompressed;
 			AssetDatabase.ImportAsset(filePath);
 			AssetDatabase.Refresh();
@@ -777,7 +777,7 @@ public class AfsFoliageToolEditor : Editor {
 			AssetDatabase.Refresh();
 			ti2 = AssetImporter.GetAtPath(filePath) as TextureImporter;
 			ti2.anisoLevel = 7;
-			ti2.textureType = TextureImporterType.Advanced;
+			ti2.textureType = TextureImporterType.Default;
 			ti2.textureFormat = TextureImporterFormat.ARGB32;
 			AssetDatabase.ImportAsset(filePath);
 			AssetDatabase.Refresh();
@@ -823,8 +823,8 @@ public class AfsFoliageToolEditor : Editor {
 			else {
 				ti0.isReadable = true;
 			}
-			if (ti0.textureFormat != TextureImporterFormat.AutomaticTruecolor || ti0.textureType != TextureImporterType.Image ) {
-				ti0.textureType = TextureImporterType.Image; 
+			if (ti0.textureFormat != TextureImporterFormat.AutomaticTruecolor || ti0.textureType != TextureImporterType.Default ) {
+				ti0.textureType = TextureImporterType.Default; 
 				ti0.textureFormat = TextureImporterFormat.AutomaticTruecolor;
 				// Refresh texture
 				AssetDatabase.ImportAsset( path0, ImportAssetOptions.ForceUpdate );
@@ -840,8 +840,8 @@ public class AfsFoliageToolEditor : Editor {
 			else {
 				ti1.isReadable = true;
 			}
-			if (ti1.textureFormat != TextureImporterFormat.AutomaticTruecolor || ti1.textureType != TextureImporterType.Image ) {
-				ti1.textureType = TextureImporterType.Image; 
+			if (ti1.textureFormat != TextureImporterFormat.AutomaticTruecolor || ti1.textureType != TextureImporterType.Default ) {
+				ti1.textureType = TextureImporterType.Default; 
 				ti1.textureFormat = TextureImporterFormat.AutomaticTruecolor;
 				// Refresh texture
 				AssetDatabase.ImportAsset( path1, ImportAssetOptions.ForceUpdate ); 
@@ -883,7 +883,7 @@ public class AfsFoliageToolEditor : Editor {
 				AssetDatabase.Refresh();
 				TextureImporter ti2 = AssetImporter.GetAtPath(filePath) as TextureImporter;
 				ti2.anisoLevel = 7;
-				ti2.textureType = TextureImporterType.Advanced;
+				ti2.textureType = TextureImporterType.Default;
 				ti2.textureFormat = TextureImporterFormat.ARGB32;
 				AssetDatabase.ImportAsset(filePath);
 				AssetDatabase.Refresh();

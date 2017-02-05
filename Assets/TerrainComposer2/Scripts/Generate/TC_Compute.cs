@@ -15,7 +15,7 @@ namespace TerrainComposer2
         public bool run;
         public ComputeShader shader;
         public string path;
-        [NonSerialized] public float threads = 1024;
+        [NonSerialized] public int threads = 1024;
         public int collisionMask;
 
         public PerlinNoise m_perlin;
@@ -128,9 +128,16 @@ namespace TerrainComposer2
             terrainConvexityKernel = shader.FindKernel("TerrainConvexity"); 
             terrainSplatmap0Kernel = shader.FindKernel("TerrainSplatmap0");
             terrainSplatmap1Kernel = shader.FindKernel("TerrainSplatmap1");
-            terrainCollisionHeightKernel = shader.FindKernel("TerrainCollisionHeight");
-            terrainCollisionHeightIncludeKernel = shader.FindKernel("TerrainCollisionHeightInclude"); 
-            terrainCollisionMaskKernel = shader.FindKernel("TerrainCollisionMask");
+
+            #if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4
+                terrainCollisionHeightKernel = shader.FindKernel("TerrainCollisionHeight");
+                terrainCollisionHeightIncludeKernel = shader.FindKernel("TerrainCollisionHeightInclude"); 
+                terrainCollisionMaskKernel = shader.FindKernel("TerrainCollisionMask");
+            #else
+                terrainCollisionHeightKernel = shader.FindKernel("TerrainCollisionHeightInverted");
+                terrainCollisionHeightIncludeKernel = shader.FindKernel("TerrainCollisionHeightIncludeInverted"); 
+                terrainCollisionMaskKernel = shader.FindKernel("TerrainCollisionMaskInverted");
+            #endif
 
             noiseRandomKernel = shader.FindKernel("NoiseRandom");
 
@@ -222,6 +229,8 @@ namespace TerrainComposer2
 
         public void RunColorCompute(TC_NodeGroup nodeGroup, TC_SelectItemGroup itemGroup, ref RenderTexture rt, ref ComputeBuffer resultBuffer)
         {
+            TC_Area2D area2D = TC_Area2D.current;
+
             ComputeBuffer colorMixBuffer = new ComputeBuffer(itemGroup.colorMixBuffer.Length, 28);
             colorMixBuffer.SetData(itemGroup.colorMixBuffer);
 
@@ -235,12 +244,12 @@ namespace TerrainComposer2
 
             shader.SetBuffer(kernel, "colorMixBuffer", colorMixBuffer);
             // shader.SetBuffer(kernel, "itemColorBuffer", itemColorBuffer);
-            shader.SetVector("resConversion", TC_Area2D.current.resolutionPM);
-            shader.SetVector("resToPreview", TC_Area2D.current.resToPreview);
-            shader.SetInt("resolutionX", TC_Area2D.current.intResolution.x);
-            shader.SetInt("resolutionY", TC_Area2D.current.intResolution.y);
+            shader.SetVector("resolutionPM", area2D.resolutionPM);
+            shader.SetVector("resToPreview", area2D.resToPreview);
+            shader.SetInt("resolutionX", area2D.intResolution.x);
+            shader.SetInt("resolutionY", area2D.intResolution.y);
 
-            Int2 resolution = TC_Area2D.current.intResolution;
+            Int2 resolution = area2D.intResolution;
             bufferLength = resolution.x * resolution.y;
 
             if (kernel == -1) { Debug.Log("Kernel not found"); return; }
@@ -253,14 +262,15 @@ namespace TerrainComposer2
 
         public void RunSplatCompute(TC_NodeGroup nodeGroup, TC_SelectItemGroup itemGroup, ref RenderTexture[] rts, ref ComputeBuffer resultBuffer)
         {
+            TC_Area2D area2D = TC_Area2D.current;
             // ComputeBuffer resultBuffer = RunShader(null, node);
-            
+
             ComputeBuffer splatMixBuffer = new ComputeBuffer(itemGroup.splatMixBuffer.Length, 48);
             splatMixBuffer.SetData(itemGroup.splatMixBuffer);
 
             ComputeBuffer itemColorBuffer = new ComputeBuffer(8, 16);
             itemColorBuffer.SetData(TC_Settings.instance.global.previewColors);
-            // itemColorBuffer.SetData(TC_Area2D.current.currentTCUnityTerrain.splatColors);
+            // itemColorBuffer.SetData(area2D.currentTCUnityTerrain.splatColors);
 
             int kernel = calcSplatKernel;
 
@@ -273,12 +283,12 @@ namespace TerrainComposer2
 
             shader.SetBuffer(kernel, "splatMixBuffer", splatMixBuffer);
             shader.SetBuffer(kernel, "itemColorBuffer", itemColorBuffer);
-            shader.SetVector("resConversion", TC_Area2D.current.resolutionPM);
-            shader.SetVector("resToPreview", TC_Area2D.current.resToPreview);
-            shader.SetInt("resolutionX", TC_Area2D.current.intResolution.x);
-            shader.SetInt("resolutionY", TC_Area2D.current.intResolution.y);
+            shader.SetVector("resolutionPM", area2D.resolutionPM);
+            shader.SetVector("resToPreview", area2D.resToPreview);
+            shader.SetInt("resolutionX", area2D.intResolution.x);
+            shader.SetInt("resolutionY", area2D.intResolution.y);
 
-            Int2 resolution = TC_Area2D.current.intResolution;
+            Int2 resolution = area2D.intResolution;
             bufferLength = resolution.x * resolution.y;
 
             if (kernel == -1) { Debug.Log("Kernel not found"); return; }
@@ -326,10 +336,13 @@ namespace TerrainComposer2
             shader.SetInt("resolutionY", area2D.intResolution.y);
             shader.SetFloat("mixValue", itemGroup.mix);
 
-            shader.SetVector("resConversion", TC_Area2D.current.resolutionPM);
-            shader.SetVector("resToPreview", TC_Area2D.current.resToPreview);
-            shader.SetVector("areaPos", TC_Area2D.current.area.position);
-            shader.SetVector("totalAreaPos", TC_Area2D.current.totalArea.position);
+            shader.SetVector("resolutionPM", area2D.resolutionPM);
+            shader.SetVector("resToPreview", area2D.resToPreview);
+            // shader.SetVector("areaPos", area2D.area.position - area2D.outputOffsetV2);
+            shader.SetVector("areaPos", area2D.area.position);// - area2D.outputOffsetV2);
+            shader.SetVector("outputOffsetV2", area2D.outputOffsetV2);
+
+            shader.SetVector("totalAreaPos", area2D.totalArea.position);
 
             if (kernel == -1) { Debug.Log("Kernel not found"); return; }
             shader.Dispatch(kernel, Mathf.CeilToInt(resolution / threads), 1, 1);
@@ -340,13 +353,15 @@ namespace TerrainComposer2
 
         public void RunItemPositionCompute(ComputeBuffer itemMapBuffer, int outputId)
         {
+            TC_Area2D area2D = TC_Area2D.current;
+
             int kernel = calcObjectPositionKernel;
 
-            int resolution = TC_Area2D.current.intResolution.x * TC_Area2D.current.intResolution.y;
+            int resolution = area2D.intResolution.x * area2D.intResolution.y;
 
             List<TC_SelectItem> items;
-            if (outputId == TC.treeOutput) items = TC_Area2D.current.terrainLayer.treeSelectItems;
-            else items = TC_Area2D.current.terrainLayer.objectSelectItems;
+            if (outputId == TC.treeOutput) items = area2D.terrainLayer.treeSelectItems;
+            else items = area2D.terrainLayer.objectSelectItems;
 
             float[] indices = new float[items.Count];
             if (outputId == TC.treeOutput) for (int i = 0; i < items.Count; i++) indices[i] = items[i].tree.randomPosition / 2;
@@ -356,40 +371,45 @@ namespace TerrainComposer2
             resultBuffer.SetData(indices);
 
             shader.SetBuffer(kernel, "resultBuffer", resultBuffer);
-            if (TC_Area2D.current.currentTCTerrain.texHeight != null)
+            if (area2D.currentTCTerrain.texHeight != null)
             {
-                shader.SetTexture(kernel, "terrainTexRead", TC_Area2D.current.currentTCTerrain.texHeight);
-                shader.SetFloat("terrainTexReadResolution", TC_Area2D.current.currentTCTerrain.texHeight.width);
-                shader.SetFloat("terrainTexReadNormalResolution", TC_Area2D.current.currentTCTerrain.texHeight.width - TC_Area2D.current.resExpandBorder * 2);
-                shader.SetFloat("resExpandBorder", TC_Area2D.current.resExpandBorder);
+                shader.SetTexture(kernel, "terrainTexRead", area2D.currentTCTerrain.texHeight);
+                shader.SetFloat("terrainTexReadResolution", area2D.currentTCTerrain.texHeight.width);
+                shader.SetFloat("terrainTexReadNormalResolution", area2D.currentTCTerrain.texHeight.width - area2D.resExpandBorder * 2);
+                shader.SetFloat("resExpandBorder", area2D.resExpandBorder);
 
-                // Debug.Log("T " + TC_Area2D.current.currentTCTerrain.texHeight.width);
-                // Debug.Log(TC_Area2D.current.currentTCTerrain.texHeight.width - TC_Area2D.current.resExpandBorder * 2);
+                // Debug.Log("T " + area2D.currentTCTerrain.texHeight.width);
+                // Debug.Log(area2D.currentTCTerrain.texHeight.width - area2D.resExpandBorder * 2);
 
             }
 
             shader.SetBuffer(kernel, "itemMapBuffer", itemMapBuffer);
-            shader.SetInt("resolutionX", TC_Area2D.current.intResolution.x);
-            shader.SetInt("resolutionY", TC_Area2D.current.intResolution.y);
+            shader.SetInt("resolutionX", area2D.intResolution.x);
+            shader.SetInt("resolutionY", area2D.intResolution.y);
 
-            // Debug.Log("ResolutionX " + TC_Area2D.current.intResolution.x);
+            // Debug.Log("ResolutionX " + area2D.intResolution.x);
             
             shader.SetVector("posOffset", Vector3.zero);// target.position);
             shader.SetVector("texResolution", new Vector2(TC_Settings.instance.global.defaultTerrainSize.x, TC_Settings.instance.global.defaultTerrainSize.z));
 
-            shader.SetVector("resConversion", TC_Area2D.current.resolutionPM);
-            shader.SetVector("resToPreview", TC_Area2D.current.resToPreview);
-            shader.SetVector("areaPos", TC_Area2D.current.area.position);
-            shader.SetVector("totalAreaPos", TC_Area2D.current.totalArea.position);
-            shader.SetVector("snapOffset", TC_Area2D.current.snapOffsetUV);
-            shader.SetFloat("terrainHeight", TC_Area2D.current.terrainSize.y);
+            shader.SetVector("resolutionPM", area2D.resolutionPM);
+            shader.SetVector("resToPreview", area2D.resToPreview);
+            // shader.SetVector("areaPos", area2D.area.position - area2D.outputOffsetV2);
+            shader.SetVector("areaPos", area2D.area.position); // - area2D.outputOffsetV2);
+            shader.SetVector("outputOffsetV2", area2D.outputOffsetV2);
 
-            // Debug.Log("areaPos " + TC_Area2D.current.area.position);
-            // Debug.Log("totalAreaPos " + TC_Area2D.current.totalArea.position);
-            // Debug.Log("resConversion" + TC_Area2D.current.resolutionPM);
+            shader.SetVector("totalAreaPos", area2D.totalArea.position);
+            shader.SetVector("snapOffset", area2D.snapOffsetUV);
+            shader.SetFloat("terrainHeight", area2D.terrainSize.y);
 
-            // Debug.Log("pos" + TC_Area2D.current.startPos);
-            // Debug.Log("scale " + TC_Area2D.current.terrainSize);
+            // Debug.Log(area2D.area.position - area2D.outputOffsetV2);
+
+            // Debug.Log("areaPos " + area2D.area.position);
+            // Debug.Log("totalAreaPos " + area2D.totalArea.position);
+            // Debug.Log("resolutionPM" + area2D.resolutionPM);
+
+            // Debug.Log("pos" + area2D.startPos);
+            // Debug.Log("scale " + area2D.terrainSize);
 
             if (kernel == -1) { Debug.Log("Kernel not found"); return; }
             shader.Dispatch(kernel, Mathf.CeilToInt(resolution / threads), 1, 1);
@@ -411,14 +431,24 @@ namespace TerrainComposer2
 
         public void RunItemComputeMask(TC_ItemBehaviour item, ref RenderTexture rtPreview, RenderTexture rtColorPreview, ref ComputeBuffer itemMapBuffer, ref ComputeBuffer maskBuffer)
         {
+            TC_Area2D area2D = TC_Area2D.current;
+
             int kernel = item.level == 0 ? methodItemTex0MaskKernel : methodItemTexMaskKernel;
             //a Debug.Log("Layer mask kernel " + kernel);
 
-            int resolution = TC_Area2D.current.intResolution.x * TC_Area2D.current.intResolution.y;
-            shader.SetInt("resolutionX", TC_Area2D.current.intResolution.x);
-            shader.SetInt("resolutionY", TC_Area2D.current.intResolution.y);
-            shader.SetVector("colLayer", TC_Settings.instance.global.GetVisualizeColor(item.listIndex));
+            int resolution = area2D.intResolution.x * area2D.intResolution.y;
+            shader.SetVector("areaPos", area2D.area.position - area2D.outputOffsetV2);
 
+            shader.SetInt("resolutionX", area2D.intResolution.x);
+            shader.SetInt("resolutionY", area2D.intResolution.y);
+
+            shader.SetVector("colLayer", TC_Settings.instance.global.GetVisualizeColor(item.listIndex));
+            shader.SetVector("resolutionPM", area2D.resolutionPM);
+            shader.SetVector("resToPreview", area2D.resToPreview);
+            shader.SetVector("areaPos", area2D.area.position); // - area2D.outputOffsetV2);
+            shader.SetVector("outputOffsetV2", area2D.outputOffsetV2);
+            shader.SetVector("totalAreaPos", area2D.totalArea.position);
+            
             shader.SetTexture(kernel, "leftPreviewTex", rtColorPreview);
             shader.SetTexture(kernel, "splatPreviewTex", rtPreview);
             shader.SetBuffer(kernel, "itemMapBuffer", itemMapBuffer);
@@ -432,12 +462,14 @@ namespace TerrainComposer2
 
         public ComputeBuffer RunNodeCompute(TC_GroupBehaviour groupItem, TC_Node node, float seedParent, ComputeBuffer rightBuffer = null, bool disposeRightBuffer = false)//, int method, ComputeBuffer leftBuffer, bool last)
         {
+            int _threads = threads;
+            TC_Area2D area2D = TC_Area2D.current;
             TC_Settings localSettings = TC_Settings.instance;
             // TC_GlobalSettings globalSettings = localSettings.global;
 
             node.ct.CopySpecial(node);
 
-            Vector2 resolution = TC_Area2D.current.resolution;
+            Vector2 resolution = area2D.resolution;
 
             InitCurves(node);
             if (groupItem != null) groupItem.localCurve.ConvertCurve();
@@ -452,10 +484,10 @@ namespace TerrainComposer2
             if (node.useConstant) kernel = shapeConstantKernel;
             else if (node.inputKind == InputKind.Terrain)
             {
-                // shader.SetInt("totalResolutionX", TC_Area2D.current.currentTerrainArea.heightTexResolution.x);
-                // shader.SetInt("totalResolutionY", TC_Area2D.current.currentTerrainArea.heightTexResolution.y);
+                // shader.SetInt("totalResolutionX", area2D.currentTerrainArea.heightTexResolution.x);
+                // shader.SetInt("totalResolutionY", area2D.currentTerrainArea.heightTexResolution.y);
 
-                // Debug.Log(new Vector2((float)TC_Area2D.current.currentTCUnityTerrain.tileX / (float)TC_Area2D.current.currentTerrainArea.tiles.x, (float)TC_Area2D.current.currentTCUnityTerrain.tileZ / (float)TC_Area2D.current.currentTerrainArea.tiles.y));
+                // Debug.Log(new Vector2((float)area2D.currentTCUnityTerrain.tileX / (float)area2D.currentTerrainArea.tiles.x, (float)area2D.currentTCUnityTerrain.tileZ / (float)area2D.currentTerrainArea.tiles.y));
                 if (node.inputTerrain == InputTerrain.Height)
                 {
                     kernel = terrainHeightKernel; 
@@ -467,16 +499,16 @@ namespace TerrainComposer2
                 else if (node.inputTerrain == InputTerrain.Convexity)
                 {
                     kernel = terrainConvexityKernel;
-                    float resolutionLevel = Mathf.Log(TC_Area2D.current.currentTCTerrain.texHeight.width, 2) - 6;
+                    float resolutionLevel = Mathf.Log(area2D.currentTCTerrain.texHeight.width, 2) - 6;
                     int mipmapLevel = Mathf.Clamp(node.mipmapLevel + (int)resolutionLevel, 1, 8);
                     shader.SetInt("itemCount", mipmapLevel);
                     shader.SetFloat("overlay", node.convexityMode == ConvexityMode.Convex ? node.convexityStrength : -node.convexityStrength);// / resolutionLevel);
-                    // Debug.Log(Mathf.Log(TC_Area2D.current.currentTCTerrain.texHeight.width, 2));
+                    // Debug.Log(Mathf.Log(area2D.currentTCTerrain.texHeight.width, 2));
                 }
                 else if (node.inputTerrain == InputTerrain.Splatmap)
                 {
                     // if (node.outputId == TC.treeOutput || node.outputId == TC.objectOutput) kernel = terrainSplatmapItemMapKernel; else
-                    Texture[] textures = TC_Area2D.current.currentTerrain.terrainData.alphamapTextures;
+                    Texture[] textures = area2D.currentTerrain.terrainData.alphamapTextures;
 
                     if (node.splatSelectIndex < 4)
                     {
@@ -490,11 +522,11 @@ namespace TerrainComposer2
                         shader.SetTexture(kernel, "leftSplatmap1", textures[1]);
                         shader.SetInt("splatIndex", node.splatSelectIndex - 4);
                     }
-                    // RenderTexture[] textures = TC_Area2D.current.currentTerrainArea.rtSplatmaps;
+                    // RenderTexture[] textures = area2D.currentTerrainArea.rtSplatmaps;
                 }
                 else if (node.inputTerrain == InputTerrain.Collision) 
                 {
-                    if (camCapture.collisionMask != node.collisionMask || !camCapture.terrain != TC_Area2D.current.currentTerrain) camCapture.Capture(node.collisionMask, node.collisionDirection, node.outputId);
+                    if (camCapture.collisionMask != node.collisionMask || !camCapture.terrain != area2D.currentTerrain) camCapture.Capture(node.collisionMask, node.collisionDirection, node.outputId);
 
                     if (node.collisionMode == CollisionMode.Height)
                     {
@@ -503,18 +535,18 @@ namespace TerrainComposer2
                     else kernel = terrainCollisionMaskKernel;
                     shader.SetTexture(kernel, "tex1", camCapture.cam.targetTexture);
                     if (rightBuffer != null) shader.SetBuffer(kernel, "rightBuffer", rightBuffer);
-                    if (node.heightDetectRange) shader.SetVector("range", node.range / TC_Area2D.current.terrainSize.y); else shader.SetVector("range", new Vector2(0, TC_Area2D.current.terrainSize.y));
+                    if (node.heightDetectRange) shader.SetVector("range", node.range / area2D.terrainSize.y); else shader.SetVector("range", new Vector2(0, area2D.terrainSize.y));
 
                 }
 
-                if (node.inputTerrain != InputTerrain.Splatmap && TC_Area2D.current.currentTCTerrain.texHeight != null)
+                if (node.inputTerrain != InputTerrain.Splatmap && area2D.currentTCTerrain.texHeight != null)
                 {
-                    shader.SetTexture(kernel, "terrainTexRead", TC_Area2D.current.currentTCTerrain.texHeight);
-                    shader.SetFloat("terrainTexReadResolution", TC_Area2D.current.currentTCTerrain.texHeight.width);
-                    shader.SetFloat("terrainTexReadNormalResolution", TC_Area2D.current.currentTCTerrain.texHeight.width - TC_Area2D.current.resExpandBorder * 2);
-                    shader.SetFloat("resExpandBorder", TC_Area2D.current.resExpandBorder);
+                    shader.SetTexture(kernel, "terrainTexRead", area2D.currentTCTerrain.texHeight);
+                    shader.SetFloat("terrainTexReadResolution", area2D.currentTCTerrain.texHeight.width);
+                    shader.SetFloat("terrainTexReadNormalResolution", area2D.currentTCTerrain.texHeight.width - area2D.resExpandBorder * 2);
+                    shader.SetFloat("resExpandBorder", area2D.resExpandBorder);
 
-                    // Debug.Log("terrainTexRead " + TC_Area2D.current.currentTCUnityTerrain.terrain.name);
+                    // Debug.Log("terrainTexRead " + area2D.currentTCUnityTerrain.terrain.name);
                 }
             }
             else if (node.inputKind == InputKind.Noise || (node.inputKind == InputKind.Current && node.inputCurrent == InputCurrent.Distortion))
@@ -534,9 +566,9 @@ namespace TerrainComposer2
                     if (node.noise.mode == NoiseMode.TextureLookup) kernel = noiserRidgedKernel[node.noise.octaves - 1];
                     else kernel = noiseRidged2Kernel[((int)node.noise.mode) - 1];
                 }
-                else if (node.inputNoise == InputNoise.IQ) kernel = noiseIQKernel[((int)node.noise.mode) - 1];
-                else if (node.inputNoise == InputNoise.Swiss) kernel = noiseSwissKernel[((int)node.noise.mode) - 1];
-                else if (node.inputNoise == InputNoise.Jordan) kernel = noiseJordanKernel[((int)node.noise.mode) - 1];
+                else if (node.inputNoise == InputNoise.IQ) { kernel = noiseIQKernel[((int)node.noise.mode) - 1]; _threads = 512; }
+                else if (node.inputNoise == InputNoise.Swiss) { kernel = noiseSwissKernel[((int)node.noise.mode) - 1]; _threads = 512; }
+                else if (node.inputNoise == InputNoise.Jordan) { kernel = noiseJordanKernel[((int)node.noise.mode) - 1]; _threads = 512; }
                 else if (node.inputNoise == InputNoise.Cell)
                 {
                     if (node.noise.cellMode == CellNoiseMode.Normal) kernel = noiseCellNormalKernel; else kernel = noiseCellFastKernel;
@@ -617,7 +649,7 @@ namespace TerrainComposer2
             else if (node.inputKind == InputKind.Portal)
             {
                 kernel = copyBufferKernel;
-                shader.SetBuffer(kernel, "rightBuffer", TC_Area2D.current.layerGroupBuffer);
+                shader.SetBuffer(kernel, "rightBuffer", area2D.layerGroupBuffer);
             }
 
             if (node.inputKind == InputKind.Current)
@@ -683,13 +715,13 @@ namespace TerrainComposer2
             if (node.nodeType == NodeGroupType.Mask) shader.SetInt("mask", 1);
             else shader.SetInt("mask", 0);
 
-            shader.SetVector("resConversion", TC_Area2D.current.resolutionPM);
-            shader.SetVector("resToPreview", TC_Area2D.current.resToPreview);
-            shader.SetVector("terrainSize", new Vector2(TC_Area2D.current.terrainSize.x, TC_Area2D.current.terrainSize.z));
-            shader.SetVector("offset", node.ct.position - TC_Area2D.current.startPos);
+            shader.SetVector("resolutionPM", area2D.resolutionPM);
+            shader.SetVector("resToPreview", area2D.resToPreview);
+            shader.SetVector("terrainSize", new Vector2(area2D.terrainSize.x, area2D.terrainSize.z));
+            shader.SetVector("offset", node.ct.position - area2D.startPos);
             shader.SetVector("posOffset", node.ct.posOffset);
-            shader.SetVector("areaPos", TC_Area2D.current.area.position);
-            shader.SetVector("totalAreaPos", TC_Area2D.current.totalArea.position);
+            shader.SetVector("areaPos", area2D.area.position);
+            shader.SetVector("totalAreaPos", area2D.totalArea.position);
             shader.SetVector("rot", new Vector4(node.ct.rotation.x, node.ct.rotation.y, node.ct.rotation.z, node.ct.rotation.w));
 
             if (node.outputId == TC.treeOutput || node.outputId == TC.objectOutput) shader.SetVector("uvOffset", new Vector2(0.5f / resolution.x, 0.5f / resolution.y));
@@ -703,13 +735,13 @@ namespace TerrainComposer2
             shader.SetVector("scale", new Vector3(node.ct.scale.x, scaleY * (node.size.y / 1000), node.ct.scale.z));
             
             // shader.SetFloat("terrainHeight", node.outputId == TC.heightOutput ? Area2D.current.terrainSize.y : 1000);
-            shader.SetFloat("terrainHeight", TC_Area2D.current.terrainSize.y);
-            // Debug.Log(TC_Area2D.current.terrainSize.y);
+            shader.SetFloat("terrainHeight", area2D.terrainSize.y);
+            // Debug.Log(area2D.terrainSize.y);
             shader.SetInt("outputId", node.outputId);
 
             // Reporter.Log("Run shader");
             if (kernel == -1) { Debug.Log("Kernel not found"); return null; }
-            shader.Dispatch(kernel, Mathf.CeilToInt(bufferLength / threads), 1, 1);
+            shader.Dispatch(kernel, Mathf.CeilToInt(bufferLength / _threads), 1, 1);
 
             DisposeBuffers(ref localCurveKeys, ref localCurveCalc);
             DisposeBuffers(ref localGroupCurveKeys, ref localGroupCurveCalc);
@@ -721,6 +753,8 @@ namespace TerrainComposer2
         
         public void RunComputeMultiMethod(TC_ItemBehaviour item, Method method, bool normalize, ref RenderTexture[] rtsLeft, ref RenderTexture[] rtsRight, ComputeBuffer maskBuffer, RenderTexture rtPreview, ref RenderTexture rtPreviewClone, ref RenderTexture rtLeftPreview, RenderTexture rtRightPreview)
         {
+            TC_Area2D area2D = TC_Area2D.current;
+
             int kernel = -1;
             int _method = (int)method;
 
@@ -738,7 +772,7 @@ namespace TerrainComposer2
 
             shader.SetInt("doNormalize", normalize ? 1 : 0);
 
-            Int2 resolution = TC_Area2D.current.intResolution;
+            Int2 resolution = area2D.intResolution;
             shader.SetInt("resolutionX", resolution.x);
             shader.SetInt("resolutionY", resolution.y);
 
@@ -772,6 +806,8 @@ namespace TerrainComposer2
 
         public void RunComputeMultiMethod(TC_ItemBehaviour item, bool doNormalize, ref RenderTexture[] rtsLeft, ComputeBuffer maskBuffer, RenderTexture rtLeftPreview = null)
         {
+            TC_Area2D area2D = TC_Area2D.current;
+
             int kernel = -1;
 
             //if (previewTex == null) kernel = multiMethodMultiplyBufferKernel;
@@ -781,7 +817,7 @@ namespace TerrainComposer2
 
             shader.SetInt("doNormalize", doNormalize ? 1 : 0);
 
-            Int2 resolution = TC_Area2D.current.intResolution;
+            Int2 resolution = area2D.intResolution;
             shader.SetInt("resolutionX", resolution.x);
             shader.SetInt("resolutionY", resolution.y);
 
@@ -811,6 +847,8 @@ namespace TerrainComposer2
 
         public void RunComputeColorMethod(TC_ItemBehaviour item, Method method, ref RenderTexture rtLeft, ref RenderTexture rtRight, ComputeBuffer maskBuffer, RenderTexture rtPreview, ref RenderTexture rtPreviewClone, ref RenderTexture rtLeftPreview, RenderTexture rtRightPreview)
         {
+            TC_Area2D area2D = TC_Area2D.current;
+
             int kernel = -1;
             int _method = (int)method;
 
@@ -826,7 +864,7 @@ namespace TerrainComposer2
 
             shader.SetFloat("overlay", item.opacity);
 
-            Int2 resolution = TC_Area2D.current.intResolution;
+            Int2 resolution = area2D.intResolution;
             shader.SetInt("resolutionX", resolution.x);
             shader.SetInt("resolutionY", resolution.y);
 
@@ -859,12 +897,14 @@ namespace TerrainComposer2
 
         public void RunComputeColorMethod(TC_ItemBehaviour item, ref RenderTexture rtLeft, ComputeBuffer maskBuffer, RenderTexture rtLeftPreview = null)
         {
+            TC_Area2D area2D = TC_Area2D.current;
+
             int kernel = -1;
 
             kernel = colorMethodMultiplyBufferKernel;
             shader.SetBuffer(kernel, "rightBuffer", maskBuffer);
 
-            Int2 resolution = TC_Area2D.current.intResolution;
+            Int2 resolution = area2D.intResolution;
             shader.SetInt("resolutionX", resolution.x);
             shader.SetInt("resolutionY", resolution.y);
 
@@ -985,6 +1025,7 @@ namespace TerrainComposer2
          
         public void RunComputeObjectMethod(TC_GroupBehaviour groupItem, TC_ItemBehaviour item, ComputeBuffer itemMapBuffer, ref ComputeBuffer rightItemMapBuffer, ComputeBuffer maskBuffer, RenderTexture rtPreview, ref RenderTexture rtPreviewClone, ref RenderTexture rtLeftPreview, RenderTexture rtRightPreview)
         {
+            TC_Area2D area2D = TC_Area2D.current;
             TC_Settings settings = TC_Settings.instance;
             
             // if (rtPreview == null) Debug.Log("null"); else Debug.Log("Not null");
@@ -1042,21 +1083,21 @@ namespace TerrainComposer2
             
             shader.SetBuffer(kernel, "itemMapBuffer", itemMapBuffer);
             shader.SetBuffer(kernel, "rightItemMapBuffer", rightItemMapBuffer);
-            shader.SetVector("resConversion", TC_Area2D.current.resolutionPM);
+            shader.SetVector("resolutionPM", area2D.resolutionPM);
 
-            Int2 resolution = TC_Area2D.current.intResolution;
+            Int2 resolution = area2D.intResolution;
             shader.SetInt("resolutionX", resolution.x);
             shader.SetInt("resolutionY", resolution.y);
-            shader.SetVector("areaPos", TC_Area2D.current.area.position);
-            shader.SetVector("totalAreaPos", TC_Area2D.current.totalArea.position);
-            shader.SetVector("resToPreview", TC_Area2D.current.resToPreview);
+            shader.SetVector("areaPos", area2D.area.position);
+            shader.SetVector("totalAreaPos", area2D.totalArea.position);
+            shader.SetVector("resToPreview", area2D.resToPreview);
             
-            // Debug.Log("areaPos " + TC_Area2D.current.area.position);
-            // Debug.Log("totalAreaPos " + TC_Area2D.current.totalArea.position);
-            // Debug.Log("resConversion " + TC_Area2D.current.resToTerrain);
-            // Debug.Log("resToPreview " + TC_Area2D.current.resToPreview);
+            // Debug.Log("areaPos " + area2D.area.position);
+            // Debug.Log("totalAreaPos " + area2D.totalArea.position);
+            // Debug.Log("resolutionPM " + area2D.resToTerrain);
+            // Debug.Log("resToPreview " + area2D.resToPreview);
 
-            //a Debug.Log("resConversion " + TC_Area2D.current.resToTerrain);
+            //a Debug.Log("resolutionPM " + area2D.resToTerrain);
 
             if (groupItem != null)
             {
@@ -1103,6 +1144,7 @@ namespace TerrainComposer2
 
         public void RunTerrainTex(ComputeBuffer resultBuffer, ref RenderTexture rtHeight, int resolution, bool useRTP = false)
         {
+            TC_Area2D area2D = TC_Area2D.current;
             TC_Reporter.Log("Run terrain tex");
 
             // Reporter.Log(Area2D.current.currentTCTerrain.terrain.name);
@@ -1110,10 +1152,10 @@ namespace TerrainComposer2
             // Debug.Log("rb " + resultBuffer.count);
             // Debug.Log("con" + Area2D.current.resToTerrain);
             // Debug.Log("res" + resolution);
-            // Debug.Log("Area resolution "+ TC_Area2D.current.resolution.ToString());
+            // Debug.Log("Area resolution "+ area2D.resolution.ToString());
 
-            InitRenderTexture(ref rtResult, "rtResult", resolution, RenderTextureFormat.RHalf);
-            InitRenderTexture(ref rtHeight, "rtHeight "+TC_Area2D.current.currentTCUnityTerrain.terrain.name, new Int2(resolution, resolution), RenderTextureFormat.ARGB32, false, true);
+            InitRenderTexture(ref rtResult, "rtResult", resolution, RenderTextureFormat.RFloat);
+            InitRenderTexture(ref rtHeight, "rtHeight "+area2D.currentTCUnityTerrain.terrain.name, new Int2(resolution, resolution), RenderTextureFormat.ARGB32, false, true);
 
             shader.SetBuffer(resultBufferToTexKernel, "resultBuffer", resultBuffer);
             shader.SetTexture(resultBufferToTexKernel, "resultTex", rtResult);
@@ -1121,11 +1163,15 @@ namespace TerrainComposer2
 
             float t = Time.realtimeSinceStartup;
             if (resultBufferToTexKernel == -1) { Debug.Log("Kernel not found"); return; }
-            TC_Reporter.Log("Area resolution " + TC_Area2D.current.resolution);
+            TC_Reporter.Log("Area resolution " + area2D.resolution);
 
             int kernel = resultBufferToTexKernel; 
 
             if (kernel == -1) { Debug.Log("Kernel not found"); return; }
+
+            shader.SetInt("resolutionX", resolution);
+            shader.SetInt("resolutionY", resolution);
+
             shader.Dispatch(kernel, Mathf.CeilToInt(resolution / 8.0f), Mathf.CeilToInt(resolution / 8.0f), 1);
 
             float f = 1 / (Time.realtimeSinceStartup - t);
@@ -1139,16 +1185,14 @@ namespace TerrainComposer2
             shader.SetTexture(terrainTexKernel, "resultTexRead", rtResult);
 
             // --resolution; 
-            Vector3 size = TC_Area2D.current.currentTCUnityTerrain.terrain.terrainData.size;
+            Vector3 size = area2D.currentTCUnityTerrain.terrain.terrainData.size;
             Vector2 resolutionPM = new Vector2(size.x / (resolution), size.z / (resolution));
             
-            shader.SetVector("resConversion", resolutionPM);
-            shader.SetInt("resolutionX", resolution);
-            shader.SetInt("resolutionY", resolution);
-
+            shader.SetVector("resolutionPM", resolutionPM);
+            
             // Debug.Log("resolution " + resolution);
 
-            // shader.SetInts("idOffset", new int[] { TC_Area2D.current.currentTCUnityTerrain.tileX * resolution, TC_Area2D.current.currentTCUnityTerrain.tileZ * resolution });
+            // shader.SetInts("idOffset", new int[] { area2D.currentTCUnityTerrain.tileX * resolution, area2D.currentTCUnityTerrain.tileZ * resolution });
             
             // Reporter.Log("terrainTex " + Mathf.FloorToInt(Area2D.current.intResolution.x / 8.0f) * 8 + ", "+resolution.y);
             if (kernel == -1) { Debug.Log("Kernel not found"); return; }
@@ -1174,6 +1218,7 @@ namespace TerrainComposer2
 
         static public void InitTextures(ref Texture2D[] textures, string name, int length = 1)
         {
+            TC_Area2D area2D = TC_Area2D.current;
             TC_Reporter.Log("InitTextures", 1);
 
             if (textures == null) textures = new Texture2D[length];
@@ -1189,56 +1234,62 @@ namespace TerrainComposer2
                 if (textures[i] != null)
                 {
                     TC_Reporter.Log(textures[i].name + " is assigned");
-                    if (textures[i].width == TC_Area2D.current.intResolution.x && textures[i].height == TC_Area2D.current.intResolution.y) continue;
+                    if (textures[i].width == area2D.intResolution.x && textures[i].height == area2D.intResolution.y) continue;
                     else
                     {
-                        textures[i].Resize(TC_Area2D.current.intResolution.x, TC_Area2D.current.intResolution.y);
+                        textures[i].Resize(area2D.intResolution.x, area2D.intResolution.y);
                         continue;
                     }
                 }
-                textures[i] = new Texture2D(TC_Area2D.current.intResolution.x, TC_Area2D.current.intResolution.y, TextureFormat.ARGB32, false, true);
+                textures[i] = new Texture2D(area2D.intResolution.x, area2D.intResolution.y, TextureFormat.ARGB32, false, true);
                 textures[i].hideFlags = HideFlags.DontSave;
                 textures[i].name = name;
             }
         }
 
-        static public void InitTexture(ref Texture2D tex, string name, int resolution = -1, bool mipmap = false) 
+        static public void InitTexture(ref Texture2D tex, string name, int resolution = -1, bool mipmap = false, TextureFormat format = TextureFormat.ARGB32) 
         {
+            TC_Area2D area2D = TC_Area2D.current;
             TC_Reporter.Log("InitTextures", 1);
             Int2 intResolution;
 
-            if (resolution == -1) intResolution = TC_Area2D.current.intResolution;
+            if (resolution == -1) intResolution = area2D.intResolution;
             else intResolution = new Int2(resolution, resolution);
 
             if (tex != null)
             {
                 TC_Reporter.Log(tex.name + " is assigned");
-                if (!(tex.mipmapCount == 1 && mipmap))
+                if (tex.format == format)
                 {
-                    if (tex.width == intResolution.x && tex.height == intResolution.y) return;
-                    else
+                    if (!(tex.mipmapCount == 1 && mipmap))
                     {
-                        tex.Resize(intResolution.x, intResolution.y);
-                        return;
+                        if (tex.width == intResolution.x && tex.height == intResolution.y) return;
+                        else
+                        {
+                            tex.Resize(intResolution.x, intResolution.y);
+                            return;
+                        }
                     }
                 }
+                else DisposeTexture(ref tex);
             }
             TC_Reporter.Log("Create new Texture2D " + name);
-            tex = new Texture2D(intResolution.x, intResolution.y, TextureFormat.ARGB32, mipmap, true);
+            tex = new Texture2D(intResolution.x, intResolution.y, format, mipmap, true);
             tex.hideFlags = HideFlags.DontSave;
             tex.name = name;
         }
 
         static public void InitPreviewRenderTexture(ref RenderTexture rt, string name)
         {
+            TC_Area2D area2D = TC_Area2D.current;
             TC_Reporter.Log("InitPreviewRenderTextures", 1);
 
-            if (TC_Area2D.current == null) return;
-            int resolution = TC_Area2D.current.previewResolution;
+            if (area2D == null) return;
+            int resolution = area2D.previewResolution;
 
             if (rt != null)
             {
-                if (!rt.IsCreated()) Debug.Log("RenderTexture not Created!");
+                // if (!rt.IsCreated()) Debug.Log("RenderTexture not Created!");
                 if (rt.width != resolution)
                 {
                     // Debug.Log("Release RenderTexture "+rt.width+" res "+resolution+" "+name);
@@ -1265,6 +1316,7 @@ namespace TerrainComposer2
 
         static public void InitRenderTextures(ref RenderTexture[] rts, string name, int length = 2)
         {
+            TC_Area2D area2D = TC_Area2D.current;
             TC_Reporter.Log("InitRenderTextures");
 
             if (rts == null) rts = new RenderTexture[length];
@@ -1279,9 +1331,9 @@ namespace TerrainComposer2
             {
                 if (rts[i] != null)
                 {
-                    if (!rts[i].IsCreated()) Debug.Log("RenderTexture not Created!");
+                    // if (!rts[i].IsCreated()) Debug.Log("RenderTexture not Created!");
                     TC_Reporter.Log(rts[i].name + " is assigned");
-                    if (rts[i].width == TC_Area2D.current.intResolution.x && rts[i].height == TC_Area2D.current.intResolution.y) continue;
+                    if (rts[i].width == area2D.intResolution.x && rts[i].height == area2D.intResolution.y) continue;
                     else
                     {
                         // Debug.Log("release ");
@@ -1289,7 +1341,7 @@ namespace TerrainComposer2
                     }
                 }
                 // Debug.Log("Create RenderTexture");
-                rts[i] = new RenderTexture(TC_Area2D.current.intResolution.x, TC_Area2D.current.intResolution.y, 0, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Linear);
+                rts[i] = new RenderTexture(area2D.intResolution.x, area2D.intResolution.y, 0, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Linear);
                 rts[i].enableRandomWrite = true;
                 rts[i].name = name;
                 rts[i].hideFlags = HideFlags.DontSave;
@@ -1299,22 +1351,23 @@ namespace TerrainComposer2
 
         static public void InitRenderTexture(ref RenderTexture rt, string name)
         {
+            TC_Area2D area2D = TC_Area2D.current;
             TC_Reporter.Log("InitRenderTextures");
 
             if (rt != null)
             {
                 if (!rt.IsCreated()) Debug.Log("RenderTexture not Created!");
                 TC_Reporter.Log(rt.name + " is assigned");
-                if (rt.width == TC_Area2D.current.intResolution.x && rt.height == TC_Area2D.current.intResolution.y) return;
+                if (rt.width == area2D.intResolution.x && rt.height == area2D.intResolution.y) return;
                 else
                 {
-                    TC_Reporter.Log("release " + name + " from " + rt.width + " x " + rt.height +" to "+TC_Area2D.current.intResolution.x +" x " + TC_Area2D.current.intResolution.y);
+                    TC_Reporter.Log("release " + name + " from " + rt.width + " x " + rt.height +" to "+area2D.intResolution.x +" x " + area2D.intResolution.y);
                     DisposeRenderTexture(ref rt);
                     rt = null;
                 }
             }
             // Debug.Log("Create RenderTexture "+name);
-            rt = new RenderTexture(TC_Area2D.current.intResolution.x, TC_Area2D.current.intResolution.y, 0, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Linear);
+            rt = new RenderTexture(area2D.intResolution.x, area2D.intResolution.y, 0, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Linear);
             rt.enableRandomWrite = true;
             rt.name = name;
             rt.hideFlags = HideFlags.DontSave;
@@ -1377,7 +1430,11 @@ namespace TerrainComposer2
                 rt = new RenderTexture(resolution.x, resolution.y, 0, format, RenderTextureReadWrite.Linear);
                 rt.name = name;
                 rt.useMipMap = useMipmap;
-                rt.generateMips = useMipmap;
+#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4
+                    rt.generateMips = useMipmap;                    
+#else
+                    rt.autoGenerateMips = useMipmap;
+#endif
                 rt.hideFlags = HideFlags.DontSave;
                 rt.enableRandomWrite = true;
                 rt.Create();
@@ -1409,11 +1466,11 @@ namespace TerrainComposer2
 
             // Debug.Log("Dispose RenderTexture " + renderTexture.name);
             rt.Release();
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
                 DestroyImmediate(rt);
-            #else
+#else
                 rt = null;
-            #endif
+#endif
         }
 
         static public void DisposeRenderTextures(ref RenderTexture[] rts)
@@ -1427,11 +1484,11 @@ namespace TerrainComposer2
                 if (rts[i] == null) continue;
                 // Debug.Log("Dispose RenderTexture " + renderTextures[i].name);
                 rts[i].Release();
-                #if UNITY_EDITOR
+#if UNITY_EDITOR
                     DestroyImmediate(rts[i]);
-                #else
+#else
                     Destroy(rts[i]); 
-                #endif
+#endif
                 rts[i] = null;
             }
         }
@@ -1440,11 +1497,11 @@ namespace TerrainComposer2
         {
             if (tex == null) return;
 
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
                 DestroyImmediate(tex);
-            #else
+#else
                 Destroy(tex);
-            #endif
+#endif
         }
 
         static public void DisposeTextures(ref Texture2D[] textures)

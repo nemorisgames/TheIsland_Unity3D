@@ -14,6 +14,7 @@ namespace TerrainComposer2
         SerializedProperty masterTerrain;
         SerializedProperty previewResolution;
         SerializedProperty hideTerrainGroup;
+        SerializedProperty useTCRuntime;
 
         // Global Settings
         SerializedObject global;
@@ -36,6 +37,7 @@ namespace TerrainComposer2
             masterTerrain = serializedObject.FindProperty("masterTerrain");
             previewResolution = serializedObject.FindProperty("previewResolution");
             hideTerrainGroup = serializedObject.FindProperty("hideTerrainGroup");
+            useTCRuntime = serializedObject.FindProperty("useTCRuntime");
 
             global = new SerializedObject(((TC_Settings)target).global);
             
@@ -93,6 +95,12 @@ namespace TerrainComposer2
             {
                 serializedObject.ApplyModifiedProperties();
                 TC_NodeWindow.DebugMode();
+            }
+
+            TD.DrawProperty(useTCRuntime);
+            if (GUI.changed)
+            {
+                if (!useTCRuntime.boolValue) TC_Settings.instance.transform.parent.tag = "EditorOnly"; else TC_Settings.instance.transform.parent.tag = "Untagged";
             }
             
             EditorGUILayout.EndVertical();

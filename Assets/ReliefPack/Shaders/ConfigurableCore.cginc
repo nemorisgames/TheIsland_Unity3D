@@ -1,7 +1,4 @@
-﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
-// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
-
-	float4 _MainTex_ST;
+﻿	float4 _MainTex_ST;
 	void vert (inout appdata_full v, out Input o) {
 	    #if defined(SHADER_API_D3D11) || defined(SHADER_API_D3D11_9X) || defined(UNITY_PI)
 			UNITY_INITIALIZE_OUTPUT(Input, o);

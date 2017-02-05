@@ -75,9 +75,11 @@ public class CellPhone : MonoBehaviour
 
 		if (!selected)
 		{
-			Vector3 tVec = new Vector3(target.position.x, target.position.y, target.position.z) + target.right * position.x + target.forward * position.z + target.up * position.y;
-			transform.position = Vector3.Lerp(transform.position, tVec, Time.deltaTime * speed);
-			transform.forward = Vector3.Lerp(transform.forward, target.forward, Time.deltaTime * speedRotation);
+			if (target != null) {
+				Vector3 tVec = new Vector3 (target.position.x, target.position.y, target.position.z) + target.right * position.x + target.forward * position.z + target.up * position.y;
+				transform.position = Vector3.Lerp (transform.position, tVec, Time.deltaTime * speed);
+				transform.forward = Vector3.Lerp (transform.forward, target.forward, Time.deltaTime * speedRotation);
+			}
 		}
 		else
 		{

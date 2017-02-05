@@ -221,7 +221,12 @@ public class RTP_LODmanagerEditor : Editor {
 			    EditorGUILayout.LabelField("No forward add", GUILayout.MinWidth(190), GUILayout.MaxWidth(190));
 			    _target.RTP_NOFORWARDADD=EditorGUILayout.Toggle(_target.RTP_NOFORWARDADD);
 		    EditorGUILayout.EndHorizontal();
-		    EditorGUILayout.HelpBox("Option below does matter only when no forward add is disabled. You can decide then whether you want to handle shadows from point/spot lights in forward or not.", MessageType.None, true);
+            EditorGUILayout.HelpBox("When checked terrain will be rendered in forward (regardless of camera or project setup). Can be helpful to have better control over specularity.", MessageType.None, true);
+            EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("No deferred", GUILayout.MinWidth(190), GUILayout.MaxWidth(190));
+                 _target.RTP_NO_DEFERRED = EditorGUILayout.Toggle(_target.RTP_NO_DEFERRED);
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.HelpBox("Option below does matter only when no forward add is disabled. You can decide then whether you want to handle shadows from point/spot lights in forward or not.", MessageType.None, true);
 		    EditorGUILayout.BeginHorizontal();
 			    EditorGUI.BeginDisabledGroup(_target.RTP_NOFORWARDADD);
 			    EditorGUILayout.LabelField("full forward shadows", GUILayout.MinWidth(190), GUILayout.MaxWidth(190));
@@ -317,7 +322,7 @@ public class RTP_LODmanagerEditor : Editor {
 			//samplers_used+=_target.RTP_IBL_DIFFUSE_FIRST ? 1:0;	
 			
 			if (samplers_used>samplers_left) {
-				EditorGUILayout.HelpBox("Firstpass MIGHT NOT COMPILE. You're using "+samplers_used+" aux textures out of "+samplers_left+" available. Try to disable vertical texture, rain droplets, caustics, global normal/trees or change dedicated color/normal texture for snow. For Add Pass try to disable crosspass heightblend.",MessageType.Error, true);
+				EditorGUILayout.HelpBox("Firstpass MIGHT NOT COMPILE on platforms target 3 (dx9, gles). You're using "+samplers_used+" aux textures out of "+samplers_left+" available. Try to disable vertical texture, rain droplets, caustics, global normal/trees or change dedicated color/normal texture for snow. For Add Pass try to disable crosspass heightblend.",MessageType.Warning, true);
 			}
 		}
 
@@ -356,7 +361,7 @@ public class RTP_LODmanagerEditor : Editor {
 			//samplers_used+=_target.RTP_IBL_DIFFUSE_ADD ? 1:0;	
 			
 			if (samplers_used>samplers_left) {
-				EditorGUILayout.HelpBox("Addpass WON'T COMPILE. You're using "+samplers_used+" aux textures out of "+samplers_left+" available. Try to disable Crosspass heightblend, vertical texture, rain droplets, caustics, global normal/trees or change dedicated color/normal texture for snow.",MessageType.Error, true);
+				EditorGUILayout.HelpBox("Addpass MIGHT NOT COMPILE on platforms target 3 (dx9, gles). You're using " + samplers_used+" aux textures out of "+samplers_left+" available. Try to disable Crosspass heightblend, vertical texture, rain droplets, caustics, global normal/trees or change dedicated color/normal texture for snow.",MessageType.Warning, true);
 			}
 		}			
 		
@@ -2005,9 +2010,44 @@ public class RTP_LODmanagerEditor : Editor {
 					}
 				} while(flag);				
 			}
-			
-			// fullforwardshadows treatment in all shaders
-			if (mainshaders_flag) {
+
+            // no deferred treatment in all shaders
+            if (mainshaders_flag)
+            {
+                sidx = 0;
+                do
+                {
+                    flag = false;
+                    idx = _code.IndexOf("#pragma surface", sidx);
+                    if (idx > 0)
+                    {
+                        sidx = idx + 5; flag = true;
+                        string _code_beg = _code.Substring(0, idx);
+                        string _code_mid = _code.Substring(idx, _code.IndexOfNewLine(idx + 1) - idx);
+                        string _code_end = _code.Substring(_code.IndexOfNewLine(idx + 1));
+                        if (_target.RTP_NO_DEFERRED)
+                        {
+                            if (_code_mid.IndexOf(" exclude_path:deferred") < 0)
+                            {
+                                _code_mid = _code_mid + " exclude_path:deferred";
+                            }
+                        }
+                        else
+                        {
+                            if (_code_mid.IndexOf(" exclude_path:deferred") >= 0)
+                            {
+                                _code_mid = _code_mid.Replace(" exclude_path:deferred", "");
+                            }
+                        }
+                        _code = _code_beg + _code_mid + _code_end;
+                    }
+                } while (flag);
+            }
+
+            
+
+            // fullforwardshadows treatment in all shaders
+            if (mainshaders_flag) {
 				sidx=0;
 				do {					
 					flag=false;

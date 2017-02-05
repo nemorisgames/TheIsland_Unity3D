@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Reflection;
+using System;
 
 namespace TerrainComposer2
 {
@@ -18,6 +19,7 @@ namespace TerrainComposer2
         public RenderTexture rtHeight;
         public Texture2D texHeight;
         public Texture2D texColormap;
+        public Texture2D texNormalmap;
 
 
         // public Texture2D texHeight;
@@ -30,6 +32,7 @@ namespace TerrainComposer2
             TC_Compute.DisposeRenderTexture(ref rtHeight);
             TC_Compute.DisposeTexture(ref texHeight);
             TC_Compute.DisposeTexture(ref texColormap);
+            TC_Compute.DisposeTexture(ref texNormalmap);
         }
 
         public void SetNodesActive(bool active)
@@ -139,7 +142,27 @@ namespace TerrainComposer2
         public float wavingGrassStrength = 0.5f;
         public Color wavingGrassTint = new Color(0.698f, 0.6f, 0.50f);
 
+        public void AssignTextureRTP(string texName, Texture2D tex)
+        {
+            Type t = TC.FindRTP();
 
+            if (t == null) return;
+            if (terrain == null) return;
+
+            Component c = terrain.GetComponent(t);
+
+            if (c == null) return;
+            
+            FieldInfo fi = t.GetField(texName);
+            if (fi == null) return;
+            
+            fi.SetValue(c, tex);
+
+            #if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(c);
+            #endif
+        }
+        
         public bool CheckValidUnityTerrain()
         {
             if (terrain == null) return false;
@@ -149,6 +172,7 @@ namespace TerrainComposer2
 
         public void AddSplatTexture(int index)
         {
+            if (splatPrototypes.Count >= 8) { TC.AddMessage("TC2 supports generating maximum 8 splat textures."); Debug.Log("TC2 supports generating maximum 8 splat textures."); return; }
             splatPrototypes.Insert(index, new TC_SplatPrototype());
         }
 
@@ -193,8 +217,9 @@ namespace TerrainComposer2
             }
         }
 
-        public void add_detailprototype(int detail_number)
+        public void AddDetailPrototype(int detail_number)
         {
+            if (detailPrototypes.Count >= 8) { TC.AddMessage("TC2 supports generating maximum 8 grass textures."); Debug.Log("TC2 supports generating maximum 8 grass textures."); return; }
             detailPrototypes.Insert(detail_number, new TC_DetailPrototype());
         }
 
@@ -221,7 +246,7 @@ namespace TerrainComposer2
             heightmapResolutionList = 12 - (int)Mathf.Log(heightmapResolution - 1, 2);
             splatmapResolutionList = 11 - (int)Mathf.Log(splatmapResolution, 2);
             basemapResolutionList = 11 - (int)Mathf.Log(basemapResolution, 2);
-            detailResolutionPerPatchList = 5 - (int)Mathf.Log(detailResolutionPerPatch, 2);
+            detailResolutionPerPatchList = (int)Mathf.Log(detailResolutionPerPatch, 2) - 3;
         }
 
         public void SetTerrainResolutionFromList()
@@ -229,7 +254,8 @@ namespace TerrainComposer2
             heightmapResolution = (int)(Mathf.Pow(2, 12 - heightmapResolutionList) + 1);
             splatmapResolution = (int)Mathf.Pow(2, 11 - splatmapResolutionList);
             basemapResolution = (int)Mathf.Pow(2, 11 - basemapResolutionList);
-            detailResolutionPerPatch = (int)Mathf.Pow(2, 5 - detailResolutionPerPatchList);
+            detailResolutionPerPatch = (int)Mathf.Pow(2, detailResolutionPerPatchList + 3);
+            SetTerrainResolutionsToList();
         }
 
         public void ApplyAllSettings(TCUnityTerrain terrain, bool settingsEditor)
@@ -261,6 +287,9 @@ namespace TerrainComposer2
 
             if (terrain.terrainData.detailResolution != sTerrain.detailResolution || sTerrain.detailResolutionPerPatch != sTerrain.appliedResolutionPerPatch)
             {
+                // Debug.Log(sTerrain.detailResolution);
+                // Debug.Log(sTerrain.detailResolutionPerPatch);
+                
                 terrain.terrainData.SetDetailResolution(sTerrain.detailResolution, sTerrain.detailResolutionPerPatch);
                 sTerrain.appliedResolutionPerPatch = sTerrain.detailResolutionPerPatch;
             }
@@ -407,11 +436,14 @@ namespace TerrainComposer2
             // CleanSplatTextures(sTerrain);
             
             List<SplatPrototype> splatPrototypesCleaned = new List<SplatPrototype>();
+            bool tooManySplatsMessage = false;
             
             for (int i = 0; i < sTerrain.splatPrototypes.Count; i++)
             {
-                TC_SplatPrototype s = sTerrain.splatPrototypes[i];
+                if (splatPrototypesCleaned.Count >= 8) { tooManySplatsMessage = true; break; }
 
+                TC_SplatPrototype s = sTerrain.splatPrototypes[i];
+    
                 if (s.texture != null)
                 {
                     SplatPrototype d = new SplatPrototype();
@@ -427,6 +459,8 @@ namespace TerrainComposer2
                     TC.SetTextureReadWrite(s.texture);
                 }
             }
+
+            if (tooManySplatsMessage) { TC.AddMessage("TC2 supports generating maximum 8 splat textures."); Debug.Log("TC2 supports generating maximum 8 splat textures."); }
 
             terrain.terrainData.splatPrototypes = splatPrototypesCleaned.ToArray();
         }
@@ -533,11 +567,15 @@ namespace TerrainComposer2
 
             CleanGrassPrototypes(sTerrain);
 
-            List<DetailPrototype> DetailPrototypesCleaned = new List<DetailPrototype>();
+            List<DetailPrototype> detailPrototypesCleaned = new List<DetailPrototype>();
             float multi = sTerrain.grassScaleMulti;
+
+            bool tooManyGrassMessage = false;
 
             for (int i = 0; i < sTerrain.detailPrototypes.Count; i++)
             {
+                if (detailPrototypesCleaned.Count >= 8) { tooManyGrassMessage = true; break; }
+
                 TC_DetailPrototype s = sTerrain.detailPrototypes[i];
                 DetailPrototype d = new DetailPrototype();
                 
@@ -556,10 +594,12 @@ namespace TerrainComposer2
                 d.prototypeTexture = s.prototypeTexture;
                 d.renderMode = s.renderMode;
                 TC.SetTextureReadWrite(d.prototypeTexture);
-                DetailPrototypesCleaned.Add(d);
+                detailPrototypesCleaned.Add(d);
             }
 
-            terrain.terrainData.detailPrototypes = DetailPrototypesCleaned.ToArray();
+            if (tooManyGrassMessage) { TC.AddMessage("TC2 supports generating maximum 8 grass textures."); Debug.Log("TC2 supports generating maximum 8 grass textures."); }
+
+            terrain.terrainData.detailPrototypes = detailPrototypesCleaned.ToArray();
         }
 
         public void CleanGrassPrototypes(TCUnityTerrain sTerrain)

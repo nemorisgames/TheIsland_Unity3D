@@ -7,6 +7,7 @@ namespace TerrainComposer2
     public class TC_FollowTarget : MonoBehaviour
     {
         public Transform target;
+        public Vector3 offset;
         public bool refresh = false;
         
         #if UNITY_EDITOR
@@ -26,7 +27,7 @@ namespace TerrainComposer2
         {
             if (target == null) return;
 
-            transform.position = target.position;
+            transform.position = target.position + offset;
 
             if (refresh)
             {

@@ -15,9 +15,11 @@ public class InventoryItem : MonoBehaviour
 	bool throwing = false;
 	float timeOut = 0f;
 	float throwTimeout = 2f;
+	public Animator animator;
 	protected virtual void Awake()
 	{
 		//hand.SetActive(false);
+		animator = GetComponent<Animator>();
 	}
 	public virtual ItemType GetItemType()
 	{
@@ -54,7 +56,7 @@ public class InventoryItem : MonoBehaviour
 		spawnPosition = Inventory.Instance.spawnPoint;
 		GameObject ob = Instantiate(throwPrefab,spawnPosition.position,spawnPosition.rotation) as GameObject;
 		ob.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * 10f, ForceMode.Impulse);
-		Inventory.Instance.RemoveInventoryItem(type);
+		Destroy (ob, 10f);
 	}
 	protected virtual void Update()
 	{
@@ -73,7 +75,8 @@ public class InventoryItem : MonoBehaviour
 			{
 				throwing = true;
 				Debug.Log("Throwing Item");
-				ThrowItem();
+				StartCoroutine(Inventory.Instance.RemoveInventoryItem(type));
+				Invoke ("ThrowItem", 1f);
 			}
 		}
 		if (Input.GetMouseButtonUp(0))
