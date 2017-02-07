@@ -53,7 +53,7 @@ MonoBehaviour:
   isLocked: 0
   id: 0
   title: Options
-  manualSize: {x: 37, y: 42.847324}
+  manualSize: {x: 36.999996, y: 42.111115}
   positionType: 0
   manualPosition: {x: 50, y: 50}
   alignment: 0
@@ -100,12 +100,14 @@ MonoBehaviour:
   timeCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
+    - serializedVersion: 2
+      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
@@ -118,13 +120,13 @@ MonoBehaviour:
   zoomAnchor: 4
   zoomElements: 0
   oneMenuPerSpeech: 0
-  biggestElementSize: {x: 375.22, y: 219.37999}
+  biggestElementSize: {x: 297.84, y: 189.21}
   rect:
     serializedVersion: 2
-    x: 323.82
-    y: 149.74
-    width: 380.36002
-    height: 224.51999
+    x: 257.04
+    y: 132.855
+    width: 301.91998
+    height: 193.29001
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -147,7 +149,7 @@ MonoBehaviour:
   isLocked: 0
   id: 1
   title: Save
-  manualSize: {x: 31.000002, y: 33.923664}
+  manualSize: {x: 30.999998, y: 33.555557}
   positionType: 0
   manualPosition: {x: 50, y: 50}
   alignment: 0
@@ -186,12 +188,14 @@ MonoBehaviour:
   timeCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
+    - serializedVersion: 2
+      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
@@ -204,13 +208,13 @@ MonoBehaviour:
   zoomAnchor: 4
   zoomElements: 0
   oneMenuPerSpeech: 0
-  biggestElementSize: {x: 313.54, y: 172.62}
+  biggestElementSize: {x: 248.87999, y: 149.94}
   rect:
     serializedVersion: 2
-    x: 354.65997
-    y: 173.12
-    width: 318.68002
-    height: 177.76
+    x: 281.52002
+    y: 152.48999
+    width: 252.95999
+    height: 154.02
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -233,7 +237,7 @@ MonoBehaviour:
   isLocked: 0
   id: 2
   title: Load
-  manualSize: {x: 31.000002, y: 33.923664}
+  manualSize: {x: 30.999998, y: 33.555557}
   positionType: 0
   manualPosition: {x: 50, y: 50}
   alignment: 0
@@ -272,12 +276,14 @@ MonoBehaviour:
   timeCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
+    - serializedVersion: 2
+      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
@@ -290,13 +296,13 @@ MonoBehaviour:
   zoomAnchor: 4
   zoomElements: 0
   oneMenuPerSpeech: 0
-  biggestElementSize: {x: 313.54, y: 172.62}
+  biggestElementSize: {x: 248.87999, y: 149.94}
   rect:
     serializedVersion: 2
-    x: 354.65997
-    y: 173.12
-    width: 318.68002
-    height: 177.76
+    x: 281.52002
+    y: 152.48999
+    width: 252.95999
+    height: 154.02
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -321,7 +327,7 @@ MonoBehaviour:
   title: Inventory
   manualSize: {x: 100, y: 12.60303}
   positionType: 1
-  manualPosition: {x: 50, y: 6.301515}
+  manualPosition: {x: 50, y: 6.3015146}
   alignment: 0
   toggleKey: 
   ignoreMouseClicks: 0
@@ -358,12 +364,14 @@ MonoBehaviour:
   timeCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
+    - serializedVersion: 2
+      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
@@ -381,8 +389,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1028
-    height: 66.03988
+    width: 816
+    height: 57.847904
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -405,9 +413,9 @@ MonoBehaviour:
   isLocked: 0
   id: 4
   title: InGame
-  manualSize: {x: 7.2999997, y: 6.7618318}
+  manualSize: {x: 7.3, y: 6.577778}
   positionType: 1
-  manualPosition: {x: 3.6499999, y: 96.61908}
+  manualPosition: {x: 3.65, y: 96.711105}
   alignment: 6
   toggleKey: 
   ignoreMouseClicks: 0
@@ -440,12 +448,14 @@ MonoBehaviour:
   timeCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
+    - serializedVersion: 2
+      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
@@ -458,13 +468,13 @@ MonoBehaviour:
   zoomAnchor: 4
   zoomElements: 0
   oneMenuPerSpeech: 0
-  biggestElementSize: {x: 69.904, y: 30.292}
+  biggestElementSize: {x: 55.488, y: 26.112001}
   rect:
     serializedVersion: 2
     x: 0
-    y: 488.568
-    width: 75.044
-    height: 35.432
+    y: 428.80798
+    width: 59.568
+    height: 30.192001
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -487,7 +497,7 @@ MonoBehaviour:
   isLocked: 0
   id: 5
   title: Conversation
-  manualSize: {x: 36, y: 29.942747}
+  manualSize: {x: 35.999996, y: 29.666666}
   positionType: 2
   manualPosition: {x: 24, y: 69.7}
   alignment: 6
@@ -524,12 +534,14 @@ MonoBehaviour:
   timeCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
+    - serializedVersion: 2
+      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
@@ -542,13 +554,13 @@ MonoBehaviour:
   zoomAnchor: 4
   zoomElements: 0
   oneMenuPerSpeech: 0
-  biggestElementSize: {x: 364.94, y: 151.76}
+  biggestElementSize: {x: 289.68, y: 132.09}
   rect:
     serializedVersion: 2
-    x: 61.679993
-    y: 286.778
-    width: 370.08002
-    height: 156.9
+    x: 48.960007
+    y: 251.83798
+    width: 293.75998
+    height: 136.17
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -571,7 +583,7 @@ MonoBehaviour:
   isLocked: 0
   id: 6
   title: Interaction
-  manualSize: {x: 22.08852, y: 7.166259}
+  manualSize: {x: 17.161764, y: 6.96}
   positionType: 4
   manualPosition: {x: 50, y: 50}
   alignment: 4
@@ -612,12 +624,14 @@ MonoBehaviour:
   timeCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
+    - serializedVersion: 2
+      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
@@ -630,13 +644,13 @@ MonoBehaviour:
   zoomAnchor: 4
   zoomElements: 0
   oneMenuPerSpeech: 0
-  biggestElementSize: {x: 224.29437, y: 34.775597}
+  biggestElementSize: {x: 137.83679, y: 29.7432}
   rect:
     serializedVersion: 2
-    x: 400.46503
-    y: 243.2244
-    width: 227.06998
-    height: 37.551197
+    x: 337.98
+    y: 213.5268
+    width: 140.04
+    height: 31.9464
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -712,12 +726,14 @@ MonoBehaviour:
   timeCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
+    - serializedVersion: 2
+      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
@@ -733,10 +749,10 @@ MonoBehaviour:
   biggestElementSize: {x: 0, y: 0}
   rect:
     serializedVersion: 2
-    x: 227.92526
-    y: 156.41971
-    width: 572.1495
-    height: 211.1606
+    x: 180.92122
+    y: 137.0165
+    width: 454.15756
+    height: 184.96701
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -775,10 +791,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 5.14
-    width: 370.08
-    height: 26.199999
+    x: 4.08
+    y: 4.08
+    width: 293.76
+    height: 22.95
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiText: {fileID: 0}
@@ -832,10 +848,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 36.48
-    width: 370.08
-    height: 26.199999
+    x: 4.08
+    y: 31.11
+    width: 293.76
+    height: 22.95
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiSlider: {fileID: 0}
@@ -892,10 +908,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 67.82
-    width: 370.08
-    height: 26.199999
+    x: 4.08
+    y: 58.140003
+    width: 293.76
+    height: 22.95
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiSlider: {fileID: 0}
@@ -952,10 +968,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 99.159996
-    width: 370.08
-    height: 26.199999
+    x: 4.08
+    y: 85.170006
+    width: 293.76
+    height: 22.95
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiSlider: {fileID: 0}
@@ -1012,10 +1028,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 130.5
-    width: 370.08
-    height: 26.199999
+    x: 4.08
+    y: 112.200005
+    width: 293.76
+    height: 22.95
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -1066,10 +1082,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 5.14
-    width: 308.4
-    height: 26.199999
+    x: 4.08
+    y: 4.08
+    width: 244.79999
+    height: 22.95
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiText: {fileID: 0}
@@ -1123,10 +1139,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 36.48
-    width: 308.4
-    height: 104.799995
+    x: 4.08
+    y: 31.11
+    width: 244.79999
+    height: 91.8
   relativePosition: {x: 0, y: 0}
   numSlots: 4
   uiSlots:
@@ -1201,10 +1217,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 146.42
-    width: 308.4
-    height: 26.199999
+    x: 4.08
+    y: 126.990005
+    width: 244.79999
+    height: 22.95
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -1269,10 +1285,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 5.14
-    width: 308.4
-    height: 26.199999
+    x: 4.08
+    y: 4.08
+    width: 244.79999
+    height: 22.95
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiText: {fileID: 0}
@@ -1326,10 +1342,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 36.48
-    width: 308.4
-    height: 104.799995
+    x: 4.08
+    y: 31.11
+    width: 244.79999
+    height: 91.8
   relativePosition: {x: 0, y: 0}
   numSlots: 4
   uiSlots:
@@ -1404,10 +1420,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 146.42
-    width: 308.4
-    height: 26.199999
+    x: 4.08
+    y: 126.990005
+    width: 244.79999
+    height: 22.95
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -1472,10 +1488,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 5.14
-    width: 25.699999
-    height: 57.64
+    x: 4.08
+    y: 4.08
+    width: 20.4
+    height: 50.49
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -1540,10 +1556,10 @@ MonoBehaviour:
   uiHideStyle: 1
   relativeRect:
     serializedVersion: 2
-    x: 35.98
-    y: 5.14
-    width: 935.48
-    height: 57.64
+    x: 28.56
+    y: 4.08
+    width: 742.56
+    height: 50.49
   relativePosition: {x: 0, y: 0}
   numSlots: 13
   uiSlots:
@@ -1594,18 +1610,80 @@ MonoBehaviour:
   limitToDefinedInteractions: 1
   categoryID: -1
   items:
-  - label: Prop sword
+  - label: Cellphone
     id: 0
     altLabel: 
     carryOnStart: 0
     carryOnStartNotDefault: 0
     carryOnStartID: 0
-    vars: []
+    vars:
+    - label: Title
+      id: 0
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: Cellphone
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
+    - label: Description
+      id: 1
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: This is your cellphone. Why it was on that rock? it was like if somebody
+        has put it on there on purpose.
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
+    - label: Instructions
+      id: 2
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: '[Right mouse button] to bring up\n[Mouse scroll wheel] to navigate
+        functions\n[Left mouse button] to activate/deactivate function'
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
+    - label: SpriteName
+      id: 3
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: Cellphone
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
     canCarryMultiple: 0
     count: 1
     useSeparateSlots: 0
-    tex: {fileID: 2800000, guid: a01609783128744659e8933c2954ac90, type: 3}
-    activeTex: {fileID: 2800000, guid: e54effe7242064987b6b9ae71576d6fc, type: 3}
+    tex: {fileID: 2800000, guid: b26ed7e6b79a745439ac32ce9a859ea8, type: 3}
+    activeTex: {fileID: 2800000, guid: b26ed7e6b79a745439ac32ce9a859ea8, type: 3}
     selectedTex: {fileID: 0}
     cursorIcon:
       texture: {fileID: 0}
@@ -1621,7 +1699,7 @@ MonoBehaviour:
       label: Icon 1
       lineID: -1
       id: 0
-    lineID: 62
+    lineID: -1
     useIconID: 0
     binID: -1
     isEditing: 1
@@ -1629,11 +1707,11 @@ MonoBehaviour:
     lastInteractionIndex: 0
     overrideUseSyntax: 0
     hotspotPrefix1:
-      label: 
-      lineID: 0
+      label: Use
+      lineID: -1
     hotspotPrefix2:
-      label: 
-      lineID: 0
+      label: on
+      lineID: -1
     useActionList: {fileID: 0}
     lookActionList: {fileID: 0}
     interactions: []
@@ -1683,8 +1761,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 997.16
     y: 5.943589
-    width: 25.699999
-    height: 57.64
+    width: 20.4
+    height: 50.49
   relativePosition: {x: 97, y: 9}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -1770,12 +1848,14 @@ MonoBehaviour:
   timeCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
+    - serializedVersion: 2
+      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
@@ -1791,10 +1871,10 @@ MonoBehaviour:
   biggestElementSize: {x: 0, y: 0}
   rect:
     serializedVersion: 2
-    x: 257
-    y: 345.31604
-    width: 514
-    height: 146.72
+    x: 204
+    y: 302.481
+    width: 408
+    height: 128.52
 --- !u!114 &11400050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1833,10 +1913,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 5.14
-    width: 64.764
-    height: 25.152
+    x: 4.08
+    y: 4.08
+    width: 51.408
+    height: 22.032001
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -1901,10 +1981,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 5.14
-    width: 359.8
-    height: 136.23999
+    x: 4.08
+    y: 4.08
+    width: 285.6
+    height: 119.34
   relativePosition: {x: 0, y: 0}
   numSlots: 5
   uiSlots:
@@ -1972,10 +2052,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 146.51999
-    width: 359.8
-    height: 5.24
+    x: 4.08
+    y: 127.5
+    width: 285.6
+    height: 4.59
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiSlider: {fileID: 0}
@@ -1996,7 +2076,7 @@ MonoBehaviour:
   ID: 1
   isEditing: 1
   title: Use
-  slotSize: {x: 3.1128404, y: 6.10687}
+  slotSize: {x: 1.4705882, y: 2.6143792}
   sizeType: 0
   positionType: 0
   slotSpacing: 0
@@ -2020,10 +2100,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 2.7756002
-    y: 2.7756002
-    width: 31.999998
-    height: 31.999998
+    x: 2.2032
+    y: 2.2032
+    width: 12
+    height: 12.000001
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -2049,7 +2129,7 @@ MonoBehaviour:
   ID: 3
   isEditing: 0
   title: Talk
-  slotSize: {x: 3.1128404, y: 6.10687}
+  slotSize: {x: 1.4705882, y: 2.6143792}
   sizeType: 0
   positionType: 0
   slotSpacing: 0
@@ -2073,10 +2153,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 37.551197
-    y: 2.7756002
-    width: 31.999998
-    height: 31.999998
+    x: 16.4064
+    y: 2.2032
+    width: 12
+    height: 12.000001
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -2102,7 +2182,7 @@ MonoBehaviour:
   ID: 0
   isEditing: 0
   title: Look
-  slotSize: {x: 3.1128404, y: 6.10687}
+  slotSize: {x: 1.4705882, y: 2.6143792}
   sizeType: 0
   positionType: 0
   slotSpacing: 0
@@ -2126,10 +2206,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 72.32679
-    y: 2.7756002
-    width: 31.999998
-    height: 31.999998
+    x: 30.6096
+    y: 2.2032
+    width: 12
+    height: 12.000001
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -2179,10 +2259,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 107.10239
-    y: 2.7756002
-    width: 117.19199
-    height: 31.439999
+    x: 44.8128
+    y: 2.2032
+    width: 93.023994
+    height: 27.54
   relativePosition: {x: 0, y: 0}
   numSlots: 3
   uiSlots:
@@ -2203,18 +2283,80 @@ MonoBehaviour:
   limitToDefinedInteractions: 1
   categoryID: -1
   items:
-  - label: Prop sword
+  - label: Cellphone
     id: 0
     altLabel: 
     carryOnStart: 0
     carryOnStartNotDefault: 0
     carryOnStartID: 0
-    vars: []
+    vars:
+    - label: Title
+      id: 0
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: Cellphone
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
+    - label: Description
+      id: 1
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: This is your cellphone. Why it was on that rock? it was like if somebody
+        has put it on there on purpose.
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
+    - label: Instructions
+      id: 2
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: '[Right mouse button] to bring up\n[Mouse scroll wheel] to navigate
+        functions\n[Left mouse button] to activate/deactivate function'
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
+    - label: SpriteName
+      id: 3
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: Cellphone
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
     canCarryMultiple: 0
     count: 1
     useSeparateSlots: 0
-    tex: {fileID: 2800000, guid: a01609783128744659e8933c2954ac90, type: 3}
-    activeTex: {fileID: 2800000, guid: e54effe7242064987b6b9ae71576d6fc, type: 3}
+    tex: {fileID: 2800000, guid: b26ed7e6b79a745439ac32ce9a859ea8, type: 3}
+    activeTex: {fileID: 2800000, guid: b26ed7e6b79a745439ac32ce9a859ea8, type: 3}
     selectedTex: {fileID: 0}
     cursorIcon:
       texture: {fileID: 0}
@@ -2230,7 +2372,7 @@ MonoBehaviour:
       label: Icon 1
       lineID: -1
       id: 0
-    lineID: 62
+    lineID: -1
     useIconID: 0
     binID: -1
     isEditing: 1
@@ -2238,11 +2380,11 @@ MonoBehaviour:
     lastInteractionIndex: 0
     overrideUseSyntax: 0
     hotspotPrefix1:
-      label: 
-      lineID: 0
+      label: Use
+      lineID: -1
     hotspotPrefix2:
-      label: 
-      lineID: 0
+      label: on
+      lineID: -1
     useActionList: {fileID: 0}
     lookActionList: {fileID: 0}
     interactions: []
@@ -2292,8 +2434,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 514
-    height: 36.68
+    width: 408
+    height: 32.13
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiText: {fileID: 0}
@@ -2347,10 +2489,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 5.14
-    width: 561.28796
-    height: 16.09213
+    x: 4.08
+    y: 4.08
+    width: 445.53598
+    height: 14.09597
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiText: {fileID: 0}
@@ -2406,8 +2548,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 34.328968
     y: 27.450876
-    width: 514
-    height: 52.399998
+    width: 408
+    height: 45.9
   relativePosition: {x: 6, y: 13}
   numSlots: 5
   uiSlots:
@@ -2434,18 +2576,80 @@ MonoBehaviour:
   limitToDefinedInteractions: 1
   categoryID: -1
   items:
-  - label: Prop sword
+  - label: Cellphone
     id: 0
     altLabel: 
     carryOnStart: 0
     carryOnStartNotDefault: 0
     carryOnStartID: 0
-    vars: []
+    vars:
+    - label: Title
+      id: 0
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: Cellphone
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
+    - label: Description
+      id: 1
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: This is your cellphone. Why it was on that rock? it was like if somebody
+        has put it on there on purpose.
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
+    - label: Instructions
+      id: 2
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: '[Right mouse button] to bring up\n[Mouse scroll wheel] to navigate
+        functions\n[Left mouse button] to activate/deactivate function'
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
+    - label: SpriteName
+      id: 3
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: Cellphone
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
     canCarryMultiple: 0
     count: 1
     useSeparateSlots: 0
-    tex: {fileID: 2800000, guid: a01609783128744659e8933c2954ac90, type: 3}
-    activeTex: {fileID: 2800000, guid: e54effe7242064987b6b9ae71576d6fc, type: 3}
+    tex: {fileID: 2800000, guid: b26ed7e6b79a745439ac32ce9a859ea8, type: 3}
+    activeTex: {fileID: 2800000, guid: b26ed7e6b79a745439ac32ce9a859ea8, type: 3}
     selectedTex: {fileID: 0}
     cursorIcon:
       texture: {fileID: 0}
@@ -2461,7 +2665,7 @@ MonoBehaviour:
       label: Icon 1
       lineID: -1
       id: 0
-    lineID: 62
+    lineID: -1
     useIconID: 0
     binID: -1
     isEditing: 1
@@ -2469,11 +2673,11 @@ MonoBehaviour:
     lastInteractionIndex: 0
     overrideUseSyntax: 0
     hotspotPrefix1:
-      label: 
-      lineID: 0
+      label: Use
+      lineID: -1
     hotspotPrefix2:
-      label: 
-      lineID: 0
+      label: on
+      lineID: -1
     useActionList: {fileID: 0}
     lookActionList: {fileID: 0}
     interactions: []
@@ -2522,9 +2726,9 @@ MonoBehaviour:
   relativeRect:
     serializedVersion: 2
     x: 0
-    y: 36.68
-    width: 514
-    height: 31.439999
+    y: 32.13
+    width: 408
+    height: 27.54
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiText: {fileID: 0}
@@ -2554,7 +2758,7 @@ MonoBehaviour:
   ID: 0
   isEditing: 0
   title: CloseButton
-  slotSize: {x: 5.155642, y: 4.5801525}
+  slotSize: {x: 5.147059, y: 3.485839}
   sizeType: 0
   positionType: 2
   slotSpacing: 0
@@ -2580,8 +2784,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 512.0738
     y: 190.46684
-    width: 53
-    height: 23.999998
+    width: 42
+    height: 16.000002
   relativePosition: {x: 89.5, y: 90.2}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -2622,7 +2826,7 @@ MonoBehaviour:
   ID: 3
   isEditing: 0
   title: TakeAllButton
-  slotSize: {x: 7.8793774, y: 4.5801525}
+  slotSize: {x: 7.8431373, y: 3.485839}
   sizeType: 0
   positionType: 2
   slotSpacing: 0
@@ -2648,8 +2852,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 485.7549
     y: 92.06601
-    width: 81
-    height: 23.999998
+    width: 64
+    height: 16.000002
   relativePosition: {x: 84.9, y: 43.6}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -2716,8 +2920,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 34.328968
     y: 135.14278
-    width: 514
-    height: 52.399998
+    width: 408
+    height: 45.9
   relativePosition: {x: 6, y: 64}
   numSlots: 5
   uiSlots:
@@ -2744,18 +2948,80 @@ MonoBehaviour:
   limitToDefinedInteractions: 1
   categoryID: -1
   items:
-  - label: Prop sword
+  - label: Cellphone
     id: 0
     altLabel: 
     carryOnStart: 0
     carryOnStartNotDefault: 0
     carryOnStartID: 0
-    vars: []
+    vars:
+    - label: Title
+      id: 0
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: Cellphone
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
+    - label: Description
+      id: 1
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: This is your cellphone. Why it was on that rock? it was like if somebody
+        has put it on there on purpose.
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
+    - label: Instructions
+      id: 2
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: '[Right mouse button] to bring up\n[Mouse scroll wheel] to navigate
+        functions\n[Left mouse button] to activate/deactivate function'
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
+    - label: SpriteName
+      id: 3
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: Cellphone
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
     canCarryMultiple: 0
     count: 1
     useSeparateSlots: 0
-    tex: {fileID: 2800000, guid: a01609783128744659e8933c2954ac90, type: 3}
-    activeTex: {fileID: 2800000, guid: e54effe7242064987b6b9ae71576d6fc, type: 3}
+    tex: {fileID: 2800000, guid: b26ed7e6b79a745439ac32ce9a859ea8, type: 3}
+    activeTex: {fileID: 2800000, guid: b26ed7e6b79a745439ac32ce9a859ea8, type: 3}
     selectedTex: {fileID: 0}
     cursorIcon:
       texture: {fileID: 0}
@@ -2771,7 +3037,7 @@ MonoBehaviour:
       label: Icon 1
       lineID: -1
       id: 0
-    lineID: 62
+    lineID: -1
     useIconID: 0
     binID: -1
     isEditing: 1
@@ -2779,11 +3045,11 @@ MonoBehaviour:
     lastInteractionIndex: 0
     overrideUseSyntax: 0
     hotspotPrefix1:
-      label: 
-      lineID: 0
+      label: Use
+      lineID: -1
     hotspotPrefix2:
-      label: 
-      lineID: 0
+      label: on
+      lineID: -1
     useActionList: {fileID: 0}
     lookActionList: {fileID: 0}
     interactions: []
@@ -2833,8 +3099,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 5.7214947
     y: 114.02672
-    width: 561.28796
-    height: 15.086371
+    width: 445.53598
+    height: 13.214972
   relativePosition: {x: 1, y: 54}
   numSlots: 1
   uiText: {fileID: 0}
@@ -2890,8 +3156,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 8.582242
     y: 28.50668
-    width: 20.56
-    height: 52.399998
+    width: 16.32
+    height: 45.9
   relativePosition: {x: 1.5, y: 13.5}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -2993,12 +3259,14 @@ MonoBehaviour:
   timeCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
+    - serializedVersion: 2
+      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
@@ -3014,10 +3282,10 @@ MonoBehaviour:
   biggestElementSize: {x: 0, y: 0}
   rect:
     serializedVersion: 2
-    x: 281.2312
-    y: 80.696014
-    width: 465.5376
-    height: 362.60797
+    x: 223.2341
+    y: 70.686005
+    width: 369.5318
+    height: 317.628
 --- !u!114 &11400088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3058,8 +3326,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 52.14021
     y: 239.32127
-    width: 370.08
-    height: 83.84
+    width: 293.76
+    height: 73.44
   relativePosition: {x: 11.2, y: 66}
   numSlots: 4
   uiSlots:
@@ -3083,18 +3351,80 @@ MonoBehaviour:
   limitToDefinedInteractions: 1
   categoryID: -1
   items:
-  - label: Prop sword
+  - label: Cellphone
     id: 0
     altLabel: 
     carryOnStart: 0
     carryOnStartNotDefault: 0
     carryOnStartID: 0
-    vars: []
+    vars:
+    - label: Title
+      id: 0
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: Cellphone
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
+    - label: Description
+      id: 1
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: This is your cellphone. Why it was on that rock? it was like if somebody
+        has put it on there on purpose.
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
+    - label: Instructions
+      id: 2
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: '[Right mouse button] to bring up\n[Mouse scroll wheel] to navigate
+        functions\n[Left mouse button] to activate/deactivate function'
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
+    - label: SpriteName
+      id: 3
+      type: 2
+      val: 0
+      floatVal: 0
+      textVal: Cellphone
+      popUps: []
+      link: 0
+      pmVar: 
+      updateLinkOnStart: 0
+      isEditing: 0
+      textValLineID: -1
+      popUpsLineID: -1
+      limitToCategories: 0
+      categoryIDs: 
     canCarryMultiple: 0
     count: 1
     useSeparateSlots: 0
-    tex: {fileID: 2800000, guid: a01609783128744659e8933c2954ac90, type: 3}
-    activeTex: {fileID: 2800000, guid: e54effe7242064987b6b9ae71576d6fc, type: 3}
+    tex: {fileID: 2800000, guid: b26ed7e6b79a745439ac32ce9a859ea8, type: 3}
+    activeTex: {fileID: 2800000, guid: b26ed7e6b79a745439ac32ce9a859ea8, type: 3}
     selectedTex: {fileID: 0}
     cursorIcon:
       texture: {fileID: 0}
@@ -3110,7 +3440,7 @@ MonoBehaviour:
       label: Icon 1
       lineID: -1
       id: 0
-    lineID: 62
+    lineID: -1
     useIconID: 0
     binID: -1
     isEditing: 1
@@ -3118,11 +3448,11 @@ MonoBehaviour:
     lastInteractionIndex: 0
     overrideUseSyntax: 0
     hotspotPrefix1:
-      label: 
-      lineID: 0
+      label: Use
+      lineID: -1
     hotspotPrefix2:
-      label: 
-      lineID: 0
+      label: on
+      lineID: -1
     useActionList: {fileID: 0}
     lookActionList: {fileID: 0}
     interactions: []
@@ -3172,8 +3502,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 13.966127
     y: 36.2608
-    width: 185.04
-    height: 167.68
+    width: 146.88
+    height: 146.88
   relativePosition: {x: 3, y: 10}
   numSlots: 4
   uiSlots:
@@ -3234,8 +3564,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 18.621504
     y: 239.32127
-    width: 20.56
-    height: 83.84
+    width: 16.32
+    height: 73.44
   relativePosition: {x: 4, y: 66}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -3302,8 +3632,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 428.2946
     y: 239.32127
-    width: 20.56
-    height: 83.84
+    width: 16.32
+    height: 73.44
   relativePosition: {x: 92, y: 66}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -3370,8 +3700,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 335.18707
     y: 36.2608
-    width: 92.52
-    height: 83.84
+    width: 73.44
+    height: 73.44
   relativePosition: {x: 72, y: 10}
   numSlots: 1
   uiSlots:
@@ -3397,7 +3727,7 @@ MonoBehaviour:
   ID: 5
   isEditing: 0
   title: CreateButton
-  slotSize: {x: 6.1284046, y: 4.5801525}
+  slotSize: {x: 6.372549, y: 3.485839}
   sizeType: 0
   positionType: 2
   slotSpacing: 0
@@ -3423,8 +3753,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 335.18707
     y: 137.42844
-    width: 62.999996
-    height: 23.999998
+    width: 52
+    height: 16.000002
   relativePosition: {x: 72, y: 37.9}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -3465,7 +3795,7 @@ MonoBehaviour:
   ID: 6
   isEditing: 0
   title: CloseButton
-  slotSize: {x: 5.155642, y: 4.5801525}
+  slotSize: {x: 5.147059, y: 3.485839}
   sizeType: 0
   positionType: 2
   slotSpacing: 0
@@ -3491,8 +3821,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 394.31033
     y: 333.59933
-    width: 53
-    height: 23.999998
+    width: 42
+    height: 16.000002
   relativePosition: {x: 84.7, y: 92}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -3533,7 +3863,7 @@ MonoBehaviour:
   ID: 7
   isEditing: 0
   title: IngredientsLabel
-  slotSize: {x: 11.089494, y: 4.5801525}
+  slotSize: {x: 11.029411, y: 3.485839}
   sizeType: 0
   positionType: 2
   slotSpacing: 0
@@ -3559,8 +3889,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 13.966127
     y: 10.87824
-    width: 113.99999
-    height: 23.999998
+    width: 89.99999
+    height: 16.000002
   relativePosition: {x: 3, y: 3}
   numSlots: 1
   uiText: {fileID: 0}
@@ -3590,7 +3920,7 @@ MonoBehaviour:
   ID: 8
   isEditing: 0
   title: InventoryLabel
-  slotSize: {x: 9.241245, y: 4.5801525}
+  slotSize: {x: 9.313725, y: 3.485839}
   sizeType: 0
   positionType: 2
   slotSpacing: 0
@@ -3616,8 +3946,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 17.224892
     y: 217.56479
-    width: 95
-    height: 23.999998
+    width: 76
+    height: 16.000002
   relativePosition: {x: 3.7, y: 60}
   numSlots: 1
   uiText: {fileID: 0}
@@ -3647,7 +3977,7 @@ MonoBehaviour:
   ID: 9
   isEditing: 0
   title: OutputLabel
-  slotSize: {x: 6.614786, y: 4.5801525}
+  slotSize: {x: 6.617647, y: 3.485839}
   sizeType: 0
   positionType: 2
   slotSpacing: 0
@@ -3673,8 +4003,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 335.18707
     y: 10.87824
-    width: 68
-    height: 23.999998
+    width: 54
+    height: 16.000002
   relativePosition: {x: 72, y: 3}
   numSlots: 1
   uiText: {fileID: 0}
@@ -3712,7 +4042,7 @@ MonoBehaviour:
   isLocked: 0
   id: 11
   title: Hotspot
-  manualSize: {x: 34, y: 11.999999}
+  manualSize: {x: 34, y: 12}
   positionType: 3
   manualPosition: {x: 50, y: 44.4}
   alignment: 0
@@ -3747,12 +4077,14 @@ MonoBehaviour:
   timeCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
+    - serializedVersion: 2
+      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
@@ -3765,13 +4097,13 @@ MonoBehaviour:
   zoomAnchor: 4
   zoomElements: 0
   oneMenuPerSpeech: 0
-  biggestElementSize: {x: 349.52, y: 62.879997}
+  biggestElementSize: {x: 277.44, y: 55.08}
   rect:
     serializedVersion: 2
-    x: 339.24
-    y: 201.216
-    width: 349.52
-    height: 62.879997
+    x: 269.28
+    y: 176.25601
+    width: 277.44
+    height: 55.08
 --- !u!114 &11400110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3812,8 +4144,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 349.52
-    height: 62.879997
+    width: 277.44
+    height: 55.08
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiText: {fileID: 0}
@@ -3851,7 +4183,7 @@ MonoBehaviour:
   isLocked: 0
   id: 12
   title: Pause
-  manualSize: {x: 17, y: 30.885496}
+  manualSize: {x: 17, y: 30.333336}
   positionType: 0
   manualPosition: {x: 50, y: 50}
   alignment: 4
@@ -3895,12 +4227,14 @@ MonoBehaviour:
   timeCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
+    - serializedVersion: 2
+      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
@@ -3913,13 +4247,13 @@ MonoBehaviour:
   zoomAnchor: 4
   zoomElements: 0
   oneMenuPerSpeech: 0
-  biggestElementSize: {x: 169.62, y: 156.7}
+  biggestElementSize: {x: 134.64, y: 135.15001}
   rect:
     serializedVersion: 2
-    x: 426.62
-    y: 181.08
-    width: 174.76
-    height: 161.84
+    x: 338.64
+    y: 159.885
+    width: 138.72
+    height: 139.23001
 --- !u!114 &11400132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3958,10 +4292,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 5.14
-    width: 164.48
-    height: 26.199999
+    x: 4.08
+    y: 4.08
+    width: 130.56
+    height: 22.95
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -4026,10 +4360,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 36.48
-    width: 164.48
-    height: 26.199999
+    x: 4.08
+    y: 31.11
+    width: 130.56
+    height: 22.95
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -4094,10 +4428,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 67.82
-    width: 164.48
-    height: 26.199999
+    x: 4.08
+    y: 58.140003
+    width: 130.56
+    height: 22.95
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -4162,10 +4496,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 99.159996
-    width: 164.48
-    height: 26.199999
+    x: 4.08
+    y: 85.170006
+    width: 130.56
+    height: 22.95
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -4230,10 +4564,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 130.5
-    width: 164.48
-    height: 26.199999
+    x: 4.08
+    y: 112.200005
+    width: 130.56
+    height: 22.95
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -4298,10 +4632,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 161.84
-    width: 370.08
-    height: 26.199999
+    x: 4.08
+    y: 139.23001
+    width: 293.76
+    height: 22.95
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiToggle: {fileID: 0}
@@ -4354,10 +4688,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 193.18
-    width: 370.08
-    height: 26.199999
+    x: 4.08
+    y: 166.26001
+    width: 293.76
+    height: 22.95
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -4424,8 +4758,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 543.542
     y: 28.50668
-    width: 20.56
-    height: 52.399998
+    width: 16.32
+    height: 45.9
   relativePosition: {x: 95, y: 13.5}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -4492,8 +4826,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 8.582242
     y: 135.14278
-    width: 20.56
-    height: 52.399998
+    width: 16.32
+    height: 45.9
   relativePosition: {x: 1.5, y: 64}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -4560,8 +4894,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 543.542
     y: 135.14278
-    width: 20.56
-    height: 52.399998
+    width: 16.32
+    height: 45.9
   relativePosition: {x: 95, y: 64}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -4661,12 +4995,14 @@ MonoBehaviour:
   timeCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
+    - serializedVersion: 2
+      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
@@ -4682,10 +5018,10 @@ MonoBehaviour:
   biggestElementSize: {x: 0, y: 0}
   rect:
     serializedVersion: 2
-    x: 354.66003
-    y: 144.1
-    width: 318.67996
-    height: 235.79999
+    x: 281.52002
+    y: 126.225006
+    width: 252.95998
+    height: 206.54999
 --- !u!114 &11410476
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4724,10 +5060,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 5.14
-    width: 308.4
-    height: 26.199999
+    x: 4.08
+    y: 4.08
+    width: 244.79999
+    height: 22.95
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiText: {fileID: 0}
@@ -4783,8 +5119,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 36.648193
     y: 66.023994
-    width: 276.53198
-    height: 104.799995
+    width: 219.504
+    height: 91.8
   relativePosition: {x: 11.5, y: 28}
   numSlots: 4
   uiSlots:
@@ -4846,8 +5182,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 3.695
     y: 101.675
-    width: 164.48
-    height: 26.199999
+    width: 130.56
+    height: 22.95
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -4914,8 +5250,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 5.417559
     y: 66.023994
-    width: 30.84
-    height: 26.199999
+    width: 24.48
+    height: 22.95
   relativePosition: {x: 1.7, y: 28}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -4982,8 +5318,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 5.0988793
     y: 205.14598
-    width: 308.4
-    height: 26.199999
+    width: 244.79999
+    height: 22.95
   relativePosition: {x: 1.6, y: 87}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -5050,8 +5386,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 87.636986
     y: 35.369995
-    width: 193.26399
-    height: 26.199999
+    width: 153.40799
+    height: 22.95
   relativePosition: {x: 27.5, y: 15}
   numSlots: 1
   uiText: {fileID: 0}
@@ -5107,8 +5443,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 5.0988793
     y: 174.49199
-    width: 308.4
-    height: 26.199999
+    width: 244.79999
+    height: 22.95
   relativePosition: {x: 1.6, y: 74}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -5173,10 +5509,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 5.14
-    y: 36.48
-    width: 82.24
-    height: 26.199999
+    x: 4.08
+    y: 31.11
+    width: 65.28
+    height: 22.95
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiText: {fileID: 0}
@@ -5232,8 +5568,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 5.417559
     y: 143.83798
-    width: 30.84
-    height: 26.199999
+    width: 24.48
+    height: 22.95
   relativePosition: {x: 1.7, y: 61}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -5300,8 +5636,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 281.0757
     y: 35.369995
-    width: 30.84
-    height: 26.199999
+    width: 24.48
+    height: 22.95
   relativePosition: {x: 88.2, y: 15}
   numSlots: 1
   uiButton: {fileID: 0}
