@@ -5,8 +5,7 @@ using System.Collections.Generic;
 
 public class ViewPages : MonoBehaviour
 {
-	public RawImage image;
-	public GameObject pagePrefab;
+	public RawImage image;	
 	public GameObject noPages;
 	private int currentPage = 0;
 	private int pagesCount = 1;
@@ -45,6 +44,7 @@ public class ViewPages : MonoBehaviour
 			}
 		}
 		pages = new List<Texture2D>();
+		//aqui cargar paginas
 		for (int i = 0; i < 15; i++)
 		{
 			pages.Add(new Texture2D(500, 500));

@@ -99,7 +99,7 @@ public class ScreenManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Escape) && showedScreens.Count == 0)
+		if (Input.GetKeyDown(KeyCode.P))
 		{
 			pauseGame.Interact();
 			ShowScreen(ScreenType.BookView);
