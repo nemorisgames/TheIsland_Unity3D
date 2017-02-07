@@ -131,7 +131,7 @@ public class RTP_MaterialProp : MaterialPropertyDrawer {
                             EditorGUIUtility.labelWidth -= 30;
                             if (noAlphaFlag)
                             {
-                                EditorGUI.ColorField(position, new GUIContent(label, ""), prop.colorValue, true, false, false, null);
+                                prop.colorValue = EditorGUI.ColorField(position, new GUIContent(label, ""), prop.colorValue, true, false, false, null);
                             }
                             else
                             {

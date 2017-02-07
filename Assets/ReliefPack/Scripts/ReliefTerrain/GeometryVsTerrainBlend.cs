@@ -144,7 +144,7 @@ public class GeometryVsTerrainBlend : MonoBehaviour {
 					Terrain terrainComp=(Terrain)blendedObject.GetComponent(typeof(Terrain));
 					if (terrainComp) {
 						underlying_renderer.lightmapIndex=terrainComp.lightmapIndex;
-						if (LightmapSettings.lightmapsMode==LightmapsMode.SeparateDirectional) {
+						if (LightmapSettings.lightmapsMode==LightmapsMode.CombinedDirectional) {
 							underlying_renderer.lightmapScaleOffset=new Vector4(0.5f,0.5f,0,0);
 						} else {
 							underlying_renderer.lightmapScaleOffset=new Vector4(1,1,0,0);

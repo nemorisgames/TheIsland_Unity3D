@@ -10,6 +10,7 @@ public class InteractableObject : MonoBehaviour
 	ObjectType type;
 	[SerializeField]
 	Animator anim;
+	public string triggerName;
 	void Update()
 	{
 		
@@ -22,7 +23,7 @@ public class InteractableObject : MonoBehaviour
 				if (collision.collider.tag == "stick")
 				{
 					Destroy(collision.gameObject);
-					anim.SetBool("falling", true);			
+					anim.SetTrigger(triggerName);			
 				}
 				break;			
 			default:

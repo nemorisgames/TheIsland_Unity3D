@@ -9,6 +9,8 @@ namespace TerrainComposer2
     [ExecuteInEditMode]
     public class TC_Settings : MonoBehaviour
     {
+        public enum ImageExportFormat { JPG, PNG }
+
         static public TC_Settings instance;
 
         // Node Window
@@ -20,6 +22,7 @@ namespace TerrainComposer2
         public bool drawDefaultInspector;
         public bool debugMode = true;
         public bool hideTerrainGroup = true;
+        public bool useTCRuntime = false;
         public bool showFps = true;
         public bool hideMenuBar = false;
         public Transform dustbinT;
@@ -33,11 +36,25 @@ namespace TerrainComposer2
 
         public bool preview;
         public int previewResolution = 128;
-        
+
+        public ImageExportFormat imageExportFormat;
+        public bool combineHeightmapImage = true;
+        public string heightmapFilename = "Heightmap";
+        public string normalmapFilename = "Normalmap";
+        public string splatmapFilename = "Splatmap";
+        public string colormapFilename = "Colormap";
+
+        public float normalmapStrength = 0.5f;
+
         public List<TC_RawImage> rawFiles = new List<TC_RawImage>();
         public List<TC_Image> imageList = new List<TC_Image>();
 
+        public bool isRTPDetected;
+        public bool autoNormalmapRTP = true, autoColormapRTP = true;
+
         public TC_GlobalSettings global;
+
+        public string exportPath;
 
         void Awake()
         {

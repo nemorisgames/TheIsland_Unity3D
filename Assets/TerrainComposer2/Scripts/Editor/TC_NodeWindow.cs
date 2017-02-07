@@ -30,7 +30,9 @@ namespace TerrainComposer2
             Undo.undoRedoPerformed += UndoRedoPerformed;
 
             // Debug.Log("Node Window OnEnable");
-            TC.RefreshOutputReferences(6);
+            // Debug.Log(Application.isPlaying);
+
+            // if (!Application.isPlaying) TC.RefreshOutputReferences(6);
         }
 
         void OnFocus()
@@ -58,7 +60,7 @@ namespace TerrainComposer2
             // Debug.Log("Perform undo");
             if (TD.SelectionContainsItemBehaviour())
             {
-                TC.refreshOutputReferences = TC.allOutput;
+                TC.RefreshOutputReferences(TC.allOutput);
                 TC.AutoGenerate();
             }
         }
@@ -522,9 +524,9 @@ namespace TerrainComposer2
                 TC_Generate.instance.RefreshOutputReferences(6, true); 
                 if (TC_Generate.instance.autoGenerate) TC_Generate.instance.Generate(false);
             }
-            else if (cmd == "ResetTextures") TC.refreshOutputReferences = 7;
+            else if (cmd == "ResetTextures") TC.RefreshOutputReferences(7);
             else if (cmd == "Documentation") Application.OpenURL("http://www.terraincomposer.com/terraincomposer2-documentation/");
-            else if (cmd == "About...") TC.AddMessage("TerrainComposer 2 Beta 7d", 0, 4);
+            else if (cmd == "About...") TC.AddMessage("TerrainComposer version " + TC.GetVersionLabel(), 0, 4);
         }
 
         void Open()

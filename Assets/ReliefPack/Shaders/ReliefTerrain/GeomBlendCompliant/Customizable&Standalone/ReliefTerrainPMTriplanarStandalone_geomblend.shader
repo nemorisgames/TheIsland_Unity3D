@@ -625,20 +625,44 @@ Shader "Relief Pack - GeometryBlend/ Standalone Triplanar" {
 #define GEOM_BLEND
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// missing defines for LOD/GRAD access
+#if defined(SHADER_API_D3D11) || defined(SHADER_API_XBOXONE) || defined(SHADER_API_GLES3) || defined(SHADER_API_GLCORE) || defined(SHADER_API_PSSL)
+	#if !defined(UNITY_SAMPLE_TEX2D_GRAD)
+		#define UNITY_SAMPLE_TEX2D_GRAD(tex,coord,dx,dy) tex.SampleGrad(sampler##tex,coord,dx,dy)
+	#endif
+	#if !defined(UNITY_SAMPLE_TEX2D_LOD)
+		#define UNITY_SAMPLE_TEX2D_LOD(tex,coord) tex.SampleLevel (sampler##tex,(coord).xy,(coord).w)
+	#endif
+	#if !defined(UNITY_SAMPLE_TEX2D_LOD_SAMPLER)
+		#define UNITY_SAMPLE_TEX2D_LOD_SAMPLER(tex,samplertex,coord) tex.SampleLevel (sampler##samplertex,(coord).xy,(coord).w)
+	#endif
+#else
+	#if !defined(UNITY_SAMPLE_TEX2D_GRAD)
+		#define UNITY_SAMPLE_TEX2D_GRAD(tex,coord,dx,dy) tex2Dgrad(tex,coord,dx,dy)
+	#endif
+	#if !defined(UNITY_SAMPLE_TEX2D_LOD)
+		#define UNITY_SAMPLE_TEX2D_LOD(tex,coord) tex2Dlod(tex,coord)
+	#endif
+	#if !defined(UNITY_SAMPLE_TEX2D_LOD_SAMPLER)
+		#define UNITY_SAMPLE_TEX2D_LOD_SAMPLER(tex,samplertex,coord) tex2Dlod(tex,coord)
+	#endif
+#endif
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // UV blend routing defines section
 //
-// DON'T touch defines below... (unless you know exactly what you're doing) - lines 482-497
+// DON'T touch defines below... (unless you know exactly what you're doing) - lines 473-488
 #if !defined(_4LAYERS) || defined(RTP_USE_COLOR_ATLAS)
-	#define UV_BLEND_SRC_0 (tex2Dlod(_SplatAtlasA, float4(uvSplat01M.xy, _MixMipActual.xx)).rgba)
-	#define UV_BLEND_SRC_1 (tex2Dlod(_SplatAtlasA, float4(uvSplat01M.zw, _MixMipActual.yy)).rgba)
-	#define UV_BLEND_SRC_2 (tex2Dlod(_SplatAtlasA, float4(uvSplat23M.xy, _MixMipActual.zz)).rgba)
-	#define UV_BLEND_SRC_3 (tex2Dlod(_SplatAtlasA, float4(uvSplat23M.zw, _MixMipActual.ww)).rgba)
+	#define UV_BLEND_SRC_0 (UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01M.xy, _MixMipActual.xx)).rgba)
+	#define UV_BLEND_SRC_1 (UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01M.zw, _MixMipActual.yy)).rgba)
+	#define UV_BLEND_SRC_2 (UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23M.xy, _MixMipActual.zz)).rgba)
+	#define UV_BLEND_SRC_3 (UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23M.zw, _MixMipActual.ww)).rgba)
 #else
-	#define UV_BLEND_SRC_0 (tex2Dlod(_SplatA0, float4(uvSplat01M.xy, _MixMipActual.xx)).rgba)
-	#define UV_BLEND_SRC_1 (tex2Dlod(_SplatA1, float4(uvSplat01M.zw, _MixMipActual.yy)).rgba)
-	#define UV_BLEND_SRC_2 (tex2Dlod(_SplatA2, float4(uvSplat23M.xy, _MixMipActual.zz)).rgba)
-	#define UV_BLEND_SRC_3 (tex2Dlod(_SplatA3, float4(uvSplat23M.zw, _MixMipActual.ww)).rgba)
+	#define UV_BLEND_SRC_0 (UNITY_SAMPLE_TEX2D_LOD(_SplatA0, float4(uvSplat01M.xy, _MixMipActual.xx)).rgba)
+	#define UV_BLEND_SRC_1 (UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatA1, _SplatA0, float4(uvSplat01M.zw, _MixMipActual.yy)).rgba)
+	#define UV_BLEND_SRC_2 (UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatA2, _SplatA0, float4(uvSplat23M.xy, _MixMipActual.zz)).rgba)
+	#define UV_BLEND_SRC_3 (UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatA3, _SplatA0, float4(uvSplat23M.zw, _MixMipActual.ww)).rgba)
 #endif
 #define UV_BLENDMIX_SRC_0 (_MixScale0123.x)
 #define UV_BLENDMIX_SRC_1 (_MixScale0123.y)

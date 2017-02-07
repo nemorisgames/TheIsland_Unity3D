@@ -1,6 +1,3 @@
-// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
-// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
-
 // uncomment when you've got problems with DX9 compilation under Unity5
 #define DISABLE_DX9_HLSL_BRANCHING_LEVEL1
 // if above LEVEL1 disable is not enough you can uncomment below one as well
@@ -56,25 +53,50 @@
 //#define RTP_DISTANCE_ONLY_UV_BLEND
 // usage of normals from blended layer at far distance
 //#define RTP_NORMALS_FOR_REPLACE_UV_BLEND
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// missing defines for LOD/GRAD access
+#if defined(SHADER_API_D3D11) || defined(SHADER_API_XBOXONE) || defined(SHADER_API_GLES3) || defined(SHADER_API_GLCORE) || defined(SHADER_API_PSSL)
+	#if !defined(UNITY_SAMPLE_TEX2D_GRAD)
+		#define UNITY_SAMPLE_TEX2D_GRAD(tex,coord,dx,dy) tex.SampleGrad(sampler##tex,coord,dx,dy)
+	#endif
+	#if !defined(UNITY_SAMPLE_TEX2D_LOD)
+		#define UNITY_SAMPLE_TEX2D_LOD(tex,coord) tex.SampleLevel (sampler##tex,(coord).xy,(coord).w)
+	#endif
+	#if !defined(UNITY_SAMPLE_TEX2D_LOD_SAMPLER)
+		#define UNITY_SAMPLE_TEX2D_LOD_SAMPLER(tex,samplertex,coord) tex.SampleLevel (sampler##samplertex,(coord).xy,(coord).w)
+	#endif
+#else
+	#if !defined(UNITY_SAMPLE_TEX2D_GRAD)
+		#define UNITY_SAMPLE_TEX2D_GRAD(tex,coord,dx,dy) tex2Dgrad(tex,coord,dx,dy)
+	#endif
+	#if !defined(UNITY_SAMPLE_TEX2D_LOD)
+		#define UNITY_SAMPLE_TEX2D_LOD(tex,coord) tex2Dlod(tex,coord)
+	#endif
+	#if !defined(UNITY_SAMPLE_TEX2D_LOD_SAMPLER)
+		#define UNITY_SAMPLE_TEX2D_LOD_SAMPLER(tex,samplertex,coord) tex2Dlod(tex,coord)
+	#endif
+#endif
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // UV blend routing defines section
 //
 // DON'T touch defines below... (unless you know exactly what you're doing) - lines 31-53
 #if !defined(_4LAYERS) || defined(RTP_USE_COLOR_ATLAS)
-	#define UV_BLEND_SRC_0 (tex2Dlod(_SplatAtlasA, float4(uvSplat01M.xy, _MixMipActual.xx)).rgba)
-	#define UV_BLEND_SRC_1 (tex2Dlod(_SplatAtlasA, float4(uvSplat01M.zw, _MixMipActual.yy)).rgba)
-	#define UV_BLEND_SRC_2 (tex2Dlod(_SplatAtlasA, float4(uvSplat23M.xy, _MixMipActual.zz)).rgba)
-	#define UV_BLEND_SRC_3 (tex2Dlod(_SplatAtlasA, float4(uvSplat23M.zw, _MixMipActual.ww)).rgba)
-	#define UV_BLEND_SRC_4 (tex2Dlod(_SplatAtlasB, float4(uvSplat01M.xy, _MixMipActual.xx)).rgba)
-	#define UV_BLEND_SRC_5 (tex2Dlod(_SplatAtlasB, float4(uvSplat01M.zw, _MixMipActual.yy)).rgba)
-	#define UV_BLEND_SRC_6 (tex2Dlod(_SplatAtlasB, float4(uvSplat23M.xy, _MixMipActual.zz)).rgba)
-	#define UV_BLEND_SRC_7 (tex2Dlod(_SplatAtlasB, float4(uvSplat23M.zw, _MixMipActual.ww)).rgba)
+	#define UV_BLEND_SRC_0 (UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01M.xy, _MixMipActual.xx)).rgba)
+	#define UV_BLEND_SRC_1 (UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01M.zw, _MixMipActual.yy)).rgba)
+	#define UV_BLEND_SRC_2 (UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23M.xy, _MixMipActual.zz)).rgba)
+	#define UV_BLEND_SRC_3 (UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23M.zw, _MixMipActual.ww)).rgba)
+	#define UV_BLEND_SRC_4 (UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01M.xy, _MixMipActual.xx)).rgba)
+	#define UV_BLEND_SRC_5 (UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01M.zw, _MixMipActual.yy)).rgba)
+	#define UV_BLEND_SRC_6 (UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23M.xy, _MixMipActual.zz)).rgba)
+	#define UV_BLEND_SRC_7 (UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23M.zw, _MixMipActual.ww)).rgba)
 #else
-	#define UV_BLEND_SRC_0 (tex2Dlod(_SplatA0, float4(uvSplat01M.xy, _MixMipActual.xx)).rgba)
-	#define UV_BLEND_SRC_1 (tex2Dlod(_SplatA1, float4(uvSplat01M.zw, _MixMipActual.yy)).rgba)
-	#define UV_BLEND_SRC_2 (tex2Dlod(_SplatA2, float4(uvSplat23M.xy, _MixMipActual.zz)).rgba)
-	#define UV_BLEND_SRC_3 (tex2Dlod(_SplatA3, float4(uvSplat23M.zw, _MixMipActual.ww)).rgba)
+	#define UV_BLEND_SRC_0 (UNITY_SAMPLE_TEX2D_LOD(_SplatA0, float4(uvSplat01M.xy, _MixMipActual.xx)).rgba)
+	#define UV_BLEND_SRC_1 (UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatA1, _SplatA0, float4(uvSplat01M.zw, _MixMipActual.yy)).rgba)
+	#define UV_BLEND_SRC_2 (UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatA2, _SplatA0, float4(uvSplat23M.xy, _MixMipActual.zz)).rgba)
+	#define UV_BLEND_SRC_3 (UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatA3, _SplatA0, float4(uvSplat23M.zw, _MixMipActual.ww)).rgba)
 #endif
 #define UV_BLENDMIX_SRC_0 (_MixScale0123.x)
 #define UV_BLENDMIX_SRC_1 (_MixScale0123.y)
@@ -153,7 +175,7 @@
 // when defined we don't calculate overlapping 0-3 vs 4-7 layers in 8 layers mode, but take "higher"
 // it's recommended to use this define for significantly better performance
 // undef it only when you really need smooth transitions between overlapping groups
-#define RTP_HARD_CROSSPASS
+//#define RTP_HARD_CROSSPASS
 // when hard crosspass above is active, we can blend passing edges with global colormap
 #define RTP_HIDE_EDGE_HARD_CROSSPASS
 
@@ -168,7 +190,7 @@
 //#define RTP_VERTICAL_TEXTURE
 
 // we use wet (can't be used with superdetail as globalnormal texture BA channels are shared)
-#define RTP_WETNESS
+//#define RTP_WETNESS
 // water droplets
 //#define RTP_WET_RIPPLE_TEXTURE
 // if defined water won't handle flow nor refractions
@@ -183,7 +205,7 @@
 //#define USE_EXTRUDE_REDUCTION
 
 // cutting holes functionality (make global colormap alpha channel completely black to cut)
-//#define RTP_CUT_HOLES
+#define RTP_CUT_HOLES
 
 //
 // in 8 layers mode we can use simplier shading for not overplapped (RTP_HARD_CROSSPASS must be defined) 4-7 layers
@@ -386,17 +408,32 @@
 CBUFFER_START(rtpConstants)
 #endif
 
-sampler2D _Control, _Control1, _Control2;
+sampler2D _Control;
+UNITY_DECLARE_TEX2D(_Control1);
+UNITY_DECLARE_TEX2D_NOSAMPLER(_Control2);
 
 #ifdef RTP_STANDALONE
 float4 _TERRAIN_PosSize;
 #endif
 float3 terrainTileSize;
 
-sampler2D _SplatAtlasA, _SplatAtlasB;
-sampler2D _SplatA0, _SplatA1, _SplatA2, _SplatA3;
-sampler2D _SplatB0, _SplatB1, _SplatB2, _SplatB3;
-sampler2D _BumpMap01, _BumpMap23, _BumpMap45, _BumpMap67;
+UNITY_DECLARE_TEX2D(_SplatAtlasA);
+UNITY_DECLARE_TEX2D_NOSAMPLER(_SplatAtlasB);
+
+UNITY_DECLARE_TEX2D(_SplatA0);
+UNITY_DECLARE_TEX2D_NOSAMPLER(_SplatA1);
+UNITY_DECLARE_TEX2D_NOSAMPLER(_SplatA2);
+UNITY_DECLARE_TEX2D_NOSAMPLER(_SplatA3);
+UNITY_DECLARE_TEX2D_NOSAMPLER(_SplatB0);
+UNITY_DECLARE_TEX2D_NOSAMPLER(_SplatB1);
+UNITY_DECLARE_TEX2D_NOSAMPLER(_SplatB2);
+UNITY_DECLARE_TEX2D_NOSAMPLER(_SplatB3);
+
+UNITY_DECLARE_TEX2D(_BumpMap01);
+UNITY_DECLARE_TEX2D_NOSAMPLER(_BumpMap23);
+UNITY_DECLARE_TEX2D_NOSAMPLER(_BumpMap45);
+UNITY_DECLARE_TEX2D_NOSAMPLER(_BumpMap67);
+
 sampler2D _ColorMapGlobal;
 
 sampler2D _BumpMapGlobal;
@@ -455,7 +492,9 @@ float4 _FarSpecCorrection4567;
 float4 _MIPmult0123;
 float4 _MIPmult4567;
 
-sampler2D _TERRAIN_HeightMap, _TERRAIN_HeightMap2;
+UNITY_DECLARE_TEX2D(_TERRAIN_HeightMap);
+UNITY_DECLARE_TEX2D_NOSAMPLER(_TERRAIN_HeightMap2);
+
 float4 _TERRAIN_HeightMap_TexelSize;
 float4 _TERRAIN_HeightMap2_TexelSize;
 float4 _SplatAtlasA_TexelSize;
@@ -885,6 +924,9 @@ void customFog (Input IN, SurfaceOutputStandard o, inout fixed4 color) {
 		#ifdef UNITY_APPLY_FOG_COLOR
 			#undef UNITY_APPLY_FOG_COLOR
 			#if defined(FOG_LINEAR) || defined(FOG_EXP) || defined(FOG_EXP2)
+				// U5.5 introduced recalc at this stage, we need to take distance like previously
+				#undef UNITY_CALC_FOG_FACTOR
+				#define UNITY_CALC_FOG_FACTOR(coord) UNITY_CALC_FOG_FACTOR_RAW(coord)
 				// always compute fog factor per pixel (so RTP has chance to work on mobile, too)
 				#define UNITY_APPLY_FOG_COLOR(coord,col,fogCol) UNITY_CALC_FOG_FACTOR(coord); UNITY_FOG_LERP_COLOR(col,fogCol,unityFogFactor)
 			#else
@@ -1055,13 +1097,14 @@ float2 RTP_CustomTiling;
 			#ifndef SAMPLE_TEXTURE_TESSELLATION
 				// we still benefit phong geometry smoothing
 			#else
-		    	float2 gUV = v.texcoord.xy*(1-_NormalMapGlobal_TexelSize.xy) + _NormalMapGlobal_TexelSize.xy*0.5;
 		    	#ifdef HEIGHTMAP_SAMPLE_BICUBIC
+			    	float2 gUV = v.texcoord.xy;
 		    		float3 norm=0;
 					v.vertex.y=interpolate_bicubic(gUV.x, gUV.y, /*out*/ norm)*terrainTileSize.y+_TessYOffset;
 					norm.xz*=_TERRAIN_trees_shadow_values.w;
 					v.normal.xyz=normalize(norm.xyz);
 				#else
+			    	float2 gUV = v.texcoord.xy*(1-_NormalMapGlobal_TexelSize.xy) + _NormalMapGlobal_TexelSize.xy*0.5;
 			    	fixed4 HNMap=tex2Dlod(_NormalMapGlobal, float4(gUV,0,0));
 					v.vertex.y=((1.0/255)*HNMap.g + HNMap.r)*terrainTileSize.y+_TessYOffset;
 					v.normal.xz=HNMap.ba*2-1;
@@ -1073,7 +1116,6 @@ float2 RTP_CustomTiling;
 					//
 					// displace details
 					//
-				
 					float3 wPos=mul(unity_ObjectToWorld, v.vertex).xyz;
 					float2 _INPUT_uv=wPos.xz / _TERRAIN_ReliefTransform.xy + _TERRAIN_ReliefTransform.zw;
 					
@@ -1082,10 +1124,10 @@ float2 RTP_CustomTiling;
 					float detailMIPlevel=_uv_Relief_z*5;
 					_uv_Relief_z=1-_uv_Relief_z;	
 										
-					float4 splat_controlA = tex2Dlod(_Control1, float4(gUV, 0,0));
+					float4 splat_controlA = UNITY_SAMPLE_TEX2D_LOD(_Control1, float4(gUV, 0,0));
 					float total_coverage=dot(splat_controlA, 1);
 					#ifndef _4LAYERS
-						float4 splat_controlB = tex2Dlod(_Control2, float4(gUV, 0,0));
+						float4 splat_controlB = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_Control2, _Control1, float4(gUV, 0,0));
 						total_coverage+=dot(splat_controlB, 1);
 					#endif
 												
@@ -1100,9 +1142,9 @@ float2 RTP_CustomTiling;
 					//		#endif	
 					//	#else
 						#ifdef USE_EXTRUDE_REDUCTION
-							tHA=saturate(lerp(tex2Dlod(_TERRAIN_HeightMap, float4(_INPUT_uv.xy,0,detailMIPlevel)), 1, PER_LAYER_HEIGHT_MODIFIER0123)+0.001);
+							tHA=saturate(lerp(UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, float4(_INPUT_uv.xy,0,detailMIPlevel)), 1, PER_LAYER_HEIGHT_MODIFIER0123)+0.001);
 						#else
-							tHA=saturate(tex2Dlod(_TERRAIN_HeightMap, float4(_INPUT_uv.xy,0,detailMIPlevel))+0.001);
+							tHA=saturate(UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, float4(_INPUT_uv.xy,0,detailMIPlevel))+0.001);
 						#endif	
 					//	#endif
 					splat_control1 *= tHA;
@@ -1123,10 +1165,10 @@ float2 RTP_CustomTiling;
 						float4 splat_control1_mid=splat_control1*splat_control1;
 						float4 splat_control2 = splat_controlB;
 						#ifdef USE_EXTRUDE_REDUCTION
-							tHB=saturate(lerp(tex2Dlod(_TERRAIN_HeightMap2, float4(_INPUT_uv.xy,0,detailMIPlevel)), 1, PER_LAYER_HEIGHT_MODIFIER4567)+0.001);
+							tHB=saturate(lerp(UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, float4(_INPUT_uv.xy,0,detailMIPlevel)), 1, PER_LAYER_HEIGHT_MODIFIER4567)+0.001);
 							splat_control2 *= tHB;
 						#else
-							tHB=saturate(tex2Dlod(_TERRAIN_HeightMap2, float4(_INPUT_uv.xy,0,detailMIPlevel))+0.001);
+							tHB=saturate(UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, float4(_INPUT_uv.xy,0,detailMIPlevel))+0.001);
 							splat_control2 *= tHB;
 						#endif	
 						float4 splat_control2_mid=splat_control2*splat_control2;
@@ -1316,14 +1358,17 @@ inline fixed4 tex2Dp(sampler2D tex, float2 uv, float2 mddx, float2 mddy) {
 		return fixed4(tex2D(tex, uv));
 	#endif
 }
-inline fixed4 tex2Dd(sampler2D tex, float2 uv, float2 mddx, float2 mddy) {
-	#if !SHADER_API_GLES
-		return fixed4(tex2Dgrad(tex, uv, mddx, mddy));
+
+#if !SHADER_API_GLES
+	#if defined(SHADER_API_D3D11) || defined(SHADER_API_XBOXONE) || defined(SHADER_API_GLES3) || defined(SHADER_API_GLCORE) || defined(SHADER_API_PSSL)
+		#define tex2Dd(tex,samplertex,coord,dx,dy) tex.SampleGrad(sampler##samplertex,coord,dx,dy)
 	#else
-		// webGL on firefox doesn't like derivate texture calls
-		return fixed4(tex2D(tex, uv));
+		#define tex2Dd(tex,samplertex,uv,mddx,mddy) fixed4(tex2Dgrad(tex, uv, mddx, mddy))
 	#endif
-}
+#else
+	// webGL on firefox doesn't like derivate texture calls
+	#define tex2Dd(tex,samplertex,uv,mddx,mddy) fixed4(tex2D(tex, uv))
+#endif
 
 void surf (Input IN, inout SurfaceOutputStandard o) {
 	o.Normal = float3(0, 0, 1); o.Albedo = 0; o.Smoothness = 0; o.Alpha = 0;
@@ -1367,17 +1412,22 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 		// so we need to sample normal here
     	float3 worldNormalFlat;
     	{
-			#ifdef UNITY_PASS_META	
-    			float2 gUV = (IN.uv_Control.xy*_MainTex_ST.xy+_MainTex_ST.zw)*(1-_NormalMapGlobal_TexelSize.xy) + _NormalMapGlobal_TexelSize.xy*0.5;
-			#else
-	    		float2 gUV = IN.uv_Control*(1-_NormalMapGlobal_TexelSize.xy) + _NormalMapGlobal_TexelSize.xy*0.5;
-			#endif
 	    	#ifdef HEIGHTMAP_SAMPLE_BICUBIC
+				#ifdef UNITY_PASS_META	
+    				float2 gUV = (IN.uv_Control.xy*_MainTex_ST.xy+_MainTex_ST.zw);
+				#else
+	    			float2 gUV = IN.uv_Control;
+				#endif
 	    		float3 norm=0;
 				interpolate_bicubic(gUV.x, gUV.y, /*out*/ norm);
 				norm.xz*=_TERRAIN_trees_shadow_values.w;
 				worldNormalFlat=normalize(norm.xyz);
 			#else
+				#ifdef UNITY_PASS_META	
+    				float2 gUV = (IN.uv_Control.xy*_MainTex_ST.xy+_MainTex_ST.zw)*(1-_NormalMapGlobal_TexelSize.xy) + _NormalMapGlobal_TexelSize.xy*0.5;
+				#else
+	    			float2 gUV = IN.uv_Control*(1-_NormalMapGlobal_TexelSize.xy) + _NormalMapGlobal_TexelSize.xy*0.5;
+				#endif
 		    	fixed4 HNMap=tex2Dlod(_NormalMapGlobal, float4(gUV.xy,0,0));
 				float3 norm;
 				norm.xz=HNMap.ba*2-1;
@@ -1544,7 +1594,7 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 				#endif
 			#endif
 		#else
-			float4 splat_controlA = tex2D(_Control1, IN_uv_Control);
+			float4 splat_controlA = UNITY_SAMPLE_TEX2D(_Control1, IN_uv_Control);
 		#endif
 		#if defined(COLOR_MAP) && defined(RTP_COLORMAP_COVERAGE)
 			float4 global_color_value=tex2D(_ColorMapGlobal, IN_uv_Control);
@@ -1567,13 +1617,22 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 		#ifdef VERTEX_COLOR_CONTROL
 			float4 splat_controlA = IN.color;
 		#else
-			float4 splat_controlA = tex2Dp(_Control1, IN_uv_Control, _ddxGlobal, _ddyGlobal);
+			#if (defined(RTP_STANDALONE) || defined(GEOM_BLEND)) && !SHADER_API_OPENGL
+				float4 splat_controlA = UNITY_SAMPLE_TEX2D_GRAD(_Control1, IN_uv_Control, _ddxGlobal, _ddyGlobal);
+			#else
+				float4 splat_controlA = UNITY_SAMPLE_TEX2D(_Control1, IN_uv_Control);
+			#endif
 		#endif
 	 	float total_coverage=dot(splat_controlA, 1);
 		#ifdef _4LAYERS
 			//float4 splat_controlA_normalized=splat_controlA/total_coverage;
 		#else
-			float4 splat_controlB = tex2Dp(_Control2, IN_uv_Control, _ddxGlobal, _ddyGlobal);
+			#if (defined(RTP_STANDALONE) || defined(GEOM_BLEND)) && !SHADER_API_OPENGL
+				float4 splat_controlB = UNITY_SAMPLE_TEX2D_GRAD_SAMPLER(_Control2, _Control1, IN_uv_Control, _ddxGlobal, _ddyGlobal);
+			#else
+				float4 splat_controlB = UNITY_SAMPLE_TEX2D_SAMPLER(_Control2, _Control1, IN_uv_Control); 
+			#endif
+
 		 	total_coverage+=dot(splat_controlB, 1);
 			//float4 splat_controlA_normalized=splat_controlA/total_coverage;
 			//float4 splat_controlB_normalized=splat_controlB/total_coverage;
@@ -1610,9 +1669,9 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 		float4 triplanar_xy_global_bumpval=tex2Dlod(_BumpMapGlobal, float4(_INPUT_uv.xy*_BumpMapGlobalScale*8, mip_selector+rtp_mipoffset_globalnorm+3))*0.4;
 		triplanar_xy_global_bumpval+=tex2Dlod(_BumpMapGlobal, float4(_INPUT_uv.xy*_BumpMapGlobalScale, mip_selector+rtp_mipoffset_globalnorm))*0.6;
 		
-		fixed4 hMapVal_YZ = tex2Dd(_TERRAIN_HeightMap, _INPUT_uv.yz, _ddxMain.yz, _ddyMain.yz);
-		fixed4 hMapVal_XY = tex2Dd(_TERRAIN_HeightMap, _INPUT_uv.xy, _ddxMain.xy, _ddyMain.xy);
-		fixed4 hMapVal_XZ = tex2Dd(_TERRAIN_HeightMap, _INPUT_uv.xz, _ddxMain.xz, _ddyMain.xz);
+		fixed4 hMapVal_YZ = tex2Dd(_TERRAIN_HeightMap, _TERRAIN_HeightMap, _INPUT_uv.yz, _ddxMain.yz, _ddyMain.yz);
+		fixed4 hMapVal_XY = tex2Dd(_TERRAIN_HeightMap, _TERRAIN_HeightMap, _INPUT_uv.xy, _ddxMain.xy, _ddyMain.xy);
+		fixed4 hMapVal_XZ = tex2Dd(_TERRAIN_HeightMap, _TERRAIN_HeightMap, _INPUT_uv.xz, _ddxMain.xz, _ddyMain.xz);
 		
 		float3 triplanar_blend;
 		#ifdef LOCAL_SPACE_UV
@@ -1707,9 +1766,9 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 		#endif	
 	#else
 		#ifdef USE_EXTRUDE_REDUCTION
-			tHA=saturate(lerp(tex2Dd(_TERRAIN_HeightMap, _INPUT_uv.xy, _ddxMain.xy, _ddyMain.xy), 1, PER_LAYER_HEIGHT_MODIFIER0123)+0.001);
+			tHA=saturate(lerp(tex2Dd(_TERRAIN_HeightMap, _TERRAIN_HeightMap, _INPUT_uv.xy, _ddxMain.xy, _ddyMain.xy), 1, PER_LAYER_HEIGHT_MODIFIER0123)+0.001);
 		#else
-			tHA=saturate(tex2Dd(_TERRAIN_HeightMap, _INPUT_uv.xy, _ddxMain.xy, _ddyMain.xy)+0.001);
+			tHA=saturate(tex2Dd(_TERRAIN_HeightMap, _TERRAIN_HeightMap, _INPUT_uv.xy, _ddxMain.xy, _ddyMain.xy)+0.001);
 		#endif	
 	#endif
 	splat_control1 *= tHA;
@@ -1735,10 +1794,10 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 		float4 splat_control1_mid=splat_control1*splat_control1;
 		float4 splat_control2 = splat_controlB;
 		#ifdef USE_EXTRUDE_REDUCTION
-			tHB=saturate(lerp(tex2Dd(_TERRAIN_HeightMap2, _INPUT_uv.xy, _ddxMain.xy, _ddyMain.xy), 1, PER_LAYER_HEIGHT_MODIFIER4567)+0.001);
+			tHB=saturate(lerp(tex2Dd(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, _INPUT_uv.xy, _ddxMain.xy, _ddyMain.xy), 1, PER_LAYER_HEIGHT_MODIFIER4567)+0.001);
 			splat_control2 *= tHB;
 		#else
-			tHB=saturate(tex2Dd(_TERRAIN_HeightMap2, _INPUT_uv.xy, _ddxMain.xy, _ddyMain.xy)+0.001);
+			tHB=saturate(tex2Dd(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, _INPUT_uv.xy, _ddxMain.xy, _ddyMain.xy)+0.001);
 			splat_control2 *= tHB;
 		#endif	
 		float4 splat_control2_mid=splat_control2*splat_control2;
@@ -2106,11 +2165,11 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 					rayPos.xyz+=EyeDirTan;
 			 		float4 tH1, tH2;
 					#ifdef USE_EXTRUDE_REDUCTION
-						tH1=lerp(tex2Dlod(_TERRAIN_HeightMap, rayPos.xyww), 1, PER_LAYER_HEIGHT_MODIFIER0123);
-						tH2=lerp(tex2Dlod(_TERRAIN_HeightMap2, rayPos.xyww), 1, PER_LAYER_HEIGHT_MODIFIER4567);
+						tH1=lerp(UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, rayPos.xyww), 1, PER_LAYER_HEIGHT_MODIFIER0123);
+						tH2=lerp(UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, rayPos.xyww), 1, PER_LAYER_HEIGHT_MODIFIER4567);
 					#else
-						tH1=tex2Dlod(_TERRAIN_HeightMap, rayPos.xyww);
-						tH2=tex2Dlod(_TERRAIN_HeightMap2, rayPos.xyww);
+						tH1= UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, rayPos.xyww);
+						tH2= UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, rayPos.xyww);
 					#endif
 					_h=saturate(dot(splat_control1, tH1)+dot(splat_control2, tH2));
 					hit_flag=_h >= rayPos.z;
@@ -2126,11 +2185,11 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 					rayPos.xyz-=EyeDirTan*(1 - scl); // back
 			 		float4 tH1, tH2;
 					#ifdef USE_EXTRUDE_REDUCTION
-						tH1=lerp(tex2Dlod(_TERRAIN_HeightMap, rayPos.xyww), 1, PER_LAYER_HEIGHT_MODIFIER0123);
-						tH2=lerp(tex2Dlod(_TERRAIN_HeightMap2, rayPos.xyww), 1, PER_LAYER_HEIGHT_MODIFIER4567);
+						tH1=lerp(UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, rayPos.xyww), 1, PER_LAYER_HEIGHT_MODIFIER0123);
+						tH2=lerp(UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, rayPos.xyww), 1, PER_LAYER_HEIGHT_MODIFIER4567);
 					#else
-						tH1=tex2Dlod(_TERRAIN_HeightMap, rayPos.xyww);
-						tH2=tex2Dlod(_TERRAIN_HeightMap2, rayPos.xyww);
+						tH1= UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, rayPos.xyww);
+						tH2= UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, rayPos.xyww);
 					#endif
 					float _nh=saturate(dot(splat_control1, tH1)+dot(splat_control2, tH2));
 					if (_nh >= rayPos.z) {
@@ -2313,10 +2372,10 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 			fixed4 c;
 			float4 gloss=0;
 			float _MipActual=min(mip_selector.x+rtp_mipoffset_color,6);
-			c = tex2Dlod(_SplatAtlasA, float4(uvSplat01.xy, _MipActual.xx)); col = splat_control1.x * c.rgb; gloss.r = c.a;
-			c = tex2Dlod(_SplatAtlasA, float4(uvSplat01.zw, _MipActual.xx)); col += splat_control1.y * c.rgb; gloss.g = c.a;
-			c = tex2Dlod(_SplatAtlasA, float4(uvSplat23.xy, _MipActual.xx)); col += splat_control1.z * c.rgb; gloss.b = c.a;
-			c = tex2Dlod(_SplatAtlasA, float4(uvSplat23.zw, _MipActual.xx)); col += splat_control1.w * c.rgb; gloss.a = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.xy, _MipActual.xx)); col = splat_control1.x * c.rgb; gloss.r = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.zw, _MipActual.xx)); col += splat_control1.y * c.rgb; gloss.g = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.xy, _MipActual.xx)); col += splat_control1.z * c.rgb; gloss.b = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.zw, _MipActual.xx)); col += splat_control1.w * c.rgb; gloss.a = c.a;
 			
 			float glcombined = dot(gloss, splat_control1);
 							
@@ -2340,10 +2399,10 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 			#endif
 			#endif
 
-			c = tex2Dlod(_SplatAtlasB, float4(uvSplat01.xy, _MipActual.xx)); col += splat_control2.x * c.rgb; gloss.r = c.a;
-			c = tex2Dlod(_SplatAtlasB, float4(uvSplat01.zw, _MipActual.xx)); col += splat_control2.y * c.rgb; gloss.g = c.a;
-			c = tex2Dlod(_SplatAtlasB, float4(uvSplat23.xy, _MipActual.xx)); col += splat_control2.z * c.rgb; gloss.b = c.a;
-			c = tex2Dlod(_SplatAtlasB, float4(uvSplat23.zw, _MipActual.xx)); col += splat_control2.w * c.rgb; gloss.a = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.xy, _MipActual.xx)); col += splat_control2.x * c.rgb; gloss.r = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.zw, _MipActual.xx)); col += splat_control2.y * c.rgb; gloss.g = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.xy, _MipActual.xx)); col += splat_control2.z * c.rgb; gloss.b = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.zw, _MipActual.xx)); col += splat_control2.w * c.rgb; gloss.a = c.a;
 
 			glcombined += dot(gloss, splat_control2);
 						
@@ -2396,10 +2455,10 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 			#if ( defined(RTP_SNOW) && !defined(UNITY_PASS_SHADOWCASTER) )
 				rayPos.w += snow_depth;
 			#endif				
-			normals_combined = tex2Dlod(_BumpMap01, rayPos.xyww).rgba*splat_control1.rrgg;
-			normals_combined+=tex2Dlod(_BumpMap23, rayPos.xyww).rgba*splat_control1.bbaa;
-			normals_combined+=tex2Dlod(_BumpMap45, rayPos.xyww).rgba*splat_control2.rrgg;
-			normals_combined+=tex2Dlod(_BumpMap67, rayPos.xyww).rgba*splat_control2.bbaa;
+			normals_combined = UNITY_SAMPLE_TEX2D_LOD(_BumpMap01, rayPos.xyww).rgba*splat_control1.rrgg;
+			normals_combined+= UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_BumpMap23, _BumpMap01, rayPos.xyww).rgba*splat_control1.bbaa;
+			normals_combined+= UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_BumpMap45, _BumpMap01, rayPos.xyww).rgba*splat_control2.rrgg;
+			normals_combined+= UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_BumpMap67, _BumpMap01, rayPos.xyww).rgba*splat_control2.bbaa;
 			n.xy=(normals_combined.rg+normals_combined.ba)*2-1;
 			n.xy*=_uv_Relief_z;
 			n.z = sqrt(1 - saturate(dot(n.xy, n.xy)));
@@ -2491,35 +2550,35 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 			// snow color
 			#if ( defined(RTP_SNOW) && !defined(UNITY_PASS_SHADOWCASTER) ) && !defined(RTP_SIMPLE_SHADING) && ( defined(RTP_SNW_CHOOSEN_LAYER_COLOR_0) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_1) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_2) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_3) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_4) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_5) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_6) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_7) )
 			#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_0)
-				half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color, 6)));
+				half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color, 6)));
 				GETrtp_snow_TEX
 			#endif
 			#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_4)
-				half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color, 6)));
+				half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color, 6)));
 				GETrtp_snow_TEX
 			#endif
 			#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_1)
-				half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color, 6)));
+				half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color, 6)));
 				GETrtp_snow_TEX
 			#endif			
 			#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_5)
-				half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color, 6)));
+				half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color, 6)));
 				GETrtp_snow_TEX
 			#endif			
 			#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_2)
-				half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color, 6)));
+				half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color, 6)));
 				GETrtp_snow_TEX
 			#endif				
 			#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_6)
-				half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color, 6)));
+				half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color, 6)));
 				GETrtp_snow_TEX
 			#endif			
 			#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_3)
-				half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color, 6)));
+				half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color, 6)));
 				GETrtp_snow_TEX
 			#endif				
 			#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_7)
-				half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color, 6)));
+				half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color, 6)));
 				GETrtp_snow_TEX
 			#endif		
 			#endif
@@ -2550,7 +2609,7 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 				//_TERRAIN_SHADOW_STEPS=min(_TERRAIN_SHADOW_STEPS, ((EyeDirTan.z>0) ? (1-rayPos_shadows.z) : rayPos_shadows.z) / abs(EyeDirTan.z));
 				for(int i=0; i<_TERRAIN_SHADOW_STEPS; i++) {
 					rayPos_shadows.xyz+=EyeDirTan;
-					_h=dot(splat_control1, tex2Dlod(_TERRAIN_HeightMap, rayPos_shadows.xyww))+dot(splat_control2, tex2Dlod(_TERRAIN_HeightMap2, rayPos_shadows.xyww));
+					_h=dot(splat_control1, UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, rayPos_shadows.xyww))+dot(splat_control2, UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, rayPos_shadows.xyww));
 					hit_flag=_h >= rayPos_shadows.z;
 					if (hit_flag) break;
 					h_prev=_h;
@@ -2568,13 +2627,13 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 							float dh;
 							
 							rayPos_shadows.xyz += (1+_TERRAIN_ShadowSoftnessFade)*EyeDirTan.xyz; rayPos_shadows.w++;
-							dh = saturate( dot(splat_control1, tex2Dlod(_TERRAIN_HeightMap, rayPos_shadows.xyww))+dot(splat_control2, tex2Dlod(_TERRAIN_HeightMap2, rayPos_shadows.xyww)) - rayPos_shadows.z ); // weight 1 (mip+1 frequency)
+							dh = saturate( dot(splat_control1, UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, rayPos_shadows.xyww))+dot(splat_control2, UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, rayPos_shadows.xyww)) - rayPos_shadows.z ); // weight 1 (mip+1 frequency)
 							
 							rayPos_shadows.xyz += (1+_TERRAIN_ShadowSoftnessFade*3)*EyeDirTan.xyz; rayPos_shadows.w++;
-							dh += saturate( dot(splat_control1, tex2Dlod(_TERRAIN_HeightMap, rayPos_shadows.xyww))+dot(splat_control2, tex2Dlod(_TERRAIN_HeightMap2, rayPos_shadows.xyww)) - rayPos_shadows.z )*4; // weight 4 (mip+2 frequency)
+							dh += saturate( dot(splat_control1, UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, rayPos_shadows.xyww))+dot(splat_control2, UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, rayPos_shadows.xyww)) - rayPos_shadows.z )*4; // weight 4 (mip+2 frequency)
 							
 							rayPos_shadows.xyz += (1+_TERRAIN_ShadowSoftnessFade*7)*EyeDirTan.xyz; rayPos_shadows.w++;
-							dh += saturate( dot(splat_control1, tex2Dlod(_TERRAIN_HeightMap, rayPos_shadows.xyww))+dot(splat_control2, tex2Dlod(_TERRAIN_HeightMap2, rayPos_shadows.xyww)) - rayPos_shadows.z )*8; // weight 8 (mip+3 frequency)
+							dh += saturate( dot(splat_control1, UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, rayPos_shadows.xyww))+dot(splat_control2, UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, rayPos_shadows.xyww)) - rayPos_shadows.z )*8; // weight 8 (mip+3 frequency)
 
 							shadow_atten=1-saturate(dh*exp2(_TERRAIN_ShadowSmoothing));						
 						}						
@@ -2624,9 +2683,9 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 					rayPos.xyz+=EyeDirTan;
 			 		float4 tH;
 					#ifdef USE_EXTRUDE_REDUCTION
-						tH=lerp(tex2Dlod(_TERRAIN_HeightMap, rayPos.xyww), 1, PER_LAYER_HEIGHT_MODIFIER0123);
+						tH=lerp(UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, rayPos.xyww), 1, PER_LAYER_HEIGHT_MODIFIER0123);
 					#else
-						tH=tex2Dlod(_TERRAIN_HeightMap, rayPos.xyww);
+						tH= UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, rayPos.xyww);
 					#endif	
 					_h=saturate(dot(splat_control1, tH));
 					hit_flag=_h >= rayPos.z;
@@ -2642,9 +2701,9 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 					rayPos.xyz-=EyeDirTan*(1 - scl); // back
 			 		float4 tH;
 					#ifdef USE_EXTRUDE_REDUCTION
-						tH=lerp(tex2Dlod(_TERRAIN_HeightMap, rayPos.xyww), 1, PER_LAYER_HEIGHT_MODIFIER0123);
+						tH=lerp(UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, rayPos.xyww), 1, PER_LAYER_HEIGHT_MODIFIER0123);
 					#else
-						tH=tex2Dlod(_TERRAIN_HeightMap, rayPos.xyww);
+						tH= UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, rayPos.xyww);
 					#endif	
 					float _nh=saturate(dot(splat_control1, tH));
 					if (_nh >= rayPos.z) {
@@ -2681,9 +2740,9 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 		 				} else {
 		 					// no blend case
 							#ifdef USE_EXTRUDE_REDUCTION
-					 			hgtTRI = dot(splat_control1, lerp(tex2Dlod(_TERRAIN_HeightMap, uvTRI.xyzz), 1, PER_LAYER_HEIGHT_MODIFIER0123));
+					 			hgtTRI = dot(splat_control1, lerp(UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, uvTRI.xyzz), 1, PER_LAYER_HEIGHT_MODIFIER0123));
 							#else
-					 			hgtTRI = dot(splat_control1, tex2Dlod(_TERRAIN_HeightMap, uvTRI.xyzz));
+					 			hgtTRI = dot(splat_control1, UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, uvTRI.xyzz));
 							#endif
 			 				//hgtTRI*=triplanar_blend_simple;
 							#if defined(NEED_LOCALHEIGHT)
@@ -2915,27 +2974,27 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 						#if defined(RTP_PM_SHADING) && !defined(UNITY_PASS_SHADOWCASTER)
 							uvTRI1.xy+= ParallaxOffset(hgtYZ, _TERRAIN_ExtrudeHeight*_uv_Relief_z*COLOR_DAMP_VAL, dir);
 						#endif
-						#if defined(RTP_USE_COLOR_ATLAS)
+						#if defined(RTP_USE_COLOR_ATLAS) || !defined(_4LAYERS)
 							float _MipActual=min(uvTRI1.z,6);
 							float hi_mip_adjust=(exp2(_MipActual))*_SplatAtlasA_TexelSize.x; 
 							uvSplat01=frac(uvTRI1.xy).xyxy*(_mult-hi_mip_adjust)+_off+0.5*hi_mip_adjust;
 							uvSplat01.zw+=float2(0.5,0);
 							uvSplat23=uvSplat01.xyxy+float4(0,0.5,0.5,0.5);
-							c = tex2Dlod(_SplatAtlasA, float4(uvSplat01.xy, _MipActual.xx)); col += _MixBlendtmp.x * c.rgb; tmp_gloss.r = c.a;
-							c = tex2Dlod(_SplatAtlasA, float4(uvSplat01.zw, _MipActual.xx)); col += _MixBlendtmp.y  * c.rgb; tmp_gloss.g = c.a;
+							c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.xy, _MipActual.xx)); col += _MixBlendtmp.x * c.rgb; tmp_gloss.r = c.a;
+							c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.zw, _MipActual.xx)); col += _MixBlendtmp.y  * c.rgb; tmp_gloss.g = c.a;
 							#if !defined(USE_2_LAYERS_ONLY)
-							c = tex2Dlod(_SplatAtlasA, float4(uvSplat23.xy, _MipActual.xx)); col += _MixBlendtmp.z * c.rgb; tmp_gloss.b = c.a;
+							c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.xy, _MipActual.xx)); col += _MixBlendtmp.z * c.rgb; tmp_gloss.b = c.a;
 							#if !defined(USE_3_LAYERS_ONLY)
-							c = tex2Dlod(_SplatAtlasA, float4(uvSplat23.zw, _MipActual.xx)); col += _MixBlendtmp.w * c.rgb; tmp_gloss.a = c.a;
+							c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.zw, _MipActual.xx)); col += _MixBlendtmp.w * c.rgb; tmp_gloss.a = c.a;
 							#endif
 							#endif							
 						#else
-							c = tex2Dd(_SplatA0, uvTRI1.xy, _ddxMain.yz, _ddyMain.yz); col += _MixBlendtmp.x * c.rgb; tmp_gloss.r=c.a;
-							c = tex2Dd(_SplatA1, uvTRI1.xy, _ddxMain.yz, _ddyMain.yz); col += _MixBlendtmp.y * c.rgb; tmp_gloss.g=c.a;
+							c = tex2Dd(_SplatA0, _SplatA0, uvTRI1.xy, _ddxMain.yz, _ddyMain.yz); col += _MixBlendtmp.x * c.rgb; tmp_gloss.r=c.a;
+							c = tex2Dd(_SplatA1, _SplatA0, uvTRI1.xy, _ddxMain.yz, _ddyMain.yz); col += _MixBlendtmp.y * c.rgb; tmp_gloss.g=c.a;
 							#if !defined(USE_2_LAYERS_ONLY)
-							c = tex2Dd(_SplatA2, uvTRI1.xy, _ddxMain.yz, _ddyMain.yz); col += _MixBlendtmp.z * c.rgb; tmp_gloss.b=c.a;
+							c = tex2Dd(_SplatA2, _SplatA0, uvTRI1.xy, _ddxMain.yz, _ddyMain.yz); col += _MixBlendtmp.z * c.rgb; tmp_gloss.b=c.a;
 							#if !defined(USE_3_LAYERS_ONLY)
-							c = tex2Dd(_SplatA3, uvTRI1.xy, _ddxMain.yz, _ddyMain.yz); col += _MixBlendtmp.w * c.rgb; tmp_gloss.a=c.a;
+							c = tex2Dd(_SplatA3, _SplatA0, uvTRI1.xy, _ddxMain.yz, _ddyMain.yz); col += _MixBlendtmp.w * c.rgb; tmp_gloss.a=c.a;
 							#endif
 							#endif
 						#endif				
@@ -2946,9 +3005,9 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 						#endif							
 						
 						uvTRI1.z+=-rtp_mipoffset_color+rtp_mipoffset_bump;
-						normals_combined = tex2Dd(_BumpMap01, uvTRI1.xy, _ddxMain.yz*snow_depthMult, _ddyMain.yz*snow_depthMult).rgba*splat_control1.rrgg;
+						normals_combined = tex2Dd(_BumpMap01, _BumpMap01, uvTRI1.xy, _ddxMain.yz*snow_depthMult, _ddyMain.yz*snow_depthMult).rgba*splat_control1.rrgg;
 						#if !defined(USE_2_LAYERS_ONLY)
-						normals_combined+=tex2Dd(_BumpMap23, uvTRI1.xy, _ddxMain.yz*snow_depthMult, _ddyMain.yz*snow_depthMult).rgba*splat_control1.bbaa;
+						normals_combined += tex2Dd(_BumpMap23, _BumpMap01, uvTRI1.xy, _ddxMain.yz*snow_depthMult, _ddyMain.yz*snow_depthMult).rgba*splat_control1.bbaa;
 						#endif							
 						nA.xy=(normals_combined.rg+normals_combined.ba)*2-1;
 						nA.y = triplanar_flip.x ? -nA.y : nA.y;
@@ -2964,27 +3023,27 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 						#if defined(RTP_PM_SHADING) && !defined(UNITY_PASS_SHADOWCASTER)
 							uvTRI2.xy+= ParallaxOffset(hgtXY, _TERRAIN_ExtrudeHeight*_uv_Relief_z*COLOR_DAMP_VAL, dir);
 						#endif
-						#if defined(RTP_USE_COLOR_ATLAS)
+						#if defined(RTP_USE_COLOR_ATLAS) || !defined(_4LAYERS)
 							float _MipActual=min(uvTRI2.z,6);
 							float hi_mip_adjust=(exp2(_MipActual))*_SplatAtlasA_TexelSize.x; 
 							uvSplat01=frac(uvTRI2.xy).xyxy*(_mult-hi_mip_adjust)+_off+0.5*hi_mip_adjust;
 							uvSplat01.zw+=float2(0.5,0);
 							uvSplat23=uvSplat01.xyxy+float4(0,0.5,0.5,0.5);
-							c = tex2Dlod(_SplatAtlasA, float4(uvSplat01.xy, _MipActual.xx)); col += _MixBlendtmp.x * c.rgb; tmp_gloss.r = c.a;
-							c = tex2Dlod(_SplatAtlasA, float4(uvSplat01.zw, _MipActual.xx)); col += _MixBlendtmp.y  * c.rgb; tmp_gloss.g = c.a;
+							c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.xy, _MipActual.xx)); col += _MixBlendtmp.x * c.rgb; tmp_gloss.r = c.a;
+							c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.zw, _MipActual.xx)); col += _MixBlendtmp.y  * c.rgb; tmp_gloss.g = c.a;
 							#if !defined(USE_2_LAYERS_ONLY)
-							c = tex2Dlod(_SplatAtlasA, float4(uvSplat23.xy, _MipActual.xx)); col += _MixBlendtmp.z * c.rgb; tmp_gloss.b = c.a;
+							c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.xy, _MipActual.xx)); col += _MixBlendtmp.z * c.rgb; tmp_gloss.b = c.a;
 							#if !defined(USE_3_LAYERS_ONLY)
-							c = tex2Dlod(_SplatAtlasA, float4(uvSplat23.zw, _MipActual.xx)); col += _MixBlendtmp.w * c.rgb; tmp_gloss.a = c.a;
+							c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.zw, _MipActual.xx)); col += _MixBlendtmp.w * c.rgb; tmp_gloss.a = c.a;
 							#endif
 							#endif							
 						#else
-							c = tex2Dd(_SplatA0, uvTRI2.xy, _ddxMain.xy, _ddyMain.xy); col += _MixBlendtmp.x * c.rgb; tmp_gloss.r=c.a;
-							c = tex2Dd(_SplatA1, uvTRI2.xy, _ddxMain.xy, _ddyMain.xy); col += _MixBlendtmp.y * c.rgb; tmp_gloss.g=c.a;
+							c = tex2Dd(_SplatA0, _SplatA0, uvTRI2.xy, _ddxMain.xy, _ddyMain.xy); col += _MixBlendtmp.x * c.rgb; tmp_gloss.r=c.a;
+							c = tex2Dd(_SplatA1, _SplatA0, uvTRI2.xy, _ddxMain.xy, _ddyMain.xy); col += _MixBlendtmp.y * c.rgb; tmp_gloss.g=c.a;
 							#if !defined(USE_2_LAYERS_ONLY)
-							c = tex2Dd(_SplatA2, uvTRI2.xy, _ddxMain.xy, _ddyMain.xy); col += _MixBlendtmp.z * c.rgb; tmp_gloss.b=c.a;
+							c = tex2Dd(_SplatA2, _SplatA0, uvTRI2.xy, _ddxMain.xy, _ddyMain.xy); col += _MixBlendtmp.z * c.rgb; tmp_gloss.b=c.a;
 							#if !defined(USE_3_LAYERS_ONLY)
-							c = tex2Dd(_SplatA3, uvTRI2.xy, _ddxMain.xy, _ddyMain.xy); col += _MixBlendtmp.w * c.rgb; tmp_gloss.a=c.a;
+							c = tex2Dd(_SplatA3, _SplatA0, uvTRI2.xy, _ddxMain.xy, _ddyMain.xy); col += _MixBlendtmp.w * c.rgb; tmp_gloss.a=c.a;
 							#endif
 							#endif	
 						#endif				
@@ -2995,9 +3054,9 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 						#endif		
 						
 						uvTRI2.z+=-rtp_mipoffset_color+rtp_mipoffset_bump;
-						normals_combined = tex2Dd(_BumpMap01, uvTRI2.xy, _ddxMain.xy*snow_depthMult, _ddyMain.xy*snow_depthMult).rgba*splat_control1.rrgg;
+						normals_combined = tex2Dd(_BumpMap01, _BumpMap01, uvTRI2.xy, _ddxMain.xy*snow_depthMult, _ddyMain.xy*snow_depthMult).rgba*splat_control1.rrgg;
 						#if !defined(USE_2_LAYERS_ONLY)
-						normals_combined+=tex2Dd(_BumpMap23, uvTRI2.xy, _ddxMain.xy*snow_depthMult, _ddyMain.xy*snow_depthMult).rgba*splat_control1.bbaa;
+						normals_combined+= tex2Dd(_BumpMap23, _BumpMap01, uvTRI2.xy, _ddxMain.xy*snow_depthMult, _ddyMain.xy*snow_depthMult).rgba*splat_control1.bbaa;
 						#endif							
 						nB.xy=(normals_combined.rg+normals_combined.ba)*2-1;
 						nB.y=triplanar_flip.y ? -nB.y:nB.y;
@@ -3013,27 +3072,27 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 						#if defined(RTP_PM_SHADING) && !defined(UNITY_PASS_SHADOWCASTER)
 							uvTRI3.xy+= ParallaxOffset(hgtXZ, _TERRAIN_ExtrudeHeight*_uv_Relief_z*COLOR_DAMP_VAL, dir);
 						#endif
-						#if defined(RTP_USE_COLOR_ATLAS)
+						#if defined(RTP_USE_COLOR_ATLAS) || !defined(_4LAYERS)
 							float _MipActual=min(uvTRI3.z,6);
 							float hi_mip_adjust=(exp2(_MipActual))*_SplatAtlasA_TexelSize.x; 
 							uvSplat01=frac(uvTRI3.xy).xyxy*(_mult-hi_mip_adjust)+_off+0.5*hi_mip_adjust;
 							uvSplat01.zw+=float2(0.5,0);
 							uvSplat23=uvSplat01.xyxy+float4(0,0.5,0.5,0.5);
-							c = tex2Dlod(_SplatAtlasA, float4(uvSplat01.xy, _MipActual.xx)); col += _MixBlendtmp.x * c.rgb; tmp_gloss.r = c.a;
-							c = tex2Dlod(_SplatAtlasA, float4(uvSplat01.zw, _MipActual.xx)); col += _MixBlendtmp.y  * c.rgb; tmp_gloss.g = c.a;
+							c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.xy, _MipActual.xx)); col += _MixBlendtmp.x * c.rgb; tmp_gloss.r = c.a;
+							c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.zw, _MipActual.xx)); col += _MixBlendtmp.y  * c.rgb; tmp_gloss.g = c.a;
 							#if !defined(USE_2_LAYERS_ONLY)
-							c = tex2Dlod(_SplatAtlasA, float4(uvSplat23.xy, _MipActual.xx)); col += _MixBlendtmp.z * c.rgb; tmp_gloss.b = c.a;
+							c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.xy, _MipActual.xx)); col += _MixBlendtmp.z * c.rgb; tmp_gloss.b = c.a;
 							#if !defined(USE_3_LAYERS_ONLY)
-							c = tex2Dlod(_SplatAtlasA, float4(uvSplat23.zw, _MipActual.xx)); col += _MixBlendtmp.w * c.rgb; tmp_gloss.a = c.a;
+							c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.zw, _MipActual.xx)); col += _MixBlendtmp.w * c.rgb; tmp_gloss.a = c.a;
 							#endif
 							#endif							
 						#else
-							c = tex2Dd(_SplatA0, uvTRI3.xy, _ddxMain.xz, _ddyMain.xz); col += _MixBlendtmp.x * c.rgb; tmp_gloss.r=c.a;
-							c = tex2Dd(_SplatA1, uvTRI3.xy, _ddxMain.xz, _ddyMain.xz); col += _MixBlendtmp.y * c.rgb; tmp_gloss.g=c.a;
+							c = tex2Dd(_SplatA0, _SplatA0, uvTRI3.xy, _ddxMain.xz, _ddyMain.xz); col += _MixBlendtmp.x * c.rgb; tmp_gloss.r=c.a;
+							c = tex2Dd(_SplatA1, _SplatA0, uvTRI3.xy, _ddxMain.xz, _ddyMain.xz); col += _MixBlendtmp.y * c.rgb; tmp_gloss.g=c.a;
 							#if !defined(USE_2_LAYERS_ONLY)
-							c = tex2Dd(_SplatA2, uvTRI3.xy, _ddxMain.xz, _ddyMain.xz); col += _MixBlendtmp.z * c.rgb; tmp_gloss.b=c.a;
+							c = tex2Dd(_SplatA2, _SplatA0, uvTRI3.xy, _ddxMain.xz, _ddyMain.xz); col += _MixBlendtmp.z * c.rgb; tmp_gloss.b=c.a;
 							#if !defined(USE_3_LAYERS_ONLY)
-							c = tex2Dd(_SplatA3, uvTRI3.xy, _ddxMain.xz, _ddyMain.xz); col += _MixBlendtmp.w * c.rgb; tmp_gloss.a=c.a;
+							c = tex2Dd(_SplatA3, _SplatA0, uvTRI3.xy, _ddxMain.xz, _ddyMain.xz); col += _MixBlendtmp.w * c.rgb; tmp_gloss.a=c.a;
 							#endif
 							#endif							
 						#endif
@@ -3044,9 +3103,9 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 						#endif
 									
 						uvTRI3.z+=-rtp_mipoffset_color+rtp_mipoffset_bump;
-						normals_combined = tex2Dd(_BumpMap01, uvTRI3.xy, _ddxMain.xz*snow_depthMult, _ddyMain.xz*snow_depthMult).rgba*splat_control1.rrgg;
+						normals_combined = tex2Dd(_BumpMap01, _BumpMap01, uvTRI3.xy, _ddxMain.xz*snow_depthMult, _ddyMain.xz*snow_depthMult).rgba*splat_control1.rrgg;
 						#if !defined(USE_2_LAYERS_ONLY)
-						normals_combined+=tex2Dd(_BumpMap23, uvTRI3.xy, _ddxMain.xz*snow_depthMult, _ddyMain.xz*snow_depthMult).rgba*splat_control1.bbaa;
+						normals_combined+= tex2Dd(_BumpMap23, _BumpMap01, uvTRI3.xy, _ddxMain.xz*snow_depthMult, _ddyMain.xz*snow_depthMult).rgba*splat_control1.bbaa;
 						#endif							
 						nC.xy=(normals_combined.rg+normals_combined.ba)*2-1;
 						nC.y=triplanar_flip.z ? nC.y:-nC.y;
@@ -3075,27 +3134,27 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 
 					float3 uvTRI_tmp=float3(uvTRI.xy, uvTRI.z+rtp_mipoffset_color);
 					float4 tmp_gloss=0;
-					#if defined(RTP_USE_COLOR_ATLAS)
+					#if defined(RTP_USE_COLOR_ATLAS) || !defined(_4LAYERS)
 						float _MipActual=min(uvTRI_tmp.z,6);
 						float hi_mip_adjust=(exp2(_MipActual))*_SplatAtlasA_TexelSize.x; 
 						uvSplat01=frac(uvTRI_tmp.xy).xyxy*(_mult-hi_mip_adjust)+_off+0.5*hi_mip_adjust;
 						uvSplat01.zw+=float2(0.5,0);
 						uvSplat23=uvSplat01.xyxy+float4(0,0.5,0.5,0.5);
-						c = tex2Dlod(_SplatAtlasA, float4(uvSplat01.xy, _MipActual.xx)); col += c.rgb*splat_control1.x; tmp_gloss.r = c.a;
-						c = tex2Dlod(_SplatAtlasA, float4(uvSplat01.zw, _MipActual.xx)); col += c.rgb*splat_control1.y; tmp_gloss.g = c.a;
+						c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.xy, _MipActual.xx)); col += c.rgb*splat_control1.x; tmp_gloss.r = c.a;
+						c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.zw, _MipActual.xx)); col += c.rgb*splat_control1.y; tmp_gloss.g = c.a;
 						#if !defined(USE_2_LAYERS_ONLY)
-						c = tex2Dlod(_SplatAtlasA, float4(uvSplat23.xy, _MipActual.xx)); col += c.rgb*splat_control1.z; tmp_gloss.b = c.a;
+						c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.xy, _MipActual.xx)); col += c.rgb*splat_control1.z; tmp_gloss.b = c.a;
 						#if !defined(USE_3_LAYERS_ONLY)
-						c = tex2Dlod(_SplatAtlasA, float4(uvSplat23.zw, _MipActual.xx)); col += c.rgb*splat_control1.w; tmp_gloss.a = c.a;
+						c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.zw, _MipActual.xx)); col += c.rgb*splat_control1.w; tmp_gloss.a = c.a;
 						#endif
 						#endif							
 					#else
-						c = tex2Dd(_SplatA0, uvTRI_tmp.xy, _ddxMainTRI.xy, _ddyMainTRI.xy); col += c.rgb*splat_control1.x; tmp_gloss.r=c.a;
-						c = tex2Dd(_SplatA1, uvTRI_tmp.xy, _ddxMainTRI.xy, _ddyMainTRI.xy); col += c.rgb*splat_control1.y; tmp_gloss.g=c.a;
+						c = tex2Dd(_SplatA0, _SplatA0, uvTRI_tmp.xy, _ddxMainTRI.xy, _ddyMainTRI.xy); col += c.rgb*splat_control1.x; tmp_gloss.r=c.a;
+						c = tex2Dd(_SplatA1, _SplatA0, uvTRI_tmp.xy, _ddxMainTRI.xy, _ddyMainTRI.xy); col += c.rgb*splat_control1.y; tmp_gloss.g=c.a;
 						#if !defined(USE_2_LAYERS_ONLY)
-						c = tex2Dd(_SplatA2, uvTRI_tmp.xy, _ddxMainTRI.xy, _ddyMainTRI.xy); col += c.rgb*splat_control1.z; tmp_gloss.b=c.a;
+						c = tex2Dd(_SplatA2, _SplatA0, uvTRI_tmp.xy, _ddxMainTRI.xy, _ddyMainTRI.xy); col += c.rgb*splat_control1.z; tmp_gloss.b=c.a;
 						#if !defined(USE_3_LAYERS_ONLY)
-						c = tex2Dd(_SplatA3, uvTRI_tmp.xy, _ddxMainTRI.xy, _ddyMainTRI.xy); col += c.rgb*splat_control1.w; tmp_gloss.a=c.a;
+						c = tex2Dd(_SplatA3, _SplatA0, uvTRI_tmp.xy, _ddxMainTRI.xy, _ddyMainTRI.xy); col += c.rgb*splat_control1.w; tmp_gloss.a=c.a;
 						#endif
 						#endif			
 					#endif						
@@ -3107,10 +3166,10 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 						uvTRI_tmp.z += snow_depth;
 					#endif				
 					
-					float4 normA=tex2Dd(_BumpMap01, uvTRI_tmp.xy, _ddxMainTRI.xy*snow_depthMult, _ddyMainTRI.xy*snow_depthMult).rgba;
+					float4 normA= tex2Dd(_BumpMap01, _BumpMap01, uvTRI_tmp.xy, _ddxMainTRI.xy*snow_depthMult, _ddyMainTRI.xy*snow_depthMult).rgba;
 					float4 normals_combined = normA*splat_control1.rrgg;
 					#if !defined(USE_2_LAYERS_ONLY)
-					float4 normB=tex2Dd(_BumpMap23, uvTRI_tmp.xy, _ddxMainTRI.xy*snow_depthMult, _ddyMainTRI.xy*snow_depthMult).rgba;
+					float4 normB= tex2Dd(_BumpMap23, _BumpMap01, uvTRI_tmp.xy, _ddxMainTRI.xy*snow_depthMult, _ddyMainTRI.xy*snow_depthMult).rgba;
 					normals_combined += normB*splat_control1.bbaa;
 					#endif							
 					float3 n;
@@ -3126,7 +3185,7 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 				}
 				
 				#if defined(RTP_UV_BLEND) && !defined(RTP_DISTANCE_ONLY_UV_BLEND)
-					#if defined(RTP_USE_COLOR_ATLAS)
+					#if defined(RTP_USE_COLOR_ATLAS) || !defined(_4LAYERS)
 						float4 _MixMipActual=min(uvTRI.zzzz+rtp_mipoffset_color+MIPmult0123+log2(MixScaleRouted0123), float4(6,6,6,6));
 						_MixMipActual=max(float4(0,0,0,0),_MixMipActual); // nie moze byc ujemny do obj hi_mip_adjustMix ponizej
 						float4 hi_mip_adjustMix=exp2(_MixMipActual)*_SplatAtlasA_TexelSize.x;
@@ -3160,22 +3219,22 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 				//
 				#if !defined(_4LAYERS) || defined(RTP_USE_COLOR_ATLAS)
 					float _MipActual=min(mip_selector.x + rtp_mipoffset_color, 6);
-					c = tex2Dlod(_SplatAtlasA, float4(uvSplat01.xy, _MipActual.xx)); col = splat_control1.x * c.rgb; gloss.r = c.a;
-					c = tex2Dlod(_SplatAtlasA, float4(uvSplat01.zw, _MipActual.xx)); col += splat_control1.y * c.rgb; gloss.g = c.a;
+					c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.xy, _MipActual.xx)); col = splat_control1.x * c.rgb; gloss.r = c.a;
+					c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.zw, _MipActual.xx)); col += splat_control1.y * c.rgb; gloss.g = c.a;
 					#if !defined(USE_2_LAYERS_ONLY)
-					c = tex2Dlod(_SplatAtlasA, float4(uvSplat23.xy, _MipActual.xx)); col += splat_control1.z * c.rgb; gloss.b = c.a;
+					c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.xy, _MipActual.xx)); col += splat_control1.z * c.rgb; gloss.b = c.a;
 					#if !defined(USE_3_LAYERS_ONLY)
-					c = tex2Dlod(_SplatAtlasA, float4(uvSplat23.zw, _MipActual.xx)); col += splat_control1.w * c.rgb; gloss.a = c.a;
+					c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.zw, _MipActual.xx)); col += splat_control1.w * c.rgb; gloss.a = c.a;
 					#endif
 					#endif							
 				#else
 					rayPos.w=mip_selector.x+rtp_mipoffset_color;
-					c = tex2Dd(_SplatA0, rayPos.xy, _ddxMain.xy, _ddyMain.xy); col = splat_control1.x * c.rgb; gloss.r = c.a;
-					c = tex2Dd(_SplatA1, rayPos.xy, _ddxMain.xy, _ddyMain.xy); col += splat_control1.y * c.rgb; gloss.g = c.a;
+					c = tex2Dd(_SplatA0, _SplatA0, rayPos.xy, _ddxMain.xy, _ddyMain.xy); col = splat_control1.x * c.rgb; gloss.r = c.a;
+					c = tex2Dd(_SplatA1, _SplatA0, rayPos.xy, _ddxMain.xy, _ddyMain.xy); col += splat_control1.y * c.rgb; gloss.g = c.a;
 					#if !defined(USE_2_LAYERS_ONLY)
-					c = tex2Dd(_SplatA2, rayPos.xy, _ddxMain.xy, _ddyMain.xy); col += splat_control1.z * c.rgb; gloss.b = c.a;
+					c = tex2Dd(_SplatA2, _SplatA0, rayPos.xy, _ddxMain.xy, _ddyMain.xy); col += splat_control1.z * c.rgb; gloss.b = c.a;
 					#if !defined(USE_3_LAYERS_ONLY)
-					c = tex2Dd(_SplatA3, rayPos.xy, _ddxMain.xy, _ddyMain.xy); col += splat_control1.w * c.rgb; gloss.a = c.a;
+					c = tex2Dd(_SplatA3, _SplatA0, rayPos.xy, _ddxMain.xy, _ddyMain.xy); col += splat_control1.w * c.rgb; gloss.a = c.a;
 					#endif
 					#endif	
 					//col = splat_control1.xyz;
@@ -3262,9 +3321,9 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 				#if ( defined(RTP_SNOW) && !defined(UNITY_PASS_SHADOWCASTER) )
 					rayPos.w += snow_depth;
 				#endif				
-				normals_combined = tex2Dd(_BumpMap01, rayPos.xy, _ddxMain.xy*snow_depthMult, _ddyMain.xy*snow_depthMult).rgba*splat_control1.rrgg;
+				normals_combined = tex2Dd(_BumpMap01, _BumpMap01, rayPos.xy, _ddxMain.xy*snow_depthMult, _ddyMain.xy*snow_depthMult).rgba*splat_control1.rrgg;
 				#if !defined(USE_2_LAYERS_ONLY)
-				normals_combined+=tex2Dd(_BumpMap23, rayPos.xy, _ddxMain.xy*snow_depthMult, _ddyMain.xy*snow_depthMult).rgba*splat_control1.bbaa;
+				normals_combined+= tex2Dd(_BumpMap23, _BumpMap01, rayPos.xy, _ddxMain.xy*snow_depthMult, _ddyMain.xy*snow_depthMult).rgba*splat_control1.bbaa;
 				#endif							
 				n.xy=(normals_combined.rg+normals_combined.ba)*2-1;
 				n.xy*=_uv_Relief_z;
@@ -3367,7 +3426,7 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 			#if !defined(_4LAYERS) || defined(RTP_USE_COLOR_ATLAS)
 
 				// ponownie przelicz uvSplat01 i uvSplat23 dla triplanar (nadpisane powyzej)
-				#if defined(RTP_USE_COLOR_ATLAS) && defined(RTP_TRIPLANAR)
+				#if (defined(RTP_USE_COLOR_ATLAS)  || !defined(_4LAYERS)) && defined(RTP_TRIPLANAR)
 					float3 uvTRItmp=float3(_INPUT_uv.xy, mip_selector.x+rtp_mipoffset_color);
 					#if defined(RTP_PM_SHADING) && !defined(UNITY_PASS_SHADOWCASTER)
 						#ifdef USE_EXTRUDE_REDUCTION
@@ -3384,69 +3443,69 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 				#endif
 							
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_4)
-					half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_0)
-					half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_5)
-					half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_1)
-					half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_6)
-					half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_2)
-					half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_7)
-					half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_3)
-					half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 			#else
 				rayPos.w=mip_selector.x+rtp_mipoffset_color;
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_4)
-					half4 csnow = tex2Dlod(_SplatB0, rayPos.xyww+SNOW_PM_OFFSET);
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatB0, _SplatA0, rayPos.xyww+SNOW_PM_OFFSET);
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_0)
-					half4 csnow = tex2Dlod(_SplatA0, rayPos.xyww+SNOW_PM_OFFSET);
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatA0, rayPos.xyww+SNOW_PM_OFFSET);
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_5)
-					half4 csnow = tex2Dlod(_SplatB1, rayPos.xyww+SNOW_PM_OFFSET);
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatB1, _SplatA0, rayPos.xyww+SNOW_PM_OFFSET);
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_1)
-					half4 csnow = tex2Dlod(_SplatA1, rayPos.xyww+SNOW_PM_OFFSET);
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatA1, _SplatA0, rayPos.xyww+SNOW_PM_OFFSET);
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_6)
-					half4 csnow = tex2Dlod(_SplatB2, rayPos.xyww+SNOW_PM_OFFSET);
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatB2, _SplatA0, rayPos.xyww+SNOW_PM_OFFSET);
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_2)
-					half4 csnow = tex2Dlod(_SplatA2, rayPos.xyww+SNOW_PM_OFFSET);
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatA2, _SplatA0, rayPos.xyww+SNOW_PM_OFFSET);
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_7)
-					half4 csnow = tex2Dlod(_SplatB3, rayPos.xyww+SNOW_PM_OFFSET);
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatB3, _SplatA0, rayPos.xyww+SNOW_PM_OFFSET);
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_3)
-					half4 csnow = tex2Dlod(_SplatA3, rayPos.xyww+SNOW_PM_OFFSET);
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatA3, _SplatA0, rayPos.xyww+SNOW_PM_OFFSET);
 					GETrtp_snow_TEX
 				#endif
 			#endif	
@@ -3478,7 +3537,7 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 				//_TERRAIN_SHADOW_STEPS=min(_TERRAIN_SHADOW_STEPS, ((EyeDirTan.z>0) ? (1-rayPos_shadows.z) : rayPos_shadows.z) / abs(EyeDirTan.z));
 				for(int i=0; i<_TERRAIN_SHADOW_STEPS; i++) {
 					rayPos_shadows.xyz+=EyeDirTan;
-					_h=dot(splat_control1, tex2Dlod(_TERRAIN_HeightMap, rayPos_shadows.xyww));
+					_h=dot(splat_control1, UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, rayPos_shadows.xyww));
 					hit_flag=_h >= rayPos_shadows.z;
 					if (hit_flag) break;
 					h_prev=_h;
@@ -3496,13 +3555,13 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 							float dh;
 							
 							rayPos_shadows.xyz += (1+_TERRAIN_ShadowSoftnessFade)*EyeDirTan.xyz; rayPos_shadows.w++;
-							dh = saturate( dot(splat_control1, tex2Dlod(_TERRAIN_HeightMap, rayPos_shadows.xyww)) - rayPos_shadows.z ); // weight 1 (mip+1 frequency)
+							dh = saturate( dot(splat_control1, UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, rayPos_shadows.xyww)) - rayPos_shadows.z ); // weight 1 (mip+1 frequency)
 							
 							rayPos_shadows.xyz += (1+_TERRAIN_ShadowSoftnessFade*3)*EyeDirTan.xyz; rayPos_shadows.w++;
-							dh += saturate( dot(splat_control1, tex2Dlod(_TERRAIN_HeightMap, rayPos_shadows.xyww)) - rayPos_shadows.z )*4; // weight 4 (mip+2 frequency)
+							dh += saturate( dot(splat_control1, UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, rayPos_shadows.xyww)) - rayPos_shadows.z )*4; // weight 4 (mip+2 frequency)
 							
 							rayPos_shadows.xyz += (1+_TERRAIN_ShadowSoftnessFade*7)*EyeDirTan.xyz; rayPos_shadows.w++;
-							dh += saturate( dot(splat_control1, tex2Dlod(_TERRAIN_HeightMap, rayPos_shadows.xyww)) - rayPos_shadows.z )*8; // weight 8 (mip+3 frequency)
+							dh += saturate( dot(splat_control1, UNITY_SAMPLE_TEX2D_LOD(_TERRAIN_HeightMap, rayPos_shadows.xyww)) - rayPos_shadows.z )*8; // weight 8 (mip+3 frequency)
 
 							shadow_atten=1-saturate(dh*exp2(_TERRAIN_ShadowSmoothing));						
 						}						
@@ -3552,9 +3611,9 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 					rayPos.xyz+=EyeDirTan;
 			 		float4 tH;
 					#ifdef USE_EXTRUDE_REDUCTION
-						tH=lerp(tex2Dlod(_TERRAIN_HeightMap2, rayPos.xyww), 1, PER_LAYER_HEIGHT_MODIFIER4567);
+						tH=lerp(UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, rayPos.xyww), 1, PER_LAYER_HEIGHT_MODIFIER4567);
 					#else
-						tH=tex2Dlod(_TERRAIN_HeightMap2, rayPos.xyww);
+						tH= UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, rayPos.xyww);
 					#endif						
 					_h=saturate(dot(splat_control2, tH));
 					hit_flag=_h >= rayPos.z;
@@ -3570,9 +3629,9 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 					rayPos.xyz-=EyeDirTan*(1 - scl); // back
 			 		float4 tH;
 					#ifdef USE_EXTRUDE_REDUCTION
-						tH=lerp(tex2Dlod(_TERRAIN_HeightMap2, rayPos.xyww), 1, PER_LAYER_HEIGHT_MODIFIER4567);
+						tH=lerp(UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, rayPos.xyww), 1, PER_LAYER_HEIGHT_MODIFIER4567);
 					#else
-						tH=tex2Dlod(_TERRAIN_HeightMap2, rayPos.xyww);
+						tH= UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, rayPos.xyww);
 					#endif						
 					float _nh=saturate(dot(splat_control2, tH));
 					if (_nh >= rayPos.z) {
@@ -3777,10 +3836,10 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 			float4 c;
 			float4 gloss;
 			float _MipActual=min(mip_selector.x + rtp_mipoffset_color,6);
-			c = tex2Dlod(_SplatAtlasB, float4(uvSplat01.xy, _MipActual.xx)); col = splat_control2.x * c.rgb; gloss.r = c.a;
-			c = tex2Dlod(_SplatAtlasB, float4(uvSplat01.zw, _MipActual.xx)); col += splat_control2.y * c.rgb; gloss.g = c.a;
-			c = tex2Dlod(_SplatAtlasB, float4(uvSplat23.xy, _MipActual.xx)); col += splat_control2.z * c.rgb; gloss.b = c.a;
-			c = tex2Dlod(_SplatAtlasB, float4(uvSplat23.zw, _MipActual.xx)); col += splat_control2.w * c.rgb; gloss.a = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.xy, _MipActual.xx)); col = splat_control2.x * c.rgb; gloss.r = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.zw, _MipActual.xx)); col += splat_control2.y * c.rgb; gloss.g = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.xy, _MipActual.xx)); col += splat_control2.z * c.rgb; gloss.b = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.zw, _MipActual.xx)); col += splat_control2.w * c.rgb; gloss.a = c.a;
 			
 			float glcombined = dot(gloss, splat_control2);
 						
@@ -3834,8 +3893,8 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 			#if ( defined(RTP_SNOW) && !defined(UNITY_PASS_SHADOWCASTER) )
 				rayPos.w += snow_depth;
 			#endif
-			normals_combined = tex2Dlod(_BumpMap45, rayPos.xyww).rgba*splat_control2.rrgg;
-			normals_combined+=tex2Dlod(_BumpMap67, rayPos.xyww).rgba*splat_control2.bbaa;
+			normals_combined = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_BumpMap45, _BumpMap01, rayPos.xyww).rgba*splat_control2.rrgg;
+			normals_combined+= UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_BumpMap67, _BumpMap01, rayPos.xyww).rgba*splat_control2.bbaa;
 			n.xy=(normals_combined.rg+normals_combined.ba)*2-1;
 			n.xy*=_uv_Relief_z;
 			n.z = sqrt(1 - saturate(dot(n.xy, n.xy)));
@@ -3931,35 +3990,35 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 	 		#if !defined(RTP_HARD_CROSSPASS) || ( defined(RTP_HARD_CROSSPASS) && (defined(RTP_47SHADING_POM_HI) || defined(RTP_47SHADING_POM_MED) || defined(RTP_47SHADING_POM_LO) || defined(RTP_47SHADING_PM)) )
 			#if ( defined(RTP_SNOW) && !defined(UNITY_PASS_SHADOWCASTER) ) && !defined(RTP_SIMPLE_SHADING) && ( defined(RTP_SNW_CHOOSEN_LAYER_COLOR_0) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_1) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_2) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_3) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_4) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_5) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_6) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_7) )
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_0)
-					half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_4)
-					half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_1)
-					half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_5)
-					half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_2)
-					half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_6)
-					half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_3)
-					half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_7)
-					half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 			#endif
@@ -3993,7 +4052,7 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 				//_TERRAIN_SHADOW_STEPS=min(_TERRAIN_SHADOW_STEPS, ((EyeDirTan.z>0) ? (1-rayPos_shadows.z) : rayPos_shadows.z) / abs(EyeDirTan.z));
 				for(int i=0; i<_TERRAIN_SHADOW_STEPS; i++) {
 					rayPos_shadows.xyz+=EyeDirTan;
-					_h=dot(splat_control2, tex2Dlod(_TERRAIN_HeightMap2, rayPos_shadows.xyww));
+					_h=dot(splat_control2, UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, rayPos_shadows.xyww));
 					hit_flag=_h >= rayPos_shadows.z;
 					if (hit_flag) break;
 					h_prev=_h;
@@ -4012,13 +4071,13 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 								float dh;
 								
 								rayPos_shadows.xyz += (1+_TERRAIN_ShadowSoftnessFade)*EyeDirTan.xyz; rayPos_shadows.w++;
-								dh = saturate( dot(splat_control2, tex2Dlod(_TERRAIN_HeightMap2, rayPos_shadows.xyww)) - rayPos_shadows.z ); // weight 1 (mip+1 frequency)
+								dh = saturate( dot(splat_control2, UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, rayPos_shadows.xyww)) - rayPos_shadows.z ); // weight 1 (mip+1 frequency)
 								
 								rayPos_shadows.xyz += (1+_TERRAIN_ShadowSoftnessFade*3)*EyeDirTan.xyz; rayPos_shadows.w++;
-								dh += saturate( dot(splat_control2, tex2Dlod(_TERRAIN_HeightMap2, rayPos_shadows.xyww)) - rayPos_shadows.z )*4; // weight 4 (mip+2 frequency)
+								dh += saturate( dot(splat_control2, UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, rayPos_shadows.xyww)) - rayPos_shadows.z )*4; // weight 4 (mip+2 frequency)
 								
 								rayPos_shadows.xyz += (1+_TERRAIN_ShadowSoftnessFade*7)*EyeDirTan.xyz; rayPos_shadows.w++;
-								dh += saturate( dot(splat_control2, tex2Dlod(_TERRAIN_HeightMap2, rayPos_shadows.xyww)) - rayPos_shadows.z )*8; // weight 8 (mip+3 frequency)
+								dh += saturate( dot(splat_control2, UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_TERRAIN_HeightMap2, _TERRAIN_HeightMap, rayPos_shadows.xyww)) - rayPos_shadows.z )*8; // weight 8 (mip+3 frequency)
 
 								shadow_atten=1-saturate(dh*exp2(_TERRAIN_ShadowSmoothing));						
 							}							
@@ -4111,10 +4170,10 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 			float4 _MipActual=min(mip_selector.x + rtp_mipoffset_color+MIPmult0123, 6);
 			half4 c;
 			float4 gloss;
-			c = tex2Dlod(_SplatAtlasA, float4(uvSplat01.xy, _MipActual.xx)); col = splat_control1.x * c.rgb; gloss.r = c.a;
-			c = tex2Dlod(_SplatAtlasA, float4(uvSplat01.zw, _MipActual.yy)); col += splat_control1.y * c.rgb; gloss.g = c.a;
-			c = tex2Dlod(_SplatAtlasA, float4(uvSplat23.xy, _MipActual.zz)); col += splat_control1.z * c.rgb; gloss.b = c.a;
-			c = tex2Dlod(_SplatAtlasA, float4(uvSplat23.zw, _MipActual.ww)); col += splat_control1.w * c.rgb; gloss.a = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.xy, _MipActual.xx)); col = splat_control1.x * c.rgb; gloss.r = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.zw, _MipActual.yy)); col += splat_control1.y * c.rgb; gloss.g = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.xy, _MipActual.zz)); col += splat_control1.z * c.rgb; gloss.b = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.zw, _MipActual.ww)); col += splat_control1.w * c.rgb; gloss.a = c.a;
 			
 			float glcombined = dot(gloss, splat_control1);
 							
@@ -4136,10 +4195,10 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 				colBlend += splat_control1.w * UV_BLEND_ROUTE_LAYER_3;
 			#endif
 						
-			c = tex2Dlod(_SplatAtlasB, float4(uvSplat01.xy, _MipActual.xx)); col += splat_control2.x * c.rgb; gloss.r = c.a;
-			c = tex2Dlod(_SplatAtlasB, float4(uvSplat01.zw, _MipActual.yy)); col += splat_control2.y * c.rgb; gloss.g = c.a;
-			c = tex2Dlod(_SplatAtlasB, float4(uvSplat23.xy, _MipActual.zz)); col += splat_control2.z * c.rgb; gloss.b = c.a;
-			c = tex2Dlod(_SplatAtlasB, float4(uvSplat23.zw, _MipActual.ww)); col += splat_control2.w * c.rgb; gloss.a = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.xy, _MipActual.xx)); col += splat_control2.x * c.rgb; gloss.r = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.zw, _MipActual.yy)); col += splat_control2.y * c.rgb; gloss.g = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.xy, _MipActual.zz)); col += splat_control2.z * c.rgb; gloss.b = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.zw, _MipActual.ww)); col += splat_control2.w * c.rgb; gloss.a = c.a;
 			glcombined += dot(gloss, splat_control2);
 						
 			#ifdef RTP_UV_BLEND
@@ -4206,35 +4265,35 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 			// snow color
 			#if ( defined(RTP_SNOW) && !defined(UNITY_PASS_SHADOWCASTER) ) && !defined(RTP_SIMPLE_SHADING) && ( defined(RTP_SNW_CHOOSEN_LAYER_COLOR_0) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_1) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_2) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_3) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_4) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_5) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_6) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_7) )
 			#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_0)
-				half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
+				half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
 				GETrtp_snow_TEX
 			#endif
 			#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_4)
-				half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
+				half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
 				GETrtp_snow_TEX
 			#endif
 			#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_1)
-				half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
+				half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
 				GETrtp_snow_TEX
 			#endif			
 			#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_5)
-				half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
+				half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
 				GETrtp_snow_TEX
 			#endif			
 			#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_2)
-				half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
+				half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
 				GETrtp_snow_TEX
 			#endif				
 			#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_6)
-				half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
+				half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
 				GETrtp_snow_TEX
 			#endif			
 			#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_3)
-				half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
+				half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
 				GETrtp_snow_TEX
 			#endif				
 			#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_7)
-				half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
+				half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
 				GETrtp_snow_TEX
 			#endif		
 			#endif
@@ -4373,28 +4432,28 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 				//
 				float4 _MixMipActual=uvTRI.zzzz+rtp_mipoffset_color+MIPmult0123;
 				float4 tmp_gloss=0;
-				#if defined(RTP_USE_COLOR_ATLAS)
+				#if defined(RTP_USE_COLOR_ATLAS) || !defined(_4LAYERS)
 					_MixMipActual=min( _MixMipActual, float4(6,6,6,6) );
 					float4 hi_mip_adjustTMP1=(exp2(_MixMipActual))*_SplatAtlasA_TexelSize.x; 
 					uvSplat01=frac(uvTRI.xy).xyxy*(_mult.xxxx-hi_mip_adjustTMP1)+_off.xxxx+0.5*hi_mip_adjustTMP1;
 					uvSplat01.zw+=float2(0.5,0);
 					uvSplat23=uvSplat01.xyxy+float4(0,0.5,0.5,0.5);
-					c = tex2Dlod(_SplatAtlasA, float4(uvSplat01.xy, _MixMipActual.xx)); col += c.rgb*splat_control1.x; tmp_gloss.r = c.a;
-					c = tex2Dlod(_SplatAtlasA, float4(uvSplat01.zw, _MixMipActual.yy)); col += c.rgb*splat_control1.y; tmp_gloss.g = c.a;
+					c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.xy, _MixMipActual.xx)); col += c.rgb*splat_control1.x; tmp_gloss.r = c.a;
+					c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.zw, _MixMipActual.yy)); col += c.rgb*splat_control1.y; tmp_gloss.g = c.a;
 					#if !defined(USE_2_LAYERS_ONLY)
-					c = tex2Dlod(_SplatAtlasA, float4(uvSplat23.xy, _MixMipActual.zz)); col += c.rgb*splat_control1.z; tmp_gloss.b = c.a;
+					c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.xy, _MixMipActual.zz)); col += c.rgb*splat_control1.z; tmp_gloss.b = c.a;
 					#if !defined(USE_3_LAYERS_ONLY)
-					c = tex2Dlod(_SplatAtlasA, float4(uvSplat23.zw, _MixMipActual.ww)); col += c.rgb*splat_control1.w; tmp_gloss.a = c.a;
+					c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.zw, _MixMipActual.ww)); col += c.rgb*splat_control1.w; tmp_gloss.a = c.a;
 					#endif
 					#endif							
 				#else
 					float4 mipTweak=exp2(MIPmult0123);				
-					c = tex2Dd(_SplatA0, uvTRI.xy, _ddxMainTRI.xy*mipTweak.x, _ddyMainTRI.xy*mipTweak.x); col += c.rgb*splat_control1.x; tmp_gloss.r=c.a;
-					c = tex2Dd(_SplatA1, uvTRI.xy, _ddxMainTRI.xy*mipTweak.y, _ddyMainTRI.xy*mipTweak.y); col += c.rgb*splat_control1.y; tmp_gloss.g=c.a;
+					c = tex2Dd(_SplatA0, _SplatA0, uvTRI.xy, _ddxMainTRI.xy*mipTweak.x, _ddyMainTRI.xy*mipTweak.x); col += c.rgb*splat_control1.x; tmp_gloss.r=c.a;
+					c = tex2Dd(_SplatA1, _SplatA0, uvTRI.xy, _ddxMainTRI.xy*mipTweak.y, _ddyMainTRI.xy*mipTweak.y); col += c.rgb*splat_control1.y; tmp_gloss.g=c.a;
 					#if !defined(USE_2_LAYERS_ONLY)
-					c = tex2Dd(_SplatA2, uvTRI.xy, _ddxMainTRI.xy*mipTweak.z, _ddyMainTRI.xy*mipTweak.z); col += c.rgb*splat_control1.z; tmp_gloss.b=c.a;
+					c = tex2Dd(_SplatA2, _SplatA0, uvTRI.xy, _ddxMainTRI.xy*mipTweak.z, _ddyMainTRI.xy*mipTweak.z); col += c.rgb*splat_control1.z; tmp_gloss.b=c.a;
 					#if !defined(USE_3_LAYERS_ONLY)
-					c = tex2Dd(_SplatA3, uvTRI.xy, _ddxMainTRI.xy*mipTweak.w, _ddyMainTRI.xy*mipTweak.w); col += c.rgb*splat_control1.w; tmp_gloss.a=c.a;
+					c = tex2Dd(_SplatA3, _SplatA0, uvTRI.xy, _ddxMainTRI.xy*mipTweak.w, _ddyMainTRI.xy*mipTweak.w); col += c.rgb*splat_control1.w; tmp_gloss.a=c.a;
 					#endif
 					#endif		
 				#endif						
@@ -4402,7 +4461,7 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 			
 				#if defined(RTP_UV_BLEND)
 					_MixMipActual=uvTRI.zzzz+rtp_mipoffset_color+MIPmult0123+log2(MixScaleRouted0123);
-					#if defined(RTP_USE_COLOR_ATLAS)
+					#if defined(RTP_USE_COLOR_ATLAS) || !defined(_4LAYERS)
 						_MixMipActual=min(_MixMipActual, float4(6,6,6,6));
 						_MixMipActual=max(float4(0,0,0,0),_MixMipActual); // nie moze byc ujemny do obj hi_mip_adjustMix ponizej
 						float4 hi_mip_adjustMix=exp2(_MixMipActual)*_SplatAtlasA_TexelSize.x;
@@ -4436,23 +4495,23 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 				//
 				#if !defined(_4LAYERS) || defined(RTP_USE_COLOR_ATLAS)
 					float4 _MixMipActual=min(mip_selector.xxxx + rtp_mipoffset_color+MIPmult0123, float4(6,6,6,6));
-					c = tex2Dlod(_SplatAtlasA, float4(uvSplat01.xy, _MixMipActual.xx)); col = splat_control1.x * c.rgb; gloss.r = c.a;
-					c = tex2Dlod(_SplatAtlasA, float4(uvSplat01.zw, _MixMipActual.yy)); col += splat_control1.y * c.rgb; gloss.g = c.a;
+					c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.xy, _MixMipActual.xx)); col = splat_control1.x * c.rgb; gloss.r = c.a;
+					c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.zw, _MixMipActual.yy)); col += splat_control1.y * c.rgb; gloss.g = c.a;
 					#if !defined(USE_2_LAYERS_ONLY)
-						c = tex2Dlod(_SplatAtlasA, float4(uvSplat23.xy, _MixMipActual.zz)); col += splat_control1.z * c.rgb; gloss.b = c.a;
+						c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.xy, _MixMipActual.zz)); col += splat_control1.z * c.rgb; gloss.b = c.a;
 						#if !defined(USE_3_LAYERS_ONLY)
-							c = tex2Dlod(_SplatAtlasA, float4(uvSplat23.zw, _MixMipActual.ww)); col += splat_control1.w * c.rgb; gloss.a = c.a;
+							c = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.zw, _MixMipActual.ww)); col += splat_control1.w * c.rgb; gloss.a = c.a;
 						#endif
 					#endif							
 				#else
 					float4 _MixMipActual=mip_selector.xxxx + rtp_mipoffset_color+MIPmult0123;
 					float4 mipTweak=exp2(MIPmult0123);
-					c = tex2Dd(_SplatA0, _INPUT_uv.xy, _ddxMain.xy*mipTweak.x, _ddyMain.xy*mipTweak.x); col = splat_control1.x * c.rgb; gloss.r = c.a;
-					c = tex2Dd(_SplatA1, _INPUT_uv.xy, _ddxMain.xy*mipTweak.y, _ddyMain.xy*mipTweak.y); col += splat_control1.y * c.rgb; gloss.g = c.a;
+					c = tex2Dd(_SplatA0, _SplatA0, _INPUT_uv.xy, _ddxMain.xy*mipTweak.x, _ddyMain.xy*mipTweak.x); col = splat_control1.x * c.rgb; gloss.r = c.a;
+					c = tex2Dd(_SplatA1, _SplatA0, _INPUT_uv.xy, _ddxMain.xy*mipTweak.y, _ddyMain.xy*mipTweak.y); col += splat_control1.y * c.rgb; gloss.g = c.a;
 					#if !defined(USE_2_LAYERS_ONLY)
-						c = tex2Dd(_SplatA2, _INPUT_uv.xy, _ddxMain.xy*mipTweak.z, _ddyMain.xy*mipTweak.z); col += splat_control1.z * c.rgb; gloss.b = c.a;
+						c = tex2Dd(_SplatA2, _SplatA0, _INPUT_uv.xy, _ddxMain.xy*mipTweak.z, _ddyMain.xy*mipTweak.z); col += splat_control1.z * c.rgb; gloss.b = c.a;
 						#if !defined(USE_3_LAYERS_ONLY)
-							c = tex2Dd(_SplatA3, _INPUT_uv.xy, _ddxMain.xy*mipTweak.w, _ddyMain.xy*mipTweak.w); col += splat_control1.w * c.rgb; gloss.a = c.a;				
+							c = tex2Dd(_SplatA3, _SplatA0, _INPUT_uv.xy, _ddxMain.xy*mipTweak.w, _ddyMain.xy*mipTweak.w); col += splat_control1.w * c.rgb; gloss.a = c.a;
 						#endif
 					#endif							
 				#endif
@@ -4555,7 +4614,7 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 			#if !defined(_4LAYERS) || defined(RTP_USE_COLOR_ATLAS)
 			
 				// ponownie przelicz uvSplat01 i uvSplat23 dla triplanar (nadpisane powyzej)
-				#if defined(RTP_USE_COLOR_ATLAS) && defined(RTP_TRIPLANAR)
+				#if (defined(RTP_USE_COLOR_ATLAS) || !defined(_4LAYERS)) && defined(RTP_TRIPLANAR)
 					float3 uvTRItmp=float3(_INPUT_uv.xy, mip_selector.x+rtp_mipoffset_color);
 					float hi_mip_adjustTMP2=(exp2(min(uvTRItmp.z,6)))*_SplatAtlasA_TexelSize.x; 
 					uvSplat01=frac(uvTRItmp.xy).xyxy*(_mult-hi_mip_adjustTMP2)+_off+0.5*hi_mip_adjustTMP2;
@@ -4564,68 +4623,68 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 				#endif
 			
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_4)
-					half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_0)
-					half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_5)
-					half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_1)
-					half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_6)
-					half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_2)
-					half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_7)
-					half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_3)
-					half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 			#else
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_4)
-					half4 csnow = tex2Dlod(_SplatB0, float4(_INPUT_uv.xy, mip_selector + rtp_mipoffset_color));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatB0, _SplatA0, float4(_INPUT_uv.xy, mip_selector + rtp_mipoffset_color));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_0)
-					half4 csnow = tex2Dlod(_SplatA0, float4(_INPUT_uv.xy, mip_selector + rtp_mipoffset_color));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatA0, float4(_INPUT_uv.xy, mip_selector + rtp_mipoffset_color));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_5)
-					half4 csnow = tex2Dlod(_SplatB1, float4(_INPUT_uv.xy, mip_selector + rtp_mipoffset_color));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatB1, _SplatA0, float4(_INPUT_uv.xy, mip_selector + rtp_mipoffset_color));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_1)
-					half4 csnow = tex2Dlod(_SplatA1, float4(_INPUT_uv.xy, mip_selector + rtp_mipoffset_color));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatA1, _SplatA0, float4(_INPUT_uv.xy, mip_selector + rtp_mipoffset_color));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_6)
-					half4 csnow = tex2Dlod(_SplatB2, float4(_INPUT_uv.xy, mip_selector + rtp_mipoffset_color));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatB2, _SplatA0, float4(_INPUT_uv.xy, mip_selector + rtp_mipoffset_color));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_2)
-					half4 csnow = tex2Dlod(_SplatA2, float4(_INPUT_uv.xy, mip_selector + rtp_mipoffset_color));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatA2, _SplatA0, float4(_INPUT_uv.xy, mip_selector + rtp_mipoffset_color));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_7)
-					half4 csnow = tex2Dlod(_SplatB3, float4(_INPUT_uv.xy, mip_selector + rtp_mipoffset_color));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatB3, _SplatA0, float4(_INPUT_uv.xy, mip_selector + rtp_mipoffset_color));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_3)
-					half4 csnow = tex2Dlod(_SplatA3, float4(_INPUT_uv.xy, mip_selector + rtp_mipoffset_color));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatA3, _SplatA0, float4(_INPUT_uv.xy, mip_selector + rtp_mipoffset_color));
 					GETrtp_snow_TEX
 				#endif
 			#endif	
@@ -4763,10 +4822,10 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 			#endif
 			half4 c;
 			float4 gloss;
-			c = tex2Dlod(_SplatAtlasB, float4(uvSplat01.xy, _MixMipActual.xx)); col = splat_control2.x * c.rgb; gloss.r = c.a;
-			c = tex2Dlod(_SplatAtlasB, float4(uvSplat01.zw, _MixMipActual.yy)); col += splat_control2.y * c.rgb; gloss.g = c.a;
-			c = tex2Dlod(_SplatAtlasB, float4(uvSplat23.xy, _MixMipActual.zz)); col += splat_control2.z * c.rgb; gloss.b = c.a;
-			c = tex2Dlod(_SplatAtlasB, float4(uvSplat23.zw, _MixMipActual.ww)); col += splat_control2.w * c.rgb; gloss.a = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.xy, _MixMipActual.xx)); col = splat_control2.x * c.rgb; gloss.r = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.zw, _MixMipActual.yy)); col += splat_control2.y * c.rgb; gloss.g = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.xy, _MixMipActual.zz)); col += splat_control2.z * c.rgb; gloss.b = c.a;
+			c = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.zw, _MixMipActual.ww)); col += splat_control2.w * c.rgb; gloss.a = c.a;
 			
 			#ifdef RTP_UV_BLEND
 				_MixMipActual=min(mip_selector.xxxx + rtp_mipoffset_color + MIPmult4567 + log2(MixScaleRouted4567), float4(6,6,6,6)); // na layerach 4-7 w trybie 8 layers nie mozemy korzystac z UV blendu kanaow 4-7 (bo nie wiemy w define pobierajcym tekstur ponizej czy to pierwszy czy drugi set layerow) dlatego uzywamy tutaj maski 0123
@@ -4836,35 +4895,35 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 	 		#if !defined(RTP_HARD_CROSSPASS) || ( defined(RTP_HARD_CROSSPASS) && (defined(RTP_47SHADING_POM_HI) || defined(RTP_47SHADING_POM_MED) || defined(RTP_47SHADING_POM_LO) || defined(RTP_47SHADING_PM)) )
 			#if ( defined(RTP_SNOW) && !defined(UNITY_PASS_SHADOWCASTER) ) && !defined(RTP_SIMPLE_SHADING) && ( defined(RTP_SNW_CHOOSEN_LAYER_COLOR_0) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_1) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_2) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_3) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_4) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_5) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_6) || defined(RTP_SNW_CHOOSEN_LAYER_COLOR_7) )
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_0)
-					half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_4)
-					half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LODSAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.xy, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_1)
-					half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif			
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_5)
-					half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LODSAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat01.zw, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif			
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_2)
-					half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif				
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_6)
-					half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.xy, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif			
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_3)
-					half4 csnow = tex2Dlod(_SplatAtlasA, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD(_SplatAtlasA, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif				
 				#if defined(RTP_SNW_CHOOSEN_LAYER_COLOR_7)
-					half4 csnow = tex2Dlod(_SplatAtlasB, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
+					half4 csnow = UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_SplatAtlasB, _SplatAtlasA, float4(uvSplat23.zw, min(mip_selector + rtp_mipoffset_color,6)));
 					GETrtp_snow_TEX
 				#endif		
 			#endif
@@ -4989,19 +5048,19 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 		#if ( defined(RTP_SNOW) && !defined(UNITY_PASS_SHADOWCASTER) )
 			mipN += snow_depth;
 		#endif
-		n.xy = tex2Dlod(_BumpMap01, float4(_INPUT_uv.xy*MixScaleRouted0123.x,  mipN.xx)).rg*splat_control1.r;
-		n.xy += tex2Dlod(_BumpMap01, float4(_INPUT_uv.xy*MixScaleRouted0123.y,  mipN.yy)).ba*splat_control1.g;
-		n.xy += tex2Dlod(_BumpMap23, float4(_INPUT_uv.xy*MixScaleRouted0123.z,  mipN.zz)).rg*splat_control1.b;
-		n.xy += tex2Dlod(_BumpMap23, float4(_INPUT_uv.xy*MixScaleRouted0123.w,  mipN.ww)).ba*splat_control1.a;
+		n.xy = UNITY_SAMPLE_TEX2D_LOD(_BumpMap01, float4(_INPUT_uv.xy*MixScaleRouted0123.x,  mipN.xx)).rg*splat_control1.r;
+		n.xy += UNITY_SAMPLE_TEX2D_LOD(_BumpMap01, float4(_INPUT_uv.xy*MixScaleRouted0123.y,  mipN.yy)).ba*splat_control1.g;
+		n.xy += UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_BumpMap23, _BumpMap01, float4(_INPUT_uv.xy*MixScaleRouted0123.z,  mipN.zz)).rg*splat_control1.b;
+		n.xy += UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_BumpMap23, _BumpMap01, float4(_INPUT_uv.xy*MixScaleRouted0123.w,  mipN.ww)).ba*splat_control1.a;
 		#ifndef _4LAYERS
 			mipN=mip_selector.xxxx+rtp_mipoffset_bump+MIPmult4567+log2(MixScaleRouted4567);
 			#if ( defined(RTP_SNOW) && !defined(UNITY_PASS_SHADOWCASTER) )
 				mipN += snow_depth;
 			#endif
-			n.xy += tex2Dlod(_BumpMap45, float4(_INPUT_uv.xy*MixScaleRouted4567.x,  mipN.xx)).rg*splat_control2.r;
-			n.xy += tex2Dlod(_BumpMap45, float4(_INPUT_uv.xy*MixScaleRouted4567.y,  mipN.yy)).ba*splat_control2.g;
-			n.xy += tex2Dlod(_BumpMap67, float4(_INPUT_uv.xy*MixScaleRouted4567.z,  mipN.zz)).rg*splat_control2.b;
-			n.xy += tex2Dlod(_BumpMap67, float4(_INPUT_uv.xy*MixScaleRouted4567.w,  mipN.ww)).ba*splat_control2.a;
+			n.xy += UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_BumpMap45, _BumpMap01, float4(_INPUT_uv.xy*MixScaleRouted4567.x,  mipN.xx)).rg*splat_control2.r;
+			n.xy += UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_BumpMap45, _BumpMap01, float4(_INPUT_uv.xy*MixScaleRouted4567.y,  mipN.yy)).ba*splat_control2.g;
+			n.xy += UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_BumpMap67, _BumpMap01, float4(_INPUT_uv.xy*MixScaleRouted4567.z,  mipN.zz)).rg*splat_control2.b;
+			n.xy += UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_BumpMap67, _BumpMap01, float4(_INPUT_uv.xy*MixScaleRouted4567.w,  mipN.ww)).ba*splat_control2.a;
 		#endif
 		n.xy=n.xy*2-1;
 		n.z = sqrt(1 - saturate(dot(n.xy, n.xy)));
@@ -5187,28 +5246,28 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 		#if defined(RTP_SNW_CHOOSEN_LAYER_NORM_0) || defined(RTP_SNW_CHOOSEN_LAYER_NORM_1) || defined(RTP_SNW_CHOOSEN_LAYER_NORM_2) || defined(RTP_SNW_CHOOSEN_LAYER_NORM_3) || defined(RTP_SNW_CHOOSEN_LAYER_NORM_4) || defined(RTP_SNW_CHOOSEN_LAYER_NORM_5) || defined(RTP_SNW_CHOOSEN_LAYER_NORM_6) || defined(RTP_SNW_CHOOSEN_LAYER_NORM_7)
 			float3 n;
 			#ifdef RTP_SNW_CHOOSEN_LAYER_NORM_0
-				n.xy=tex2Dlod(_BumpMap01, float4(IN_uv_Relief_Offset.xy+SNOW_PM_OFFSET.xy, mip_selector + rtp_mipoffset_bump)).rg*2-1;
+				n.xy= UNITY_SAMPLE_TEX2D_LOD(_BumpMap01, float4(IN_uv_Relief_Offset.xy+SNOW_PM_OFFSET.xy, mip_selector + rtp_mipoffset_bump)).rg*2-1;
 			#endif
 			#ifdef RTP_SNW_CHOOSEN_LAYER_NORM_1
-				n.xy=tex2Dlod(_BumpMap01, float4(IN_uv_Relief_Offset.xy+SNOW_PM_OFFSET.xy, mip_selector + rtp_mipoffset_bump)).ba*2-1;
+				n.xy= UNITY_SAMPLE_TEX2D_LOD(_BumpMap01, float4(IN_uv_Relief_Offset.xy+SNOW_PM_OFFSET.xy, mip_selector + rtp_mipoffset_bump)).ba*2-1;
 			#endif
 			#ifdef RTP_SNW_CHOOSEN_LAYER_NORM_2
-				n.xy=tex2Dlod(_BumpMap23, float4(IN_uv_Relief_Offset.xy+SNOW_PM_OFFSET.xy, mip_selector + rtp_mipoffset_bump)).rg*2-1;
+				n.xy= UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_BumpMap23, _BumpMap01, float4(IN_uv_Relief_Offset.xy+SNOW_PM_OFFSET.xy, mip_selector + rtp_mipoffset_bump)).rg*2-1;
 			#endif
 			#ifdef RTP_SNW_CHOOSEN_LAYER_NORM_3
-				n.xy=tex2Dlod(_BumpMap23, float4(IN_uv_Relief_Offset.xy+SNOW_PM_OFFSET.xy, mip_selector + rtp_mipoffset_bump)).ba*2-1;
+				n.xy= UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_BumpMap23, _BumpMap01, float4(IN_uv_Relief_Offset.xy+SNOW_PM_OFFSET.xy, mip_selector + rtp_mipoffset_bump)).ba*2-1;
 			#endif
 			#ifdef RTP_SNW_CHOOSEN_LAYER_NORM_4
-				n.xy=tex2Dlod(_BumpMap45, float4(IN_uv_Relief_Offset.xy, mip_selector + rtp_mipoffset_bump)).rg*2-1;
+				n.xy= UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_BumpMap45, _BumpMap01, float4(IN_uv_Relief_Offset.xy, mip_selector + rtp_mipoffset_bump)).rg*2-1;
 			#endif
 			#ifdef RTP_SNW_CHOOSEN_LAYER_NORM_5
-				n.xy=tex2Dlod(_BumpMap45, float4(IN_uv_Relief_Offset.xy, mip_selector + rtp_mipoffset_bump)).ba*2-1;
+				n.xy= UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_BumpMap45, _BumpMap01, float4(IN_uv_Relief_Offset.xy, mip_selector + rtp_mipoffset_bump)).ba*2-1;
 			#endif
 			#ifdef RTP_SNW_CHOOSEN_LAYER_NORM_6
-				n.xy=tex2Dlod(_BumpMap67, float4(IN_uv_Relief_Offset.xy, mip_selector + rtp_mipoffset_bump)).rg*2-1;
+				n.xy= UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_BumpMap67, _BumpMap01, float4(IN_uv_Relief_Offset.xy, mip_selector + rtp_mipoffset_bump)).rg*2-1;
 			#endif
 			#ifdef RTP_SNW_CHOOSEN_LAYER_NORM_7
-				n.xy=tex2Dlod(_BumpMap67, float4(IN_uv_Relief_Offset.xy, mip_selector + rtp_mipoffset_bump)).ba*2-1;
+				n.xy= UNITY_SAMPLE_TEX2D_LOD_SAMPLER(_BumpMap67, _BumpMap01, float4(IN_uv_Relief_Offset.xy, mip_selector + rtp_mipoffset_bump)).ba*2-1;
 			#endif
 			n.xy*=_uv_Relief_z;
 			n.z = sqrt(1 - saturate(dot(n.xy, n.xy)));

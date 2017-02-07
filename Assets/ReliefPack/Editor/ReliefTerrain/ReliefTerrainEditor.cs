@@ -619,10 +619,10 @@ public class ReliefTerrainEditor : Editor
                                 tex_importer.isReadable = true;
                                 changed = true;
                             }
-                            if (!tex_importer.normalmap)
+                            if (tex_importer.textureType != TextureImporterType.NormalMap)
                             {
                                 Debug.LogWarning("Normal texture " + n + " (" + ntex.name + ") has been reimported as normal map type.");
-                                tex_importer.normalmap = true;
+                                tex_importer.textureType = TextureImporterType.NormalMap;
                                 changed = true;
                             }
                             if (changed)
@@ -652,10 +652,10 @@ public class ReliefTerrainEditor : Editor
                                 tex_importer.isReadable = true;
                                 changed = true;
                             }
-                            if (!tex_importer.linearTexture)
+                            if (!tex_importer.sRGBTexture)
                             {
                                 Debug.LogWarning("Height texture " + n + " (" + ntex.name + ") has been reimported as linear.");
-                                tex_importer.linearTexture = true;
+                                tex_importer.sRGBTexture = true;
                                 changed = true;
                             }
                             if (changed)
@@ -911,7 +911,7 @@ public class ReliefTerrainEditor : Editor
                                             Debug.LogWarning("Normal texture " + n + " (" + _target.splats[n].name + ") has been imported with " + tex_importer.maxTextureSize + " size.");
                                         }
                                     }
-                                    tex_importer.textureType = TextureImporterType.Bump;
+                                    tex_importer.textureType = TextureImporterType.NormalMap;
                                     AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
                                     ntex = (Texture2D)AssetDatabase.LoadAssetAtPath(path, typeof(Texture2D));
                                     _target.Bumps[n] = ntex;
@@ -956,8 +956,9 @@ public class ReliefTerrainEditor : Editor
                                     Texture2D tex_prev = _target.Heights[n];
                                     TextureImporter tex_importer = (TextureImporter)_importer;
                                     tex_importer.isReadable = true;
-                                    tex_importer.linearTexture = true;
-                                    tex_importer.textureFormat = TextureImporterFormat.Alpha8;
+                                    tex_importer.sRGBTexture = true;
+                                    tex_importer.textureCompression = TextureImporterCompression.Uncompressed;
+                                    tex_importer.textureType = TextureImporterType.SingleChannel;
                                     AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
                                     ntex = (Texture2D)AssetDatabase.LoadAssetAtPath(path, typeof(Texture2D));
                                     _target.Heights[n] = ntex;
@@ -2058,7 +2059,7 @@ public class ReliefTerrainEditor : Editor
                             Texture2D tex = _targetRT.GetSteepnessHeightDirectionTexture(0);
                             if (tex)
                             {
-                                SaveTexture(ref tex, ref _target.save_path_terrain_steepness, "terrain_steepnessMap.png", 0, TextureImporterFormat.AutomaticCompressed, false, false);
+                                SaveTexture(ref tex, ref _target.save_path_terrain_steepness, "terrain_steepnessMap.png", 0, TextureImporterCompression.Compressed, TextureImporterType.Default, false, false);
                             }
                             else
                             {
@@ -2070,7 +2071,7 @@ public class ReliefTerrainEditor : Editor
                             Texture2D tex = _targetRT.GetSteepnessHeightDirectionTexture(1);
                             if (tex)
                             {
-                                SaveTexture(ref tex, ref _target.save_path_terrain_height, "terrain_heightMap.png", 0, TextureImporterFormat.AutomaticCompressed, false, false);
+                                SaveTexture(ref tex, ref _target.save_path_terrain_height, "terrain_heightMap.png", 0, TextureImporterCompression.Compressed, TextureImporterType.Default, false, false);
                             }
                             else
                             {
@@ -2095,7 +2096,7 @@ public class ReliefTerrainEditor : Editor
                             Texture2D tex = _targetRT.GetSteepnessHeightDirectionTexture(2, _target.direction_object);
                             if (tex)
                             {
-                                SaveTexture(ref tex, ref _target.save_path_terrain_direction, "terrain_directionMap.png", 0, TextureImporterFormat.AutomaticCompressed, false, false);
+                                SaveTexture(ref tex, ref _target.save_path_terrain_direction, "terrain_directionMap.png", 0, TextureImporterCompression.Compressed, TextureImporterType.Default, false, false);
                             }
                             else
                             {
@@ -2191,7 +2192,7 @@ public class ReliefTerrainEditor : Editor
                         Texture2D tex = _targetRT.controlA;
                         if (tex)
                         {
-                            SaveTexture(ref tex, ref _targetRT.save_path_controlA, "terrain_splatMapA.png", 0, TextureImporterFormat.ARGB32, true, false, true);
+                            SaveTexture(ref tex, ref _targetRT.save_path_controlA, "terrain_splatMapA.png", 0, TextureImporterCompression.Uncompressed, TextureImporterType.Default, true, false, true);
                         }
                         else
                         {
@@ -2205,7 +2206,7 @@ public class ReliefTerrainEditor : Editor
                             Texture2D tex = _targetRT.controlB;
                             if (tex)
                             {
-                                SaveTexture(ref tex, ref _targetRT.save_path_controlB, "terrain_splatMapB.png", 0, TextureImporterFormat.ARGB32, true, false, true);
+                                SaveTexture(ref tex, ref _targetRT.save_path_controlB, "terrain_splatMapB.png", 0, TextureImporterCompression.Uncompressed, TextureImporterType.Default, true, false, true);
                             }
                             else
                             {
@@ -2253,7 +2254,7 @@ public class ReliefTerrainEditor : Editor
                             Texture2D tex = _targetRT.controlC;
                             if (tex)
                             {
-                                SaveTexture(ref tex, ref _targetRT.save_path_controlC, "terrain_splatMapC.png", 0, TextureImporterFormat.ARGB32, true, false, true);
+                                SaveTexture(ref tex, ref _targetRT.save_path_controlC, "terrain_splatMapC.png", 0, TextureImporterCompression.Uncompressed, TextureImporterType.Default, true, false, true);
                             }
                             else
                             {
@@ -2316,7 +2317,7 @@ public class ReliefTerrainEditor : Editor
                         {
                             DestroyUnusedCombinedTexture(oRef);
                         }
-                        if (SaveTexture(ref _target.splat_atlases[0], ref _target.save_path_atlasA, "atlas_texture_layers_0_to_3.png", 100, TextureImporterFormat.AutomaticCompressed, true))
+                        if (SaveTexture(ref _target.splat_atlases[0], ref _target.save_path_atlasA, "atlas_texture_layers_0_to_3.png", 100, TextureImporterCompression.Compressed, TextureImporterType.Default, true))
                         {
                             string path = AssetDatabase.GetAssetPath(_target.splat_atlases[0]);
                             TextureImporter textureImporter = AssetImporter.GetAtPath(path) as TextureImporter;
@@ -2338,7 +2339,7 @@ public class ReliefTerrainEditor : Editor
                         {
                             DestroyUnusedCombinedTexture(oRef);
                         }
-                        if (SaveTexture(ref _target.splat_atlases[1], ref _target.save_path_atlasB, "atlas_texture_layers_4_to_7.png", 100, TextureImporterFormat.AutomaticCompressed, true))
+                        if (SaveTexture(ref _target.splat_atlases[1], ref _target.save_path_atlasB, "atlas_texture_layers_4_to_7.png", 100, TextureImporterCompression.Compressed, TextureImporterType.Default, true))
                         {
                             _target.splat_atlases[1].wrapMode = TextureWrapMode.Clamp;
                             _target.splat_atlases[1].filterMode = FilterMode.Trilinear;
@@ -2359,7 +2360,7 @@ public class ReliefTerrainEditor : Editor
                         {
                             DestroyUnusedCombinedTexture(oRef);
                         }
-                        if (SaveTexture(ref _target.splat_atlases[2], ref _target.save_path_atlasC, "atlas_texture_layers_8_to_11.png", 100, TextureImporterFormat.AutomaticCompressed, true))
+                        if (SaveTexture(ref _target.splat_atlases[2], ref _target.save_path_atlasC, "atlas_texture_layers_8_to_11.png", 100, TextureImporterCompression.Compressed, TextureImporterType.Default, true))
                         {
                             _target.splat_atlases[2].wrapMode = TextureWrapMode.Clamp;
                             _target.splat_atlases[2].filterMode = FilterMode.Trilinear;
@@ -2395,7 +2396,7 @@ public class ReliefTerrainEditor : Editor
                         {
                             DestroyUnusedCombinedTexture(oRef);
                         }
-                        SaveTexture(ref _target.HeightMap, ref _target.save_path_HeightMap, "heightmap_layers_0_to_3.png", 80, TextureImporterFormat.AutomaticCompressed, true, true, true);
+                        SaveTexture(ref _target.HeightMap, ref _target.save_path_HeightMap, "heightmap_layers_0_to_3.png", 80, TextureImporterCompression.Compressed, TextureImporterType.Default, true, true, true);
                         EditorGUILayout.EndVertical();
                     }
 
@@ -2408,7 +2409,7 @@ public class ReliefTerrainEditor : Editor
                         {
                             DestroyUnusedCombinedTexture(oRef);
                         }
-                        SaveTexture(ref _target.HeightMap2, ref _target.save_path_HeightMap2, "heightmap_layers_4_to_7.png", 80, TextureImporterFormat.AutomaticCompressed, true, true, true);
+                        SaveTexture(ref _target.HeightMap2, ref _target.save_path_HeightMap2, "heightmap_layers_4_to_7.png", 80, TextureImporterCompression.Compressed, TextureImporterType.Default, true, true, true);
                         EditorGUILayout.EndVertical();
                     }
 
@@ -2421,7 +2422,7 @@ public class ReliefTerrainEditor : Editor
                         {
                             DestroyUnusedCombinedTexture(oRef);
                         }
-                        SaveTexture(ref _target.HeightMap3, ref _target.save_path_HeightMap3, "heightmap_layers_8_to_11.png", 80, TextureImporterFormat.AutomaticCompressed, true, true, true);
+                        SaveTexture(ref _target.HeightMap3, ref _target.save_path_HeightMap3, "heightmap_layers_8_to_11.png", 80, TextureImporterCompression.Compressed, TextureImporterType.Default, true, true, true);
                         EditorGUILayout.EndVertical();
                     }
 
@@ -2452,7 +2453,7 @@ public class ReliefTerrainEditor : Editor
                         {
                             DestroyUnusedCombinedTexture(oRef);
                         }
-                        SaveTexture(ref _target.Bump01, ref _target.save_path_Bump01, "bumpmap_layers01.png", 80, TextureImporterFormat.ARGB32, true, true, true);
+                        SaveTexture(ref _target.Bump01, ref _target.save_path_Bump01, "bumpmap_layers01.png", 80, TextureImporterCompression.Uncompressed, TextureImporterType.Default, true, true, true);
                         EditorGUILayout.EndVertical();
                     }
 
@@ -2465,7 +2466,7 @@ public class ReliefTerrainEditor : Editor
                         {
                             DestroyUnusedCombinedTexture(oRef);
                         }
-                        SaveTexture(ref _target.Bump23, ref _target.save_path_Bump23, "bumpmap_layers23.png", 80, TextureImporterFormat.ARGB32, true, true, true);
+                        SaveTexture(ref _target.Bump23, ref _target.save_path_Bump23, "bumpmap_layers23.png", 80, TextureImporterCompression.Uncompressed, TextureImporterType.Default, true, true, true);
                         EditorGUILayout.EndVertical();
                     }
 
@@ -2478,7 +2479,7 @@ public class ReliefTerrainEditor : Editor
                         {
                             DestroyUnusedCombinedTexture(oRef);
                         }
-                        SaveTexture(ref _target.Bump45, ref _target.save_path_Bump45, "bumpmap_layers45.png", 80, TextureImporterFormat.ARGB32, true, true, true);
+                        SaveTexture(ref _target.Bump45, ref _target.save_path_Bump45, "bumpmap_layers45.png", 80, TextureImporterCompression.Uncompressed, TextureImporterType.Default, true, true, true);
                         EditorGUILayout.EndVertical();
                     }
 
@@ -2497,7 +2498,7 @@ public class ReliefTerrainEditor : Editor
                             {
                                 DestroyUnusedCombinedTexture(oRef);
                             }
-                            SaveTexture(ref _target.Bump67, ref _target.save_path_Bump67, "bumpmap_layers67.png", 80, TextureImporterFormat.ARGB32, true, true, true);
+                            SaveTexture(ref _target.Bump67, ref _target.save_path_Bump67, "bumpmap_layers67.png", 80, TextureImporterCompression.Uncompressed, TextureImporterType.Default, true, true, true);
                             EditorGUILayout.EndVertical();
                         }
 
@@ -2510,7 +2511,7 @@ public class ReliefTerrainEditor : Editor
                             {
                                 DestroyUnusedCombinedTexture(oRef);
                             }
-                            SaveTexture(ref _target.Bump89, ref _target.save_path_Bump89, "bumpmap_layers89.png", 80, TextureImporterFormat.ARGB32, true, true, true);
+                            SaveTexture(ref _target.Bump89, ref _target.save_path_Bump89, "bumpmap_layers89.png", 80, TextureImporterCompression.Uncompressed, TextureImporterType.Default, true, true, true);
                             EditorGUILayout.EndVertical();
                         }
 
@@ -2523,7 +2524,7 @@ public class ReliefTerrainEditor : Editor
                             {
                                 DestroyUnusedCombinedTexture(oRef);
                             }
-                            SaveTexture(ref _target.BumpAB, ref _target.save_path_BumpAB, "bumpmap_layersAB.png", 80, TextureImporterFormat.ARGB32, true, true, true);
+                            SaveTexture(ref _target.BumpAB, ref _target.save_path_BumpAB, "bumpmap_layersAB.png", 80, TextureImporterCompression.Uncompressed, TextureImporterType.Default, true, true, true);
                             EditorGUILayout.EndVertical();
                         }
 
@@ -2556,7 +2557,7 @@ public class ReliefTerrainEditor : Editor
                         sync_tex = true;
                     }
                     GUI.color = new Color(0.5f, 1, 0.5f, 1);
-                    if (SaveTexture(ref _targetRT.BumpGlobalCombined, ref _targetRT.save_path_BumpGlobalCombined, "perlin_normal_aux.png", 100, TextureImporterFormat.AutomaticCompressed, true, true, true)) sync_tex = true;
+                    if (SaveTexture(ref _targetRT.BumpGlobalCombined, ref _targetRT.save_path_BumpGlobalCombined, "perlin_normal_aux.png", 100, TextureImporterCompression.Compressed, TextureImporterType.Default, true, true, true)) sync_tex = true;
                     GUI.color = skin_color;
                     if (sync_tex)
                     {
@@ -3523,7 +3524,7 @@ public class ReliefTerrainEditor : Editor
                             if (_importer)
                             {
                                 TextureImporter tex_importer = (TextureImporter)_importer;
-                                if (tex_importer.textureFormat != TextureImporterFormat.AutomaticTruecolor && tex_importer.textureFormat != TextureImporterFormat.RGBA32 && tex_importer.textureFormat != TextureImporterFormat.ARGB32)
+                                if (tex_importer.textureCompression != TextureImporterCompression.Uncompressed || tex_importer.textureType != TextureImporterType.Default)
                                 {
                                     Debug.LogWarning("Texture (" + _targetRT.NormalGlobal.name + ") seems to be NOT compatible with RTP Height&normal format. Use attached tool to make the texture.");
                                 }
@@ -3697,7 +3698,7 @@ public class ReliefTerrainEditor : Editor
                                     if (tex_importer)
                                     {
                                         tex_importer.wrapMode = TextureWrapMode.Clamp;
-                                        tex_importer.textureType = TextureImporterType.Bump;
+                                        tex_importer.textureType = TextureImporterType.NormalMap;
                                         Debug.LogWarning("Global normal texture (" + _targetRT.NormalGlobal.name + ") has been imported as normalmap type.");
                                         AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(_targetRT.NormalGlobal), ImportAssetOptions.ForceUpdate);
                                     }
@@ -4571,7 +4572,7 @@ public class ReliefTerrainEditor : Editor
                             _targetRT.RefreshTextures();
                             DestroyUnusedCombinedTexture(oRef);
                         }
-                        if (SaveTexture(ref _targetRT.TERRAIN_WetMask, ref _targetRT.save_path_WetMask, "terrain_wetmask.png", 140, TextureImporterFormat.Alpha8, true))
+                        if (SaveTexture(ref _targetRT.TERRAIN_WetMask, ref _targetRT.save_path_WetMask, "terrain_wetmask.png", 140, TextureImporterCompression.Uncompressed, TextureImporterType.SingleChannel, true))
                         {
                             _targetRT.globalWaterModifed_flag = false;
                         }
@@ -4628,11 +4629,12 @@ public class ReliefTerrainEditor : Editor
                                         tex_importer.isReadable = true;
                                         modified_flag = true;
                                     }
-                                    if (tex_importer.textureFormat != TextureImporterFormat.Alpha8)
+                                    if (tex_importer.textureCompression != TextureImporterCompression.Uncompressed && tex_importer.textureType != TextureImporterType.SingleChannel)
                                     {
                                         Debug.LogWarning("Wet mask texture (" + ntex.name + ") has been reimported as Alpha8.");
-                                        tex_importer.grayscaleToAlpha = true;
-                                        tex_importer.textureFormat = TextureImporterFormat.Alpha8;
+                                        tex_importer.alphaSource = TextureImporterAlphaSource.FromGrayScale;
+                                        tex_importer.textureCompression = TextureImporterCompression.Uncompressed;
+                                        tex_importer.textureType = TextureImporterType.SingleChannel;
                                         modified_flag = true;
                                     }
                                     if (modified_flag)
@@ -5868,11 +5870,12 @@ public class ReliefTerrainEditor : Editor
                     tex_importer.isReadable = true;
                     reimport_flag = true;
                 }
-                if (!tex_importer.DoesSourceTextureHaveAlpha() && !tex_importer.grayscaleToAlpha)
+                if (!tex_importer.DoesSourceTextureHaveAlpha() && tex_importer.alphaSource!=TextureImporterAlphaSource.FromGrayScale)
                 {
                     Debug.LogWarning("Height texture " + n + " (" + Heights[n].name + ") has been reimported to have alpha channel.");
-                    tex_importer.grayscaleToAlpha = true;
-                    tex_importer.textureFormat = TextureImporterFormat.Alpha8;
+                    tex_importer.alphaSource = TextureImporterAlphaSource.FromGrayScale;
+                    tex_importer.textureType = TextureImporterType.SingleChannel;
+                    tex_importer.textureCompression = TextureImporterCompression.Uncompressed;
                     reimport_flag = true;
                 }
                 if (Heights[n] && Heights[n].width > min_size)
@@ -6025,7 +6028,7 @@ public class ReliefTerrainEditor : Editor
         tex.SetPixels32(cols);
     }
 
-    private bool SaveTexture(ref Texture2D tex, ref string save_path, string default_name, int buttonwidth, TextureImporterFormat textureFormat, bool mipmapEnabled, bool button_triggered = true, bool sRGB_flag = false)
+    private bool SaveTexture(ref Texture2D tex, ref string save_path, string default_name, int buttonwidth, TextureImporterCompression textureCompression, TextureImporterType textureType, bool mipmapEnabled, bool button_triggered = true, bool sRGB_flag = false)
     {
         //		if (tex==null) return;			
         //		if (AssetDatabase.GetAssetPath(tex)!="") return;
@@ -6072,9 +6075,10 @@ public class ReliefTerrainEditor : Editor
                 System.IO.File.WriteAllBytes(path, bytes);
                 AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
                 TextureImporter textureImporter = AssetImporter.GetAtPath(path) as TextureImporter;
-                textureImporter.textureFormat = textureFormat;
+                textureImporter.textureType = textureType;
+                textureImporter.textureCompression = textureCompression;
                 textureImporter.mipmapEnabled = mipmapEnabled;
-                textureImporter.linearTexture = sRGB_flag;
+                textureImporter.sRGBTexture = sRGB_flag;
                 AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
                 if (tex != null)
                 {

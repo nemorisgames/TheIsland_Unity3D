@@ -108,9 +108,9 @@ public class RTP_CustomShaderGUI : MaterialEditor
         {
             active_layer = (int)active_layerProp.floatValue;
         }
-        Profiler.BeginSample("BetterEditor OnInspectorGUI", target);
+        UnityEngine.Profiling.Profiler.BeginSample("BetterEditor OnInspectorGUI", target);
         base.OnInspectorGUI();
-        Profiler.EndSample();
+        UnityEngine.Profiling.Profiler.EndSample();
     }
 
     public bool CheckDefine(string define, bool invertFlag)

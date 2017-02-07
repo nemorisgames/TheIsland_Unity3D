@@ -46,6 +46,12 @@ public class CaraFunctions : MonoBehaviour
 		killAnimation.Interact();
 		killCamera.GetComponent<Animator>().SetBool("Kill", true);
 	}
+
+	public void enhaceSight(int enhace){
+		fpsCamera.GetComponent<Camera> ().farClipPlane = (enhace == 1) ? 37f : 15f;
+		RenderSettings.fog = (enhace == 0);
+	}
+
 	void Reset()
 	{
 		Debug.Log("Resseting to last start");

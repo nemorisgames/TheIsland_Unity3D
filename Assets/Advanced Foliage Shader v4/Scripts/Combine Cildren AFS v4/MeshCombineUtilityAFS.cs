@@ -170,7 +170,7 @@ public class MeshCombineUtilityAFS {
 
 		mesh.tangents = tangents;
 		mesh.triangles = triangles;
-		mesh.Optimize();
+		;
 
 		#if UNITY_EDITOR
 			if(createUniqueUV2 && !bakeGroundLightingFoliage) {

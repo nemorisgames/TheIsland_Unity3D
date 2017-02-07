@@ -10,6 +10,9 @@ namespace TerrainComposer2
         [HideInInspector] public CachedTransform cT = new CachedTransform();
         public bool generateOnEnable = true;
         public bool generateOnDisable = true;
+        public bool instantGenerate;
+        public bool waitForEndOfFrame;
+        bool generate;
         Transform t;
         // public bool repeat;
 
@@ -29,14 +32,27 @@ namespace TerrainComposer2
         void MyUpdate()
         {
             // if (repeat) TC.AutoGenerate();
-
+            
             if (cT.hasChanged(t))
             {
                 // Debug.Log("Auto generate");
                 cT.Copy(t);
-                TC.AutoGenerate();
-                // TC_Generate.instance.Generate(true);
+
+                if (waitForEndOfFrame) generate = true; else Generate();
             }
+        }
+
+        void LateUpdate()
+        {
+            if (generate) Generate();
+        }
+
+        void Generate()
+        {
+            generate = false;
+
+            if (instantGenerate) TC_Generate.instance.Generate(true);
+            else TC.AutoGenerate();
         }
 
         void OnEnable()

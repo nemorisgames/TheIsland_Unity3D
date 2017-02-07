@@ -31,7 +31,7 @@ public class Inventory : MonoBehaviour
 	}
 	void Start()
 	{
-
+		inventoryItems[0].SetActive(false);
 	}
 	void Update()
 	{
@@ -47,9 +47,11 @@ public class Inventory : MonoBehaviour
 			}
 		}
 	}
-	public void RemoveInventoryItem(ItemType type)
+	public IEnumerator RemoveInventoryItem(ItemType type)
 	{
 		inventoryItems[(int)type].hasItem = false;
+		inventoryItems [(int)type].animator.SetTrigger ("Throw");
+		yield return new WaitForSeconds (1f);
 		inventoryItems[(int)type].SetActive(false);
 		//inventoryItems[(int)type].hand.SetActive(false);
 	}
@@ -57,6 +59,7 @@ public class Inventory : MonoBehaviour
 	{
 		//checking
 		inventoryItems[(int)type].hasItem = true;
+		inventoryItems [(int)type].animator.SetTrigger ("PickingUp");
 		inventoryItems[(int)type].SetActive(true);
 		//inventoryItems[(int)type].objectInHand.SetActive(true);
 	}

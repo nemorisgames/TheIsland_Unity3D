@@ -624,7 +624,7 @@ Material:
       second: 0.20153847
     - first:
         name: rtp_snow_strength
-      second: 0.76
+      second: 0.588
     m_Colors:
     - first:
         name: RTP_AO_0123

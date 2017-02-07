@@ -216,7 +216,7 @@ public class GeometryVsTerrainBlendEditor : Editor {
 										}
 								}
 								GUI.backgroundColor = new Color (1.0f, 0.7f, 0.5f, 0.9f);
-								if (allUnbatched && PlayerSettings.advancedLicense) { // batching only in Pro
+								if (allUnbatched) { // && PlayerSettings.advancedLicense) { // batching only in Pro (was in U4, in Unity5 it doesn't apply)
 										if (GUILayout.Button (new GUIContent ("Prepare static batch", "Will combine all objects/underlying objects into combined batched mesh."))) {
 												if (EditorUtility.DisplayDialog ("RTP Warning", "Are you sure to do batching ?\n\nDo it the the VERY END of your authoring\n(because you'll have to use reset to original mesh\nto restore separate meshes back).", "Yes, go on", "Cancel")) {
 

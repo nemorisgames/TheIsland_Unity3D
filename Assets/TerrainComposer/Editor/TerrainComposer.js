@@ -14871,7 +14871,7 @@ class TerrainComposer extends EditorWindow
 	function save_global_settings()
 	{	
 		EditorUtility.SetDirty (global_script);
-		EditorApplication.SaveAssets();
+		AssetDatabase.SaveAssets();
 	}
      
     function load_layer(prelayer_number: int,layer_number: int,path: String): boolean

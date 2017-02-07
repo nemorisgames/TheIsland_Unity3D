@@ -29,14 +29,18 @@ namespace TerrainComposer2
 				LoadRawImage(path);
 				TC_Settings.instance.rawFiles.Add(this);
 			}
-			if (!callDestroy) { TC.refreshOutputReferences = TC.allOutput; referenceCount = 0; }
+			if (!callDestroy) { TC.RefreshOutputReferences(TC.allOutput); referenceCount = 0; }
 			else callDestroy = false;
 		}
 
 		void OnDestroy()
 		{
 			TC_Compute.DisposeTexture(ref tex);
-			if (!callDestroy) TC.refreshOutputReferences = TC.allOutput;
+			#if UNITY_EDITOR
+				if (!UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode && !callDestroy) TC.RefreshOutputReferences(TC.allOutput);
+			#else
+				if (!callDestroy) TC.RefreshOutputReferences(TC.allOutput);
+			#endif
 		}
 
 		void DestroyMe()
@@ -97,12 +101,12 @@ namespace TerrainComposer2
 
 			if (tex != null) return;
 
-			#if UNITY_EDITOR
+#if UNITY_EDITOR
 				if (!isResourcesFolder)
 				{ 
 					if (!TC.FileExists(fullPath)) return;
 				}
-			#endif
+#endif
 
 			TC_Reporter.Log("Load Raw file " + fullPath);
 
@@ -118,9 +122,9 @@ namespace TerrainComposer2
 			}
 			else
 			{ 
-				#if !UNITY_WEBPLAYER
+                    #if !UNITY_WEBPLAYER
 					bytes = File.ReadAllBytes(fullPath);
-				#else
+                    #else
 					// TC.AddMessage("You are in Webplayer build mode, loading from disk is protected in this mode and stamp textures don't work.\nThis will be fixed.\n\nFor now another build mode in needed.", 0, 5); 
 					WWW request = new WWW("file:///" + fullPath);
 
@@ -128,7 +132,7 @@ namespace TerrainComposer2
 					if (request.error != null) TC.AddMessage(request.error);
 
 					bytes = request.bytes;
-				#endif
+                    #endif
 			}
 			
 			if (bytes == null) return;

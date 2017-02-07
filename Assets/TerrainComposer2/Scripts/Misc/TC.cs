@@ -7,7 +7,7 @@ namespace TerrainComposer2
 {
     static public class TC
     {
-        static public int refreshOutputReferences;
+        static private int refreshOutputReferences;
         static public bool refreshPreviewImages;
         static public bool repaintNodeWindow;
         static public List<MessageCommand> messages = new List<MessageCommand>();
@@ -31,14 +31,23 @@ namespace TerrainComposer2
         static public string installPath;
         static public string fullInstallPath;
 
+        static public Type FindRTP()
+        {
+            Type t = Type.GetType("ReliefTerrain");
+
+            TC_Settings.instance.isRTPDetected = t != null ? true : false;
+
+            return t;
+        }
+
         static public float GetVersionNumber()
         {
-            return 2.07f;
+            return 2.21f;
         }
 
         static public string GetVersionLabel()
         {
-            return "Beta7e";
+            return "2.21";
         }
 
         static public int OutputNameToOutputID(string outputName)
@@ -52,8 +61,16 @@ namespace TerrainComposer2
             // Debug.Log("Auto Generate");
             if (TC_Generate.instance != null) TC_Generate.instance.cmdGenerate = true;
         }
-        
-        static public void RefreshOutputReferences(int outputId, bool autoGenerate = false)
+
+        static public void RefreshOutputReferences(int outputId)
+        {
+            // Debug.Log("Call refresh " + outputId);
+            refreshOutputReferences = outputId;
+        }
+
+        static public int GetRefreshOutputReferences() { return refreshOutputReferences; }
+
+        static public void RefreshOutputReferences(int outputId, bool autoGenerate)
         {
             // Debug.Log("Call refresh " + outputId);
             refreshOutputReferences = outputId;
@@ -194,8 +211,11 @@ namespace TerrainComposer2
         static public void GetInstallPath()
         {
             #if UNITY_EDITOR
-            installPath = UnityEditor.AssetDatabase.GetAssetPath(UnityEditor.MonoScript.FromMonoBehaviour(TC_Settings.instance));
-            installPath = installPath.Replace("/Scripts/Settings/TC_Settings.cs", "");
+            if (TC_Settings.instance != null)
+            {
+                installPath = UnityEditor.AssetDatabase.GetAssetPath(UnityEditor.MonoScript.FromMonoBehaviour(TC_Settings.instance));
+                installPath = installPath.Replace("/Scripts/Settings/TC_Settings.cs", "");
+            }
             #endif
         }
 

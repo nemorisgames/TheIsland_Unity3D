@@ -14,8 +14,8 @@ namespace TerrainComposer2
         // [NonSerialized]
         public List<TC_SelectItem> treeSelectItems;
         
-        public int treeResolutionPM = 128;
-        public int objectResolutionPM = 128;
+        public float treeResolutionPM = 128;
+        public float objectResolutionPM = 128;
         public Vector2 objectAreaSize;
         public Transform objectTransform; // stream around camera
 

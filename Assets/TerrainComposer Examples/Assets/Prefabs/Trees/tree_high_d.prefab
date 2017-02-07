@@ -5,13 +5,13 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 400000}
-  - 193: {fileID: 19300000}
-  - 33: {fileID: 3300000}
-  - 23: {fileID: 2300000}
-  - 136: {fileID: 13600000}
+  - component: {fileID: 400000}
+  - component: {fileID: 19300000}
+  - component: {fileID: 3300000}
+  - component: {fileID: 2300000}
+  - component: {fileID: 13600000}
   m_Layer: 2
   m_Name: tree_high_d
   m_TagString: Untagged
@@ -31,10 +31,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 438.0015, y: 35.1923, z: 681.4053}
   m_LocalScale: {x: 1.7568381, y: 1.7568378, z: 1.756838}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1002 &400001
 EditorExtensionImpl:
   serializedVersion: 6
@@ -207,7 +207,9 @@ MeshRenderer:
   m_Materials:
   - {fileID: 2100000}
   - {fileID: 2100002}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -215,7 +217,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -387,7 +389,7 @@ MonoBehaviour:
   m_Name: Tree Data
   m_EditorClassIdentifier: 
   _uniqueID: 4120
-  materialHash: ccef917b237ebdc34dd08266a293e586-550813696
+  materialHash: caa74204723bfbc1b150c5e91622b125-550813696
   root:
     _uniqueID: 1
     seed: 1234
@@ -398,12 +400,14 @@ MonoBehaviour:
     distributionCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -417,12 +421,14 @@ MonoBehaviour:
     distributionPitchCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -434,12 +440,14 @@ MonoBehaviour:
     distributionScaleCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 0
         inSlope: 0
         outSlope: 0
@@ -465,17 +473,17 @@ MonoBehaviour:
     rootSpread: 1.5470645
     groundOffset: 0.3
     rootMatrix:
-      e00: 0.887968
-      e01: -0.0021504993
-      e02: -0.4599003
+      e00: 0.7375649
+      e01: -0.028155826
+      e02: 0.67468905
       e03: 0
-      e10: -0.45976144
-      e11: -0.029162388
-      e12: -0.8875635
+      e10: 0.67522585
+      e11: 0.018537097
+      e12: -0.7373781
       e13: 0
-      e20: -0.0115030855
-      e21: 0.99957246
-      e22: -0.026883982
+      e20: 0.008254713
+      e21: 0.9994317
+      e22: 0.03268385
       e23: 0
       e30: 0
       e31: 0
@@ -491,12 +499,14 @@ MonoBehaviour:
     distributionCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -510,12 +520,14 @@ MonoBehaviour:
     distributionPitchCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -527,12 +539,14 @@ MonoBehaviour:
     distributionScaleCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 0
         inSlope: 0
         outSlope: 0
@@ -559,12 +573,14 @@ MonoBehaviour:
     radiusCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 0.7136917
         inSlope: -0.5305459
         outSlope: -0.5305459
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 0.23790415
         inSlope: -0.68756396
         outSlope: -0.68756396
@@ -578,12 +594,14 @@ MonoBehaviour:
     crinkCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -595,12 +613,14 @@ MonoBehaviour:
     seekCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -612,12 +632,14 @@ MonoBehaviour:
     noiseCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -640,12 +662,14 @@ MonoBehaviour:
     frondCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -665,12 +689,14 @@ MonoBehaviour:
     distributionCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -684,12 +710,14 @@ MonoBehaviour:
     distributionPitchCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -701,17 +729,20 @@ MonoBehaviour:
     distributionScaleCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 0.046296477
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 0.3782771
+      - serializedVersion: 2
+        time: 0.3782771
         value: 0.99120736
         inSlope: 4.6602116
         outSlope: 4.6602116
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 0.2824074
         inSlope: 0
         outSlope: 0
@@ -738,12 +769,14 @@ MonoBehaviour:
     radiusCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: -1
         outSlope: -1
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 0.29436713
         inSlope: -0.13639612
         outSlope: -0.13639612
@@ -757,12 +790,14 @@ MonoBehaviour:
     crinkCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -774,12 +809,14 @@ MonoBehaviour:
     seekCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -791,12 +828,14 @@ MonoBehaviour:
     noiseCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -819,12 +858,14 @@ MonoBehaviour:
     frondCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -845,16 +886,18 @@ MonoBehaviour:
     distributionCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: -1
         outSlope: -1
-        tangentMode: 10
-      - time: 1
+        tangentMode: 34
+      - serializedVersion: 2
+        time: 1
         value: 0
         inSlope: -1
         outSlope: -1
-        tangentMode: 10
+        tangentMode: 34
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -864,12 +907,14 @@ MonoBehaviour:
     distributionPitchCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -881,12 +926,14 @@ MonoBehaviour:
     distributionScaleCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 0
         inSlope: 0
         outSlope: 0
@@ -918,16 +965,18 @@ MonoBehaviour:
     distributionCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
-        tangentMode: 10
-      - time: 1
+        tangentMode: 34
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
-        tangentMode: 10
+        tangentMode: 34
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -937,12 +986,14 @@ MonoBehaviour:
     distributionPitchCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -954,12 +1005,14 @@ MonoBehaviour:
     distributionScaleCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 0
         inSlope: 0
         outSlope: 0
@@ -991,16 +1044,18 @@ MonoBehaviour:
     distributionCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
-        tangentMode: 10
-      - time: 1
+        tangentMode: 34
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
-        tangentMode: 10
+        tangentMode: 34
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -1010,12 +1065,14 @@ MonoBehaviour:
     distributionPitchCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -1027,12 +1084,14 @@ MonoBehaviour:
     distributionScaleCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1064,16 +1123,18 @@ MonoBehaviour:
     distributionCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: -1
         outSlope: -1
-        tangentMode: 10
-      - time: 1
+        tangentMode: 34
+      - serializedVersion: 2
+        time: 1
         value: 0
         inSlope: -1
         outSlope: -1
-        tangentMode: 10
+        tangentMode: 34
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -1083,12 +1144,14 @@ MonoBehaviour:
     distributionPitchCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -1100,12 +1163,14 @@ MonoBehaviour:
     distributionScaleCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1149,17 +1214,17 @@ MonoBehaviour:
     pitch: -0
     rotation: {x: 0, y: 0, z: 0, w: 1}
     matrix:
-      e00: 0.887968
-      e01: -0.0021504993
-      e02: -0.4599003
+      e00: 0.7375649
+      e01: -0.028155826
+      e02: 0.67468905
       e03: 0
-      e10: -0.45976144
-      e11: -0.029162388
-      e12: -0.8875635
+      e10: 0.67522585
+      e11: 0.018537097
+      e12: -0.7373781
       e13: 0
-      e20: -0.0115030855
-      e21: 0.99957246
-      e22: -0.026883982
+      e20: 0.008254713
+      e21: 0.9994317
+      e22: 0.03268385
       e23: 0
       e30: 0
       e31: 0
