@@ -62,13 +62,13 @@ public class InventoryItem : MonoBehaviour
 	{
 		if (!activeItem)
 			return;
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetKeyDown(KeyCode.Q))
 		{
 			//first frame while pressing left click
 			timeOut = Time.time;
 			throwing = false;
 		}
-		if (Input.GetMouseButton(0))
+		if (Input.GetKey(KeyCode.Q))
 		{
 			//while pressing wait 2 seconds
 			if (Time.time - timeOut >= throwTimeout && !throwing)
@@ -79,7 +79,7 @@ public class InventoryItem : MonoBehaviour
 				Invoke ("ThrowItem", 1f);
 			}
 		}
-		if (Input.GetMouseButtonUp(0))
+		if (Input.GetKeyUp(KeyCode.Q))
 		{
 			if (Time.time - timeOut < throwTimeout)
 			{
@@ -87,7 +87,7 @@ public class InventoryItem : MonoBehaviour
 				UseItem();
 			}
 		}
-		if (Input.GetMouseButtonDown(1))
+		if (Input.GetMouseButtonDown(0))
 		{
 			//cancel throw
 			throwing = true;
