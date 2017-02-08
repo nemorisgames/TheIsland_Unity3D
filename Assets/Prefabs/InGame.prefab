@@ -72,5 +72,7 @@ MonoBehaviour:
   - Select the lightbulb icon and press [Mouse left button]
   - Press [Mouse right button] to hide the cellphone
   - Press [C] to crouch
-  - Press [Esc] to check the book
+  - Press [P] to check the book
   - Pick up a rock with [Mouse left click] and throw it holding [Q]
+  - Hold [Shift] to run
+  - Press [Forward] to climb this type of rock
