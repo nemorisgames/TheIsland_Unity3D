@@ -107,12 +107,13 @@ public class ScreenManager : MonoBehaviour
 		ScreenType type = showedScreens.Pop();
 		screens[(int)type].SetActive(true);
 	}
+		
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.P))
+		if (Input.GetKeyUp(KeyCode.P))
 		{
-			if (!screens[(int)ScreenType.BookView].activeSelf)
+			if (!screens [(int)ScreenType.BookView].activeSelf)
 				ShowScreen(ScreenType.BookView);
 		}
 		//else if (Input.GetKeyDown(KeyCode.B))

@@ -16,7 +16,6 @@ Cubemap:
   m_TextureFormat: 5
   m_MipCount: 7
   m_IsReadable: 1
-  m_ReadAllowed: 1
   m_AlphaIsTransparency: 0
   m_ImageCount: 6
   m_TextureDimension: 2

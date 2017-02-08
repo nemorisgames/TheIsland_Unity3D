@@ -10,11 +10,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: fdb7e96596117a842b8c17421a6b9b02, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-<<<<<<< HEAD
-  m_CustomRenderQueue: 3272
-=======
-  m_CustomRenderQueue: 3293
->>>>>>> babc6e6e46871ef724c034ef440c4d84fccc3325
+  m_CustomRenderQueue: 3093
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -49,7 +45,7 @@ Material:
       second: 30
     - first:
         name: _ColorStrength
-      second: 0.2
+      second: 1
     - first:
         name: _DistortIllum
       second: 1
@@ -62,4 +58,4 @@ Material:
       second: {r: 0.36764705, g: 0.4766736, b: 1, a: 1}
     - first:
         name: _TintColor
-      second: {r: 0.010272501, g: 0.29981503, b: 0.6985294, a: 0.191}
+      second: {r: 0, g: 0.19178496, b: 0.45588237, a: 1}

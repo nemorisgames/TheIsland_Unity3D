@@ -1737,7 +1737,7 @@ MonoBehaviour:
   rectTransformID: 310968
   uiTransitionType: 1
   uiPositionType: 0
-  isEditing: 1
+  isEditing: 0
   isLocked: 0
   id: 12
   title: Pause
@@ -1950,7 +1950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 2
-  isEditing: 1
+  isEditing: 0
   title: SaveButton
   slotSize: {x: 20, y: 5}
   sizeType: 1
@@ -4750,7 +4750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 6
-  isEditing: 0
+  isEditing: 1
   title: RestartButton
   slotSize: {x: 20, y: 5}
   sizeType: 1
@@ -5810,7 +5810,7 @@ MonoBehaviour:
   rectTransformID: 0
   uiTransitionType: 0
   uiPositionType: 0
-  isEditing: 0
+  isEditing: 1
   isLocked: 0
   id: 13
   title: PhotoReview
