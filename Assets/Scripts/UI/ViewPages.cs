@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class ViewPages : MonoBehaviour
 {
-	public RawImage image;	
+	public RawImage image;
 	public GameObject noPages;
 	private int currentPage = 0;
 	private int pagesCount = 1;
@@ -58,7 +58,6 @@ public class ViewPages : MonoBehaviour
 		if (pos != -1)
 		{
 			currentPage = pos;
-
 		}
 		image.texture = pages[currentPage];
 		//image.color = pages[currentPage].;
@@ -77,10 +76,5 @@ public class ViewPages : MonoBehaviour
 				LastPage();
 			}
 		}
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			ScreenManager.Instance.CloseScreen();
-		}
 	}
-
 }

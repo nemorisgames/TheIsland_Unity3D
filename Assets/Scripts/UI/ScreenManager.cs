@@ -21,7 +21,11 @@ public class ScreenManager : MonoBehaviour
 	AC.Cutscene pauseGame;
 	[SerializeField]
 	AC.Cutscene unPauseGame;
-	// Use this for initialization
+	//[SerializeField]
+	//AC.Cutscene mainMenuOn;
+	//[SerializeField]
+	//AC.Cutscene mainMenuOff;
+	public static bool paused=false;
 	private Stack<ScreenType> showedScreens = new Stack<ScreenType>();
 	void Start()
 	{
@@ -30,6 +34,7 @@ public class ScreenManager : MonoBehaviour
 	void Awake()
 	{
 		Instance = this;
+		showedScreens = new Stack<ScreenType>();
 		HideScreens();
 		if (debug)
 		{
@@ -45,13 +50,15 @@ public class ScreenManager : MonoBehaviour
 	}
 	public void ShowScreen(ScreenType type)
 	{
-		if (screens[(int)type].activeInHierarchy)
+		if (screens[(int)type].activeSelf)
 		{
 			if (!showedScreens.Contains(type))
 			{
+				HideScreens();
+				screens[(int)type].SetActive(true);
 				showedScreens.Push(type);
+				return;
 			}
-			return;
 		}
 		HideScreens();
 		if (showedScreens.Contains(type))
@@ -74,23 +81,27 @@ public class ScreenManager : MonoBehaviour
 				break;
 		}
 		showedScreens.Push(type);
-		pauseGame.Interact();
+		PauseGame();
 		screens[(int)type].SetActive(true);
-
 	}
 	public void CloseAllScreens()
 	{
 		HideScreens();
 		showedScreens.Clear();
-		unPauseGame.Interact();
+		ResumeGame();
 	}
 	public void CloseScreen()
 	{
 		HideScreens();
-		if (showedScreens.Count <= 1)
+		if (showedScreens.Count == 1)
 		{
-			unPauseGame.Interact();
+			ResumeGame();
 			showedScreens.Clear();
+			return;
+		}
+		if (showedScreens.Count == 0)
+		{
+			//para cuando se vincule todo con escape
 			return;
 		}
 		ScreenType type = showedScreens.Pop();
@@ -101,12 +112,24 @@ public class ScreenManager : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.P))
 		{
-			pauseGame.Interact();
-			ShowScreen(ScreenType.BookView);
+			if (!screens[(int)ScreenType.BookView].activeSelf)
+				ShowScreen(ScreenType.BookView);
 		}
-		else if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			CloseScreen();
-		}
+		//else if (Input.GetKeyDown(KeyCode.B))
+		//{
+		//	CloseScreen();
+		//}
+	}
+	public void PauseGame()
+	{
+		paused = true;
+		pauseGame.Interact();
+		vp_Utility.LockCursor = false;
+	}
+	public void ResumeGame()
+	{
+		paused = false;
+		unPauseGame.Interact();
+		vp_Utility.LockCursor = true;
 	}
 }

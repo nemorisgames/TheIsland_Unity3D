@@ -49,7 +49,7 @@ public class CellPhone : MonoBehaviour
 	}
 	void Awake()
 	{
-		target = GameObject.FindWithTag ("Player").transform.FindChild ("FPSCamera");
+		target = GameObject.FindWithTag("Player").transform.FindChild("FPSCamera");
 		defaultIntensity = light.intensity;
 		defaultSpotAngle = light.spotAngle;
 		defaultLightEnabled = light.enabled;
@@ -75,10 +75,11 @@ public class CellPhone : MonoBehaviour
 
 		if (!selected)
 		{
-			if (target != null) {
-				Vector3 tVec = new Vector3 (target.position.x, target.position.y, target.position.z) + target.right * position.x + target.forward * position.z + target.up * position.y;
-				transform.position = Vector3.Lerp (transform.position, tVec, Time.deltaTime * speed);
-				transform.forward = Vector3.Lerp (transform.forward, target.forward, Time.deltaTime * speedRotation);
+			if (target != null)
+			{
+				Vector3 tVec = new Vector3(target.position.x, target.position.y, target.position.z) + target.right * position.x + target.forward * position.z + target.up * position.y;
+				transform.position = Vector3.Lerp(transform.position, tVec, Time.deltaTime * speed);
+				transform.forward = Vector3.Lerp(transform.forward, target.forward, Time.deltaTime * speedRotation);
 			}
 		}
 		else
@@ -91,7 +92,7 @@ public class CellPhone : MonoBehaviour
 			}
 		}
 
-		if (!active)
+		if (!active || ScreenManager.paused)
 			return;
 
 		//Checkout on cellphone
@@ -108,7 +109,7 @@ public class CellPhone : MonoBehaviour
 				else
 				{
 					ResetToDefaults();
-					transform.parent = null;					
+					transform.parent = null;
 				}
 			}
 			ScreenManager.Instance.CloseScreen();
@@ -132,20 +133,20 @@ public class CellPhone : MonoBehaviour
 		{
 			switch (currentFunction)
 			{
-			case CellphoneFunctions.Light:
-				light.enabled = !light.enabled;
-				Light s = light.transform.FindChild ("SupportLight").GetComponent<Light> ();
-				s.enabled = !s.enabled;
-				AC.GlobalVariables.SetBooleanValue(0, light.enabled);
-				break;
-			case CellphoneFunctions.CameraPhoto:
-				if (!isTakingPhoto)
-					StartCoroutine(takePhoto());
-				break;
-			case CellphoneFunctions.ReviewPhotos:
-				ScreenManager.Instance.ShowScreen(ScreenType.PhotoView);
-				canUseMouseScroll = false;
-				break;
+				case CellphoneFunctions.Light:
+					light.enabled = !light.enabled;
+					Light s = light.transform.FindChild("SupportLight").GetComponent<Light>();
+					s.enabled = !s.enabled;
+					AC.GlobalVariables.SetBooleanValue(0, light.enabled);
+					break;
+				case CellphoneFunctions.CameraPhoto:
+					if (!isTakingPhoto)
+						StartCoroutine(takePhoto());
+					break;
+				case CellphoneFunctions.ReviewPhotos:
+					ScreenManager.Instance.ShowScreen(ScreenType.PhotoView);
+					canUseMouseScroll = false;
+					break;
 			}
 		}
 
@@ -158,7 +159,7 @@ public class CellPhone : MonoBehaviour
 			Debug.Log("Reseting defaults");
 			light.spotAngle = defaultSpotAngle;
 			light.intensity = defaultIntensity;
-			light.enabled = defaultLightEnabled;
+			light.enabled = AC.GlobalVariables.GetBooleanValue(0, light.enabled);
 			isSavingPhoto = false;
 			isTakingPhoto = false;
 		}

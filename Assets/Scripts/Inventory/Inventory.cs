@@ -35,6 +35,8 @@ public class Inventory : MonoBehaviour
 	}
 	void Update()
 	{
+		if (Time.timeScale == 0.0f)
+			return;
 		if (Input.GetAxis("Mouse ScrollWheel") != 0f && canUseMouseScroll)
 		{
 			if (Input.GetAxis("Mouse ScrollWheel") < 0f)
@@ -50,8 +52,8 @@ public class Inventory : MonoBehaviour
 	public IEnumerator RemoveInventoryItem(ItemType type)
 	{
 		inventoryItems[(int)type].hasItem = false;
-		inventoryItems [(int)type].animator.SetTrigger ("Throw");
-		yield return new WaitForSeconds (1f);
+		inventoryItems[(int)type].animator.SetTrigger("Throw");
+		yield return new WaitForSeconds(1f);
 		inventoryItems[(int)type].SetActive(false);
 		//inventoryItems[(int)type].hand.SetActive(false);
 	}
@@ -59,7 +61,7 @@ public class Inventory : MonoBehaviour
 	{
 		//checking
 		inventoryItems[(int)type].hasItem = true;
-		inventoryItems [(int)type].animator.SetTrigger ("PickingUp");
+		inventoryItems[(int)type].animator.SetTrigger("PickingUp");
 		inventoryItems[(int)type].SetActive(true);
 		//inventoryItems[(int)type].objectInHand.SetActive(true);
 	}

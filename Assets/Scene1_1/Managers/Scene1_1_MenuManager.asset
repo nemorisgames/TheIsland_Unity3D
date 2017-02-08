@@ -26,7 +26,7 @@ MonoBehaviour:
   - {fileID: 11458712}
   - {fileID: 11499766}
   - {fileID: 11488042}
-  - {fileID: 114000010799456146}
+  - {fileID: 114076593159488464}
   globalDepth: 0
   pauseTexture: {fileID: 0}
   scaleTextEffects: 0
@@ -1737,15 +1737,15 @@ MonoBehaviour:
   rectTransformID: 310968
   uiTransitionType: 1
   uiPositionType: 0
-  isEditing: 1
+  isEditing: 0
   isLocked: 0
   id: 12
-  title: Pause
+  title: Menu
   manualSize: {x: 30, y: 60}
   positionType: 0
   manualPosition: {x: 50, y: 50}
   alignment: 4
-  toggleKey: 
+  toggleKey: Menu
   ignoreMouseClicks: 0
   pauseWhenEnabled: 1
   canClickInCutscene: 0
@@ -1950,7 +1950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 2
-  isEditing: 1
+  isEditing: 0
   title: SaveButton
   slotSize: {x: 20, y: 5}
   sizeType: 1
@@ -2143,7 +2143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 0
-  isEditing: 0
+  isEditing: 1
   title: ResumeButton
   slotSize: {x: 20, y: 5}
   sizeType: 1
@@ -5792,7 +5792,7 @@ MonoBehaviour:
     y: 67.04776
     width: 350.51178
     height: 301.27948
---- !u!114 &114000010799456146
+--- !u!114 &114076593159488464
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -5805,22 +5805,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuSource: 2
   canvas: {fileID: 0}
-  canvasID: 480538
+  canvasID: 0
   rectTransform: {fileID: 0}
   rectTransformID: 0
   uiTransitionType: 0
   uiPositionType: 0
-  isEditing: 0
+  isEditing: 1
   isLocked: 0
   id: 13
-  title: PhotoReview
-  manualSize: {x: 0.5, y: 0.8246528}
+  title: UIPause
+  manualSize: {x: 0.5, y: 0.88888884}
   positionType: 0
   manualPosition: {x: 50, y: 50}
   alignment: 4
   toggleKey: 
   ignoreMouseClicks: 0
-  pauseWhenEnabled: 1
+  pauseWhenEnabled: 0
   canClickInCutscene: 0
   enabledOnStart: 0
   actionListOnTurnOn: {fileID: 0}
@@ -5870,7 +5870,7 @@ MonoBehaviour:
   biggestElementSize: {x: 0, y: 0}
   rect:
     serializedVersion: 2
-    x: 472.625
-    y: 285.625
-    width: 4.75
-    height: 4.75
+    x: 385.065
+    y: 215.7525
+    width: 3.87
+    height: 3.87
