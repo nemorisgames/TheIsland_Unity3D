@@ -25,7 +25,7 @@ public class ScreenManager : MonoBehaviour
 	//AC.Cutscene mainMenuOn;
 	//[SerializeField]
 	//AC.Cutscene mainMenuOff;
-	public static bool paused=false;
+	public static bool paused = false;
 	private Stack<ScreenType> showedScreens = new Stack<ScreenType>();
 	void Start()
 	{
@@ -107,13 +107,13 @@ public class ScreenManager : MonoBehaviour
 		ScreenType type = showedScreens.Pop();
 		screens[(int)type].SetActive(true);
 	}
-		
+
 	// Update is called once per frame
 	void Update()
 	{
 		if (Input.GetKeyUp(KeyCode.P))
 		{
-			if (!screens [(int)ScreenType.BookView].activeSelf)
+			if (!screens[(int)ScreenType.BookView].activeSelf)
 				ShowScreen(ScreenType.BookView);
 		}
 		//else if (Input.GetKeyDown(KeyCode.B))
@@ -132,5 +132,7 @@ public class ScreenManager : MonoBehaviour
 		paused = false;
 		unPauseGame.Interact();
 		vp_Utility.LockCursor = true;
+		if (CellPhone.Instance)
+			CellPhone.Instance.CanUseScroller();
 	}
 }
