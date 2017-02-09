@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CellPhone : MonoBehaviour
 {
+	public static CellPhone Instance = null;
 	Transform target;
 	GameObject cellphoneBody;
 	public float speed = 1f;
@@ -53,6 +54,7 @@ public class CellPhone : MonoBehaviour
 		defaultIntensity = light.intensity;
 		defaultSpotAngle = light.spotAngle;
 		defaultLightEnabled = light.enabled;
+		Instance = this;
 	}
 
 	public void activate()
@@ -112,8 +114,7 @@ public class CellPhone : MonoBehaviour
 					transform.parent = null;
 				}
 			}
-			ScreenManager.Instance.CloseScreen();
-			canUseMouseScroll = true;
+			ScreenManager.Instance.CloseScreen();			
 		}
 
 		if (Input.GetAxis("Mouse ScrollWheel") != 0f && canUseMouseScroll)
@@ -269,5 +270,9 @@ public class CellPhone : MonoBehaviour
 			CancelInvoke("NotificaionDuration");
 			notification.SetActive(false);
 		}
+	}
+	public void CanUseScroller()
+	{
+		canUseMouseScroll = true;
 	}
 }
