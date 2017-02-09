@@ -9,9 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Title.unity
   - enabled: 0
     path: Assets/Scenes/Scene1.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ExteriorPrototype.unity
   - enabled: 0
     path: Assets/Scenes/InteriorPrototype.unity
   - enabled: 0
     path: Assets/Scenes/Borrar.unity
+  - enabled: 1
+    path: Assets/Scenes/TestTerrain.unity

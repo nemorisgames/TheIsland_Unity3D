@@ -1,5 +1,5 @@
 function Update() {
-	if (Input.GetKeyDown ("p") || Input.GetKeyDown ("o")) {
+	/*if (Input.GetKeyDown ("p") || Input.GetKeyDown ("o")) {
 		var oversizedScreenshot : boolean = Input.GetKeyDown ("o");
 		
 		var resWidth : int = 5000;
@@ -72,5 +72,5 @@ function Update() {
 			//Second Clean up
 			DestroyImmediate(screenShot);
 		}
-	}
+	}*/
 }
