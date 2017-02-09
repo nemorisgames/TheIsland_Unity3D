@@ -41,49 +41,79 @@ public class WeatherManager : MonoBehaviour
 	}
 	void StartNewWeather(int newWeather = -1)
 	{
+		print (newWeather);
 		if (newWeather != -1)
 			currentWeather = newWeather;
-		var em = particles.emission;
-		var rate = new ParticleSystem.MinMaxCurve();
-		var emSheet = rainSheet.emission;
-		var rateSheet = new ParticleSystem.MinMaxCurve();
-		//RemoveOldWeather();
-		switch (currentWeather)
-		{
+		if (particles != null) {
+			var em = particles.emission;
+			var rate = new ParticleSystem.MinMaxCurve ();
+			var emSheet = rainSheet.emission;
+			var rateSheet = new ParticleSystem.MinMaxCurve ();
+			//RemoveOldWeather();
+			switch (currentWeather) {
 			case 0:
 				rate.mode = ParticleSystemCurveMode.Constant;
 				rate.constant = 100f;
 				rateSheet.mode = ParticleSystemCurveMode.Constant;
 				rateSheet.constant = 1f;
-				Debug.Log("Low Rain");
+				Debug.Log ("Low Rain");
 				break;
 			case 1:
 				rate.mode = ParticleSystemCurveMode.Constant;
 				rate.constant = 1000f;
 				rateSheet.mode = ParticleSystemCurveMode.Constant;
 				rateSheet.constant = 15f;
-				Debug.Log("Normal Rain");
+				Debug.Log ("Normal Rain");
 				break;
 			case 2:
 				rate.mode = ParticleSystemCurveMode.Constant;
 				rate.constant = 2000f;
 				rateSheet.mode = ParticleSystemCurveMode.Constant;
 				rateSheet.constant = 150f;
-				Debug.Log("Heavy Rain");
+				Debug.Log ("Heavy Rain");
 				break;
 			case 3:
 				rate.mode = ParticleSystemCurveMode.Constant;
 				rate.constant = 200f;
-				ThunderAndFlash();
-				Debug.Log("Thunder");
+				ThunderAndFlash ();
+				Debug.Log ("Thunder");
 				break;
 			case 4:
+			//lluvia interior
 				break;
 			default:
 				break;
+			}
+			em.rate = rate;
+			emSheet.rate = rateSheet;
 		}
-		em.rate = rate;
-		emSheet.rate = rateSheet;
+		switch (currentWeather) {
+		case 0:
+			source.clip = weather_Sounds [0];
+			source.Play ();
+			Debug.Log ("Low Rain");
+			break;
+		case 1:
+			source.clip = weather_Sounds [1];
+			source.Play ();
+			Debug.Log ("Normal Rain");
+			break;
+		case 2:
+			source.clip = weather_Sounds [2];
+			source.Play ();
+			Debug.Log ("Heavy Rain");
+			break;
+		case 3:
+			break;
+		case 4:
+			//lluvia interior
+			print ("interior");
+			source.clip = weather_Sounds [3];
+			source.Play ();
+			break;
+		default:
+			break;
+		}
 	}
 	IEnumerator FlashEffect(int pos)
 	{

@@ -140,8 +140,7 @@ public class CellPhone : MonoBehaviour
 					AC.GlobalVariables.SetBooleanValue(0, light.enabled);
 					break;
 				case CellphoneFunctions.CameraPhoto:
-					if (!isTakingPhoto)
-						StartCoroutine(takePhoto());
+					prepareTakePhoto ();
 					break;
 				case CellphoneFunctions.ReviewPhotos:
 					ScreenManager.Instance.ShowScreen(ScreenType.PhotoView);
@@ -152,6 +151,12 @@ public class CellPhone : MonoBehaviour
 
 		cellphoneMaterialFunctions.mainTextureOffset = new Vector2(0f, Mathf.Lerp(cellphoneMaterialFunctions.mainTextureOffset.y, (indiceActual * 0.25f + 0.032f), Time.deltaTime * 3f));
 	}
+
+	void prepareTakePhoto(){
+		if (!isTakingPhoto)
+			StartCoroutine(takePhoto());
+	}
+
 	void ResetToDefaults()
 	{
 		if (currentFunction != CellphoneFunctions.Light)
