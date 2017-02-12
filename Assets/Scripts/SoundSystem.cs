@@ -14,42 +14,31 @@ public class SoundSystem : MonoBehaviour {
 
     [Header("Music")]
     public AudioClip soundscape;
-    public AudioClip danger;
-    public AudioClip[] coven;
+    public AudioClip[] music;
 
     // Use this for initialization
     void Start () {
         caraTransform = GameObject.FindWithTag("Player").transform;
         caraAudioSource = gameObject.GetComponent<AudioSource>();
         musicAudioSource = transform.FindChild("MusicManager").GetComponent<AudioSource>();
-        playAudio();
-        playMusic(0);
+		playSoundScape();
+		setCaraMood (CaraState.Idle);
     }
 
     public void playMusic(int index)
     {
-        switch (index)
-        {
-            case 0:
-                if(musicAudioSource.clip != soundscape)
-                {
-                    StartCoroutine(changeMusic(soundscape));
-                }
-                break;
-            case 1:
-                if (musicAudioSource.clip != coven[0] || musicAudioSource.clip != coven[1] || musicAudioSource.clip != coven[2])
-                {
-                    StartCoroutine(changeMusic(coven[1]));
-                }
-                break;
-            case 2:
-                if (musicAudioSource.clip != danger)
-                {
-                    StartCoroutine(changeMusic(danger));
-                }
-                break;
-        }
+		if (musicAudioSource.clip != music[index])
+		{
+			StartCoroutine(changeMusic(music[index]));
+		} 
     }
+
+	public void playSoundScape(){
+		if(musicAudioSource.clip != soundscape)
+		{
+			StartCoroutine(changeMusic(soundscape));
+		}
+	}
 
     IEnumerator changeMusic(AudioClip a)
     {
@@ -68,13 +57,27 @@ public class SoundSystem : MonoBehaviour {
         musicAudioSource.volume = 1f;
     }
 
+	public void setCaraMood(CaraState c){
+		caraState = c;
+		playAudio();
+	}
+
     public void playAudio()
     {
         switch (caraState)
         {
-            case CaraState.Idle:
-                caraAudioSource.clip = respirationNormal;
-                break;
+        case CaraState.Idle:
+            caraAudioSource.clip = respirationNormal;
+			break;
+		case CaraState.Running:
+			caraAudioSource.clip = respirationRunning;
+			break;
+		case CaraState.Scared:
+			caraAudioSource.clip = respirationScared;
+			break;
+		case CaraState.Walking:
+			caraAudioSource.clip = respirationNormal;
+			break;
         }
         caraAudioSource.Play();
     }
