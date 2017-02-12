@@ -14,6 +14,7 @@ TagManager:
   - AnimTag
   - BackgroundCamera
   - SpawnPoint
+  - AudioManager
   layers:
   - Default
   - TransparentFX
