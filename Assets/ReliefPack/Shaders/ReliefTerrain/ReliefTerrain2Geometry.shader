@@ -459,7 +459,7 @@ SubShader {
 
 	ENDCG
 	
-///* AddBlend
+/* AddBlend
 Fog { Mode Off }
 ZWrite Off
 ZTest LEqual	
@@ -482,7 +482,7 @@ CGPROGRAM
 	#include "RTP_AddBase.cginc"
 	
 ENDCG  				
-//*/ // AddBlend
+*/ // AddBlend
 
 // (used with tessellation)		
 /* TESS SHADOW PASS

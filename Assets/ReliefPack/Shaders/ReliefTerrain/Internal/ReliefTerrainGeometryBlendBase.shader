@@ -442,7 +442,7 @@ SubShader {
 	Fog { Mode Off }
 	ZTest LEqual	
 	CGPROGRAM
-	#pragma surface surf Standard vertex:vert finalcolor:customFog exclude_path:prepass exclude_path:deferred
+	#pragma surface surf Standard vertex:vert finalcolor:customFog exclude_path:prepass
 	// U5 fog handling
 	#pragma multi_compile_fog		
 	
@@ -463,12 +463,12 @@ SubShader {
 
 	ENDCG
 	
-///* AddBlend
+/* AddBlend
 Fog { Mode Off }
 ZWrite Off
 ZTest LEqual	
 CGPROGRAM
-	#pragma surface surf Standard vertex:vert finalcolor:customFog exclude_path:prepass decal:blend exclude_path:deferred
+	#pragma surface surf Standard vertex:vert finalcolor:customFog exclude_path:prepass decal:blend
 	// U5 fog handling
 	#pragma multi_compile_fog		
 	#pragma target 3.0
@@ -487,7 +487,7 @@ CGPROGRAM
 	#include "./../RTP_AddBase.cginc"
 	
 ENDCG  				
-//*/ // AddBlend
+*/ // AddBlend
 	
 	
 }

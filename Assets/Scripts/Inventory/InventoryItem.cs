@@ -14,7 +14,7 @@ public class InventoryItem : MonoBehaviour
 
 	bool throwing = false;
 	float timeOut = 0f;
-	float throwTimeout = 2f;
+	float throwTimeout = 1f;
 	public Animator animator;
 	protected virtual void Awake()
 	{

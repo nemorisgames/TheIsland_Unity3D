@@ -98,7 +98,7 @@ public class CellPhone : MonoBehaviour
 			return;
 
 		//Checkout on cellphone
-		if (Input.GetMouseButtonDown(1))
+		if (Input.GetButtonDown("Fire2"))
 		{
 			if (!inTransition)
 			{
@@ -130,7 +130,7 @@ public class CellPhone : MonoBehaviour
 		}
 
 		//Cellphone function
-		if (Input.GetMouseButtonDown(0) && selected)
+		if (Input.GetButtonDown("Fire1") && selected)
 		{
 			switch (currentFunction)
 			{

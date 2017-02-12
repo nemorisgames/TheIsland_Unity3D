@@ -15,5 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/InteriorPrototype.unity
   - enabled: 0
     path: Assets/Scenes/Borrar.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TestTerrain.unity
+  - enabled: 0
+    path: Assets/Scenes/TestPS4UFPSComposerRelief.unity
+  - enabled: 0
+    path: Assets/Scenes/TestPS4UFPSComposerAC.unity

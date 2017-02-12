@@ -47,7 +47,7 @@ PlayerSettings:
   defaultScreenWidthWeb: 960
   defaultScreenHeightWeb: 600
   m_StereoRenderingPath: 0
-  m_ActiveColorSpace: 0
+  m_ActiveColorSpace: 1
   m_MTRendering: 1
   m_MobileMTRendering: 0
   m_StackTraceTypes: 010000000100000001000000010000000100000001000000
@@ -366,7 +366,7 @@ PlayerSettings:
   playerPrefsSupport: 0
   restrictedAudioUsageRights: 0
   ps4UseResolutionFallback: 0
-  ps4ReprojectionSupport: 0
+  ps4ReprojectionSupport: 1
   ps4UseAudio3dBackend: 0
   ps4SocialScreenEnabled: 0
   ps4ScriptOptimizationLevel: 3
@@ -463,6 +463,7 @@ PlayerSettings:
   webGLCompressionFormat: 1
   scriptingDefineSymbols:
     1: UltimateFPSIsPresent
+    19: UltimateFPSIsPresent
   platformArchitecture:
     iOS: 2
   scriptingBackend:

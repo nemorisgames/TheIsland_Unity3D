@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b4a24d0e4a28423fb3249b923d7e418, type: 3}
+  m_Name: testACPS4_ManagerPackage
+  m_EditorClassIdentifier: 
+  actionsManager: {fileID: 11400000, guid: 9eb7df15f57d99e458396d3d478279cf, type: 2}
+  sceneManager: {fileID: 11400000, guid: 9adff447f46a2344ba4862115f7a0a90, type: 2}
+  settingsManager: {fileID: 11400000, guid: 2e60792efc238df4592814140d4acf7d, type: 2}
+  inventoryManager: {fileID: 11400000, guid: 20d5044ea67ad93429349694dfba0e26, type: 2}
+  variablesManager: {fileID: 11400000, guid: 0bde702c53f2cb842a61eeaa8486ed6f, type: 2}
+  speechManager: {fileID: 11400000, guid: 26362c447e776934f8f06decd849d816, type: 2}
+  cursorManager: {fileID: 11400000, guid: 2d866d80af3e2b94dbdd709cf6fe8246, type: 2}
+  menuManager: {fileID: 11400000, guid: bb6a92f424f376043b84fb13583978a6, type: 2}

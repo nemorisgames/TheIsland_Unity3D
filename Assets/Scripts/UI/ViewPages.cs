@@ -10,20 +10,28 @@ public class ViewPages : MonoBehaviour
 	private int currentPage = 0;
 	private int pagesCount = 1;
 	private List<Texture2D> pages;
-	void Awake()
+	void OnEnable()
 	{
-
+		LoadPages ();
 	}
 	void LoadPages()
 	{
 		//load pages from here and add to grid
+		pages.Clear();
+
+		PageManager p = transform.parent.GetComponent<PageManager> ();
+		pagesCount = p.unlockedPages.Count;
+		for(int i = 0; i < p.unlockedPages.Count; i++){
+			pages.Add ((Texture2D)p.allPages [i].GetComponent<RawImage> ().texture);
+			print ("adding " + i);
+		}
 	}
 	void NextPage()
 	{
 		currentPage++;
 		if (currentPage >= pagesCount)
 		{
-			currentPage = 0;
+			currentPage = pagesCount - 1;
 		}
 		ShowPage();
 	}
@@ -31,7 +39,7 @@ public class ViewPages : MonoBehaviour
 	{
 		currentPage--;
 		if (currentPage < 0)
-			currentPage = pagesCount - 1;
+			currentPage = 0;
 		ShowPage();
 	}
 	public void Load()

@@ -459,7 +459,7 @@ MonoBehaviour:
   positionSelected: {x: 0.0785, y: 0, z: 0.16}
   light: {fileID: 108000013713932314}
   lightStandBy: {fileID: 10803848}
-  active: 1
+  active: 0
   currentFunction: 0
   cellphoneMaterialFunctions: {fileID: 2100000, guid: cc0c4f0273768e24daec1b580f6bd9a5,
     type: 2}

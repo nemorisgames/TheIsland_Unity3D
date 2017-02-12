@@ -97,8 +97,9 @@ public class vp_FPInteractManager : MonoBehaviour
 			return;
 		
 		// set the default crosshair
-		if(m_OriginalCrosshair == null && m_Player.Crosshair.Get() != null)
-			m_OriginalCrosshair = m_Player.Crosshair.Get();
+		//DESCOMENTAR
+		//if(m_OriginalCrosshair == null && m_Player.Crosshair.Get() != null)
+		//	m_OriginalCrosshair = m_Player.Crosshair.Get();
 	
 		// check for an interactable
 		InteractCrosshair();
@@ -172,8 +173,9 @@ public class vp_FPInteractManager : MonoBehaviour
 	{
 
 		// return if no player crosshair
-		if(m_Player.Crosshair.Get() == null)
-			return;
+		//DESCOMENTAR
+		//if(m_Player.Crosshair.Get() == null)
+		//	return;
 		
 		// return if interacting
 		if(m_Player.Interactable.Get() != null)

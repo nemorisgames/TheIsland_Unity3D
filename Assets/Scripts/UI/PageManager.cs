@@ -6,9 +6,10 @@ public class PageManager : MonoBehaviour
 {
 	public static PageManager Instance = null;
 	public GameObject pagePrefab;
+	[SerializeField]
 	public List<int> unlockedPages;
 	[SerializeField]
-	GameObject[] allPages;
+	public GameObject[] allPages;
 	private void Awake()
 	{
 		Instance = this;
@@ -17,7 +18,8 @@ public class PageManager : MonoBehaviour
 	}
 	void Load()
 	{
-
+		//test data
+		AddPage(0);
 	}
 	public void AddPage(int page)
 	{

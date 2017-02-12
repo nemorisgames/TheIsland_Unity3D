@@ -19,6 +19,8 @@ public class CaraFunctions : MonoBehaviour
 		leftHand.SendMessage("Hide");
 		rightHand.SendMessage("Hide");
 		defaultRightHand.SendMessage("Hide");
+		print (gameObject.GetComponentInChildren<Camera> ().enabled);
+		gameObject.GetComponentInChildren<Camera> ().enabled = true;
 	}
 	void Awake()
 	{

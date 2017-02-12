@@ -450,7 +450,7 @@ SubShader {
 	Fog { Mode Off }
 	CGPROGRAM
 	
-	#pragma surface surf Standard vertex:vert finalcolor:customFog exclude_path:prepass exclude_path:deferred
+	#pragma surface surf Standard vertex:vert finalcolor:customFog exclude_path:prepass
 	// U5 fog handling
 	#pragma multi_compile_fog	
 
@@ -477,7 +477,7 @@ SubShader {
 Fog { Mode Off }
 ZWrite Off
 CGPROGRAM
-	#pragma surface surf Standard vertex:vert finalcolor:customFog decal:blend exclude_path:prepass exclude_path:deferred
+	#pragma surface surf Standard vertex:vert finalcolor:customFog decal:blend exclude_path:prepass
 	// U5 fog handling
 	#pragma multi_compile_fog	
 

@@ -3,21 +3,21 @@
 using UnityEngine;
 using System.Collections;
  
-#if PS4
+#if UNITY_PS4
 public class MovieTexture : Texture
 {
     // Constructors
-    public MovieTexture ();
+	public MovieTexture (){}
    
     // Methods
-    public void Play ();
-    public void Stop ();
-    public void Pause ();
+	public void Play (){}
+	public void Stop (){}
+	public void Pause (){}
    
     // Properties
-    public AudioClip audioClip { get; }
-    public bool loop { get; set; }
-    public bool isPlaying { get; }
-    public bool isReadyToPlay { get; }
+	public AudioClip audioClip { get{ return null; } }
+	public bool loop { get{ return false; } set{ } }
+	public bool isPlaying { get{ return false; } }
+	public bool isReadyToPlay { get{ return false; } }
 }
 #endif
