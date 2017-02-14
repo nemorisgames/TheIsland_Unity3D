@@ -61,6 +61,7 @@ GameObject:
   - component: {fileID: 12456482}
   - component: {fileID: 9227670}
   - component: {fileID: 114000013011061014}
+  - component: {fileID: 114919490447799618}
   m_Layer: 31
   m_Name: Camera
   m_TagString: Untagged
@@ -165,8 +166,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168906}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.29799986, y: 1.9660001, z: -4.94}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.29799986, y: 17.2, z: -4.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4000011222512946}
@@ -243,7 +244,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294948827
+    m_Bits: 4294916059
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 358a0de08f5a2dc4d90762c3aca97642, type: 2}
   m_TargetDisplay: 0
@@ -418,7 +419,7 @@ Light:
   serializedVersion: 7
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.07
+  m_Intensity: 0.3
   m_Range: 10
   m_SpotAngle: 139.7
   m_CookieSize: 10
@@ -459,7 +460,7 @@ MonoBehaviour:
   positionSelected: {x: 0.0785, y: 0, z: 0.16}
   light: {fileID: 108000013713932314}
   lightStandBy: {fileID: 10803848}
-  active: 0
+  active: 1
   currentFunction: 0
   cellphoneMaterialFunctions: {fileID: 2100000, guid: cc0c4f0273768e24daec1b580f6bd9a5,
     type: 2}
@@ -479,7 +480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f72e60470f1fa4fd1825cd67ce482cf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  constantID: 4560
+  constantID: 1048958
   retainInPrefab: 0
   autoManual: 0
 --- !u!124 &12456482
@@ -1406,7 +1407,7 @@ Light:
   serializedVersion: 7
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.7
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 70
   m_CookieSize: 10
@@ -1686,6 +1687,91 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ca3c3269b26861469a89a2f46275d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114919490447799618
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4234024f1ec134da7a7797a29e6cfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_grain: 1
+  m_grainIntensity: 0.04
+  m_vignette: 0
+  m_vignetteIntensity: 0.7
+  m_vignetteScale: 0.7
+  m_vignetteColor: {r: 0, g: 0, b: 0, a: 1}
+  m_chromaticAberration: 1
+  m_chromaticAberrationDistortion: 0.7
+  m_chromaticAberrationIntensity: 10
+  m_bloom: 1
+  m_bloomThreshold: 0
+  m_bloomIntensity: 0.35
+  m_bloomBrightness: 1.31
+  m_bloomDistanceMultiplier: 0.859
+  m_bloomDownsamples: 7
+  m_lensFlare: 1
+  m_lensFlareGhostSamples: 5
+  m_lensFlareGhostIntensity: 0.1
+  m_lensFlareGhostDispersal: 0.2
+  m_lensFlareGhostDistortion: 0.1
+  m_lensFlareGhostEdgeFade: 1
+  m_lensFlareLensColorTexture: {fileID: 2800000, guid: 15e9d2a745ed5d44eb7d8ed845fbfa65,
+    type: 3}
+  m_lensFlareHaloIntensity: 0.1
+  m_lensFlareHaloWidth: 0.3
+  m_lensFlareHaloDistortion: 0.5
+  m_lensFlareDiffractionTexture: {fileID: 2800000, guid: d8d307d8628ea7b4c8d4688d875507fe,
+    type: 3}
+  m_lensFlareDiffractionUVScale: 0.8
+  m_lensFlareBlurSamples: 1
+  m_lensFlareBlurStrength: 0.5
+  m_lensFlareDownsamples: 2
+  m_lensFlareThreshold: 0
+  m_lensDirt: 1
+  m_lensDirtTexture: {fileID: 2800000, guid: adbc35160ff54eb4cae0fd40240bcf9e, type: 3}
+  m_lensDirtBloomThreshold: 0
+  m_lensDirtBloomEffect: 0.3
+  m_lensDirtBloomBrightness: 1.2
+  m_lensDirtLensFlareEffect: 1
+  m_lensDirtLensFlareBrightness: 2
+  m_tonemappingMode: 0
+  m_whitePoint: 2
+  m_cameraMode: 2
+  m_fNumber: 4
+  m_ISO: 100
+  m_shutterSpeed: 0.01
+  m_userControlledFocalLength: 0
+  m_focalLength: 15
+  m_exposureCompensation: 0
+  m_minMaxExposure: {x: -6, y: 6}
+  m_adaptionSpeed: 1
+  m_depthOfField: 1
+  m_exclusionMask:
+    serializedVersion: 2
+    m_Bits: 0
+  m_maxCoCRadius: 20
+  m_depthOfFieldTemporalSupersampling: 1
+  m_depthOfFieldTemporalBlend: 0.9
+  m_depthOfFieldTemporalSteps: 8
+  m_depthOfFieldSamples: 0
+  m_depthFocusMode: 3
+  m_visualizeFocalDistance: 0
+  m_depthOfFieldTargetTransform: {fileID: 0}
+  m_pointAveragePosition: {x: 0.5, y: 0.5}
+  m_pointAverageRange: 0.1
+  m_visualizePointFocus: 0
+  m_depthAdaptionSpeed: 15
+  m_focalDistance: 10
+  m_focalRange: 10
+  m_colorGradingMode: 1
+  m_colorGradingTex1: {fileID: 2800000, guid: 942eca2293f701e42a3a1a7522ec4723, type: 3}
+  m_colorGradingTex2: {fileID: 2800000, guid: 3ad036aa92b53f84f9fe718d6224ca3c, type: 3}
+  m_colorGradingBlendFactor: 0.094
+  forceFillParams: 0
 --- !u!137 &137000013294681750
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

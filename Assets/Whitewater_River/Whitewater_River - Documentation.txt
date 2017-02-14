@@ -1,0 +1,9 @@
+This Whitewater River Pack is a collection of assets to create a realistic river environment.
+
+Load the Whitewater_River.unity for an example scene, or drag your required river Prefab (River_Small.prefab, River_Medium.prefab or River_Large.prefab) from the Project window into the Hierarchy window. Note that these assets are tileable, so you can repeat the asset to create a river to your required size.
+
+Additional assets are in the Prefab folder to dress your scene further, including grass, plants, trees and rocks.
+
+Have fun!
+
+If you have any questions then please get in touch at bendurrant@rivermillstudios.com

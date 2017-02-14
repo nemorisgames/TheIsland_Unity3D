@@ -463,6 +463,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224000010245939990}
   - component: {fileID: 114000011665770642}
+  - component: {fileID: 114364797244420036}
   m_Layer: 11
   m_Name: PageReview
   m_TagString: Untagged
@@ -3581,7 +3582,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pagePrefab: {fileID: 1000012869536360, guid: 6091c5546f37b9b4d952da99f788e055, type: 2}
   unlockedPages: 
-  allPages: []
+  allPages:
+  - {fileID: 1000012869536360, guid: 5c1c5eb6b95855b4fab1fc5d9e4e077d, type: 2}
+  - {fileID: 1000012869536360, guid: e35ce6ccf7877114fb1744e1f58048d5, type: 2}
+  - {fileID: 1000012869536360, guid: f234289a96a15124e943633855ce180b, type: 2}
 --- !u!114 &114167269581450164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3642,6 +3646,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114364797244420036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011939224600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f72e60470f1fa4fd1825cd67ce482cf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  constantID: 472804
+  retainInPrefab: 0
+  autoManual: 0
 --- !u!114 &114556554543778636
 MonoBehaviour:
   m_ObjectHideFlags: 1

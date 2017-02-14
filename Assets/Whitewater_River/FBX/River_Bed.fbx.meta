@@ -1,0 +1,172 @@
+fileFormatVersion: 2
+guid: 6377874a5aba4a34f874b17f7495ccf3
+timeCreated: 1465987371
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: River_Bed2
+    100004: River_Bed3
+    100006: River_Bed21
+    100008: River_Bed22
+    100010: River_Bed23
+    100012: River_Bed24
+    100014: River_Bed25
+    100016: River_Bed26
+    100018: River_Bed27
+    100020: River_Bed28
+    100022: River_Bed29
+    100024: River_Bed30
+    100026: River_Bed31
+    100028: River_Bed32
+    100030: Waters_Edge_Foam
+    100032: Grass
+    100034: Grass1
+    100036: Grass2
+    100038: RiverBed 1
+    400000: //RootNode
+    400002: River_Bed2
+    400004: River_Bed3
+    400006: River_Bed21
+    400008: River_Bed22
+    400010: River_Bed23
+    400012: River_Bed24
+    400014: River_Bed25
+    400016: River_Bed26
+    400018: River_Bed27
+    400020: River_Bed28
+    400022: River_Bed29
+    400024: River_Bed30
+    400026: River_Bed31
+    400028: River_Bed32
+    400030: Waters_Edge_Foam
+    400032: Grass
+    400034: Grass1
+    400036: Grass2
+    400038: RiverBed 1
+    2300000: //RootNode
+    2300002: River_Bed2
+    2300004: River_Bed3
+    2300006: River_Bed21
+    2300008: River_Bed22
+    2300010: River_Bed23
+    2300012: River_Bed24
+    2300014: River_Bed25
+    2300016: River_Bed26
+    2300018: River_Bed27
+    2300020: River_Bed28
+    2300022: River_Bed29
+    2300024: River_Bed30
+    2300026: River_Bed31
+    2300028: River_Bed32
+    2300030: Waters_Edge_Foam
+    2300032: Grass
+    2300034: Grass1
+    2300036: Grass2
+    2300038: RiverBed 1
+    3300000: //RootNode
+    3300002: River_Bed2
+    3300004: River_Bed3
+    3300006: River_Bed21
+    3300008: River_Bed22
+    3300010: River_Bed23
+    3300012: River_Bed24
+    3300014: River_Bed25
+    3300016: River_Bed26
+    3300018: River_Bed27
+    3300020: River_Bed28
+    3300022: River_Bed29
+    3300024: River_Bed30
+    3300026: River_Bed31
+    3300028: River_Bed32
+    3300030: Waters_Edge_Foam
+    3300032: Grass
+    3300034: Grass1
+    3300036: Grass2
+    3300038: RiverBed 1
+    4300000: River_Bed
+    4300002: River_Bed2
+    4300004: River_Bed3
+    4300006: River_Bed21
+    4300008: River_Bed22
+    4300010: River_Bed23
+    4300012: River_Bed24
+    4300014: River_Bed25
+    4300016: River_Bed26
+    4300018: River_Bed27
+    4300020: River_Bed28
+    4300022: River_Bed29
+    4300024: River_Bed30
+    4300026: River_Bed31
+    4300028: River_Bed32
+    4300030: Waters_Edge_Foam
+    4300032: Grass
+    4300034: Grass1
+    4300036: Grass2
+    4300038: RiverBed
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 1
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
