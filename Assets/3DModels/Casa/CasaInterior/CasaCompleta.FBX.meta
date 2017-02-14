@@ -274,6 +274,41 @@ ModelImporter:
     100532: Bidon
     100534: Bidon001
     100536: PuertaCloset
+    100538: Box013
+    100540: Cuadro004
+    100542: Cuadro1
+    100544: Cuadro3
+    100546: Cuna
+    100548: Cylinder048
+    100550: florero001
+    100552: Libro004
+    100554: Libro006
+    100556: Libro007
+    100558: Libro008
+    100560: Libro009
+    100562: Libro010
+    100564: Libro011
+    100566: Libro1
+    100568: Libro2
+    100570: Libro3
+    100572: Libro5
+    100574: linterna a vela
+    100576: manillalinterna
+    100578: Mecedora001
+    100580: mesa005
+    100582: mesa006
+    100584: Mesabano001
+    100586: Meson
+    100588: Meson001
+    100590: Meson002
+    100592: MusicBox
+    100594: Palmatoria1
+    100596: Palmatoria2
+    100598: Piso003
+    100600: Plane002
+    100602: Plane003
+    100604: Plane004
+    100606: Tapeo029
     400000: Armario
     400002: BancaCocina
     400004: Bodega
@@ -543,6 +578,41 @@ ModelImporter:
     400532: Bidon
     400534: Bidon001
     400536: PuertaCloset
+    400538: Box013
+    400540: Cuadro004
+    400542: Cuadro1
+    400544: Cuadro3
+    400546: Cuna
+    400548: Cylinder048
+    400550: florero001
+    400552: Libro004
+    400554: Libro006
+    400556: Libro007
+    400558: Libro008
+    400560: Libro009
+    400562: Libro010
+    400564: Libro011
+    400566: Libro1
+    400568: Libro2
+    400570: Libro3
+    400572: Libro5
+    400574: linterna a vela
+    400576: manillalinterna
+    400578: Mecedora001
+    400580: mesa005
+    400582: mesa006
+    400584: Mesabano001
+    400586: Meson
+    400588: Meson001
+    400590: Meson002
+    400592: MusicBox
+    400594: Palmatoria1
+    400596: Palmatoria2
+    400598: Piso003
+    400600: Plane002
+    400602: Plane003
+    400604: Plane004
+    400606: Tapeo029
     2300000: Armario
     2300002: BancaCocina
     2300004: Bodega
@@ -811,6 +881,41 @@ ModelImporter:
     2300530: Bidon
     2300532: Bidon001
     2300534: PuertaCloset
+    2300536: Box013
+    2300538: Cuadro004
+    2300540: Cuadro1
+    2300542: Cuadro3
+    2300544: Cuna
+    2300546: Cylinder048
+    2300548: florero001
+    2300550: Libro004
+    2300552: Libro006
+    2300554: Libro007
+    2300556: Libro008
+    2300558: Libro009
+    2300560: Libro010
+    2300562: Libro011
+    2300564: Libro1
+    2300566: Libro2
+    2300568: Libro3
+    2300570: Libro5
+    2300572: linterna a vela
+    2300574: manillalinterna
+    2300576: Mecedora001
+    2300578: mesa005
+    2300580: mesa006
+    2300582: Mesabano001
+    2300584: Meson
+    2300586: Meson001
+    2300588: Meson002
+    2300590: MusicBox
+    2300592: Palmatoria1
+    2300594: Palmatoria2
+    2300596: Piso003
+    2300598: Plane002
+    2300600: Plane003
+    2300602: Plane004
+    2300604: Tapeo029
     3300000: Armario
     3300002: BancaCocina
     3300004: Bodega
@@ -1079,6 +1184,41 @@ ModelImporter:
     3300530: Bidon
     3300532: Bidon001
     3300534: PuertaCloset
+    3300536: Box013
+    3300538: Cuadro004
+    3300540: Cuadro1
+    3300542: Cuadro3
+    3300544: Cuna
+    3300546: Cylinder048
+    3300548: florero001
+    3300550: Libro004
+    3300552: Libro006
+    3300554: Libro007
+    3300556: Libro008
+    3300558: Libro009
+    3300560: Libro010
+    3300562: Libro011
+    3300564: Libro1
+    3300566: Libro2
+    3300568: Libro3
+    3300570: Libro5
+    3300572: linterna a vela
+    3300574: manillalinterna
+    3300576: Mecedora001
+    3300578: mesa005
+    3300580: mesa006
+    3300582: Mesabano001
+    3300584: Meson
+    3300586: Meson001
+    3300588: Meson002
+    3300590: MusicBox
+    3300592: Palmatoria1
+    3300594: Palmatoria2
+    3300596: Piso003
+    3300598: Plane002
+    3300600: Plane003
+    3300602: Plane004
+    3300604: Tapeo029
     4300000: CasaMain
     4300002: Piso1
     4300004: Tapeo5
@@ -1347,6 +1487,41 @@ ModelImporter:
     4300530: Bidon
     4300532: Bidon001
     4300534: PuertaCloset
+    4300536: Cuadro1
+    4300538: Palmatoria1
+    4300540: florero001
+    4300542: mesa005
+    4300544: Plane002
+    4300546: Libro1
+    4300548: Cuadro3
+    4300550: Libro2
+    4300552: Libro3
+    4300554: Libro004
+    4300556: Libro5
+    4300558: Libro006
+    4300560: Meson
+    4300562: Libro007
+    4300564: Libro008
+    4300566: Meson001
+    4300568: Mesabano001
+    4300570: Mecedora001
+    4300572: Libro009
+    4300574: Libro010
+    4300576: Cylinder048
+    4300578: Plane003
+    4300580: Palmatoria2
+    4300582: mesa006
+    4300584: Box013
+    4300586: Plane004
+    4300588: Libro011
+    4300590: Piso003
+    4300592: Meson002
+    4300594: Cuna
+    4300596: linterna a vela
+    4300598: manillalinterna
+    4300600: Cuadro004
+    4300602: MusicBox
+    4300604: Tapeo029
   materials:
     importMaterials: 1
     materialName: 0
@@ -1393,6 +1568,7 @@ ModelImporter:
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
+    serializedVersion: 2
     human: []
     skeleton: []
     armTwist: 0.5
@@ -1403,7 +1579,10 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
   humanoidOversampling: 1
