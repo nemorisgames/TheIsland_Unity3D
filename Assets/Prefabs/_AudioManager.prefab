@@ -51,9 +51,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ac57d0f24c54f64c8f222dc7d2fe5e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgrounds: []
+  backgrounds:
+  - {fileID: 8300000, guid: 67d873f31f6aa714dba20b6093a0ac33, type: 3}
+  - {fileID: 8300000, guid: f02b44a6a9d3af34a90a4b207522ef57, type: 3}
+  - {fileID: 8300000, guid: b2cdbfbfef3b0224d8f8247797e09d00, type: 3}
+  - {fileID: 8300000, guid: 3cfc4324568758e4494cde6323945814, type: 3}
+  - {fileID: 8300000, guid: 51582f74fad49804ca296cec94426ecf, type: 3}
+  - {fileID: 8300000, guid: 2a44afd1f28744d4185db2fc86cdd753, type: 3}
+  - {fileID: 8300000, guid: 26fed936f5de41c47a65b0be5778c1b3, type: 3}
   jumpScares: []
-  effects: []
+  situation:
+  - {fileID: 8300000, guid: 51582f74fad49804ca296cec94426ecf, type: 3}
+  - {fileID: 8300000, guid: 2a44afd1f28744d4185db2fc86cdd753, type: 3}
+  - {fileID: 8300000, guid: 26fed936f5de41c47a65b0be5778c1b3, type: 3}
+  effects:
+  - {fileID: 8300000, guid: 51582f74fad49804ca296cec94426ecf, type: 3}
+  - {fileID: 8300000, guid: 2a44afd1f28744d4185db2fc86cdd753, type: 3}
+  - {fileID: 8300000, guid: 26fed936f5de41c47a65b0be5778c1b3, type: 3}
   bgSource: {fileID: 0}
   jsSource: {fileID: 0}
   efSource: {fileID: 0}
+  sitSource: {fileID: 0}
