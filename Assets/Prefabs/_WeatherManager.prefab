@@ -609,7 +609,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010759145192}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bde53e90cfde91c40b1df4f097c6b960, type: 3}
   m_Name: 
@@ -621,10 +621,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a41cfc2386ad0f044ad73722af8c55ed, type: 3}
   - {fileID: 8300000, guid: 9142e48c28425774ab16d59f4138187e, type: 3}
   - {fileID: 8300000, guid: e6e3f67b31bb5f24f93435ce7bd0a9ee, type: 3}
+  - {fileID: 8300000, guid: 9cfc702151c764542bf6beb4cebdd18d, type: 3}
   weather_effects:
   - {fileID: 8300000, guid: 963627dd4781c104c832506023643b11, type: 3}
   positions:
-  - {fileID: 0}
+  - {fileID: 1000012373125834}
   thunderSpawns: {fileID: 1000012373125834}
   thunderSounds:
   - {fileID: 82000013343445996}

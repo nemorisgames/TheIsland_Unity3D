@@ -47,6 +47,8 @@ public class CellPhone : MonoBehaviour
 		notification.SetActive(false);
 		cellphoneBody = transform.FindChild("Cuerpo").gameObject;
 		cellphoneBody.SetActive(active);
+		print (AC.GlobalVariables.GetBooleanValue (0));
+		turnLight (AC.GlobalVariables.GetBooleanValue (0));
 	}
 	void Awake()
 	{
@@ -134,11 +136,8 @@ public class CellPhone : MonoBehaviour
 		{
 			switch (currentFunction)
 			{
-				case CellphoneFunctions.Light:
-					light.enabled = !light.enabled;
-					Light s = light.transform.FindChild("SupportLight").GetComponent<Light>();
-					s.enabled = !s.enabled;
-					AC.GlobalVariables.SetBooleanValue(0, light.enabled);
+			case CellphoneFunctions.Light:
+				turnLight (!light.enabled);
 					break;
 				case CellphoneFunctions.CameraPhoto:
 					prepareTakePhoto ();
@@ -151,6 +150,13 @@ public class CellPhone : MonoBehaviour
 		}
 
 		cellphoneMaterialFunctions.mainTextureOffset = new Vector2(0f, Mathf.Lerp(cellphoneMaterialFunctions.mainTextureOffset.y, (indiceActual * 0.25f + 0.032f), Time.deltaTime * 3f));
+	}
+
+	void turnLight(bool lightOn){
+		light.enabled = lightOn;
+		Light s = light.transform.FindChild("SupportLight").GetComponent<Light>();
+		s.enabled = lightOn;
+		AC.GlobalVariables.SetBooleanValue(0, lightOn);
 	}
 
 	void prepareTakePhoto(){
@@ -188,7 +194,7 @@ public class CellPhone : MonoBehaviour
 
 		yield return new WaitForSeconds(0.2f);
 		lightStandBy.enabled = false;
-		lightStandBy.intensity = 2f;
+		lightStandBy.intensity = 1.3f;
 
 		while (light.intensity < intensityOriginal * 4f)
 		{

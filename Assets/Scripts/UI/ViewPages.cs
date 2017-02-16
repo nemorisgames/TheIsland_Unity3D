@@ -44,13 +44,13 @@ public class ViewPages : MonoBehaviour
 	}
 	public void Load()
 	{
-		if (pages != null)
+		/*if (pages != null)
 		{
 			for (int i = 0; i < pages.Count; i++)
 			{
 				Destroy(pages[i]);
 			}
-		}
+		}*/
 		pages = new List<Texture2D>();
 		//aqui cargar paginas
 		for (int i = 0; i < 15; i++)
