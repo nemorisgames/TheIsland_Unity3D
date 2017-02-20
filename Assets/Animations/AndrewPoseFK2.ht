@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1105 &110500000
+HumanTemplate:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: AndrewPoseFK2
+  m_BoneTemplate:
+    Chest: Bind_Spine2
+    Head: Bind_Head
+    Hips: Bind_Hips
+    Jaw: IK_LeftEye
+    Left Index Distal: Bind_LeftHandIndex3
+    Left Index Intermediate: Bind_LeftHandIndex2
+    Left Index Proximal: Bind_LeftHandIndex1
+    Left Little Distal: Bind_LeftHandPinky3
+    Left Little Intermediate: Bind_LeftHandPinky2
+    Left Little Proximal: Bind_LeftHandPinky1
+    Left Middle Distal: Bind_LeftHandMiddle3
+    Left Middle Intermediate: Bind_LeftHandMiddle2
+    Left Middle Proximal: Bind_LeftHandMiddle1
+    Left Ring Distal: Bind_LeftHandRing3
+    Left Ring Intermediate: Bind_LeftHandRing2
+    Left Ring Proximal: Bind_LeftHandRing1
+    Left Thumb Distal: Bind_LeftHandThumb3
+    Left Thumb Intermediate: Bind_LeftHandThumb2
+    Left Thumb Proximal: Bind_LeftHandThumb1
+    LeftEye: LeftEye_Aim_CTRL_GuideCurve_Cluster2Handle
+    LeftFoot: Bind_LeftFoot
+    LeftHand: FK_LeftHand
+    LeftLowerArm: FK_LeftForeArm
+    LeftLowerLeg: Bind_LeftLeg
+    LeftShoulder: Bind_LeftShoulder
+    LeftToes: Bind_LeftToeBase
+    LeftUpperArm: FK_LeftArm
+    LeftUpperLeg: Bind_LeftUpLeg
+    Neck: Bind_Neck
+    Right Index Distal: Bind_RightHandIndex3
+    Right Index Intermediate: Bind_RightHandIndex2
+    Right Index Proximal: Bind_RightHandIndex1
+    Right Little Distal: Bind_RightHandPinky3
+    Right Little Intermediate: Bind_RightHandPinky2
+    Right Little Proximal: Bind_RightHandPinky1
+    Right Middle Distal: Bind_RightHandMiddle3
+    Right Middle Intermediate: Bind_RightHandMiddle2
+    Right Middle Proximal: Bind_RightHandMiddle1
+    Right Ring Distal: Bind_RightHandRing3
+    Right Ring Intermediate: Bind_RightHandRing2
+    Right Ring Proximal: Bind_RightHandRing1
+    Right Thumb Distal: Bind_RightHandThumb3
+    Right Thumb Intermediate: Bind_RightHandThumb2
+    Right Thumb Proximal: Bind_RightHandThumb1
+    RightEye: IK_RightEye
+    RightFoot: Bind_RightFoot
+    RightHand: FK_RightHand
+    RightLowerArm: FK_RightForeArm
+    RightLowerLeg: Bind_RightLeg
+    RightShoulder: Bind_RightShoulder
+    RightToes: Bind_RightToeBase
+    RightUpperArm: FK_RightArm
+    RightUpperLeg: Bind_RightUpLeg
+    Spine: Bind_Spine

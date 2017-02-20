@@ -26,4 +26,4 @@ MonoBehaviour:
     SurfaceEffect: {fileID: 11400000, guid: 9b00f4977cad32e4d9d069ef318cc4ef, type: 2}
   itemTypeHelp: 139
   AllowFootprints: 0
-  footPrintHelp: 139
+  footPrintHelp: 150

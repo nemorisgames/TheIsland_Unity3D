@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 350af0033c8b3774cb4632df84d2e7ad
-timeCreated: 1483279726
+timeCreated: 1487302937
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName: {}
@@ -83,6 +83,14 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: PS4
     maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 1

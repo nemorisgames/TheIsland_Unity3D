@@ -309,6 +309,62 @@ ModelImporter:
     100602: Plane003
     100604: Plane004
     100606: Tapeo029
+    100608: Alfombra1
+    100610: Alfombra2
+    100612: Botella3
+    100614: "CajonLe\xF1a"
+    100616: Carton1
+    100618: Carton2
+    100620: Carton3
+    100622: CigaretteBox
+    100624: EstanteCocina
+    100626: FrutaPodrida1
+    100628: FrutaPodrida2
+    100630: HuesoPollo1
+    100632: HuesoPollo2
+    100634: HuesoPollo3
+    100636: HuesoPollo4
+    100638: ManchaTinta
+    100640: MuebleBodega
+    100642: Papel1
+    100644: Papel2
+    100646: Plato1
+    100648: Plato10
+    100650: Plato2
+    100652: Plato3
+    100654: Plato4
+    100656: Plato5
+    100658: Plato6
+    100660: Plato7
+    100662: Plato8
+    100664: Plato9
+    100666: Pluma
+    100668: Remedio1
+    100670: Remedio2
+    100672: Remedio4
+    100674: Remedio4 1
+    100676: Remedio5
+    100678: Remedio6
+    100680: Remedio7
+    100682: Tasa
+    100684: Tasa2
+    100686: Tasa3
+    100688: Vaso1
+    100690: Vaso2
+    100692: Vaso3
+    100694: Vaso4
+    100696: Vaso5
+    100698: Vaso6
+    100700: Vaso7
+    100702: Vaso8
+    100704: Viga
+    100706: Viga 1
+    100708: Viga 2
+    100710: Viga 3
+    100712: Viga 4
+    100714: Viga 5
+    100716: Viga 6
+    100718: Viga 7
     400000: Armario
     400002: BancaCocina
     400004: Bodega
@@ -613,6 +669,62 @@ ModelImporter:
     400602: Plane003
     400604: Plane004
     400606: Tapeo029
+    400608: Alfombra1
+    400610: Alfombra2
+    400612: Botella3
+    400614: "CajonLe\xF1a"
+    400616: Carton1
+    400618: Carton2
+    400620: Carton3
+    400622: CigaretteBox
+    400624: EstanteCocina
+    400626: FrutaPodrida1
+    400628: FrutaPodrida2
+    400630: HuesoPollo1
+    400632: HuesoPollo2
+    400634: HuesoPollo3
+    400636: HuesoPollo4
+    400638: ManchaTinta
+    400640: MuebleBodega
+    400642: Papel1
+    400644: Papel2
+    400646: Plato1
+    400648: Plato10
+    400650: Plato2
+    400652: Plato3
+    400654: Plato4
+    400656: Plato5
+    400658: Plato6
+    400660: Plato7
+    400662: Plato8
+    400664: Plato9
+    400666: Pluma
+    400668: Remedio1
+    400670: Remedio2
+    400672: Remedio4
+    400674: Remedio4 1
+    400676: Remedio5
+    400678: Remedio6
+    400680: Remedio7
+    400682: Tasa
+    400684: Tasa2
+    400686: Tasa3
+    400688: Vaso1
+    400690: Vaso2
+    400692: Vaso3
+    400694: Vaso4
+    400696: Vaso5
+    400698: Vaso6
+    400700: Vaso7
+    400702: Vaso8
+    400704: Viga
+    400706: Viga 1
+    400708: Viga 2
+    400710: Viga 3
+    400712: Viga 4
+    400714: Viga 5
+    400716: Viga 6
+    400718: Viga 7
     2300000: Armario
     2300002: BancaCocina
     2300004: Bodega
@@ -916,6 +1028,62 @@ ModelImporter:
     2300600: Plane003
     2300602: Plane004
     2300604: Tapeo029
+    2300606: Alfombra1
+    2300608: Alfombra2
+    2300610: Botella3
+    2300612: "CajonLe\xF1a"
+    2300614: Carton1
+    2300616: Carton2
+    2300618: Carton3
+    2300620: CigaretteBox
+    2300622: EstanteCocina
+    2300624: FrutaPodrida1
+    2300626: FrutaPodrida2
+    2300628: HuesoPollo1
+    2300630: HuesoPollo2
+    2300632: HuesoPollo3
+    2300634: HuesoPollo4
+    2300636: ManchaTinta
+    2300638: MuebleBodega
+    2300640: Papel1
+    2300642: Papel2
+    2300644: Plato1
+    2300646: Plato10
+    2300648: Plato2
+    2300650: Plato3
+    2300652: Plato4
+    2300654: Plato5
+    2300656: Plato6
+    2300658: Plato7
+    2300660: Plato8
+    2300662: Plato9
+    2300664: Pluma
+    2300666: Remedio1
+    2300668: Remedio2
+    2300670: Remedio4
+    2300672: Remedio4 1
+    2300674: Remedio5
+    2300676: Remedio6
+    2300678: Remedio7
+    2300680: Tasa
+    2300682: Tasa2
+    2300684: Tasa3
+    2300686: Vaso1
+    2300688: Vaso2
+    2300690: Vaso3
+    2300692: Vaso4
+    2300694: Vaso5
+    2300696: Vaso6
+    2300698: Vaso7
+    2300700: Vaso8
+    2300702: Viga
+    2300704: Viga 1
+    2300706: Viga 2
+    2300708: Viga 3
+    2300710: Viga 4
+    2300712: Viga 5
+    2300714: Viga 6
+    2300716: Viga 7
     3300000: Armario
     3300002: BancaCocina
     3300004: Bodega
@@ -1219,6 +1387,62 @@ ModelImporter:
     3300600: Plane003
     3300602: Plane004
     3300604: Tapeo029
+    3300606: Alfombra1
+    3300608: Alfombra2
+    3300610: Botella3
+    3300612: "CajonLe\xF1a"
+    3300614: Carton1
+    3300616: Carton2
+    3300618: Carton3
+    3300620: CigaretteBox
+    3300622: EstanteCocina
+    3300624: FrutaPodrida1
+    3300626: FrutaPodrida2
+    3300628: HuesoPollo1
+    3300630: HuesoPollo2
+    3300632: HuesoPollo3
+    3300634: HuesoPollo4
+    3300636: ManchaTinta
+    3300638: MuebleBodega
+    3300640: Papel1
+    3300642: Papel2
+    3300644: Plato1
+    3300646: Plato10
+    3300648: Plato2
+    3300650: Plato3
+    3300652: Plato4
+    3300654: Plato5
+    3300656: Plato6
+    3300658: Plato7
+    3300660: Plato8
+    3300662: Plato9
+    3300664: Pluma
+    3300666: Remedio1
+    3300668: Remedio2
+    3300670: Remedio4
+    3300672: Remedio4 1
+    3300674: Remedio5
+    3300676: Remedio6
+    3300678: Remedio7
+    3300680: Tasa
+    3300682: Tasa2
+    3300684: Tasa3
+    3300686: Vaso1
+    3300688: Vaso2
+    3300690: Vaso3
+    3300692: Vaso4
+    3300694: Vaso5
+    3300696: Vaso6
+    3300698: Vaso7
+    3300700: Vaso8
+    3300702: Viga
+    3300704: Viga 1
+    3300706: Viga 2
+    3300708: Viga 3
+    3300710: Viga 4
+    3300712: Viga 5
+    3300714: Viga 6
+    3300716: Viga 7
     4300000: CasaMain
     4300002: Piso1
     4300004: Tapeo5
@@ -1522,6 +1746,62 @@ ModelImporter:
     4300600: Cuadro004
     4300602: MusicBox
     4300604: Tapeo029
+    4300606: Viga
+    4300608: Viga
+    4300610: Viga
+    4300612: Viga
+    4300614: Viga
+    4300616: Viga
+    4300618: Viga
+    4300620: Viga
+    4300622: EstanteCocina
+    4300624: "CajonLe\xF1a"
+    4300626: Tasa
+    4300628: Plato3
+    4300630: Plato2
+    4300632: Plato1
+    4300634: Tasa3
+    4300636: Plato7
+    4300638: Plato10
+    4300640: Plato9
+    4300642: Plato8
+    4300644: Plato6
+    4300646: Plato5
+    4300648: Vaso2
+    4300650: Vaso3
+    4300652: Vaso4
+    4300654: Vaso5
+    4300656: Vaso1
+    4300658: FrutaPodrida2
+    4300660: FrutaPodrida1
+    4300662: HuesoPollo1
+    4300664: HuesoPollo2
+    4300666: Plato4
+    4300668: HuesoPollo4
+    4300670: HuesoPollo3
+    4300672: Tasa2
+    4300674: Vaso7
+    4300676: Botella3
+    4300678: Vaso6
+    4300680: Remedio5
+    4300682: Remedio4
+    4300684: Remedio6
+    4300686: Remedio7
+    4300688: Vaso8
+    4300690: Remedio4
+    4300692: Papel2
+    4300694: Carton1
+    4300696: Papel1
+    4300698: Carton2
+    4300700: Carton3
+    4300702: MuebleBodega
+    4300704: Remedio2
+    4300706: Remedio1
+    4300708: Alfombra1
+    4300710: Pluma
+    4300712: ManchaTinta
+    4300714: CigaretteBox
+    4300716: Alfombra2
   materials:
     importMaterials: 1
     materialName: 0

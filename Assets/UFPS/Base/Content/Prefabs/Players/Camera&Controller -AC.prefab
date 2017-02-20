@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 11485504}
   - component: {fileID: 11489356}
   - component: {fileID: 11467002}
-  - component: {fileID: 11448422}
   - component: {fileID: 114000012176085318}
   - component: {fileID: 114000012718285704}
+  - component: {fileID: 114931152487376900}
   m_Layer: 30
   m_Name: Camera&Controller -AC
   m_TagString: Player
@@ -85,8 +85,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113328}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1, y: 17, z: -18.3}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.1, y: 1.8, z: -12.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4000010627213338}
@@ -321,39 +321,6 @@ MonoBehaviour:
   BobRequireGroundContact: 1
   BobStepThreshold: 10
   HasCollision: 1
---- !u!114 &11448422
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 113328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78db10b0c0e15b04193ec8d0d254c1bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FootstepInterval: 0.7
-  SurfaceTypes:
-  - RandomPitch: {x: 1, y: 1.5}
-    Foldout: 1
-    SoundsFoldout: 0
-    TexturesFoldout: 0
-    SurfaceName: Forest
-    Sounds:
-    - {fileID: 8300000, guid: 740b8a11580d8b846bfad23bb75e5f27, type: 3}
-    - {fileID: 8300000, guid: 907da0d855336fb43888427a1680a85c, type: 3}
-    - {fileID: 8300000, guid: 91f05f27d99d63b468b613f00a079951, type: 3}
-    - {fileID: 8300000, guid: 6e02080dcd1a488429a9f70a6c498a61, type: 3}
-    - {fileID: 8300000, guid: 48a10742beba43f4daa2aeb556a06f9b, type: 3}
-    - {fileID: 8300000, guid: 653027b8441cc9948b2b1bc074cdc125, type: 3}
-    - {fileID: 8300000, guid: ed418c805e2f4394cba716350bc6ca3b, type: 3}
-    - {fileID: 8300000, guid: 2c74650b5b0bc174382ce087a7f9bffd, type: 3}
-    Textures:
-    - {fileID: 2800000, guid: 87417352c06c3fd489064da0fc9cb54c, type: 3}
-    - {fileID: 2800000, guid: c6e0767b1f8c34890ac245217f4b9731, type: 3}
-    - {fileID: 2800000, guid: 440eb36db91ca410f800ff3cfe43572f, type: 3}
-    - {fileID: 2800000, guid: b6a5b4571804e7f4a86c2391953490b7, type: 3}
-    - {fileID: 2800000, guid: 87417352c06c3fd489064da0fc9cb54c, type: 3}
 --- !u!114 &11454138
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8372,7 +8339,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -8452,7 +8419,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -8532,7 +8499,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -10175,6 +10142,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ca3c3269b26861469a89a2f46275d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114931152487376900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9cddb3bbeb3d36468f00a5177c170e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Persist: 0
+  States:
+  - TypeName: vp_PlayerFootFXHandler
+    Name: Run
+    TextAsset: {fileID: 4900000, guid: 742194ae408102e4e8f7fdb0766b928a, type: 3}
+    StatesToBlock: 
+  - TypeName: vp_PlayerFootFXHandler
+    Name: Default
+    TextAsset: {fileID: 0}
+    StatesToBlock: 
+  Children: []
+  Siblings: []
+  Family: []
+  Renderers: []
+  AudioSources: []
+  Mode: 2
+  FootstepImpactEvent: {fileID: 11400000, guid: c0b41502587e193479870e9bf925797a,
+    type: 2}
+  FootLeft: {fileID: 0}
+  FootRight: {fileID: 0}
+  TriggerHeight: 0.1
+  Sensitivity: 1.25
+  TimeInterval: 0.8
+  RequireMoveInput: 0
+  VerifyGroundContact: 0
+  ForceAlwaysAnimate: 1
+  JumpImpactEvent: {fileID: 11400000, guid: 99b30508304e6ff4ea0b3bea16fdc130, type: 2}
+  FallImpactEvent: {fileID: 11400000, guid: 84d80447291911e46b7ff27e4a8902d4, type: 2}
+  FallImpactThreshold: 0.15
+  m_MuteLocalFootsteps: 0
 --- !u!135 &135000012330085354
 SphereCollider:
   m_ObjectHideFlags: 1
