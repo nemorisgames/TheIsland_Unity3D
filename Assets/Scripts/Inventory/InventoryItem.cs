@@ -49,6 +49,8 @@ public class InventoryItem : MonoBehaviour
 	}
 	protected virtual void ThrowItem()
 	{
+		if (throwPrefab == null)
+			return;
 		//set animation
 
 		//throw gameObject
@@ -62,7 +64,7 @@ public class InventoryItem : MonoBehaviour
 	{
 		if (!activeItem)
 			return;
-		if (Input.GetKeyDown(KeyCode.Q))
+		if (Input.GetKeyDown(KeyCode.Q) && throwPrefab != null)
 		{
 			//first frame while pressing left click
 			timeOut = Time.time;
@@ -71,7 +73,7 @@ public class InventoryItem : MonoBehaviour
 		if (Input.GetKey(KeyCode.Q))
 		{
 			//while pressing wait 2 seconds
-			if (Time.time - timeOut >= throwTimeout && !throwing)
+			if (Time.time - timeOut >= throwTimeout && !throwing && throwPrefab != null)
 			{
 				throwing = true;
 				Debug.Log("Throwing Item");
@@ -79,7 +81,7 @@ public class InventoryItem : MonoBehaviour
 				Invoke ("ThrowItem", 1f);
 			}
 		}
-		if (Input.GetKeyUp(KeyCode.Q))
+		if (Input.GetKeyUp(KeyCode.Q) && throwPrefab != null)
 		{
 			if (Time.time - timeOut < throwTimeout)
 			{

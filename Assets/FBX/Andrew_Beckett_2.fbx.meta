@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a4b379c40343b1d43bc12cb057cab017
-timeCreated: 1487591687
+timeCreated: 1487615418
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
@@ -2159,6 +2159,54 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
+    - boneName: Bind_LeftHandIndex1
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Bind_LeftHandIndex2
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Bind_LeftHandIndex3
+      humanName: Left Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Bind_RightHandIndex1
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Bind_RightHandIndex2
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Bind_RightHandIndex3
+      humanName: Right Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
     skeleton:
     - name: Andrew_Beckett_2(Clone)
       parentName: 
@@ -2357,8 +2405,8 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: LeftHand_CTRLs_GRP
       parentName: global_CTRL
-      position: {x: -0.646012, y: 1.2685964, z: -0.053686816}
-      rotation: {x: -0.49292922, y: 0.5187088, z: -0.51190376, w: -0.4753068}
+      position: {x: -0.6449071, y: 1.2582678, z: -0.036681686}
+      rotation: {x: 0.5092834, y: -0.45499536, z: 0.52872634, w: 0.5040418}
       scale: {x: 1, y: 1, z: 1}
     - name: LeftHandIndex1_CTRL_POS_GRP
       parentName: LeftHand_CTRLs_GRP
@@ -2722,8 +2770,8 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: LeftHand_Options
       parentName: global_CTRL
-      position: {x: -0.646012, y: 1.2685964, z: -0.053686816}
-      rotation: {x: -0.49292922, y: 0.5187088, z: -0.51190376, w: -0.4753068}
+      position: {x: -0.6449071, y: 1.2582678, z: -0.036681686}
+      rotation: {x: 0.5092834, y: -0.45499536, z: 0.52872634, w: 0.5040418}
       scale: {x: 1, y: 1, z: 1}
     - name: LeftLeg_IK_CTRL_parent_POS_GRP
       parentName: global_CTRL
@@ -2922,8 +2970,8 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: RightHand_CTRLs_GRP
       parentName: global_CTRL
-      position: {x: 0.6532854, y: 1.2588015, z: -0.06161408}
-      rotation: {x: -0.4943615, y: -0.51141703, z: 0.52021605, w: -0.4726887}
+      position: {x: 0.6522223, y: 1.2603252, z: -0.055885773}
+      rotation: {x: -0.5032536, y: -0.48375717, z: 0.5214468, w: -0.490722}
       scale: {x: 1, y: 1, z: 1}
     - name: RightHandIndex1_CTRL_POS_GRP
       parentName: RightHand_CTRLs_GRP
@@ -3048,7 +3096,7 @@ ModelImporter:
     - name: RightHandPinky1_CTRL_POS_GRP
       parentName: RightHand_CTRLs_GRP
       position: {x: 0.02801057, y: 0.08170462, z: 0.0023293428}
-      rotation: {x: -0.027951306, y: -0.0008689009, z: 0.031059083, w: 0.99912626}
+      rotation: {x: -0.027951304, y: -0.0008689009, z: 0.03105908, w: 0.99912626}
       scale: {x: 1, y: 1, z: 1}
     - name: RightHandPinky1_CTRL_AnimData_CONST_GRP
       parentName: RightHandPinky1_CTRL_POS_GRP
@@ -3287,8 +3335,8 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: RightHand_Options
       parentName: global_CTRL
-      position: {x: 0.6532854, y: 1.2588015, z: -0.06161408}
-      rotation: {x: -0.4943615, y: -0.51141703, z: 0.52021605, w: -0.4726887}
+      position: {x: 0.6522223, y: 1.2603252, z: -0.055885773}
+      rotation: {x: -0.5032536, y: -0.48375717, z: 0.5214468, w: -0.490722}
       scale: {x: 1, y: 1, z: 1}
     - name: RightLeg_IK_CTRL_parent_POS_GRP
       parentName: global_CTRL
@@ -4888,12 +4936,12 @@ ModelImporter:
     - name: Bind_RightLeg
       parentName: Bind_RightUpLeg
       position: {x: -0, y: 0.33584777, z: 0}
-      rotation: {x: -0.028784154, y: 0.00046079993, z: -0.000047161488, w: 0.99958557}
+      rotation: {x: -0.028784154, y: 0.00046080374, z: -0.000047161637, w: 0.99958557}
       scale: {x: 1, y: 1, z: 1}
     - name: Bind_RightFoot
       parentName: Bind_RightLeg
       position: {x: -0, y: 0.3706007, z: 0}
-      rotation: {x: 0.42606524, y: 0.049321387, z: -0.024624353, w: 0.9030114}
+      rotation: {x: 0.42606524, y: 0.049321383, z: -0.024624353, w: 0.9030114}
       scale: {x: 1, y: 1, z: 1}
     - name: Bind_RightToeBase
       parentName: Bind_RightFoot
@@ -4943,12 +4991,12 @@ ModelImporter:
     - name: Bind_LeftForeArm
       parentName: Bind_LeftArm
       position: {x: 3.5527136e-17, y: 0.24087907, z: 0}
-      rotation: {x: 0.000019370647, y: -0.0004685033, z: -0.008722302, w: 0.99996185}
+      rotation: {x: 0.015270209, y: -0.0007331981, z: -0.04795408, w: 0.99873257}
       scale: {x: 1, y: 1, z: 1}
     - name: Bind_LeftHand
       parentName: Bind_LeftForeArm
       position: {x: 3.5527136e-17, y: 0.23665364, z: 1.4210854e-16}
-      rotation: {x: 0.010226832, y: 0.07510304, z: 0.03900903, w: 0.99636}
+      rotation: {x: 0.01984173, y: 0.12312067, z: 0.02737914, w: 0.9918155}
       scale: {x: 1, y: 1, z: 1}
     - name: Bind_LeftHandIndex1
       parentName: Bind_LeftHand
@@ -5138,17 +5186,17 @@ ModelImporter:
     - name: Bind_RightArm
       parentName: Bind_RightShoulder
       position: {x: -0, y: 0.11941549, z: 1.4210854e-16}
-      rotation: {x: -0.048913743, y: -0.0014501077, z: 0.074172854, w: 0.99604404}
+      rotation: {x: -0.054743033, y: -0.002926564, z: 0.053303517, w: 0.9970724}
       scale: {x: 1, y: 1, z: 1}
     - name: Bind_RightForeArm
       parentName: Bind_RightArm
       position: {x: 3.5527136e-17, y: 0.2520696, z: 1.4210854e-16}
-      rotation: {x: 0.000011783482, y: 0.0003264045, z: 0.008725329, w: 0.9999619}
+      rotation: {x: 0.006809997, y: 0.00044357262, z: 0.06499626, w: 0.99786216}
       scale: {x: 1, y: 1, z: 1}
     - name: Bind_RightHand
       parentName: Bind_RightForeArm
       position: {x: -0, y: 0.22500135, z: 1.4210854e-16}
-      rotation: {x: 0.012028785, y: -0.08698584, z: -0.03995558, w: 0.9953353}
+      rotation: {x: 0.014538684, y: -0.106822915, z: -0.04741974, w: 0.9930402}
       scale: {x: 1, y: 1, z: 1}
     - name: Bind_RightHandIndex1
       parentName: Bind_RightHand
@@ -5193,7 +5241,7 @@ ModelImporter:
     - name: Bind_RightHandPinky1
       parentName: Bind_RightHand
       position: {x: 0.02801057, y: 0.08170462, z: 0.0023293428}
-      rotation: {x: -0.027951306, y: -0.00086890085, z: 0.03105908, w: 0.99912626}
+      rotation: {x: -0.027951304, y: -0.00086890085, z: 0.031059079, w: 0.99912626}
       scale: {x: 1, y: 1, z: 1}
     - name: Bind_RightHandPinky2
       parentName: Bind_RightHandPinky1
@@ -5258,7 +5306,7 @@ ModelImporter:
     - name: IK_RightArm
       parentName: Bind_RightShoulder
       position: {x: -0, y: 0.11941549, z: 1.4210854e-16}
-      rotation: {x: -0.059470177, y: 0.008867916, z: 0.054775983, w: 0.99668664}
+      rotation: {x: -0.059470173, y: 0.008867916, z: 0.05477598, w: 0.99668664}
       scale: {x: 1, y: 1, z: 1}
     - name: IK_RightForeArm
       parentName: IK_RightArm
@@ -5313,12 +5361,12 @@ ModelImporter:
     - name: IK_RightLeg
       parentName: IK_RightUpLeg
       position: {x: -0, y: 0.33584777, z: 9.627715e-18}
-      rotation: {x: -0.028784154, y: 0.00046079993, z: -0.000047161488, w: 0.99958557}
+      rotation: {x: -0.028784154, y: 0.00046080374, z: -0.000047161637, w: 0.99958557}
       scale: {x: 1, y: 1, z: 1}
     - name: IK_RightFoot
       parentName: IK_RightLeg
       position: {x: 8.881784e-18, y: 0.3706007, z: 0}
-      rotation: {x: 0.42606524, y: 0.049321387, z: -0.024624353, w: 0.9030114}
+      rotation: {x: 0.42606524, y: 0.049321383, z: -0.024624353, w: 0.9030114}
       scale: {x: 1, y: 1, z: 1}
     - name: IK_RightToeBase
       parentName: IK_RightFoot

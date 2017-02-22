@@ -22,6 +22,19 @@ MonoBehaviour:
     link: 0
     pmVar: 
     updateLinkOnStart: 0
+    isEditing: 0
+    textValLineID: -1
+    popUpsLineID: -1
+  - label: ItemActive
+    id: 1
+    type: 1
+    val: -1
+    floatVal: 0
+    textVal: 
+    popUps: []
+    link: 0
+    pmVar: 
+    updateLinkOnStart: 0
     isEditing: 1
     textValLineID: -1
     popUpsLineID: -1

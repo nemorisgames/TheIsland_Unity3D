@@ -55,14 +55,18 @@ public class Inventory : MonoBehaviour
 		inventoryItems[(int)type].animator.SetTrigger("Throw");
 		yield return new WaitForSeconds(1f);
 		inventoryItems[(int)type].SetActive(false);
+
+		AC.GlobalVariables.SetIntegerValue (1, -1);
 		//inventoryItems[(int)type].hand.SetActive(false);
 	}
 	public void AddInventoryItem(ItemType type)
 	{
 		//checking
 		inventoryItems[(int)type].hasItem = true;
-		inventoryItems[(int)type].animator.SetTrigger("PickingUp");
 		inventoryItems[(int)type].SetActive(true);
+		inventoryItems[(int)type].animator.SetTrigger("PickingUp");
+
+		AC.GlobalVariables.SetIntegerValue (1, (int)type);
 		//inventoryItems[(int)type].objectInHand.SetActive(true);
 	}
 	public void CycleInventoryItem(bool forward)
@@ -102,5 +106,8 @@ public class Inventory : MonoBehaviour
 			//Cara doesn't have the item, cycle next
 			CycleInventoryItem(forward);
 		}
+		print (cycleTry);
+		if(cycleTry>=0)
+			AC.GlobalVariables.SetIntegerValue (1, currentPos);
 	}
 }
