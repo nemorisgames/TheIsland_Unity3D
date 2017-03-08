@@ -19,8 +19,8 @@ public class CaraFunctions : MonoBehaviour
 		leftHand.SendMessage("Hide");
 		rightHand.SendMessage("Hide");
 		defaultRightHand.SendMessage("Hide");
-		print (gameObject.GetComponentInChildren<Camera> ().enabled);
-		gameObject.GetComponentInChildren<Camera> ().enabled = true;
+		print(gameObject.GetComponentInChildren<Camera>().enabled);
+		gameObject.GetComponentInChildren<Camera>().enabled = true;
 	}
 	void Awake()
 	{
@@ -41,16 +41,19 @@ public class CaraFunctions : MonoBehaviour
 	}
 	void Kill()
 	{
+		//killCamera.transform.parent.parent = fpsCamera.transform.parent;
 		killCamera.transform.parent.position = fpsCamera.transform.position;
 		killCamera.transform.parent.rotation = fpsCamera.transform.rotation;
-		killCamera.GetComponent<Camera>().enabled = true;
+		fpsCamera.SetActive(false);
 		fpsCamera.GetComponent<Camera>().enabled = false;
+		killCamera.GetComponent<Camera>().enabled = true;
 		killAnimation.Interact();
 		killCamera.GetComponent<Animator>().SetBool("Kill", true);
 	}
 
-	public void enhaceSight(int enhace){
-		fpsCamera.GetComponent<Camera> ().farClipPlane = (enhace == 1) ? 37f : 15f;
+	public void enhaceSight(int enhace)
+	{
+		fpsCamera.GetComponent<Camera>().farClipPlane = (enhace == 1) ? 37f : 15f;
 		RenderSettings.fog = (enhace == 0);
 	}
 
