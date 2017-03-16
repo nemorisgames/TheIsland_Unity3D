@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class CellPhone : MonoBehaviour
@@ -16,11 +17,15 @@ public class CellPhone : MonoBehaviour
 	bool inTransition = false;
 	public bool active = false;
 
-
+	[Header("For Functions")]
+	public GameObject[] functions;
+	public GameObject[] selectors;
+	public Color selectedColor;
+	public Color unselectedColor;
 	public enum CellphoneFunctions { Light, CameraPhoto, ReviewPhotos, Call };
 	public CellphoneFunctions currentFunction = CellphoneFunctions.Light;
 
-	public Material cellphoneMaterialFunctions;
+	//public Material cellphoneMaterialFunctions;
 	int indiceActual = 0;
 
 	[Header("ForScreenShots")]
@@ -43,12 +48,12 @@ public class CellPhone : MonoBehaviour
 
 	void Start()
 	{
-		cellphoneMaterialFunctions.mainTextureOffset = new Vector2(0f, 0.032f);
+		//cellphoneMaterialFunctions.mainTextureOffset = new Vector2(0f, 0.032f);
 		notification.SetActive(false);
 		cellphoneBody = transform.FindChild("Cuerpo").gameObject;
 		cellphoneBody.SetActive(active);
-		print (AC.GlobalVariables.GetBooleanValue (0));
-		turnLight (AC.GlobalVariables.GetBooleanValue (0));
+		print(AC.GlobalVariables.GetBooleanValue(0));
+		turnLight(AC.GlobalVariables.GetBooleanValue(0));
 	}
 	void Awake()
 	{
@@ -116,7 +121,7 @@ public class CellPhone : MonoBehaviour
 					transform.parent = null;
 				}
 			}
-			ScreenManager.Instance.CloseScreen();			
+			ScreenManager.Instance.CloseScreen();
 		}
 
 		if (Input.GetAxis("Mouse ScrollWheel") != 0f && canUseMouseScroll)
@@ -136,11 +141,11 @@ public class CellPhone : MonoBehaviour
 		{
 			switch (currentFunction)
 			{
-			case CellphoneFunctions.Light:
-				turnLight (!light.enabled);
+				case CellphoneFunctions.Light:
+					turnLight(!light.enabled);
 					break;
 				case CellphoneFunctions.CameraPhoto:
-					prepareTakePhoto ();
+					prepareTakePhoto();
 					break;
 				case CellphoneFunctions.ReviewPhotos:
 					ScreenManager.Instance.ShowScreen(ScreenType.PhotoView);
@@ -149,17 +154,19 @@ public class CellPhone : MonoBehaviour
 			}
 		}
 
-		cellphoneMaterialFunctions.mainTextureOffset = new Vector2(0f, Mathf.Lerp(cellphoneMaterialFunctions.mainTextureOffset.y, (indiceActual * 0.25f + 0.032f), Time.deltaTime * 3f));
+		//cellphoneMaterialFunctions.mainTextureOffset = new Vector2(0f, Mathf.Lerp(cellphoneMaterialFunctions.mainTextureOffset.y, (indiceActual * 0.25f + 0.032f), Time.deltaTime * 3f));
 	}
 
-	void turnLight(bool lightOn){
+	void turnLight(bool lightOn)
+	{
 		light.enabled = lightOn;
 		Light s = light.transform.FindChild("SupportLight").GetComponent<Light>();
 		s.enabled = lightOn;
 		AC.GlobalVariables.SetBooleanValue(0, lightOn);
 	}
 
-	void prepareTakePhoto(){
+	void prepareTakePhoto()
+	{
 		if (!isTakingPhoto)
 			StartCoroutine(takePhoto());
 	}
