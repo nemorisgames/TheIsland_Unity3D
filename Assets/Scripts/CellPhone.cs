@@ -307,8 +307,8 @@ public class CellPhone : MonoBehaviour
 			notification.SetActive(false);
 		}
 	}
-	public void CanUseScroller()
+	public void CanUseScroller(bool canUse)
 	{
-		canUseMouseScroll = true;
+		canUseMouseScroll = canUse;
 	}
 }

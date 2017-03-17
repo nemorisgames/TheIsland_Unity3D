@@ -125,14 +125,19 @@ public class ScreenManager : MonoBehaviour
 	{
 		paused = true;
 		pauseGame.Interact();
+		if (CellPhone.Instance)
+			CellPhone.Instance.CanUseScroller(false);
+		vp_TimeUtility.Paused = (true);
 		vp_Utility.LockCursor = false;
 	}
 	public void ResumeGame()
 	{
 		paused = false;
+		//pauseGame.Kill();
 		unPauseGame.Interact();
 		vp_Utility.LockCursor = true;
+		vp_TimeUtility.Paused = (false);
 		if (CellPhone.Instance)
-			CellPhone.Instance.CanUseScroller();
+			CellPhone.Instance.CanUseScroller(true);
 	}
 }

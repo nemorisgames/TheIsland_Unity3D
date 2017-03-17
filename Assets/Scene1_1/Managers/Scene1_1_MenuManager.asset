@@ -658,7 +658,7 @@ MonoBehaviour:
   ID: 3
   isEditing: 0
   title: Talk
-  slotSize: {x: 8.672087, y: 15.417043}
+  slotSize: {x: 4.3360434, y: 7.7085214}
   sizeType: 0
   positionType: 0
   slotSpacing: 0
@@ -682,10 +682,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 67.9852
+    x: 35.9852
     y: 1.9926001
-    width: 64
-    height: 63.999996
+    width: 32
+    height: 31.999998
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -1485,7 +1485,7 @@ MonoBehaviour:
   ID: 1
   isEditing: 0
   title: Use
-  slotSize: {x: 8.672087, y: 15.417043}
+  slotSize: {x: 4.3360434, y: 7.7085214}
   sizeType: 0
   positionType: 0
   slotSpacing: 0
@@ -1511,8 +1511,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 1.9926001
     y: 1.9926001
-    width: 64
-    height: 63.999996
+    width: 32
+    height: 31.999998
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -2536,7 +2536,7 @@ MonoBehaviour:
   isLocked: 0
   id: 6
   title: Interaction
-  manualSize: {x: 38.766266, y: 16.377043}
+  manualSize: {x: 25.758131, y: 8.668521}
   positionType: 4
   manualPosition: {x: 50, y: 50}
   alignment: 4
@@ -2597,13 +2597,13 @@ MonoBehaviour:
   zoomAnchor: 4
   zoomElements: 0
   oneMenuPerSpeech: 0
-  biggestElementSize: {x: 284.10242, y: 65.9926}
+  biggestElementSize: {x: 188.1024, y: 33.9926}
   rect:
     serializedVersion: 2
-    x: 225.95248
-    y: 173.5699
-    width: 286.09503
-    height: 67.9852
+    x: 273.9525
+    y: 189.5699
+    width: 190.095
+    height: 35.9852
 --- !u!114 &11438482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3468,7 +3468,7 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 199.9704
+    x: 103.9704
     y: 1.9926001
     width: 84.132
     height: 24.9075
@@ -3833,7 +3833,7 @@ MonoBehaviour:
   ID: 0
   isEditing: 0
   title: Look
-  slotSize: {x: 8.672087, y: 15.417043}
+  slotSize: {x: 4.3360434, y: 7.7085214}
   sizeType: 0
   positionType: 0
   slotSpacing: 0
@@ -3857,10 +3857,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 133.9778
+    x: 69.9778
     y: 1.9926001
-    width: 64
-    height: 63.999996
+    width: 32
+    height: 31.999998
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
