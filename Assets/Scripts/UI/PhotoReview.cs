@@ -74,6 +74,10 @@ public class PhotoReview : MonoBehaviour
 				Destroy(scrollPhotos[i].gameObject);
 			}
 		}
+		foreach (Transform t in allPhotosGrid.transform)
+		{
+			Destroy(t.gameObject);
+		}
 		scrollPhotos = new List<Photo>();
 		photosTakenPath = new List<string>();
 		Texture2D texture = null;
@@ -81,6 +85,7 @@ public class PhotoReview : MonoBehaviour
 		string path = "";
 		float startPos = startX;
 		float size = 0;
+		int pos = 0;
 		for (int i = 0; i < photoNumber; i++)
 		{
 			path = Application.persistentDataPath + "/" + TakePhoto.photoName + i + ".png";
@@ -91,12 +96,13 @@ public class PhotoReview : MonoBehaviour
 				texture.LoadImage(fileData);
 				photosTaken.Add(texture);
 				photosTakenPath.Add(path);
+				pos++;
 				GameObject p = GameObject.Instantiate(photoPrefab, allPhotosGrid.transform) as GameObject;
 				p.transform.SetAsLastSibling();
 				p.transform.localScale = new Vector3(1, 1, 1);
 				p.transform.localPosition = new Vector3(startPos, normal, 1);
 				startPos = p.transform.localPosition.x + p.GetComponent<RectTransform>().sizeDelta.x + distance;
-				Debug.Log(startPos);
+				//Debug.Log(startPos);
 				size += p.GetComponent<RectTransform>().sizeDelta.x + distance;
 				Photo pc = p.GetComponent<Photo>();
 				pc.pos = i;
@@ -153,11 +159,11 @@ public class PhotoReview : MonoBehaviour
 		//new
 		if (File.Exists(photosTakenPath[currentPhoto]))
 		{
+			//Debug.Log("deleting at: " + photosTakenPath[currentPhoto] + " current Photo: " + currentPhoto);
 			File.Delete(photosTakenPath[currentPhoto]);
 		}
 		//FileUtil.DeleteFileOrDirectory(photosTakenPath[currentPhoto]);
-
-		Debug.Log("Deleted photo");
+		//Debug.Log("Deleted photo");
 		photosTakenPath.RemoveAt(currentPhoto);
 		Destroy(scrollPhotos[currentPhoto].gameObject);
 		scrollPhotos.RemoveAt(currentPhoto);
@@ -171,6 +177,7 @@ public class PhotoReview : MonoBehaviour
 		for (int i = 0; i < photosTaken.Count; i++)
 		{
 			temp = path + i + ".png";
+			Debug.Log("Renaming: " + temp);
 			if (File.Exists(temp))
 			{
 				File.Delete(temp);
@@ -180,6 +187,8 @@ public class PhotoReview : MonoBehaviour
 			File.WriteAllBytes(temp, bytes);
 			//FileUtil.MoveFileOrDirectory(photosTakenPath[i], path + i + ".png");
 		}
+		PlayerPrefs.SetInt("PhotoNumber", photosTaken.Count);
+		PlayerPrefs.Save();
 	}
 	public void NextPhoto()
 	{

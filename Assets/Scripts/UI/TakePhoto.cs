@@ -6,7 +6,7 @@ public class TakePhoto : MonoBehaviour
 	[Header("ForScreenShots")]
 	public Camera cellphoneView;
 	public RenderTexture screenTexture;
-	int nextPhotoNumber;
+	public int nextPhotoNumber;
 	public static string photoName = "ScreenShot_";
 	bool save = false;
 	int defaultCulling;
@@ -59,6 +59,7 @@ public class TakePhoto : MonoBehaviour
 	}
 	private string ScreenShotLocation()
 	{
+		nextPhotoNumber = PlayerPrefs.GetInt("PhotoNumber", 0);
 		string r = Application.persistentDataPath + "/" + photoName + nextPhotoNumber + ".png";
 		nextPhotoNumber++;
 		PlayerPrefs.SetInt("PhotoNumber", nextPhotoNumber);
