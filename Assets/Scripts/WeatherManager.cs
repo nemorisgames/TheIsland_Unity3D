@@ -41,7 +41,7 @@ public class WeatherManager : MonoBehaviour
 	}
 	void StartNewWeather(int newWeather = -1)
 	{
-		print(newWeather);
+		//print(newWeather);
 		if (newWeather != -1)
 			currentWeather = newWeather;
 		if (particles != null)

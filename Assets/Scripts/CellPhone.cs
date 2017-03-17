@@ -153,7 +153,7 @@ public class CellPhone : MonoBehaviour
 					break;
 			}
 		}
-
+		SetFunctionColors((int)currentFunction);
 		//cellphoneMaterialFunctions.mainTextureOffset = new Vector2(0f, Mathf.Lerp(cellphoneMaterialFunctions.mainTextureOffset.y, (indiceActual * 0.25f + 0.032f), Time.deltaTime * 3f));
 	}
 
@@ -222,10 +222,29 @@ public class CellPhone : MonoBehaviour
 		isSavingPhoto = false;
 		isTakingPhoto = false;
 	}
-
+	void SetFunctionColors(int index)
+	{
+		for (int i = 0; i < functions.Length; i++)
+		{
+			if (i == index)
+			{
+				Debug.Log("selected color" + i);
+				functions[i].GetComponent<Renderer>().material.color = selectedColor;
+				selectors[i].SetActive(true);
+				selectors[i].GetComponent<Renderer>().material.color = selectedColor;
+			}
+			else
+			{
+				functions[i].GetComponent<Renderer>().material.color = unselectedColor;
+				selectors[i].SetActive(false);
+				selectors[i].GetComponent<Renderer>().material.color = unselectedColor;
+			}
+		}
+	}
 	void nextFunction(bool next)
 	{
 		indiceActual = Mathf.Clamp(indiceActual + (next ? 1 : -1), 0, 3);
+		//functions[indiceActual].GetComponent<Renderer>().material.color = selectedColor;
 		switch (indiceActual)
 		{
 			case 0: currentFunction = CellphoneFunctions.Light; break;
@@ -234,7 +253,6 @@ public class CellPhone : MonoBehaviour
 			case 3: currentFunction = CellphoneFunctions.Call; break;
 		}
 	}
-
 	IEnumerator waitPosition()
 	{
 		inTransition = true;
