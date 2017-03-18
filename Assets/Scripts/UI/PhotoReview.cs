@@ -136,6 +136,7 @@ public class PhotoReview : MonoBehaviour
 		}
 		scrollPhotos[pos].Highlight();
 		currentPhoto = pos;
+		//allPhotosGrid.transform.position = new Vector3(-scrollPhotos[pos].transform.position.x, allPhotosGrid.transform.position.y, 0);
 	}
 	public void ShowConfirmationPopup()
 	{
