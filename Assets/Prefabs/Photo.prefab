@@ -212,6 +212,9 @@ MonoBehaviour:
   unHiglighted: {r: 0, g: 0, b: 0, a: 0}
   highlight: {fileID: 114430619572947084}
   texture: {fileID: 114537177742968968}
+  selected: {fileID: 1463245939916268}
+  selectedPos: -32
+  UnSelectedPos: -67
 --- !u!222 &222274040930103460
 CanvasRenderer:
   m_ObjectHideFlags: 1

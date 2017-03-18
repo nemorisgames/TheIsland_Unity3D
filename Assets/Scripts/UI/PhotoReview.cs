@@ -8,8 +8,7 @@ public class PhotoReview : MonoBehaviour
 {
 	public static PhotoReview Instance = null;
 	int photoNumber;
-	//[SerializeField]
-	//RawImage photo;
+
 	[SerializeField]
 	GameObject photoGameObject;
 	[SerializeField]
@@ -27,8 +26,6 @@ public class PhotoReview : MonoBehaviour
 	float normal;
 	[SerializeField]
 	float startX;
-	[SerializeField]
-	float selected;
 	[SerializeField]
 	float distance;
 
@@ -169,6 +166,7 @@ public class PhotoReview : MonoBehaviour
 		scrollPhotos.RemoveAt(currentPhoto);
 		ShowPhoto(currentPhoto - 1);
 		isDirty = true;
+		LoadPhotos();
 	}
 	void RenamePhotos()
 	{
@@ -177,7 +175,7 @@ public class PhotoReview : MonoBehaviour
 		for (int i = 0; i < photosTaken.Count; i++)
 		{
 			temp = path + i + ".png";
-			Debug.Log("Renaming: " + temp);
+			//Debug.Log("Renaming: " + temp);
 			if (File.Exists(temp))
 			{
 				File.Delete(temp);
