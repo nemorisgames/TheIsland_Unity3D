@@ -16,6 +16,8 @@ public class ScreenManager : MonoBehaviour
 	[SerializeField]
 	GameObject[] screens;
 	[SerializeField]
+	GameObject taskScreen;
+	[SerializeField]
 	bool debug = false;
 	[SerializeField]
 	AC.Cutscene pauseGame;
@@ -47,6 +49,13 @@ public class ScreenManager : MonoBehaviour
 		{
 			screens[i].SetActive(false);
 		}
+		taskScreen.SetActive(false);
+	}
+	public void ShowTaskScreen()
+	{
+		showedScreens.Clear();
+		HideScreens();
+		taskScreen.SetActive(true);
 	}
 	public void ShowScreen(ScreenType type)
 	{

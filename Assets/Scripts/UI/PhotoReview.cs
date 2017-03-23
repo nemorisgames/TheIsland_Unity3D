@@ -20,6 +20,8 @@ public class PhotoReview : MonoBehaviour
 	[SerializeField]
 	GameObject allPhotosGrid;
 	[SerializeField]
+	GameObject scrollRect;
+	[SerializeField]
 	GameObject photoPrefab;
 
 	[SerializeField]
@@ -137,6 +139,16 @@ public class PhotoReview : MonoBehaviour
 		scrollPhotos[pos].Highlight();
 		currentPhoto = pos;
 		//allPhotosGrid.transform.position = new Vector3(-scrollPhotos[pos].transform.position.x, allPhotosGrid.transform.position.y, 0);
+		//SnapTo(scrollPhotos[pos].GetComponent<RectTransform>());
+	}
+	public void SnapTo(RectTransform target)
+	{
+		Canvas.ForceUpdateCanvases();
+		Vector2 result = (Vector2)scrollRect.transform.InverseTransformPoint(allPhotosGrid.transform.localPosition)
+			- (Vector2)scrollRect.transform.InverseTransformPoint(target.position);
+		result.y = 75f;
+		allPhotosGrid.GetComponent<RectTransform>().anchoredPosition = result;
+
 	}
 	public void ShowConfirmationPopup()
 	{
