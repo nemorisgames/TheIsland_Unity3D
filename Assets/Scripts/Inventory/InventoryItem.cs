@@ -27,6 +27,7 @@ public class InventoryItem : MonoBehaviour
 	}
 	public virtual void SetActive(bool b)
 	{
+		print ("activatin item " + b);
 		if (!b)
 		{
 			objectInHand.SetActive(b);

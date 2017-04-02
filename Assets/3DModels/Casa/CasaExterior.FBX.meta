@@ -114,6 +114,72 @@ ModelImporter:
     100212: TPhotometricLight001.Target
     100214: TPhotometricLight002.Target
     100216: TPhotometricLight003.Target
+    100218: Object032
+    100220: Object033
+    100222: Object034
+    100224: Object035
+    100226: Object036
+    100228: TechoEntrada
+    100230: Lena01
+    100232: Lena010
+    100234: Lena011
+    100236: Lena012
+    100238: Lena013
+    100240: Lena014
+    100242: Lena015
+    100244: Lena016
+    100246: Lena017
+    100248: Lena018
+    100250: Lena019
+    100252: Lena02
+    100254: Lena020
+    100256: Lena021
+    100258: Lena022
+    100260: Lena023
+    100262: Lena024
+    100264: Lena025
+    100266: Lena026
+    100268: Lena027
+    100270: Lena028
+    100272: Lena029
+    100274: Lena03
+    100276: Lena030
+    100278: Lena031
+    100280: Lena032
+    100282: Lena033
+    100284: Lena034
+    100286: Lena035
+    100288: Lena036
+    100290: Lena037
+    100292: Lena038
+    100294: Lena039
+    100296: Lena04
+    100298: Lena040
+    100300: Lena041
+    100302: Lena042
+    100304: Lena043
+    100306: Lena044
+    100308: Lena045
+    100310: Lena046
+    100312: Lena047
+    100314: Lena048
+    100316: Lena049
+    100318: Lena05
+    100320: Lena050
+    100322: Lena051
+    100324: Lena052
+    100326: Lena053
+    100328: Lena054
+    100330: Lena055
+    100332: Lena056
+    100334: Lena057
+    100336: Lena058
+    100338: Lena059
+    100340: Lena06
+    100342: Lena060
+    100344: Lena07
+    100346: Lena08
+    100348: Lena09
     400000: Box001
     400002: Box002
     400004: //RootNode
@@ -223,6 +289,72 @@ ModelImporter:
     400212: TPhotometricLight001.Target
     400214: TPhotometricLight002.Target
     400216: TPhotometricLight003.Target
+    400218: Object032
+    400220: Object033
+    400222: Object034
+    400224: Object035
+    400226: Object036
+    400228: TechoEntrada
+    400230: Lena01
+    400232: Lena010
+    400234: Lena011
+    400236: Lena012
+    400238: Lena013
+    400240: Lena014
+    400242: Lena015
+    400244: Lena016
+    400246: Lena017
+    400248: Lena018
+    400250: Lena019
+    400252: Lena02
+    400254: Lena020
+    400256: Lena021
+    400258: Lena022
+    400260: Lena023
+    400262: Lena024
+    400264: Lena025
+    400266: Lena026
+    400268: Lena027
+    400270: Lena028
+    400272: Lena029
+    400274: Lena03
+    400276: Lena030
+    400278: Lena031
+    400280: Lena032
+    400282: Lena033
+    400284: Lena034
+    400286: Lena035
+    400288: Lena036
+    400290: Lena037
+    400292: Lena038
+    400294: Lena039
+    400296: Lena04
+    400298: Lena040
+    400300: Lena041
+    400302: Lena042
+    400304: Lena043
+    400306: Lena044
+    400308: Lena045
+    400310: Lena046
+    400312: Lena047
+    400314: Lena048
+    400316: Lena049
+    400318: Lena05
+    400320: Lena050
+    400322: Lena051
+    400324: Lena052
+    400326: Lena053
+    400328: Lena054
+    400330: Lena055
+    400332: Lena056
+    400334: Lena057
+    400336: Lena058
+    400338: Lena059
+    400340: Lena06
+    400342: Lena060
+    400344: Lena07
+    400346: Lena08
+    400348: Lena09
     2300000: Box001
     2300002: Box002
     2300004: Cone001
@@ -328,6 +460,72 @@ ModelImporter:
     2300204: Object029
     2300206: Object030
     2300208: Object031
+    2300210: Object032
+    2300212: Object033
+    2300214: Object034
+    2300216: Object035
+    2300218: Object036
+    2300220: TechoEntrada
+    2300222: Lena01
+    2300224: Lena010
+    2300226: Lena011
+    2300228: Lena012
+    2300230: Lena013
+    2300232: Lena014
+    2300234: Lena015
+    2300236: Lena016
+    2300238: Lena017
+    2300240: Lena018
+    2300242: Lena019
+    2300244: Lena02
+    2300246: Lena020
+    2300248: Lena021
+    2300250: Lena022
+    2300252: Lena023
+    2300254: Lena024
+    2300256: Lena025
+    2300258: Lena026
+    2300260: Lena027
+    2300262: Lena028
+    2300264: Lena029
+    2300266: Lena03
+    2300268: Lena030
+    2300270: Lena031
+    2300272: Lena032
+    2300274: Lena033
+    2300276: Lena034
+    2300278: Lena035
+    2300280: Lena036
+    2300282: Lena037
+    2300284: Lena038
+    2300286: Lena039
+    2300288: Lena04
+    2300290: Lena040
+    2300292: Lena041
+    2300294: Lena042
+    2300296: Lena043
+    2300298: Lena044
+    2300300: Lena045
+    2300302: Lena046
+    2300304: Lena047
+    2300306: Lena048
+    2300308: Lena049
+    2300310: Lena05
+    2300312: Lena050
+    2300314: Lena051
+    2300316: Lena052
+    2300318: Lena053
+    2300320: Lena054
+    2300322: Lena055
+    2300324: Lena056
+    2300326: Lena057
+    2300328: Lena058
+    2300330: Lena059
+    2300332: Lena06
+    2300334: Lena060
+    2300336: Lena07
+    2300338: Lena08
+    2300340: Lena09
     3300000: Box001
     3300002: Box002
     3300004: Cone001
@@ -433,6 +631,72 @@ ModelImporter:
     3300204: Object029
     3300206: Object030
     3300208: Object031
+    3300210: Object032
+    3300212: Object033
+    3300214: Object034
+    3300216: Object035
+    3300218: Object036
+    3300220: TechoEntrada
+    3300222: Lena01
+    3300224: Lena010
+    3300226: Lena011
+    3300228: Lena012
+    3300230: Lena013
+    3300232: Lena014
+    3300234: Lena015
+    3300236: Lena016
+    3300238: Lena017
+    3300240: Lena018
+    3300242: Lena019
+    3300244: Lena02
+    3300246: Lena020
+    3300248: Lena021
+    3300250: Lena022
+    3300252: Lena023
+    3300254: Lena024
+    3300256: Lena025
+    3300258: Lena026
+    3300260: Lena027
+    3300262: Lena028
+    3300264: Lena029
+    3300266: Lena03
+    3300268: Lena030
+    3300270: Lena031
+    3300272: Lena032
+    3300274: Lena033
+    3300276: Lena034
+    3300278: Lena035
+    3300280: Lena036
+    3300282: Lena037
+    3300284: Lena038
+    3300286: Lena039
+    3300288: Lena04
+    3300290: Lena040
+    3300292: Lena041
+    3300294: Lena042
+    3300296: Lena043
+    3300298: Lena044
+    3300300: Lena045
+    3300302: Lena046
+    3300304: Lena047
+    3300306: Lena048
+    3300308: Lena049
+    3300310: Lena05
+    3300312: Lena050
+    3300314: Lena051
+    3300316: Lena052
+    3300318: Lena053
+    3300320: Lena054
+    3300322: Lena055
+    3300324: Lena056
+    3300326: Lena057
+    3300328: Lena058
+    3300330: Lena059
+    3300332: Lena06
+    3300334: Lena060
+    3300336: Lena07
+    3300338: Lena08
+    3300340: Lena09
     4300000: Box001
     4300002: Box002
     4300004: Cylinder001
@@ -538,6 +802,72 @@ ModelImporter:
     4300204: Object029
     4300206: Object030
     4300208: Object031
+    4300210: TechoEntrada
+    4300212: Object032
+    4300214: Object033
+    4300216: Object034
+    4300218: Object035
+    4300220: Object036
+    4300222: Lena06
+    4300224: Lena07
+    4300226: Lena09
+    4300228: Lena08
+    4300230: Lena03
+    4300232: Lena02
+    4300234: Lena05
+    4300236: Lena04
+    4300238: Lena01
+    4300240: Lena010
+    4300242: Lena011
+    4300244: Lena012
+    4300246: Lena013
+    4300248: Lena014
+    4300250: Lena015
+    4300252: Lena016
+    4300254: Lena017
+    4300256: Lena018
+    4300258: Lena019
+    4300260: Lena020
+    4300262: Lena021
+    4300264: Lena022
+    4300266: Lena023
+    4300268: Lena024
+    4300270: Lena025
+    4300272: Lena026
+    4300274: Lena027
+    4300276: Lena028
+    4300278: Lena029
+    4300280: Lena030
+    4300282: Lena031
+    4300284: Lena032
+    4300286: Lena033
+    4300288: Lena034
+    4300290: Lena035
+    4300292: Lena036
+    4300294: Lena037
+    4300296: Lena038
+    4300298: Lena039
+    4300300: Lena040
+    4300302: Lena041
+    4300304: Lena042
+    4300306: Lena043
+    4300308: Lena044
+    4300310: Lena045
+    4300312: Lena046
+    4300314: Lena047
+    4300316: Lena048
+    4300318: Lena049
+    4300320: Lena050
+    4300322: Lena051
+    4300324: Lena052
+    4300326: Lena053
+    4300328: Lena054
+    4300330: Lena055
+    4300332: Lena056
+    4300334: Lena057
+    4300336: Lena058
+    4300338: Lena059
+    4300340: Lena060
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -585,6 +915,7 @@ ModelImporter:
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
+    serializedVersion: 2
     human: []
     skeleton: []
     armTwist: 0.5
@@ -595,7 +926,10 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   humanoidOversampling: 1

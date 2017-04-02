@@ -28,11 +28,12 @@ public class WeatherManager : MonoBehaviour
 	void Awake()
 	{
 		Instance = this;
-		if (GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>() == null)
-		{
-			GameObject.FindGameObjectWithTag("Player").AddComponent<AudioSource>();
+		if (source == null) {
+			if (GameObject.FindGameObjectWithTag ("Player").GetComponent<AudioSource> () == null) {
+				GameObject.FindGameObjectWithTag ("Player").AddComponent<AudioSource> ();
+			}
+			source = GameObject.FindGameObjectWithTag ("Player").GetComponent<AudioSource> ();
 		}
-		source = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
 		//thunderSounds = thunderSpawns.GetComponentsInChildren<AudioSource>();
 	}
 	void RemoveOldWeather()
@@ -91,18 +92,21 @@ public class WeatherManager : MonoBehaviour
 		}
 		switch (currentWeather)
 		{
-			case 0:
-				source.clip = weather_Sounds[0];
+		case 0:
+				source.clip = weather_Sounds [0];
+				source.volume = 0.75f;
 				source.Play();
 				//Debug.Log ("Low Rain");
 				break;
 			case 1:
 				source.clip = weather_Sounds[1];
+				source.volume = 1f;
 				source.Play();
 				//Debug.Log ("Normal Rain");
 				break;
 			case 2:
 				source.clip = weather_Sounds[2];
+				source.volume = 1f;
 				source.Play();
 				//Debug.Log ("Heavy Rain");
 				break;
@@ -112,6 +116,7 @@ public class WeatherManager : MonoBehaviour
 				//lluvia interior
 				//print ("interior");
 				source.clip = weather_Sounds[3];
+				source.volume = 1f;
 				source.Play();
 				break;
 			default:
