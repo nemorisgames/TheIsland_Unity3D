@@ -365,6 +365,7 @@ ModelImporter:
     100714: Viga 5
     100716: Viga 6
     100718: Viga 7
+    100720: Plane001
     400000: Armario
     400002: BancaCocina
     400004: Bodega
@@ -725,6 +726,7 @@ ModelImporter:
     400714: Viga 5
     400716: Viga 6
     400718: Viga 7
+    400720: Plane001
     2300000: Armario
     2300002: BancaCocina
     2300004: Bodega
@@ -1084,6 +1086,7 @@ ModelImporter:
     2300712: Viga 5
     2300714: Viga 6
     2300716: Viga 7
+    2300718: Plane001
     3300000: Armario
     3300002: BancaCocina
     3300004: Bodega
@@ -1443,6 +1446,7 @@ ModelImporter:
     3300712: Viga 5
     3300714: Viga 6
     3300716: Viga 7
+    3300718: Plane001
     4300000: CasaMain
     4300002: Piso1
     4300004: Tapeo5
@@ -1802,6 +1806,7 @@ ModelImporter:
     4300712: ManchaTinta
     4300714: CigaretteBox
     4300716: Alfombra2
+    4300718: Plane001
   materials:
     importMaterials: 1
     materialName: 0
@@ -1844,7 +1849,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 3
+    tangentImportMode: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

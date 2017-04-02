@@ -5,13 +5,13 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 448162}
-  - 193: {fileID: 19335402}
-  - 33: {fileID: 3345858}
-  - 23: {fileID: 2385202}
-  - 136: {fileID: 13673380}
+  - component: {fileID: 448162}
+  - component: {fileID: 19335402}
+  - component: {fileID: 3345858}
+  - component: {fileID: 2385202}
+  - component: {fileID: 13673380}
   m_Layer: 0
   m_Name: TI_Fol_01_a_18
   m_TagString: Untagged
@@ -28,10 +28,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2385202
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -47,7 +47,9 @@ MeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: 0e3dbf18e945cfa45a1cbb1e4c4b188d, type: 2}
   - {fileID: 2100002, guid: 0e3dbf18e945cfa45a1cbb1e4c4b188d, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -55,7 +57,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
