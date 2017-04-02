@@ -28,7 +28,7 @@ MonoBehaviour:
   - {fileID: 11488042}
   - {fileID: 114000010799456146}
   globalDepth: 0
-  pauseTexture: {fileID: 2800000, guid: de4c76ca141969143a38f929e0d265b6, type: 3}
+  pauseTexture: {fileID: 0}
   scaleTextEffects: 0
   drawOutlines: 1
   drawInEditor: 1
@@ -658,7 +658,7 @@ MonoBehaviour:
   ID: 3
   isEditing: 0
   title: Talk
-  slotSize: {x: 4.3010755, y: 7.646356}
+  slotSize: {x: 8.602151, y: 15.292712}
   sizeType: 0
   positionType: 0
   slotSpacing: 0
@@ -682,10 +682,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 36.0176
+    x: 68.01759
     y: 2.0088
-    width: 32
-    height: 32
+    width: 64
+    height: 64
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -1485,7 +1485,7 @@ MonoBehaviour:
   ID: 1
   isEditing: 0
   title: Use
-  slotSize: {x: 4.3010755, y: 7.646356}
+  slotSize: {x: 8.602151, y: 15.292712}
   sizeType: 0
   positionType: 0
   slotSpacing: 0
@@ -1511,8 +1511,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 2.0088
     y: 2.0088
-    width: 32
-    height: 32
+    width: 64
+    height: 64
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
@@ -2536,7 +2536,7 @@ MonoBehaviour:
   isLocked: 0
   id: 6
   title: Interaction
-  manualSize: {x: 25.653225, y: 8.606357}
+  manualSize: {x: 38.55645, y: 16.25271}
   positionType: 4
   manualPosition: {x: 50, y: 50}
   alignment: 4
@@ -2597,13 +2597,13 @@ MonoBehaviour:
   zoomAnchor: 4
   zoomElements: 0
   oneMenuPerSpeech: 0
-  biggestElementSize: {x: 188.8512, y: 34.0088}
+  biggestElementSize: {x: 284.8512, y: 66.0088}
   rect:
     serializedVersion: 2
-    x: 276.57
-    y: 191.2412
-    width: 190.86
-    height: 36.0176
+    x: 228.57
+    y: 175.24121
+    width: 286.86
+    height: 68.01759
 --- !u!114 &11438482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3468,7 +3468,7 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 104.035194
+    x: 200.0352
     y: 2.0088
     width: 84.816
     height: 25.11
@@ -3833,7 +3833,7 @@ MonoBehaviour:
   ID: 0
   isEditing: 0
   title: Look
-  slotSize: {x: 4.3010755, y: 7.646356}
+  slotSize: {x: 8.602151, y: 15.292712}
   sizeType: 0
   positionType: 0
   slotSpacing: 0
@@ -3857,10 +3857,10 @@ MonoBehaviour:
   uiHideStyle: 0
   relativeRect:
     serializedVersion: 2
-    x: 70.0264
+    x: 134.0264
     y: 2.0088
-    width: 32
-    height: 32
+    width: 64
+    height: 64
   relativePosition: {x: 0, y: 0}
   numSlots: 1
   uiButton: {fileID: 0}
