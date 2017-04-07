@@ -129,7 +129,10 @@ public class PhotoReview : MonoBehaviour
 	public void ShowPhoto(int pos)
 	{
 		if (pos < 0)
+		{
 			pos = 0;
+			return;
+		}
 		//photo.texture=photosTaken[i];
 		photo.texture = photosTaken[pos];
 		for (int i = 0; i < scrollPhotos.Count; i++)
@@ -232,6 +235,10 @@ public class PhotoReview : MonoBehaviour
 			{
 				LastPhoto();
 			}
+		}
+		if (Input.GetButtonDown("Fire2"))
+		{
+			ScreenManager.Instance.CloseScreen();
 		}
 	}
 }
