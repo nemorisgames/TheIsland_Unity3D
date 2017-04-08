@@ -15,12 +15,12 @@ public class AdventureCommonFunctions : MonoBehaviour {
     }
     void Hide()
     {
-        Debug.Log(gameObject.name + " has been hidden");
+        //Debug.Log(gameObject.name + " has been hidden");
         objectFunctions.SetActive(false);
     }
     void Show()
     {
-        Debug.Log(gameObject.name + " is now being shown");
+        //Debug.Log(gameObject.name + " is now being shown");
         objectFunctions.SetActive(true);
     }
 }
