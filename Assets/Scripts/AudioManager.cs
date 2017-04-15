@@ -10,10 +10,20 @@ public class AudioManager : MonoBehaviour
 	public AudioClip[] situation;
 	public AudioClip[] effects;
 	public AudioSource bgSource;
+	public AudioSource bgSource_second;
 	public AudioSource jsSource;
+	public AudioSource jsSource_second;
 	public AudioSource efSource;
+	public AudioSource efSource_second;
 	public AudioSource sitSource;
+	public AudioSource sitSource_second;
 	private List<AudioSource> playingloop;
+
+	private AudioSource one;
+	private AudioSource two;
+
+	[SerializeField]
+	private float volume = 1f;
 	void Awake()
 	{
 		Instance = this;
@@ -28,11 +38,21 @@ public class AudioManager : MonoBehaviour
 			efSource.playOnAwake = false;
 			sitSource = GameObject.FindGameObjectWithTag("AudioManager").AddComponent<AudioSource>();
 			sitSource.playOnAwake = false;
+
+
+			bgSource_second = GameObject.FindGameObjectWithTag("AudioManager").AddComponent<AudioSource>();
+			bgSource_second.playOnAwake = false;
+			jsSource_second = GameObject.FindGameObjectWithTag("AudioManager").AddComponent<AudioSource>();
+			jsSource_second.playOnAwake = false;
+			efSource_second = GameObject.FindGameObjectWithTag("AudioManager").AddComponent<AudioSource>();
+			efSource_second.playOnAwake = false;
+			sitSource_second = GameObject.FindGameObjectWithTag("AudioManager").AddComponent<AudioSource>();
+			sitSource_second.playOnAwake = false;
 		}
 		else
 		{
 			AudioSource[] sources = GameObject.FindGameObjectWithTag("AudioManager").GetComponents<AudioSource>();
-			for (int i = 0; i < 4 - sources.Length; i++)
+			for (int i = 0; i < 8 - sources.Length; i++)
 			{
 				GameObject.FindGameObjectWithTag("AudioManager").AddComponent<AudioSource>();
 			}
@@ -45,9 +65,17 @@ public class AudioManager : MonoBehaviour
 			efSource.playOnAwake = false;
 			sitSource = sources[3];
 			sitSource.playOnAwake = false;
+
+			bgSource_second = sources[4];
+			bgSource_second.playOnAwake = false;
+			jsSource_second = sources[5];
+			jsSource_second.playOnAwake = false;
+			efSource_second = sources[6];
+			efSource_second.playOnAwake = false;
+			sitSource_second = sources[7];
+			sitSource_second.playOnAwake = false;
 		}
-		PlayAmbientMusic(2, 0f);
-		StartCoroutine(Demo());
+		//StartCoroutine(Demo());
 	}
 	void PlayJumpScare(int i, float volume = 0)
 	{
@@ -58,91 +86,134 @@ public class AudioManager : MonoBehaviour
 	}
 	public void PlayAmbientMusic(int i, float time = 1f)
 	{
+		StopCoroutine("FadeAmbient");
 		StartCoroutine(FadeAmbient(time, i));
 	}
 	public void PlaySituationMusic(int i, float time = 1f)
 	{
+		StopCoroutine("FadeSituation");
 		StartCoroutine(FadeSituacion(time, i));
 	}
 	public void PlayOnlySituation(int i, float time = 1f)
 	{
-		StartCoroutine(FadeSituacion(time, i, true));
+		StopCoroutine("FadeSituation");
+		StartCoroutine(FadeSituacion(time, i, false));
 	}
 	public void PlayOnlyAmbient(int i, float time = 1f)
 	{
-		StartCoroutine(FadeAmbient(time, i, true));
+		StopCoroutine("FadeAmbient");
+		StartCoroutine(FadeAmbient(time, i, false));
 	}
-
 	IEnumerator FadeAll(float time)
 	{
 		int steps = 10;
+		if (time == 0) time = steps;
 		float timeStep = time / steps * 1.0f;
-		float volumeStep = bgSource.volume / (timeStep);
+		float volumeStep = volume / (steps);
 		for (int i = 0; i < steps; i++)
 		{
 			yield return new WaitForSeconds(timeStep);
 			sitSource.volume -= volumeStep;
+			bgSource_second.volume -= volumeStep;
+			sitSource_second.volume -= volumeStep;
 			bgSource.volume -= volumeStep;
 		}
-	}
-	IEnumerator FadeSituacion(float time, int pos, bool forceAll = false)
-	{
-		int steps = 10;
-		float timeStep = time / steps * 1.0f;
-		float volumeStep = sitSource.volume / (timeStep);
-		if (forceAll)
-		{
-			for (int i = 0; i < steps; i++)
-			{
-				yield return new WaitForSeconds(timeStep);
-				sitSource.volume -= volumeStep;
-			}
-		}
-		else
-			yield return (FadeAll(time));
 		sitSource.Stop();
-		sitSource.clip = situation[pos];
-		sitSource.Play();
-		sitSource.loop = true;
-		sitSource.clip = situation[pos];
-		for (int i = 0; i < steps; i++)
-		{
-			yield return new WaitForSeconds(timeStep);
-			sitSource.volume += volumeStep;
-		}
+		bgSource.Stop();
+		sitSource.volume = volume;
+		bgSource.volume = volume;
+		sitSource_second.Stop();
+		bgSource_second.Stop();
+		sitSource_second.volume = volume;
+		bgSource_second.volume = volume;
 	}
-	IEnumerator FadeAmbient(float time, int pos, bool forceAll = false)
+	IEnumerator FadeSituacion(float time, int pos, bool playAnother = true)
 	{
+		if (sitSource.isPlaying)
+		{
+			one = sitSource;
+			two = sitSource_second;
+		}
+		else
+		{
+			two = sitSource;
+			one = sitSource_second;
+		}
+		two.clip = situation[pos];
+		two.Play();
+		two.loop = true;
 		int steps = 10;
+		if (time == 0) time = steps;
 		float timeStep = time / steps * 1.0f;
-		float volumeStep = bgSource.volume / (timeStep);
-		if (forceAll)
+		float volumeStep = volume / (steps);
+		two.volume = 0;
+		if (playAnother)
 		{
 			for (int i = 0; i < steps; i++)
 			{
 				yield return new WaitForSeconds(timeStep);
-				bgSource.volume -= volumeStep;
+				one.volume -= volumeStep;
+				two.volume += volumeStep;
 			}
 		}
 		else
 			yield return (FadeAll(time));
-		//Debug.Log("stopping audio");
-		bgSource.Stop();
-		bgSource.clip = backgrounds[pos];
-		bgSource.Play();
-		bgSource.loop = true;
+		one.Stop();
+		one.volume = volume;
+		/*
 		for (int i = 0; i < steps; i++)
 		{
 			yield return new WaitForSeconds(timeStep);
-			bgSource.volume += volumeStep;
+			
+		}*/
+	}
+	IEnumerator FadeAmbient(float time, int pos, bool playAnother = true)
+	{
+		if (bgSource.isPlaying)
+		{
+			Debug.Log("yes");
+			one = bgSource;
+			two = bgSource_second;
 		}
-		//Debug.Log("audio back to full volume");
+		else
+		{
+			Debug.Log("NO");
+			two = bgSource;
+			one = bgSource_second;
+		}
+		two.clip = backgrounds[pos];
+		two.Play();
+		two.loop = true;
+		int steps = 10;
+		if (time == 0) time = steps;
+		float timeStep = time / steps * 1.0f;
+		float volumeStep = volume / (steps);
+		Debug.Log("volume step: " + volumeStep);
+		two.volume = 0;
+		if (playAnother)
+		{
+			for (int i = 0; i < steps; i++)
+			{
+				yield return new WaitForSeconds(timeStep);
+				one.volume -= volumeStep;
+				two.volume += volumeStep;
+				//Debug.Log("one volume " + one.volume + " two volume " + two.volume/* + " sources: " + one.clip != null ? one.clip.name : "nope" + " " + two.clip != null ? two.clip.name : "nope"*/);
+			}
+		}
+		else
+			yield return (FadeAll(time));
+		one.Stop();
+		one.volume = volume;
 	}
 	IEnumerator Demo()
 	{
-		yield return new WaitForSeconds(2f);
-		//Debug.Log("Switching to new music");
-		PlayAmbientMusic(1);
-		PlaySituationMusic(2);
+		PlayAmbientMusic(6, 0f);
+		//PlayAmbientMusic(0);
+		yield return new WaitForSeconds(10f);
+		Debug.Log("Switching to new music");
+		PlayAmbientMusic(2, 5f);
+		//PlaySituationMusic(2);
+		//yield return new WaitForSeconds(2f);
+		//CellPhone.Instance.SendMessage("ShowNotification");
 	}
 }
