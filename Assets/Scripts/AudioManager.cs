@@ -171,13 +171,13 @@ public class AudioManager : MonoBehaviour
 	{
 		if (bgSource.isPlaying)
 		{
-			Debug.Log("yes");
+			//Debug.Log("yes");
 			one = bgSource;
 			two = bgSource_second;
 		}
 		else
 		{
-			Debug.Log("NO");
+			//Debug.Log("NO");
 			two = bgSource;
 			one = bgSource_second;
 		}

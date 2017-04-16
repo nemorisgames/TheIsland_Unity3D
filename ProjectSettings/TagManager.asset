@@ -15,6 +15,7 @@ TagManager:
   - BackgroundCamera
   - SpawnPoint
   - AudioManager
+  - RainSound
   layers:
   - Default
   - TransparentFX
