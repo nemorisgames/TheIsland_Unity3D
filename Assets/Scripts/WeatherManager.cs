@@ -18,21 +18,32 @@ public class WeatherManager : MonoBehaviour
 	public static WeatherManager Instance = null;
 	public ParticleSystem particles;
 	public ParticleSystem rainSheet;
+	public GameObject rainSoundGO;
 	public AudioSource source;
+	public AudioSource source_second;
 	public AudioClip[] weather_Sounds;
 	public AudioClip[] weather_effects;
 	public GameObject[] positions;
 	public GameObject thunderSpawns;
 	public AudioSource[] thunderSounds;
 	int currentWeather = (int)Weather.rain_heavy;
+
 	void Awake()
 	{
 		Instance = this;
-		if (source == null) {
-			if (GameObject.FindGameObjectWithTag ("Player").GetComponent<AudioSource> () == null) {
-				GameObject.FindGameObjectWithTag ("Player").AddComponent<AudioSource> ();
+		rainSoundGO = GameObject.FindGameObjectWithTag("RainSound");
+		if (source == null)
+		{
+			if (rainSoundGO.GetComponent<AudioSource>() == null)
+			{
+				rainSoundGO.AddComponent<AudioSource>();
+				rainSoundGO.AddComponent<AudioSource>();
 			}
-			source = GameObject.FindGameObjectWithTag ("Player").GetComponent<AudioSource> ();
+			AudioSource[] sources = rainSoundGO.GetComponents<AudioSource>();
+			source = sources[0];
+			source.volume = 0;
+			source_second = sources[1];
+			source_second.volume = 0;
 		}
 		//thunderSounds = thunderSpawns.GetComponentsInChildren<AudioSource>();
 	}
@@ -40,35 +51,90 @@ public class WeatherManager : MonoBehaviour
 	{
 
 	}
+	IEnumerator SmoothAudioChange(float time, float objectiveVolume, int weatherSound)
+	{
+		AudioSource one;
+		AudioSource two;
+		if (source.isPlaying)
+		{
+			one = source;
+			two = source_second;
+		}
+		else
+		{
+			two = source;
+			one = source_second;
+		}
+		two.clip = weather_Sounds[weatherSound];
+		two.Play();
+		two.loop = true;
+		two.volume = 0f;
+		int steps = 10;
+		if (time == 0) time = steps;
+		float volumeStep = (((objectiveVolume)) / steps);
+		Debug.Log(volumeStep);
+		for (int i = 0; i < steps; i++)
+		{
+			yield return new WaitForSeconds(time / steps);
+			two.volume += volumeStep;
+			one.volume -= volumeStep;
+		}
+		two.volume = objectiveVolume;
+		one.Stop();
+		one.volume = objectiveVolume;
+	}
+	IEnumerator SmoothWeatherChange(float time, float objectiveRate, float objectiveRateSheet, float currentRate, float currentRateSheet)
+	{
+		var em = particles.emission;
+		var rate = new ParticleSystem.MinMaxCurve();
+		var emSheet = rainSheet.emission;
+		var rateSheet = new ParticleSystem.MinMaxCurve();
+		rateSheet.mode = ParticleSystemCurveMode.Constant;
+
+		rate.mode = ParticleSystemCurveMode.Constant;
+		float steps = ((objectiveRate - currentRate)) / time;
+		float sheetStep = (objectiveRateSheet - currentRateSheet) / steps;
+		for (int i = 0; i < steps; i++)
+		{
+			yield return new WaitForSeconds(time / steps);
+			rate.constant += time;
+			rateSheet.constant += sheetStep;
+			em.rateOverTime = rate;
+			emSheet.rateOverTime = rateSheet;
+		}
+	}
 	void StartNewWeather(int newWeather = -1)
 	{
+		float time = 5f;
 		//print(newWeather);
 		if (newWeather != -1)
 			currentWeather = newWeather;
+
+		Debug.Log("Changing weather to " + currentWeather);
 		if (particles != null)
 		{
-			var em = particles.emission;
-			var rate = new ParticleSystem.MinMaxCurve();
-			var emSheet = rainSheet.emission;
-			var rateSheet = new ParticleSystem.MinMaxCurve();
+			StopCoroutine("SmoothWeatherChange");
 			//RemoveOldWeather();
 			switch (currentWeather)
 			{
-			case 0:
-				StartCoroutine (changeRain (100f,1f));
+				case 0:
+					StartCoroutine(SmoothWeatherChange(time, 100f, 1f, particles.emission.rateOverTime.constant, rainSheet.emission.rateOverTime.constant));
+					StartCoroutine(SmoothAudioChange(time, 0.5f, currentWeather));
 					//Debug.Log ("Low Rain");
 					break;
 				case 1:
-				StartCoroutine (changeRain (1000f, 15f));
+					StartCoroutine(SmoothWeatherChange(time, 1000f, 15f, particles.emission.rateOverTime.constant, rainSheet.emission.rateOverTime.constant));
+					StartCoroutine(SmoothAudioChange(time, 0.5f, currentWeather));
 					//Debug.Log ("Normal Rain");
 					break;
 				case 2:
-				StartCoroutine (changeRain (2000f, 150f));
+					StartCoroutine(SmoothWeatherChange(time, 2000f, 150f, particles.emission.rateOverTime.constant, rainSheet.emission.rateOverTime.constant));
+					StartCoroutine(SmoothAudioChange(time, 0.75f, currentWeather));
 					//Debug.Log ("Heavy Rain");
 					break;
 				case 3:
-					//rate.mode = ParticleSystemCurveMode.Constant;
-					//rate.constant = 200f;
+					StartCoroutine(SmoothWeatherChange(time, 200f, 0f, particles.emission.rateOverTime.constant, rainSheet.emission.rateOverTime.constant));
+					StartCoroutine(SmoothAudioChange(time, 0.75f, currentWeather));
 					ThunderAndFlash();
 					//Debug.Log ("Thunder");
 					break;
@@ -78,63 +144,40 @@ public class WeatherManager : MonoBehaviour
 				default:
 					break;
 			}
-			//em.rateOverTime = rate;
-			//emSheet.rateOverTime = rateSheet;
 		}
-		switch (currentWeather)
-		{
-		case 0:
-				source.clip = weather_Sounds [0];
-				source.volume = 0.75f;
-				source.Play();
-				//Debug.Log ("Low Rain");
-				break;
-			case 1:
-				source.clip = weather_Sounds[1];
-				source.volume = 1f;
-				source.Play();
-				//Debug.Log ("Normal Rain");
-				break;
-			case 2:
-				source.clip = weather_Sounds[2];
-				source.volume = 1f;
-				source.Play();
-				//Debug.Log ("Heavy Rain");
-				break;
-			case 3:
-				break;
-			case 4:
-				//lluvia interior
-				//print ("interior");
-				source.clip = weather_Sounds[3];
-				source.volume = 1f;
-				source.Play();
-				break;
-			default:
-				break;
-		}
+		//switch (currentWeather)
+		//{
+		//	case 0:
+		//		source.clip = weather_Sounds[0];
+		//		source.volume = 0.75f;
+		//		source.Play();
+		//		//Debug.Log ("Low Rain");
+		//		break;
+		//	case 1:
+		//		source.clip = weather_Sounds[1];
+		//		source.volume = 1f;
+		//		source.Play();
+		//		//Debug.Log ("Normal Rain");
+		//		break;
+		//	case 2:
+		//		source.clip = weather_Sounds[2];
+		//		source.volume = 1f;
+		//		source.Play();
+		//		//Debug.Log ("Heavy Rain");
+		//		break;
+		//	case 3:
+		//		break;
+		//	case 4:
+		//		//lluvia interior
+		//		//print ("interior");
+		//		source.clip = weather_Sounds[3];
+		//		source.volume = 1f;
+		//		source.Play();
+		//		break;
+		//	default:
+		//		break;
+		//}
 	}
-
-	IEnumerator changeRain(float intensity, float rateS){
-		var em = particles.emission;
-		var rate = new ParticleSystem.MinMaxCurve();
-		var emSheet = rainSheet.emission;
-		var rateSheet = new ParticleSystem.MinMaxCurve();
-		rate.mode = ParticleSystemCurveMode.Constant;
-		rate.constant = em.rateOverTime.constant;
-		print ("rain " + rate.constant + " " + intensity);
-		while (Mathf.Abs (rate.constant - intensity) > 1f) {
-			rate.constant = Mathf.Lerp(rate.constant, intensity, 0.5f * Time.deltaTime);
-			//print (rate.constant);
-			em.rateOverTime = rate;
-
-			rateSheet.mode = ParticleSystemCurveMode.Constant;
-			rateSheet.constant = Mathf.Lerp(rateSheet.constant, rateS, 0.5f * Time.deltaTime);
-			emSheet.rateOverTime = rateSheet;
-			yield return new WaitForEndOfFrame ();
-		}
-	}
-
 	IEnumerator FlashEffect(int pos)
 	{
 		thunderSounds[pos].transform.GetChild(0).gameObject.SetActive(true);
@@ -159,7 +202,7 @@ public class WeatherManager : MonoBehaviour
 		StartCoroutine(FlashEffect(pos));
 		//calculate time based on distance of lightning to Cara
 		float dist = Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, thunderSounds[pos].transform.position);
-		float time = Vector3.Distance(thunderSounds[pos].transform.position, GameObject.FindWithTag("Player").transform.position) * 0.03f;
+		float time = Vector3.Distance(thunderSounds[pos].transform.position, GameObject.FindWithTag("Player").transform.position) * 0.05f;
 		StartCoroutine(ThunderSound((ulong)time, pos, 1f));
 	}
 	void NextWeather()
@@ -181,7 +224,7 @@ public class WeatherManager : MonoBehaviour
 	void Update()
 	{
 		//for debuging
-		/*
+
 		if (Input.GetAxis("Mouse ScrollWheel") != 0f)
 		{
 			if (Input.GetAxis("Mouse ScrollWheel") < 0f)
@@ -192,6 +235,6 @@ public class WeatherManager : MonoBehaviour
 			{
 				LastWeather();
 			}
-		}*/
+		}
 	}
 }
