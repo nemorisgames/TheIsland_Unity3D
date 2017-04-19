@@ -37,7 +37,7 @@ Material:
       second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _CoreColor
-      second: {r: 1, g: 0.703, b: 0.051470563, a: 1}
+      second: {r: 1, g: 0.38509127, b: 0.051470578, a: 1}
     - first:
         name: _TintColor
-      second: {r: 1, g: 0.759, b: 0.37499997, a: 1}
+      second: {r: 1, g: 0.51724136, b: 0.375, a: 1}

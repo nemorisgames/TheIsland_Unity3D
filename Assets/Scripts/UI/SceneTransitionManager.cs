@@ -45,9 +45,9 @@ public class SceneTransitionManager : MonoBehaviour
 	{
 		float r = 0;
 		//Aqui va la animacion"
-		while (bg.color != Color.red)
+		while (bg.color != Color.black)
 		{
-			bg.color = Color.Lerp(bg.color, Color.red, Time.deltaTime);
+			bg.color = Color.Lerp(bg.color, Color.black, Time.deltaTime);
 			yield return new WaitForSeconds(0.2f);
 			//Debug.Log(bg.color);
 		}
@@ -72,9 +72,9 @@ public class SceneTransitionManager : MonoBehaviour
 	{
 		float r = 0;
 		//Aqui va la animacion"
-		while (bg.color != Color.red)
+		while (bg.color != Color.black)
 		{
-			bg.color = Color.Lerp(bg.color, Color.red, Time.deltaTime);
+			bg.color = Color.Lerp(bg.color, Color.black, Time.deltaTime);
 			//Debug.Log(bg.color);
 		}
 		Debug.Log("Changing SCENE!");

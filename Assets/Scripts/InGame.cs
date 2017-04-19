@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using AC;
+using UnityEngine.SceneManagement;
 
 public class InGame : MonoBehaviour {
     int ciclo = 0;
@@ -118,6 +119,10 @@ public class InGame : MonoBehaviour {
                 ciclo = 0;
             }
         }
+
+		if (Input.GetKey (KeyCode.LeftShift) && Input.GetKey (KeyCode.R)) {
+			UnityEngine.SceneManagement.SceneManager.LoadScene ("InteriorPrototype");
+		}
     }
 
     public void clearInventoryItem()

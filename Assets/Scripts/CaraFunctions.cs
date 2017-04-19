@@ -47,6 +47,7 @@ public class CaraFunctions : MonoBehaviour
 		fpsCamera.SetActive(false);
 		fpsCamera.GetComponent<Camera>().enabled = false;
 		killCamera.GetComponent<Camera>().enabled = true;
+		killCamera.GetComponent<AudioListener> ().enabled = true;
 		killAnimation.Interact();
 		killCamera.GetComponent<Animator>().SetBool("Kill", true);
 	}

@@ -17,8 +17,11 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 9991f58702882fb478e320b34ca3f6ef, type: 3}
     - {fileID: 8300000, guid: 77de32539d9bf6a4ca0c9585b0eb31e6, type: 3}
     - {fileID: 8300000, guid: 1d541cb85b0321a4d909cc47eaf32d8f, type: 3}
-    MinPitch: 1
-    MaxPitch: 1
+    - {fileID: 8300000, guid: 487fdddc36073c04c8aeecff7b21b669, type: 3}
+    - {fileID: 8300000, guid: 9991f58702882fb478e320b34ca3f6ef, type: 3}
+    - {fileID: 8300000, guid: 892f8d511e99e084c83099460fe3917d, type: 3}
+    MinPitch: 0.9
+    MaxPitch: 1.1
     MaxOnePerFrame: 0
     soundsHelp: 106
   Objects:

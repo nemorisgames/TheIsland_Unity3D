@@ -65,12 +65,14 @@ public class Inventory : MonoBehaviour
 		inventoryItems[(int)type].hasItem = true;
 		inventoryItems[(int)type].animator.SetTrigger("PickingUp");
 		//inventoryItems[(int)type].SetActive(true);
-
-		AC.GlobalVariables.SetIntegerValue (1, (int)type);
+		print ("addInventory " + inventoryItems.Length + " " + inventoryItems [(int)type].activeItem);
+		AC.GlobalVariables.SetIntegerValue (1, (int)type); 
 		//inventoryItems[(int)type].objectInHand.SetActive(true);
-		for(int i = 0; i < inventoryItems.Length; i++)
-			if(!inventoryItems[(int)type].activeItem)
-				CycleInventoryItem(true);
+		for (int i = 0; i < inventoryItems.Length; i++)
+			//if (!inventoryItems [(int)type].activeItem) {
+			//	print ("cycle item");
+				CycleInventoryItem (true);
+			//}
 	}
 
 	public void CycleInventoryItem(){

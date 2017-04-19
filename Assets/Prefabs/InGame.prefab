@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateInterval: 0.5
-  showFPS: 1
+  showFPS: 0
 --- !u!114 &114976027323636550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,6 +73,6 @@ MonoBehaviour:
   - Press [Mouse right button] to hide the cellphone
   - Press [C] to crouch
   - Press [B] to check the book
-  - Pick up a rock with [Mouse left click] and throw it holding [Q]
+  - Pick up a rock with [Mouse left click]
   - Hold [Shift] to run
   - Press [Forward] to climb this type of rock

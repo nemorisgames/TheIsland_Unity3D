@@ -1,0 +1,394 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1473225665651230}
+  m_IsPrefabParent: 1
+--- !u!1 &1473225665651230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4076044506133462}
+  m_Layer: 0
+  m_Name: DeathCameraParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1917707904293940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4283963626223128}
+  - component: {fileID: 20017938328182062}
+  - component: {fileID: 114301314649730370}
+  - component: {fileID: 114839966525608224}
+  - component: {fileID: 114425321044724644}
+  - component: {fileID: 81021870597904294}
+  - component: {fileID: 95769615347408212}
+  m_Layer: 0
+  m_Name: DeathCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4076044506133462
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1473225665651230}
+  m_LocalRotation: {x: -0, y: -0, z: -4.6584e-10, w: 1}
+  m_LocalPosition: {x: -9.09, y: 3.76, z: -0.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4283963626223128}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 358.413, y: 94.343, z: 0}
+--- !u!4 &4283963626223128
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1917707904293940}
+  m_LocalRotation: {x: 0, y: 0, z: -0.00000031399608, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4076044506133462}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.00000005338133}
+--- !u!20 &20017938328182062
+Camera:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1917707904293940}
+  m_Enabled: 0
+  serializedVersion: 2
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0.019607844}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.1
+  far clip plane: 30
+  field of view: 60
+  orthographic: 0
+  orthographic size: 100
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294936543
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+  m_StereoMirrorMode: 0
+--- !u!81 &81021870597904294
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1917707904293940}
+  m_Enabled: 0
+--- !u!95 &95769615347408212
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1917707904293940}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1f8539c56f8db6d47a8e0fc7d5c8da1e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114301314649730370
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1917707904293940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a879e317c20b0d41a9a56f1a97f4cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ApplyMethod: 0
+  SampleCount: 1
+  PerPixelNormals: 1
+  Intensity: 0.4
+  Tint: {r: 0, g: 0, b: 0, a: 1}
+  Radius: 3.2
+  PowerExponent: 3.11
+  Bias: 0.034
+  CacheAware: 0
+  Downsample: 0
+  BlurEnabled: 1
+  BlurRadius: 2
+  BlurPasses: 1
+  BlurSharpness: 10
+--- !u!114 &114425321044724644
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1917707904293940}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fd999d1b2cf94a45a5b0a47ce074bef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redChannel:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  greenChannel:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  blueChannel:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  useDepthCorrection: 0
+  zCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  depthRedChannel:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  depthGreenChannel:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  depthBlueChannel:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  saturation: 0.23
+  selectiveCc: 0
+  selectiveFromColor: {r: 1, g: 1, b: 1, a: 1}
+  selectiveToColor: {r: 1, g: 1, b: 1, a: 1}
+  mode: 0
+  updateTextures: 1
+  colorCorrectionCurvesShader: {fileID: 4800000, guid: 62bcade1028c24ca1a39760ed84b9487,
+    type: 3}
+  simpleColorCorrectionCurvesShader: {fileID: 4800000, guid: 438ddd58d82c84d9eb1fdc56111702e1,
+    type: 3}
+  colorCorrectionSelectiveShader: {fileID: 4800000, guid: e515e0f94cefc4c0db54b45cba621544,
+    type: 3}
+--- !u!114 &114839966525608224
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1917707904293940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4234024f1ec134da7a7797a29e6cfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_grain: 1
+  m_grainIntensity: 0.04
+  m_vignette: 0
+  m_vignetteIntensity: 0.7
+  m_vignetteScale: 0.7
+  m_vignetteColor: {r: 0, g: 0, b: 0, a: 1}
+  m_chromaticAberration: 1
+  m_chromaticAberrationDistortion: 0.7
+  m_chromaticAberrationIntensity: 10
+  m_bloom: 1
+  m_bloomThreshold: 0
+  m_bloomIntensity: 0.35
+  m_bloomBrightness: 1.31
+  m_bloomDistanceMultiplier: 0.859
+  m_bloomDownsamples: 7
+  m_lensFlare: 1
+  m_lensFlareGhostSamples: 5
+  m_lensFlareGhostIntensity: 0.1
+  m_lensFlareGhostDispersal: 0.2
+  m_lensFlareGhostDistortion: 0.1
+  m_lensFlareGhostEdgeFade: 1
+  m_lensFlareLensColorTexture: {fileID: 2800000, guid: 15e9d2a745ed5d44eb7d8ed845fbfa65,
+    type: 3}
+  m_lensFlareHaloIntensity: 0.1
+  m_lensFlareHaloWidth: 0.3
+  m_lensFlareHaloDistortion: 0.5
+  m_lensFlareDiffractionTexture: {fileID: 2800000, guid: d8d307d8628ea7b4c8d4688d875507fe,
+    type: 3}
+  m_lensFlareDiffractionUVScale: 0.8
+  m_lensFlareBlurSamples: 1
+  m_lensFlareBlurStrength: 0.5
+  m_lensFlareDownsamples: 2
+  m_lensFlareThreshold: 0
+  m_lensDirt: 1
+  m_lensDirtTexture: {fileID: 2800000, guid: adbc35160ff54eb4cae0fd40240bcf9e, type: 3}
+  m_lensDirtBloomThreshold: 0
+  m_lensDirtBloomEffect: 0.3
+  m_lensDirtBloomBrightness: 1.2
+  m_lensDirtLensFlareEffect: 1
+  m_lensDirtLensFlareBrightness: 2
+  m_tonemappingMode: 2
+  m_whitePoint: 15
+  m_cameraMode: 2
+  m_fNumber: 4
+  m_ISO: 100
+  m_shutterSpeed: 0.01
+  m_userControlledFocalLength: 0
+  m_focalLength: 15
+  m_exposureCompensation: 0
+  m_minMaxExposure: {x: -6, y: 6}
+  m_adaptionSpeed: 1
+  m_depthOfField: 1
+  m_exclusionMask:
+    serializedVersion: 2
+    m_Bits: 0
+  m_maxCoCRadius: 20
+  m_depthOfFieldTemporalSupersampling: 1
+  m_depthOfFieldTemporalBlend: 0.9
+  m_depthOfFieldTemporalSteps: 8
+  m_depthOfFieldSamples: 0
+  m_depthFocusMode: 3
+  m_visualizeFocalDistance: 0
+  m_depthOfFieldTargetTransform: {fileID: 0}
+  m_pointAveragePosition: {x: 0.5, y: 0.5}
+  m_pointAverageRange: 0.1
+  m_visualizePointFocus: 0
+  m_depthAdaptionSpeed: 15
+  m_focalDistance: 10
+  m_focalRange: 10
+  m_colorGradingMode: 1
+  m_colorGradingTex1: {fileID: 2800000, guid: 942eca2293f701e42a3a1a7522ec4723, type: 3}
+  m_colorGradingTex2: {fileID: 2800000, guid: 3ad036aa92b53f84f9fe718d6224ca3c, type: 3}
+  m_colorGradingBlendFactor: 0.094
+  forceFillParams: 0

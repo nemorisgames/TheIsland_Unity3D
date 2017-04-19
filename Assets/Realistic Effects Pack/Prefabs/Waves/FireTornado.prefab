@@ -1820,7 +1820,7 @@ Light:
   serializedVersion: 7
   m_Type: 2
   m_Color: {r: 1, g: 0.4835193, b: 0.22794116, a: 1}
-  m_Intensity: 2
+  m_Intensity: 1.370351
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10

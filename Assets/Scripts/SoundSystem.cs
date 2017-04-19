@@ -21,7 +21,7 @@ public class SoundSystem : MonoBehaviour {
         caraTransform = GameObject.FindWithTag("Player").transform;
         caraAudioSource = gameObject.GetComponent<AudioSource>();
         musicAudioSource = transform.FindChild("MusicManager").GetComponent<AudioSource>();
-		playSoundScape();
+		//playSoundScape();
 		setCaraMood (CaraState.Idle);
     }
 

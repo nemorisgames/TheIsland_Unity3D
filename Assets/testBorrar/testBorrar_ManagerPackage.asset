@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b4a24d0e4a28423fb3249b923d7e418, type: 3}
+  m_Name: testBorrar_ManagerPackage
+  m_EditorClassIdentifier: 
+  actionsManager: {fileID: 11400000, guid: dce866e3378b5244dac1b5bb0e40c5a9, type: 2}
+  sceneManager: {fileID: 11400000, guid: 40e15a77eae78484b89195ceb34c45b5, type: 2}
+  settingsManager: {fileID: 11400000, guid: fbc74993f47c52c4bbf539ac33e2347a, type: 2}
+  inventoryManager: {fileID: 11400000, guid: 2a98c9238f6184e44afa3028791f4872, type: 2}
+  variablesManager: {fileID: 11400000, guid: f11b6b5203a5f8449ac8bbf8529c9029, type: 2}
+  speechManager: {fileID: 11400000, guid: 420b36189e34d224db42bb694f38f44d, type: 2}
+  cursorManager: {fileID: 11400000, guid: 12331ecae091c10478241557df824dc1, type: 2}
+  menuManager: {fileID: 11400000, guid: 23f8b0174a11a27458e01d60a1c26751, type: 2}

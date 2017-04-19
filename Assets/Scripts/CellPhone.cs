@@ -228,7 +228,7 @@ public class CellPhone : MonoBehaviour
 		{
 			if (i == index)
 			{
-				Debug.Log("selected color" + i);
+				//Debug.Log("selected color" + i);
 				functions[i].GetComponent<Renderer>().material.color = selectedColor;
 				selectors[i].SetActive(true);
 				selectors[i].GetComponent<Renderer>().material.color = selectedColor;
