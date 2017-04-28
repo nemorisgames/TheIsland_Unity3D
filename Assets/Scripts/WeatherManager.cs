@@ -15,11 +15,14 @@ public enum WeatherEffects
 }
 public class WeatherManager : MonoBehaviour
 {
+	public bool debug = false;
 	public static WeatherManager Instance = null;
 	public ParticleSystem particles;
 	public ParticleSystem rainSheet;
 	public GameObject rainSoundGO;
+	[HideInInspector]
 	public AudioSource source;
+	[HideInInspector]
 	public AudioSource source_second;
 	public AudioClip[] weather_Sounds;
 	public AudioClip[] weather_effects;
@@ -224,7 +227,8 @@ public class WeatherManager : MonoBehaviour
 	void Update()
 	{
 		//for debuging
-
+		if (!debug)
+			return;
 		if (Input.GetAxis("Mouse ScrollWheel") != 0f)
 		{
 			if (Input.GetAxis("Mouse ScrollWheel") < 0f)
