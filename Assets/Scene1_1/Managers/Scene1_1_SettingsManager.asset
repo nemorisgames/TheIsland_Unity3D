@@ -35,7 +35,7 @@ MonoBehaviour:
   cycleInventoryCursors: 1
   autoCycleWhenInteract: 0
   lockCursorOnStart: 1
-  hideLockedCursor: 1
+  hideLockedCursor: 0
   disableFreeAimWhenDragging: 0
   runConversationsWithKeys: 0
   clickUpInteractions: 0
