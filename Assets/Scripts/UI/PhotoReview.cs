@@ -142,13 +142,14 @@ public class PhotoReview : MonoBehaviour
 		scrollPhotos[pos].Highlight();
 		currentPhoto = pos;
 		//allPhotosGrid.transform.position = new Vector3(-scrollPhotos[pos].transform.position.x, allPhotosGrid.transform.position.y, 0);
-		//SnapTo(scrollPhotos[pos].GetComponent<RectTransform>());
+		SnapTo(scrollPhotos[pos].GetComponent<RectTransform>());
 	}
 	public void SnapTo(RectTransform target)
 	{
+		float offset = 115;
 		Canvas.ForceUpdateCanvases();
-		Vector2 result = (Vector2)scrollRect.transform.InverseTransformPoint(allPhotosGrid.transform.localPosition)
-			- (Vector2)scrollRect.transform.InverseTransformPoint(target.position);
+		Vector2 result = (Vector2)scrollRect.transform.InverseTransformPoint(allPhotosGrid.transform.position)
+			- (Vector2)scrollRect.transform.InverseTransformPoint(target.position)+new Vector2(offset,0);
 		result.y = 75f;
 		allPhotosGrid.GetComponent<RectTransform>().anchoredPosition = result;
 
