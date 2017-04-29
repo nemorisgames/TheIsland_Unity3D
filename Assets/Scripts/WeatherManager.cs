@@ -109,7 +109,7 @@ public class WeatherManager : MonoBehaviour
 	void StartNewWeather(int newWeather = -1)
 	{
 		float time = 5f;
-		//print(newWeather);
+		print("new weather " + newWeather);
 		if (newWeather != -1)
 			currentWeather = newWeather;
 
