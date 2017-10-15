@@ -10,6 +10,8 @@ public class PageManager : MonoBehaviour
 	public List<int> unlockedPages;
 	[SerializeField]
 	public GameObject[] allPages;
+    [HideInInspector]
+    public int totalPages = 4;
 	private void Awake()
 	{
 		Instance = this;
@@ -19,13 +21,21 @@ public class PageManager : MonoBehaviour
 	void Load()
 	{
 		//test data
-		AddPage(0);
+		//AddPage(0);
+        for(int i = 1; i <= totalPages; i++)
+        {
+            if(PlayerPrefs.GetInt("page" + i, 0) == 1)
+            {
+                AddPage(i);
+            }
+        }
 	}
 	public void AddPage(int page)
 	{
 		if (!unlockedPages.Contains(page))
 		{
 			unlockedPages.Add(page);
-		}
+            PlayerPrefs.SetInt("page" + page, 1);
+        }
 	}
 }

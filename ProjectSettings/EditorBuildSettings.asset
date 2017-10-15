@@ -11,5 +11,5 @@ EditorBuildSettings:
     path: Assets/Scenes/ExteriorPrototype.unity
   - enabled: 1
     path: Assets/Scenes/InteriorPrototype.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CinematicFinalMalo.unity

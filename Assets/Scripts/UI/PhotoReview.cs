@@ -90,12 +90,12 @@ public class PhotoReview : MonoBehaviour
 			path = Application.persistentDataPath + "/" + TakePhoto.photoName + i + ".png";
 			if (File.Exists(path))
 			{
+                print("exist " + i);
 				fileData = File.ReadAllBytes(path);
 				texture = new Texture2D(2, 2);
 				texture.LoadImage(fileData);
 				photosTaken.Add(texture);
 				photosTakenPath.Add(path);
-				pos++;
 				GameObject p = GameObject.Instantiate(photoPrefab, allPhotosGrid.transform) as GameObject;
 				p.transform.SetAsLastSibling();
 				p.transform.localScale = new Vector3(1, 1, 1);
@@ -104,12 +104,14 @@ public class PhotoReview : MonoBehaviour
 				//Debug.Log(startPos);
 				size += p.GetComponent<RectTransform>().sizeDelta.x + distance;
 				Photo pc = p.GetComponent<Photo>();
-				pc.pos = i;
+				pc.pos = pos;
 				pc.texture.texture = texture;
 				scrollPhotos.Add(pc);
-			}
+                pos++;
+            }
 			else
 			{
+                print("no exist");
 				isDirty = true;
 			}
 		}
@@ -133,6 +135,10 @@ public class PhotoReview : MonoBehaviour
 			pos = 0;
 			return;
 		}
+        if(pos >= photosTaken.Count)
+        {
+            pos = photosTaken.Count - 1;
+        }
 		//photo.texture=photosTaken[i];
 		photo.texture = photosTaken[pos];
 		for (int i = 0; i < scrollPhotos.Count; i++)

@@ -1,0 +1,166 @@
+fileFormatVersion: 2
+guid: 35fca5747b1ddcd459d896104e80de6e
+timeCreated: 1496596112
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bone002
+    100002: Bone004
+    100004: Bone010
+    100006: Bone011
+    100008: Bone012
+    100010: Box001
+    100012: //RootNode
+    100014: HD006
+    100016: HD007
+    100018: HD008
+    100020: HD009
+    100022: HD010
+    100024: HD011
+    100026: HD012
+    100028: HD013
+    100030: HD2
+    100032: HD3
+    100034: HD4
+    100036: HD5
+    100038: HojaAbajo
+    100040: HojaArriba
+    100042: HojaDerecha002
+    100044: HojaDerecha003
+    100046: HojaDerecha004
+    100048: HojaDerecha005
+    100050: HojaDerecha006
+    100052: HojaDerecha007
+    100054: HojaDerecha008
+    100056: HojaDerecha01
+    100058: HojaDerecha01 1
+    100060: LibroAbajo
+    100062: LibroArriba
+    100064: LibroB
+    100066: Plane001
+    100068: Plane002
+    400000: Bone002
+    400002: Bone004
+    400004: Bone010
+    400006: Bone011
+    400008: Bone012
+    400010: Box001
+    400012: //RootNode
+    400014: HD006
+    400016: HD007
+    400018: HD008
+    400020: HD009
+    400022: HD010
+    400024: HD011
+    400026: HD012
+    400028: HD013
+    400030: HD2
+    400032: HD3
+    400034: HD4
+    400036: HD5
+    400038: HojaAbajo
+    400040: HojaArriba
+    400042: HojaDerecha002
+    400044: HojaDerecha003
+    400046: HojaDerecha004
+    400048: HojaDerecha005
+    400050: HojaDerecha006
+    400052: HojaDerecha007
+    400054: HojaDerecha008
+    400056: HojaDerecha01
+    400058: HojaDerecha01 1
+    400060: LibroAbajo
+    400062: LibroArriba
+    400064: LibroB
+    400066: Plane001
+    400068: Plane002
+    2300000: Plane001
+    2300002: Plane002
+    3300000: Plane001
+    3300002: Plane002
+    4300000: Box001
+    4300002: Plane001
+    4300004: Plane002
+    4300006: HojaDerecha01
+    4300008: HojaDerecha002
+    4300010: HojaDerecha004
+    4300012: HojaDerecha006
+    4300014: HojaDerecha007
+    4300016: HojaDerecha008
+    9500000: //RootNode
+    13700000: Box001
+    13700002: HojaDerecha002
+    13700004: HojaDerecha004
+    13700006: HojaDerecha006
+    13700008: HojaDerecha007
+    13700010: HojaDerecha008
+    13700012: HojaDerecha01 1
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

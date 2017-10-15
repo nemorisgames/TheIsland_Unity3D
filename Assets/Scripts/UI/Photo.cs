@@ -16,6 +16,7 @@ public class Photo : MonoBehaviour
 	float UnSelectedPos = -67f;
 	public void OnClick()
 	{
+        print(pos);
 		PhotoReview.Instance.ShowPhoto(pos);
 	}
 	public void Highlight()

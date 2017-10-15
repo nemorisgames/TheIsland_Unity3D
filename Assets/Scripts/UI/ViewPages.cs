@@ -10,7 +10,9 @@ public class ViewPages : MonoBehaviour
 	private int currentPage = 0;
 	private int pagesCount = 1;
 	private List<Texture2D> pages;
-	void OnEnable()
+    PageManager p;
+
+    void OnEnable()
 	{
 		LoadPages ();
 	}
@@ -19,13 +21,20 @@ public class ViewPages : MonoBehaviour
 		//load pages from here and add to grid
 		pages.Clear();
 
-		PageManager p = transform.parent.GetComponent<PageManager> ();
+		p = transform.parent.GetComponent<PageManager> ();
 		pagesCount = p.unlockedPages.Count;
-		for(int i = 0; i < p.unlockedPages.Count; i++){
-			pages.Add ((Texture2D)p.allPages [i].GetComponent<RawImage> ().texture);
-			print ("adding " + i);
+        int contador = 0;
+        for (int i = 1; i <= p.totalPages; i++){
+            if (PlayerPrefs.GetInt("page" + i, 0) == 1)
+            {
+                pages.Add((Texture2D)p.allPages[i - 1].GetComponent<RawImage>().texture);
+                contador++;
+                print("adding " + i + " " + (Texture2D)p.allPages[contador].GetComponent<RawImage>().texture);
+            }
 		}
-	}
+        ShowPage();
+
+    }
 	void NextPage()
 	{
 		currentPage++;
@@ -53,13 +62,13 @@ public class ViewPages : MonoBehaviour
 		}*/
 		pages = new List<Texture2D>();
 		//aqui cargar paginas
-		for (int i = 0; i < 15; i++)
+		for (int i = 0; i < pagesCount; i++)
 		{
 			pages.Add(new Texture2D(500, 500));
 		}
-		pagesCount = 15;
 		currentPage = 0;
 		noPages.SetActive(false);
+        print("load pages");
 	}
 	void ShowPage(int pos = -1)
 	{
@@ -67,10 +76,14 @@ public class ViewPages : MonoBehaviour
 		{
 			currentPage = pos;
 		}
-		image.texture = pages[currentPage];
-		//image.color = pages[currentPage].;
-		//show currentPage		
-	}
+        if (pages != null && pages.Count > 0)
+            image.texture = pages[currentPage];
+        else
+            noPages.SetActive(true);
+        //image.color = pages[currentPage].;
+        //show currentPage		
+        print("show pages");
+    }
 	void Update()
 	{
 		if (Input.GetAxis("Mouse ScrollWheel") != 0f)

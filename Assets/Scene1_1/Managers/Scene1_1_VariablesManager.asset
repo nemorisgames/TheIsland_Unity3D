@@ -22,7 +22,7 @@ MonoBehaviour:
     link: 0
     pmVar: 
     updateLinkOnStart: 0
-    isEditing: 0
+    isEditing: 1
     textValLineID: -1
     popUpsLineID: -1
   - label: ItemActive
@@ -35,7 +35,7 @@ MonoBehaviour:
     link: 0
     pmVar: 
     updateLinkOnStart: 0
-    isEditing: 1
+    isEditing: 0
     textValLineID: -1
     popUpsLineID: -1
   varPresets: []

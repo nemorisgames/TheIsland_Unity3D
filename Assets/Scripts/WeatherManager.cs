@@ -93,23 +93,31 @@ public class WeatherManager : MonoBehaviour
 		var emSheet = rainSheet.emission;
 		var rateSheet = new ParticleSystem.MinMaxCurve();
 		rateSheet.mode = ParticleSystemCurveMode.Constant;
-
 		rate.mode = ParticleSystemCurveMode.Constant;
-		float steps = ((objectiveRate - currentRate)) / time;
-		float sheetStep = (objectiveRateSheet - currentRateSheet) / steps;
+
+        /*while (!Mathf.Approximately(rate.constant, objectiveRate))
+        {
+            rate.constant = Mathf.Lerp(rate.constant, objectiveRate, Time.deltaTime / time);
+            em.rateOverTime = rate;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }*/
+        rate = em.rateOverTime;
+        rateSheet = emSheet.rateOverTime;
+        float steps = Mathf.Abs(((objectiveRate - currentRate)) / time);
+		float sheetStep = ((objectiveRateSheet - currentRateSheet) / steps);
 		for (int i = 0; i < steps; i++)
 		{
 			yield return new WaitForSeconds(time / steps);
-			rate.constant += time;
+			rate.constant += ((objectiveRate - currentRate)) / steps;
 			rateSheet.constant += sheetStep;
 			em.rateOverTime = rate;
 			emSheet.rateOverTime = rateSheet;
 		}
-	}
+    }
 	void StartNewWeather(int newWeather = -1)
 	{
 		float time = 5f;
-		print("new weather " + newWeather);
+		print("weather " + currentWeather);
 		if (newWeather != -1)
 			currentWeather = newWeather;
 
@@ -142,8 +150,9 @@ public class WeatherManager : MonoBehaviour
 					//Debug.Log ("Thunder");
 					break;
 				case 4:
-					//lluvia interior
-					break;
+                    //lluvia interior
+                    StartCoroutine(SmoothAudioChange(time, 0.75f, 3));
+                    break;
 				default:
 					break;
 			}

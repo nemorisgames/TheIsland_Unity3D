@@ -124,13 +124,13 @@ public class CellPhone : MonoBehaviour
 			ScreenManager.Instance.CloseScreen();
 		}
 
-		if (Input.GetAxis("Mouse ScrollWheel") != 0f && canUseMouseScroll)
+		if (Input.GetAxis("Mouse ScrollWheel") != 0f && canUseMouseScroll && selected)
 		{
-			if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+			if (Input.GetAxis("Mouse ScrollWheel") > 0f)
 			{
 				nextFunction(true);
 			}
-			if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+			if (Input.GetAxis("Mouse ScrollWheel") < 0f)
 			{
 				nextFunction(false);
 			}

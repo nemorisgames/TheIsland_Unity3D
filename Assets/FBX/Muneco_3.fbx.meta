@@ -1,0 +1,304 @@
+fileFormatVersion: 2
+guid: bc87fdf8099d3584684da38a4a3ae359
+timeCreated: 1493730064
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: AnteBrazo_de
+    100002: AnteBrazo_Iz
+    100004: Brazo_De
+    100006: Brazo_de
+    100008: Brazo_Iz
+    100010: Brazo_Iz 1
+    100012: Cabeza
+    100014: Cadera
+    100016: Control_Cuello
+    100018: ControlCentro
+    100020: Cuerda
+    100022: Espalda_1
+    100024: Espalda_2
+    100026: Espalda_3
+    100028: group4
+    100030: group5
+    100032: group6
+    100034: group7
+    100036: HombroMedio
+    100038: joint1
+    100040: ManoDe
+    100042: ManoIz
+    100044: //RootNode
+    100046: nurbsCircle6
+    100048: OjoDe
+    100050: OjoIz
+    100052: Pierna_De
+    100054: Pierna_Iz
+    100056: polySurface12
+    100058: polySurface16
+    100060: polySurface18
+    100062: PuntaManoDe
+    100064: PuntaManoIz
+    100066: PuntaPierna_De
+    100068: PuntaPierna_Iz
+    100070: Rodilla_De
+    100072: Rodilla_Iz
+    100074: Brazo_De 1
+    100076: Cabeza 1
+    100078: CuelloCabeza
+    100080: group8
+    100082: Hombros
+    100084: joint8
+    100086: Mano_De
+    100088: Mano_Iz
+    100090: Perina_De
+    100092: Perina_Iz
+    100094: Punta_De
+    100096: Punta_Iz
+    100098: TroncoPiernas
+    400000: AnteBrazo_de
+    400002: AnteBrazo_Iz
+    400004: Brazo_De
+    400006: Brazo_de
+    400008: Brazo_Iz
+    400010: Brazo_Iz 1
+    400012: Cabeza
+    400014: Cadera
+    400016: Control_Cuello
+    400018: ControlCentro
+    400020: Cuerda
+    400022: Espalda_1
+    400024: Espalda_2
+    400026: Espalda_3
+    400028: group4
+    400030: group5
+    400032: group6
+    400034: group7
+    400036: HombroMedio
+    400038: joint1
+    400040: ManoDe
+    400042: ManoIz
+    400044: //RootNode
+    400046: nurbsCircle6
+    400048: OjoDe
+    400050: OjoIz
+    400052: Pierna_De
+    400054: Pierna_Iz
+    400056: polySurface12
+    400058: polySurface16
+    400060: polySurface18
+    400062: PuntaManoDe
+    400064: PuntaManoIz
+    400066: PuntaPierna_De
+    400068: PuntaPierna_Iz
+    400070: Rodilla_De
+    400072: Rodilla_Iz
+    400074: Brazo_De 1
+    400076: Cabeza 1
+    400078: CuelloCabeza
+    400080: group8
+    400082: Hombros
+    400084: joint8
+    400086: Mano_De
+    400088: Mano_Iz
+    400090: Perina_De
+    400092: Perina_Iz
+    400094: Punta_De
+    400096: Punta_Iz
+    400098: TroncoPiernas
+    2300000: Cabeza
+    2300002: Cuerda
+    2300004: OjoDe
+    2300006: OjoIz
+    3300000: Cabeza
+    3300002: Cuerda
+    3300004: OjoDe
+    3300006: OjoIz
+    4300000: Cabeza
+    4300002: OjoIz
+    4300004: OjoDe
+    4300006: Cuerda
+    4300008: Brazo_De
+    4300010: Brazo_Iz
+    4300012: polySurface18
+    4300014: TroncoPiernas
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Brazo_De
+    13700002: Brazo_Iz
+    13700004: polySurface18
+    13700006: Brazo_De 1
+    13700008: Brazo_Iz 1
+    13700010: Cabeza 1
+    13700012: OjoDe
+    13700014: OjoIz
+    13700016: TroncoPiernas
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 240
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: ControlCentro
+        weight: 1
+      - path: ControlCentro/group4
+        weight: 1
+      - path: ControlCentro/group4/group5
+        weight: 1
+      - path: ControlCentro/group4/group5/group6
+        weight: 1
+      - path: ControlCentro/group4/group5/group6/nurbsCircle6
+        weight: 1
+      - path: ControlCentro/group4/group5/group6/nurbsCircle6/Control_Cuello
+        weight: 1
+      - path: ControlCentro/group4/group5/group6/nurbsCircle6/Control_Cuello/Cabeza
+        weight: 1
+      - path: ControlCentro/group4/group5/group6/nurbsCircle6/Control_Cuello/Cabeza/OjoDe
+        weight: 1
+      - path: ControlCentro/group4/group5/group6/nurbsCircle6/Control_Cuello/Cabeza/OjoIz
+        weight: 1
+      - path: Cuerda
+        weight: 1
+      - path: group7
+        weight: 1
+      - path: group7/Cadera
+        weight: 1
+      - path: group7/Cadera/Espalda_1
+        weight: 1
+      - path: group7/Cadera/Espalda_1/Espalda_2
+        weight: 1
+      - path: group7/Cadera/Espalda_1/Espalda_2/Espalda_3
+        weight: 1
+      - path: group7/Cadera/Espalda_1/Espalda_2/Espalda_3/HombroMedio
+        weight: 1
+      - path: group7/Cadera/Espalda_1/Espalda_2/Espalda_3/HombroMedio/Brazo_de
+        weight: 1
+      - path: group7/Cadera/Espalda_1/Espalda_2/Espalda_3/HombroMedio/Brazo_de/AnteBrazo_de
+        weight: 1
+      - path: group7/Cadera/Espalda_1/Espalda_2/Espalda_3/HombroMedio/Brazo_de/AnteBrazo_de/ManoDe
+        weight: 1
+      - path: group7/Cadera/Espalda_1/Espalda_2/Espalda_3/HombroMedio/Brazo_de/AnteBrazo_de/ManoDe/PuntaManoDe
+        weight: 1
+      - path: group7/Cadera/Espalda_1/Espalda_2/Espalda_3/HombroMedio/Brazo_Iz 1
+        weight: 1
+      - path: group7/Cadera/Espalda_1/Espalda_2/Espalda_3/HombroMedio/Brazo_Iz 1/AnteBrazo_Iz
+        weight: 1
+      - path: group7/Cadera/Espalda_1/Espalda_2/Espalda_3/HombroMedio/Brazo_Iz 1/AnteBrazo_Iz/ManoIz
+        weight: 1
+      - path: group7/Cadera/Espalda_1/Espalda_2/Espalda_3/HombroMedio/Brazo_Iz 1/AnteBrazo_Iz/ManoIz/PuntaManoIz
+        weight: 1
+      - path: group7/Cadera/Espalda_1/Espalda_2/Espalda_3/HombroMedio/joint1
+        weight: 1
+      - path: group7/Cadera/Pierna_De
+        weight: 1
+      - path: group7/Cadera/Pierna_De/Rodilla_De
+        weight: 1
+      - path: group7/Cadera/Pierna_De/Rodilla_De/PuntaPierna_De
+        weight: 1
+      - path: group7/Cadera/Pierna_Iz
+        weight: 1
+      - path: group7/Cadera/Pierna_Iz/Rodilla_Iz
+        weight: 1
+      - path: group7/Cadera/Pierna_Iz/Rodilla_Iz/PuntaPierna_Iz
+        weight: 1
+      - path: polySurface12
+        weight: 1
+      - path: polySurface12/Brazo_De
+        weight: 1
+      - path: polySurface12/Brazo_Iz
+        weight: 1
+      - path: polySurface12/polySurface16
+        weight: 1
+      - path: polySurface12/polySurface16/polySurface18
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
